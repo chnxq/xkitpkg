@@ -19,7 +19,7 @@ import (
 
 	cnferrors "github.com/chnxq/XGoKit/errors"
 	"github.com/chnxq/XGoKit/log"
-	"github.com/chnxq/xkitpkg/internal/host"
+	"github.com/chnxq/xkitpkg/transport/internal/host"
 )
 
 var h = func(w http.ResponseWriter, r *http.Request) {

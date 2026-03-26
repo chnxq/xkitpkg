@@ -14,7 +14,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/chnxq/xkitpkg/internal/host"
+	"github.com/chnxq/xkitpkg/transport/internal/host"
 )
 
 const appJSONStr = "application/json"

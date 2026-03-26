@@ -13,7 +13,7 @@ import (
 	"github.com/chnxq/XGoKit/log"
 	"github.com/chnxq/XGoKit/registry"
 	"github.com/chnxq/XGoKit/selector"
-	"github.com/chnxq/xkitpkg/internal/endpoint"
+	"github.com/chnxq/xkitpkg/transport/internal/endpoint"
 )
 
 // Target is resolver target

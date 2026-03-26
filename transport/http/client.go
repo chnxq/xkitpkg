@@ -15,9 +15,9 @@ import (
 	"github.com/chnxq/XGoKit/registry"
 	"github.com/chnxq/XGoKit/selector"
 	"github.com/chnxq/XGoKit/selector/wrr"
-	"github.com/chnxq/xkitpkg/internal/host"
-	"github.com/chnxq/xkitpkg/internal/httputil"
 	"github.com/chnxq/xkitpkg/transport"
+	"github.com/chnxq/xkitpkg/transport/internal/host"
+	"github.com/chnxq/xkitpkg/transport/internal/httputil"
 )
 
 func init() {

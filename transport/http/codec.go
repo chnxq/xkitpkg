@@ -11,8 +11,8 @@ import (
 
 	"github.com/chnxq/XGoKit/encoding"
 	"github.com/chnxq/XGoKit/errors"
-	"github.com/chnxq/xkitpkg/internal/httputil"
 	"github.com/chnxq/xkitpkg/transport/http/binding"
+	"github.com/chnxq/xkitpkg/transport/internal/httputil"
 )
 
 // SupportPackageIsVersion1 These constants should not be referenced from any other code.
