@@ -21,6 +21,7 @@ xkitpkg/
 ├── logger/         # 日志记录模块
 ├── registry/       # 服务注册与发现模块
 ├── tracer/         # 分布式链路追踪模块
+├── transport/      # 传输层协议实现（HTTP/gRPC/Gin/SSE/Asynq等）
 ├── go.mod          # Go 模块定义
 └── go.sum          # Go 依赖校验和
 ```
@@ -46,6 +47,8 @@ import (
     "github.com/chnxq/xkitpkg/logger"
     "github.com/chnxq/xkitpkg/registry"
     "github.com/chnxq/xkitpkg/tracer"
+    "github.com/chnxq/xkitpkg/transport"
+    "github.com/chnxq/xkitpkg/transport/http"
     "github.com/chnxq/xkitpkg/conf/v1"
 )
 
@@ -80,11 +83,27 @@ func main() {
         log.Fatal("Failed to create tracer provider:", err)
     }
     
+    // 创建HTTP传输层服务器
+    httpSrv := http.NewServer(
+        http.WithAddress(":8080"),
+        http.WithTimeout(1*time.Second),
+    )
+    
     // 应用逻辑...
+    
+    // 启动服务器
+    if err := httpSrv.Start(ctx); err != nil {
+        log.Fatal("Failed to start HTTP server:", err)
+    }
     
     // 关闭追踪系统
     if err := tracer.ShutdownTracerProvider(ctx); err != nil {
         log.Println("Failed to shutdown tracer:", err)
+    }
+    
+    // 停止服务器
+    if err := httpSrv.Stop(ctx); err != nil {
+        log.Println("Failed to stop HTTP server:", err)
     }
 }
 ```
@@ -114,6 +133,14 @@ func main() {
 - 多种导出器支持（OTLP、Zipkin 等）
 - 自动资源属性配置
 - 优雅关闭机制
+
+### 传输层 (transport)
+- 多协议支持：HTTP、gRPC、Gin、SSE、Asynq 等
+- 统一的服务器接口抽象
+- 上下文信息传递
+- 中间件支持
+- 请求/响应编解码
+- 服务保活和健康检查
 
 ## 贡献
 
