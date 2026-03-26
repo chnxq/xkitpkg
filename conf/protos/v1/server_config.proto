@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package conf;
+
+option go_package = "github.com/chnxq/xkitpkg/conf/v1;conf";
+
+import "v1/tracer.proto";
+import "v1/data.proto";
+import "v1/server.proto";
+import "v1/client.proto";
+import "v1/logger.proto";
+import "v1/registry.proto";
+import "v1/oss.proto";
+import "v1/config.proto";
+import "v1/notify.proto";
+import "v1/authn.proto";
+import "v1/authz.proto";
+import "v1/script.proto";
+
+// 服务整体配置信息
+message ServerConfig {
+  optional Server server = 1; // 服务器配置
+  optional Client client = 2; // 客户端配置
+  optional Data data = 3; // 数据存储配置(数据库、缓存)
+  optional Tracer trace = 4; // 链路追踪配置
+  optional Logger logger = 5; // 日志配置
+  optional Registry registry = 6; // 注册发现中心配置
+  optional RemoteConfig config = 7; // 远程配置服务
+  optional OSS oss = 8; // 对象存储配置
+  optional Notification notify = 9; // 通知消息配置
+  optional Authentication authn = 10; // 认证配置
+  optional Authorization authz = 11; // 授权配置
+  optional Script script = 12; // 脚本引擎配置
+}

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package conf;
+
+option go_package = "github.com/chnxq/xkitpkg/conf/v1;conf";
+
+// TLS配置
+message TLS {
+  message File {
+    optional string cert_path = 1; // 证书文件路径
+    optional string key_path = 2; // 密钥文件路径
+    optional string ca_path = 3; // CA证书文件路径
+  }
+  message Config {
+    optional bytes cert_pem = 1; // PEM格式的证书
+    optional bytes key_pem = 2; // PEM格式的密钥
+    optional bytes ca_pem = 3; // PEM格式的CA证书
+  }
+
+  optional File file = 1;
+  optional Config config = 2;
+
+  bool insecure_skip_verify = 3;
+}

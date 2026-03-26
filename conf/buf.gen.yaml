@@ -1,0 +1,9 @@
+# 配置protoc生成规则
+version: v2
+
+plugins:
+  # generate go struct code
+  #- plugin: buf.build/protocolbuffers/go
+  - remote: buf.build/protocolbuffers/go  # 远程插件，生成 Go 结构体
+    out: ./
+    opt: paths=source_relative

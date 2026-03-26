@@ -1,0 +1,268 @@
+syntax = "proto3";
+
+package conf;
+
+option go_package = "github.com/chnxq/xkitpkg/conf/v1;conf";
+
+import "google/protobuf/duration.proto";
+
+import "v1/tls.proto";
+
+// 数据存储配置
+message Data {
+  // 数据库
+  message Database {
+    string driver = 1;  // 驱动名：mysql、postgresql、mongodb、sqlite……
+    string source = 2;  // 数据源（DSN字符串）
+
+    bool migrate = 10; // 数据迁移开关
+    bool debug = 11; // 调试开关
+    bool enable_trace = 12; // 链路追踪开关
+    bool enable_metrics = 13; // 性能分析开关
+
+    optional int32 max_idle_connections = 20; // 连接池最大空闲连接数
+    optional int32 max_open_connections = 21; // 连接池最大打开连接数
+    optional google.protobuf.Duration connection_max_lifetime = 22; // 连接可重用的最大时间长度
+
+    optional string prometheus_push_addr = 30;
+    optional string prometheus_db_name = 31;
+    optional uint32 prometheus_http_port = 32;
+  }
+
+  // redis
+  message Redis {
+    string network = 1; // 网络
+    string addr = 2;  // 服务端地址
+    string password = 3;  // 密码
+    int32 db = 4; // 数据库索引
+
+    google.protobuf.Duration dial_timeout = 50;  // 连接超时时间
+    google.protobuf.Duration read_timeout = 51;  // 读取超时时间
+    google.protobuf.Duration write_timeout = 52; // 写入超时时间
+
+    bool enable_tracing = 100; // 打开链路追踪
+    bool enable_metrics = 1001; // 打开性能度量
+  }
+
+  // MongoDB
+  message MongoDB {
+    optional string uri = 1;
+
+    optional string database = 2;
+
+    optional string username = 10;
+    optional string password = 11;
+
+    optional string auth_mechanism = 20; // 认证机制：SCRAM-SHA-1、SCRAM-SHA-256、MONGODB-X509、GSSAPI、PLAIN
+    map<string, string> auth_mechanism_properties = 21; // 认证机制属性
+    optional string auth_source = 22; // 认证源：admin、$external等
+
+    optional google.protobuf.Duration connect_timeout = 50; // 连接超时时间
+    optional google.protobuf.Duration heartbeat_interval = 51; // 心跳间隔
+    optional google.protobuf.Duration local_threshold = 52; // 本地延迟阈值
+    optional google.protobuf.Duration max_conn_idle_time = 53; // 最大连接空闲时间
+    optional google.protobuf.Duration max_staleness = 54; // 最大陈旧时间
+    optional google.protobuf.Duration server_selection_timeout = 55; // 服务器选择超时时间
+    optional google.protobuf.Duration socket_timeout = 56; // 套接字超时时间
+    optional google.protobuf.Duration timeout = 57; // 总超时时间
+
+    optional bool enable_tracing = 100; // 打开链路追踪
+    optional bool enable_metrics = 101; // 打开性能度量
+
+    optional TLS tls = 70;  // TLS配置
+  }
+
+  // ClickHouse
+  message ClickHouse {
+    repeated string addresses = 1; // 对端网络地址
+
+    optional string database = 2; // 数据库名
+    optional string username = 3; // 用户名
+    optional string password = 4; // 密码
+
+    optional bool debug = 5; // 调试开关
+    optional string scheme = 6; // 协议：http、https、native
+
+    optional TLS tls = 7;  // TLS配置
+
+    optional int32 block_buffer_size = 8; // 数据块缓冲区大小
+
+    optional string compression_method = 10; // 压缩方法：zstd、lz4、lz4hc、gzip、deflate、br、none
+    optional int32 compression_level = 11; // 压缩级别：0-9
+    optional int32 max_compression_buffer = 12; // 最大压缩缓冲区大小
+
+    optional string connection_open_strategy = 20; // 连接打开策略：in_order、round_robin、random
+
+    optional google.protobuf.Duration dial_timeout = 30; // 连接超时时间
+    optional google.protobuf.Duration read_timeout = 31; // 读取超时时间
+    optional google.protobuf.Duration conn_max_lifetime = 32; // 连接可重用的最大时间长度
+
+    optional int32 max_idle_conns = 40; // 连接池最大空闲连接数
+    optional int32 max_open_conns = 41; // 连接池最大打开连接数
+
+    optional string dsn = 50; // 数据源名称（DSN字符串）
+
+    optional string http_proxy = 60; // HTTP代理地址
+
+    optional bool enable_tracing = 100; // 打开链路追踪
+    optional bool enable_metrics = 101; // 打开性能度量
+  }
+
+  // InfluxDB
+  message InfluxDB {
+    optional string host = 1; // 主机地址
+    optional string token = 2; // 认证令牌
+    optional string auth_scheme = 3; // 认证方案：default、basic
+    optional string proxy = 4; // 代理地址
+
+    optional string organization = 10; // 组织名
+    optional string database = 11; // 数据库名
+
+    optional google.protobuf.Duration write_timeout = 20; // 连接超时时间
+    optional google.protobuf.Duration query_timeout = 21; // 连接超时时间
+    optional google.protobuf.Duration idle_connection_timeout = 22; // 空闲连接超时时间
+    optional int32 max_idle_connections = 23; // 连接池最大空闲连接数
+
+    optional TLS tls = 70;  // TLS配置
+  }
+
+  message Doris {
+    string address = 1;
+  }
+
+  message ElasticSearch {
+    repeated string addresses = 1;
+
+    optional string username = 10;
+    optional string password = 11;
+
+    optional string cloud_id = 20;
+    optional string api_key = 21;
+    optional string service_token = 22;
+    optional string certificate_fingerprint = 23;
+
+    optional bool disable_retry = 30;
+    optional int32 max_retries = 31;
+
+    optional bool compress_request_body = 40;
+    optional int32 compress_request_body_level = 41;
+    optional bool pool_compressor = 42;
+
+    optional bool discover_nodes_on_start = 50;
+    optional google.protobuf.Duration discover_nodes_interval = 51;
+
+    optional bool enable_metrics = 60;
+    optional bool enable_debug_logger = 61;
+    optional bool enable_compatibility_mode = 62;
+    optional bool disable_meta_header = 63;
+
+    optional TLS tls = 70;  // TLS配置
+  }
+
+  message Cassandra {
+    optional string address = 1;
+    optional string username = 2;
+    optional string password = 3;
+    optional string keyspace = 5;
+
+    optional google.protobuf.Duration connect_timeout = 6;
+    optional google.protobuf.Duration timeout = 7;
+    optional uint32 consistency = 8;
+
+    optional bool disable_initial_host_lookup = 9;
+    optional bool ignore_peer_addr = 10;
+
+    optional TLS tls = 11;  // TLS配置
+  }
+
+  message Snowflake {
+
+  }
+
+  // Kafka
+  message Kafka {
+    repeated string endpoints = 1;  // 对端网络地址
+
+    string codec = 2;  // 编解码器
+
+    bool async = 3; // 异步发送
+    bool allow_auto_topic_creation = 4; // 允许发送的时候自动创建主题
+
+    int32 batch_size = 5; // 批量发送量
+    int64 batch_bytes = 6;// 批量发送字节数
+
+    google.protobuf.Duration batch_timeout = 7; // 批量发送超时时间
+    google.protobuf.Duration read_timeout = 8; // 读取超时时间
+    google.protobuf.Duration write_timeout = 9; // 发送超时时间
+  }
+
+  // RabbitMQ
+  message RabbitMQ {
+    repeated string endpoints = 1;  // 对端网络地址
+  }
+
+  // MQTT
+  message Mqtt {
+    string endpoint = 1;  // 对端网络地址
+    string codec = 2;  // 编解码器: json,xml,yaml...
+  }
+
+  message ActiveMQ {
+    string endpoint = 1;  // 对端网络地址
+    string codec = 2;  // 编解码器: json,xml,yaml...
+  }
+
+  message NATS {
+    string endpoint = 1;  // 对端网络地址
+    string codec = 2;  // 编解码器: json,xml,yaml...
+  }
+
+  message NSQ {
+    string endpoint = 1;  // 对端网络地址
+    string codec = 2;  // 编解码器: json,xml,yaml...
+  }
+
+  message Pulsar {
+    string endpoint = 1;  // 对端网络地址
+    string codec = 2;  // 编解码器: json,xml,yaml...
+  }
+
+  message RocketMQ {
+    string version = 1; // 驱动版本：aliyun、v2、v5
+    string codec = 2;  // 编解码器: json,xml,yaml...
+    bool enable_trace = 3;
+
+    repeated string name_servers = 4;
+    string name_server_domain = 5;
+
+    string access_key = 6;
+    string secret_key = 7;
+    string security_token = 8;
+
+    string namespace = 9;
+    string instance_name = 10;
+    string group_name = 11;
+  }
+
+  optional Database database = 1;  // 数据库DSN
+
+  optional Redis redis = 10;  // Redis
+  optional MongoDB mongodb = 11;  // MongoDB数据库
+  optional ElasticSearch elastic_search = 12;  // ElasticSearch数据库
+  optional Cassandra cassandra = 13;  // Cassandra数据库
+
+  optional ClickHouse clickhouse = 20;  // ClickHouse数据库
+  optional InfluxDB influxdb = 21;  // InfluxDB数据库
+  optional Doris doris = 22;  // Doris数据库
+
+  // Message Queue 消息队列配置
+
+  optional Kafka kafka = 30;  // Kafka服务
+  optional RabbitMQ rabbitmq = 31;  // RabbitMQ服务
+  optional Mqtt mqtt = 32;  // MQTT服务
+  optional ActiveMQ activemq = 33; // ActiveMQ
+  optional  NATS nats = 34; // NATS
+  optional NSQ nsq = 35; // NATS
+  optional Pulsar pulsar = 36; // Pulsar
+  optional RocketMQ rocketmq = 38; // RocketMQ
+}
