@@ -5,4 +5,4 @@ import (
 )
 
 // InitAppFunc 应用初始化函数类型
-type InitAppFunc func(ctx *Context) (app *kit.App, cleanup func(), err error)
+type InitAppFunc func(ctx *AppCtx) (app *kit.App, cleanup func(), err error)
