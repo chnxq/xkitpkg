@@ -47,7 +47,7 @@ import (
 
 func main() {
     // 创建应用上下文
-    appCtx := application.NewContext(nil, &conf.AppInfo{
+    appCtx := application.NewAppCtx(nil, &conf.AppInfo{
         AppName:    "example",
         AppVersion: "1.0.0",
         Environment: "production",
@@ -120,7 +120,7 @@ func initApp() error {
 
 func main() {
     // 创建应用上下文
-    appCtx := application.NewContext(nil, &conf.AppInfo{
+    appCtx := application.NewAppCtx(nil, &conf.AppInfo{
         AppName:    "example-service",
         AppVersion: "1.0.0",
         Environment: "production",
@@ -158,7 +158,7 @@ func main() {
 
 ### 应用上下文
 
-#### `func NewContext(parent context.Context, ai *conf.AppInfo) *AppCtx`
+#### `func NewAppCtx(parent context.Context, ai *conf.AppInfo) *AppCtx`
 
 创建应用级上下文。
 

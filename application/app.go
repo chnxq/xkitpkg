@@ -2,6 +2,7 @@ package application
 
 import (
 	"fmt"
+
 	"github.com/spf13/cobra"
 
 	"github.com/chnxq/XGoKit/transport"
@@ -14,7 +15,7 @@ import (
 )
 
 // NewApp 创建应用程序
-func NewApp(ctx *Context, srv ...transport.Server) *kit.App {
+func NewApp(ctx *AppCtx, srv ...transport.Server) *kit.App {
 	var opts []kit.Option
 	if ctx.logger != nil {
 		opts = append(opts, kit.Logger(ctx.logger))
@@ -49,7 +50,7 @@ func NewApp(ctx *Context, srv ...transport.Server) *kit.App {
 
 // RunApp 运行应用程序并允许在执行前对 root 命令做定制。
 // opts 可用于注册子命令、对 root 添加 flag 或其他修改。
-func RunApp(ctx *Context, initApp InitAppFunc, opts ...func(root *cobra.Command)) error {
+func RunApp(ctx *AppCtx, initApp InitAppFunc, opts ...func(root *cobra.Command)) error {
 	if ctx == nil {
 		return fmt.Errorf("bootstrap context is nil")
 	}
@@ -78,7 +79,7 @@ func RunApp(ctx *Context, initApp InitAppFunc, opts ...func(root *cobra.Command)
 }
 
 // bootstrap 应用引导启动
-func bootstrap(ctx *Context, initApp InitAppFunc) error {
+func bootstrap(ctx *AppCtx, initApp InitAppFunc) error {
 	// 打印应用信息
 	ctx.PrintAppInfo()
 
@@ -108,7 +109,7 @@ func bootstrap(ctx *Context, initApp InitAppFunc) error {
 	}
 
 	// init tracer
-	if err = tracer.NewTracerProvider(ctx.Context(), ctx.config.Trace, ctx.appInfo); err != nil {
+	if err = tracer.NewTracerProvider(ctx.AppCtx(), ctx.config.Trace, ctx.appInfo); err != nil {
 		return err
 	}
 

@@ -32,8 +32,8 @@ type AppCtx struct {
 	cancel  context.CancelFunc // 取消函数
 }
 
-// NewContext 创建带 cancel 的应用级 AppCtx（传 nil 使用 Background）
-func NewContext(parent context.Context, ai *conf.AppInfo) *AppCtx {
+// NewAppCtx 创建带 cancel 的应用级 AppCtx（传 nil 使用 Background）
+func NewAppCtx(parent context.Context, ai *conf.AppInfo) *AppCtx {
 	if parent == nil {
 		parent = context.Background()
 	}

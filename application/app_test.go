@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func initApp(ctx *Context) (*kit.App, func(), error) {
+func initApp(ctx *AppCtx) (*kit.App, func(), error) {
 	app := NewApp(ctx)
 	return app, func() {
 	}, nil
@@ -19,7 +19,7 @@ func TestBootstrapWithNameVersion(t *testing.T) {
 	serviceName := "test"
 	version := "v0.0.1"
 
-	ctx := NewContext(context.Background(), &conf.AppInfo{
+	ctx := NewAppCtx(context.Background(), &conf.AppInfo{
 		Project: "",
 		AppId:   serviceName,
 		Version: version,
