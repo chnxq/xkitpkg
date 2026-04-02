@@ -22,6 +22,52 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Server_Kafka_ScramMechanism_Algorithm int32
+
+const (
+	Server_Kafka_ScramMechanism_SHA256 Server_Kafka_ScramMechanism_Algorithm = 0
+	Server_Kafka_ScramMechanism_SHA512 Server_Kafka_ScramMechanism_Algorithm = 1
+)
+
+// Enum value maps for Server_Kafka_ScramMechanism_Algorithm.
+var (
+	Server_Kafka_ScramMechanism_Algorithm_name = map[int32]string{
+		0: "SHA256",
+		1: "SHA512",
+	}
+	Server_Kafka_ScramMechanism_Algorithm_value = map[string]int32{
+		"SHA256": 0,
+		"SHA512": 1,
+	}
+)
+
+func (x Server_Kafka_ScramMechanism_Algorithm) Enum() *Server_Kafka_ScramMechanism_Algorithm {
+	p := new(Server_Kafka_ScramMechanism_Algorithm)
+	*p = x
+	return p
+}
+
+func (x Server_Kafka_ScramMechanism_Algorithm) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Server_Kafka_ScramMechanism_Algorithm) Descriptor() protoreflect.EnumDescriptor {
+	return file_v1_server_proto_enumTypes[0].Descriptor()
+}
+
+func (Server_Kafka_ScramMechanism_Algorithm) Type() protoreflect.EnumType {
+	return &file_v1_server_proto_enumTypes[0]
+}
+
+func (x Server_Kafka_ScramMechanism_Algorithm) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Server_Kafka_ScramMechanism_Algorithm.Descriptor instead.
+func (Server_Kafka_ScramMechanism_Algorithm) EnumDescriptor() ([]byte, []int) {
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 4, 1, 0}
+}
+
 // 服务器
 type Server struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -585,10 +631,27 @@ func (x *Server_Mqtt) GetCleanSession() bool {
 
 // Kafka
 type Server_Kafka struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Endpoints     []string               `protobuf:"bytes,1,rep,name=endpoints,proto3" json:"endpoints,omitempty"` // 对端网络地址
-	Codec         string                 `protobuf:"bytes,2,opt,name=codec,proto3" json:"codec,omitempty"`         // 编解码器: json,xml,yaml...
-	Tls           *TLS                   `protobuf:"bytes,3,opt,name=tls,proto3" json:"tls,omitempty"`             // TLS配置
+	state                         protoimpl.MessageState `protogen:"open.v1"`
+	Endpoints                     []string               `protobuf:"bytes,1,rep,name=endpoints,proto3" json:"endpoints,omitempty"`                                                                                            // 对端网络地址
+	Codec                         string                 `protobuf:"bytes,2,opt,name=codec,proto3" json:"codec,omitempty"`                                                                                                    // 编解码器: json,xml,yaml...
+	Tls                           *TLS                   `protobuf:"bytes,3,opt,name=tls,proto3" json:"tls,omitempty"`                                                                                                        // TLS配置
+	MaxAttempts                   *int32                 `protobuf:"varint,4,opt,name=max_attempts,json=maxAttempts,proto3,oneof" json:"max_attempts,omitempty"`                                                              // 最大尝试次数
+	BatchSize                     *int32                 `protobuf:"varint,5,opt,name=batch_size,json=batchSize,proto3,oneof" json:"batch_size,omitempty"`                                                                    // 批量大小
+	BatchBytes                    *int64                 `protobuf:"varint,6,opt,name=batch_bytes,json=batchBytes,proto3,oneof" json:"batch_bytes,omitempty"`                                                                 // 批量字节数
+	PublishMaxAttempts            *int32                 `protobuf:"varint,7,opt,name=publish_max_attempts,json=publishMaxAttempts,proto3,oneof" json:"publish_max_attempts,omitempty"`                                       // 发布最大尝试次数
+	BatchTimeout                  *durationpb.Duration   `protobuf:"bytes,10,opt,name=batch_timeout,json=batchTimeout,proto3,oneof" json:"batch_timeout,omitempty"`                                                           // 批量超时时间
+	ReadTimeout                   *durationpb.Duration   `protobuf:"bytes,11,opt,name=read_timeout,json=readTimeout,proto3,oneof" json:"read_timeout,omitempty"`                                                              // 读取超时时间
+	WriteTimeout                  *durationpb.Duration   `protobuf:"bytes,12,opt,name=write_timeout,json=writeTimeout,proto3,oneof" json:"write_timeout,omitempty"`                                                           // 写入超时时间
+	EnableOneTopicOneWriter       *bool                  `protobuf:"varint,20,opt,name=enable_one_topic_one_writer,json=enableOneTopicOneWriter,proto3,oneof" json:"enable_one_topic_one_writer,omitempty"`                   // 启用一主题一写入器
+	AllowPublishAutoTopicCreation *bool                  `protobuf:"varint,21,opt,name=allow_publish_auto_topic_creation,json=allowPublishAutoTopicCreation,proto3,oneof" json:"allow_publish_auto_topic_creation,omitempty"` // 允许发布自动创建主题
+	Async                         *bool                  `protobuf:"varint,22,opt,name=async,proto3,oneof" json:"async,omitempty"`                                                                                            // 异步发送
+	EnableLogger                  *bool                  `protobuf:"varint,23,opt,name=enable_logger,json=enableLogger,proto3,oneof" json:"enable_logger,omitempty"`                                                          // 启用日志记录
+	EnableErrorLogger             *bool                  `protobuf:"varint,24,opt,name=enable_error_logger,json=enableErrorLogger,proto3,oneof" json:"enable_error_logger,omitempty"`                                         // 启用错误日志记录
+	// Types that are valid to be assigned to AuthMechanism:
+	//
+	//	*Server_Kafka_Plain
+	//	*Server_Kafka_Scram
+	AuthMechanism isServer_Kafka_AuthMechanism `protobuf_oneof:"auth_mechanism"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -643,6 +706,131 @@ func (x *Server_Kafka) GetTls() *TLS {
 	}
 	return nil
 }
+
+func (x *Server_Kafka) GetMaxAttempts() int32 {
+	if x != nil && x.MaxAttempts != nil {
+		return *x.MaxAttempts
+	}
+	return 0
+}
+
+func (x *Server_Kafka) GetBatchSize() int32 {
+	if x != nil && x.BatchSize != nil {
+		return *x.BatchSize
+	}
+	return 0
+}
+
+func (x *Server_Kafka) GetBatchBytes() int64 {
+	if x != nil && x.BatchBytes != nil {
+		return *x.BatchBytes
+	}
+	return 0
+}
+
+func (x *Server_Kafka) GetPublishMaxAttempts() int32 {
+	if x != nil && x.PublishMaxAttempts != nil {
+		return *x.PublishMaxAttempts
+	}
+	return 0
+}
+
+func (x *Server_Kafka) GetBatchTimeout() *durationpb.Duration {
+	if x != nil {
+		return x.BatchTimeout
+	}
+	return nil
+}
+
+func (x *Server_Kafka) GetReadTimeout() *durationpb.Duration {
+	if x != nil {
+		return x.ReadTimeout
+	}
+	return nil
+}
+
+func (x *Server_Kafka) GetWriteTimeout() *durationpb.Duration {
+	if x != nil {
+		return x.WriteTimeout
+	}
+	return nil
+}
+
+func (x *Server_Kafka) GetEnableOneTopicOneWriter() bool {
+	if x != nil && x.EnableOneTopicOneWriter != nil {
+		return *x.EnableOneTopicOneWriter
+	}
+	return false
+}
+
+func (x *Server_Kafka) GetAllowPublishAutoTopicCreation() bool {
+	if x != nil && x.AllowPublishAutoTopicCreation != nil {
+		return *x.AllowPublishAutoTopicCreation
+	}
+	return false
+}
+
+func (x *Server_Kafka) GetAsync() bool {
+	if x != nil && x.Async != nil {
+		return *x.Async
+	}
+	return false
+}
+
+func (x *Server_Kafka) GetEnableLogger() bool {
+	if x != nil && x.EnableLogger != nil {
+		return *x.EnableLogger
+	}
+	return false
+}
+
+func (x *Server_Kafka) GetEnableErrorLogger() bool {
+	if x != nil && x.EnableErrorLogger != nil {
+		return *x.EnableErrorLogger
+	}
+	return false
+}
+
+func (x *Server_Kafka) GetAuthMechanism() isServer_Kafka_AuthMechanism {
+	if x != nil {
+		return x.AuthMechanism
+	}
+	return nil
+}
+
+func (x *Server_Kafka) GetPlain() *Server_Kafka_PlainMechanism {
+	if x != nil {
+		if x, ok := x.AuthMechanism.(*Server_Kafka_Plain); ok {
+			return x.Plain
+		}
+	}
+	return nil
+}
+
+func (x *Server_Kafka) GetScram() *Server_Kafka_ScramMechanism {
+	if x != nil {
+		if x, ok := x.AuthMechanism.(*Server_Kafka_Scram); ok {
+			return x.Scram
+		}
+	}
+	return nil
+}
+
+type isServer_Kafka_AuthMechanism interface {
+	isServer_Kafka_AuthMechanism()
+}
+
+type Server_Kafka_Plain struct {
+	Plain *Server_Kafka_PlainMechanism `protobuf:"bytes,30,opt,name=plain,proto3,oneof"` // PLAIN认证机制
+}
+
+type Server_Kafka_Scram struct {
+	Scram *Server_Kafka_ScramMechanism `protobuf:"bytes,31,opt,name=scram,proto3,oneof"` // SCRAM认证机制
+}
+
+func (*Server_Kafka_Plain) isServer_Kafka_AuthMechanism() {}
+
+func (*Server_Kafka_Scram) isServer_Kafka_AuthMechanism() {}
 
 // RabbitMQ
 type Server_RabbitMQ struct {
@@ -1145,29 +1333,33 @@ func (x *Server_RocketMQ) GetEnableTrace() bool {
 
 // Asynq
 type Server_Asynq struct {
-	state                    protoimpl.MessageState `protogen:"open.v1"`
-	Network                  string                 `protobuf:"bytes,1,opt,name=network,proto3" json:"network,omitempty"`                                                                           // Redis对端网络地址
-	Endpoint                 string                 `protobuf:"bytes,2,opt,name=endpoint,proto3" json:"endpoint,omitempty"`                                                                         // Redis对端网络地址
-	Password                 string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`                                                                         // Redis登录密码
-	Db                       int32                  `protobuf:"varint,4,opt,name=db,proto3" json:"db,omitempty"`                                                                                    // Redis数据库索引
-	Uri                      string                 `protobuf:"bytes,5,opt,name=uri,proto3" json:"uri,omitempty"`                                                                                   // Redis URI
-	PoolSize                 int32                  `protobuf:"varint,6,opt,name=pool_size,json=poolSize,proto3" json:"pool_size,omitempty"`                                                        // Redis连接池大小
-	Tls                      *TLS                   `protobuf:"bytes,7,opt,name=tls,proto3" json:"tls,omitempty"`                                                                                   // TLS配置
-	Codec                    string                 `protobuf:"bytes,8,opt,name=codec,proto3" json:"codec,omitempty"`                                                                               // 编解码器: json,xml,yaml...
-	Location                 string                 `protobuf:"bytes,10,opt,name=location,proto3" json:"location,omitempty"`                                                                        // 时区
-	Concurrency              int32                  `protobuf:"varint,11,opt,name=concurrency,proto3" json:"concurrency,omitempty"`                                                                 // 并发数
-	GroupMaxSize             int32                  `protobuf:"varint,12,opt,name=group_max_size,json=groupMaxSize,proto3" json:"group_max_size,omitempty"`                                         // 组最大大小
-	Queues                   map[string]int32       `protobuf:"bytes,13,rep,name=queues,proto3" json:"queues,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"` // 队列
-	EnableGracefullyShutdown bool                   `protobuf:"varint,20,opt,name=enable_gracefully_shutdown,json=enableGracefullyShutdown,proto3" json:"enable_gracefully_shutdown,omitempty"`     // 优雅关闭
-	EnableStrictPriority     bool                   `protobuf:"varint,21,opt,name=enable_strict_priority,json=enableStrictPriority,proto3" json:"enable_strict_priority,omitempty"`                 // 严格优先级
-	ShutdownTimeout          *durationpb.Duration   `protobuf:"bytes,30,opt,name=shutdown_timeout,json=shutdownTimeout,proto3" json:"shutdown_timeout,omitempty"`                                   // 关闭超时时间
-	DialTimeout              *durationpb.Duration   `protobuf:"bytes,31,opt,name=dial_timeout,json=dialTimeout,proto3" json:"dial_timeout,omitempty"`                                               // 拨号超时时间
-	ReadTimeout              *durationpb.Duration   `protobuf:"bytes,32,opt,name=read_timeout,json=readTimeout,proto3" json:"read_timeout,omitempty"`                                               // 读取超时时间
-	WriteTimeout             *durationpb.Duration   `protobuf:"bytes,33,opt,name=write_timeout,json=writeTimeout,proto3" json:"write_timeout,omitempty"`                                            // 写入超时时间
-	HealthCheckInterval      *durationpb.Duration   `protobuf:"bytes,34,opt,name=health_check_interval,json=healthCheckInterval,proto3" json:"health_check_interval,omitempty"`                     // 健康检查时间间隔
-	DelayedTaskCheckInterval *durationpb.Duration   `protobuf:"bytes,35,opt,name=delayed_task_check_interval,json=delayedTaskCheckInterval,proto3" json:"delayed_task_check_interval,omitempty"`    // 延迟任务检查时间间隔
-	GroupGracePeriod         *durationpb.Duration   `protobuf:"bytes,36,opt,name=group_grace_period,json=groupGracePeriod,proto3" json:"group_grace_period,omitempty"`                              // 组宽限期
-	GroupMaxDelay            *durationpb.Duration   `protobuf:"bytes,37,opt,name=group_max_delay,json=groupMaxDelay,proto3" json:"group_max_delay,omitempty"`                                       // 组最大延迟
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to RedisClientOpts:
+	//
+	//	*Server_Asynq_RedisOpt
+	//	*Server_Asynq_RedisClusterOpt
+	//	*Server_Asynq_RedisFailoverOpt
+	//	*Server_Asynq_Uri
+	RedisClientOpts          isServer_Asynq_RedisClientOpts `protobuf_oneof:"redis_client_opts"`
+	Codec                    *string                        `protobuf:"bytes,5,opt,name=codec,proto3,oneof" json:"codec,omitempty"`                                                                            // 编解码器: json,xml,yaml...
+	Tls                      *TLS                           `protobuf:"bytes,6,opt,name=tls,proto3,oneof" json:"tls,omitempty"`                                                                                // TLS配置
+	DialTimeout              *durationpb.Duration           `protobuf:"bytes,7,opt,name=dial_timeout,json=dialTimeout,proto3,oneof" json:"dial_timeout,omitempty"`                                             // 拨号超时时间
+	ReadTimeout              *durationpb.Duration           `protobuf:"bytes,8,opt,name=read_timeout,json=readTimeout,proto3,oneof" json:"read_timeout,omitempty"`                                             // 读取超时时间
+	WriteTimeout             *durationpb.Duration           `protobuf:"bytes,9,opt,name=write_timeout,json=writeTimeout,proto3,oneof" json:"write_timeout,omitempty"`                                          // 写入超时时间
+	Location                 *string                        `protobuf:"bytes,10,opt,name=location,proto3,oneof" json:"location,omitempty"`                                                                     // 时区
+	Concurrency              *int32                         `protobuf:"varint,11,opt,name=concurrency,proto3,oneof" json:"concurrency,omitempty"`                                                              // 并发数
+	GroupMaxSize             *int32                         `protobuf:"varint,12,opt,name=group_max_size,json=groupMaxSize,proto3,oneof" json:"group_max_size,omitempty"`                                      // 组最大大小
+	Queues                   map[string]int32               `protobuf:"bytes,13,rep,name=queues,proto3" json:"queues,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`    // 队列
+	EnableGracefullyShutdown *bool                          `protobuf:"varint,20,opt,name=enable_gracefully_shutdown,json=enableGracefullyShutdown,proto3,oneof" json:"enable_gracefully_shutdown,omitempty"`  // 优雅关闭
+	EnableStrictPriority     *bool                          `protobuf:"varint,21,opt,name=enable_strict_priority,json=enableStrictPriority,proto3,oneof" json:"enable_strict_priority,omitempty"`              // 严格优先级
+	ShutdownTimeout          *durationpb.Duration           `protobuf:"bytes,30,opt,name=shutdown_timeout,json=shutdownTimeout,proto3,oneof" json:"shutdown_timeout,omitempty"`                                // 关闭超时时间
+	TaskCheckInterval        *durationpb.Duration           `protobuf:"bytes,31,opt,name=task_check_interval,json=taskCheckInterval,proto3,oneof" json:"task_check_interval,omitempty"`                        // 任务检查时间间隔
+	HealthCheckInterval      *durationpb.Duration           `protobuf:"bytes,32,opt,name=health_check_interval,json=healthCheckInterval,proto3,oneof" json:"health_check_interval,omitempty"`                  // 健康检查时间间隔
+	DelayedTaskCheckInterval *durationpb.Duration           `protobuf:"bytes,33,opt,name=delayed_task_check_interval,json=delayedTaskCheckInterval,proto3,oneof" json:"delayed_task_check_interval,omitempty"` // 延迟任务检查时间间隔
+	GroupGracePeriod         *durationpb.Duration           `protobuf:"bytes,34,opt,name=group_grace_period,json=groupGracePeriod,proto3,oneof" json:"group_grace_period,omitempty"`                           // 组宽限期
+	GroupMaxDelay            *durationpb.Duration           `protobuf:"bytes,35,opt,name=group_max_delay,json=groupMaxDelay,proto3,oneof" json:"group_max_delay,omitempty"`                                    // 组最大延迟
+	JanitorInterval          *durationpb.Duration           `protobuf:"bytes,36,opt,name=janitor_interval,json=janitorInterval,proto3,oneof" json:"janitor_interval,omitempty"`                                // 清扫器时间间隔
+	JanitorBatchSize         *int32                         `protobuf:"varint,37,opt,name=janitor_batch_size,json=janitorBatchSize,proto3,oneof" json:"janitor_batch_size,omitempty"`                          // 清扫器批量大小
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -1202,107 +1394,59 @@ func (*Server_Asynq) Descriptor() ([]byte, []int) {
 	return file_v1_server_proto_rawDescGZIP(), []int{0, 12}
 }
 
-func (x *Server_Asynq) GetNetwork() string {
+func (x *Server_Asynq) GetRedisClientOpts() isServer_Asynq_RedisClientOpts {
 	if x != nil {
-		return x.Network
+		return x.RedisClientOpts
 	}
-	return ""
+	return nil
 }
 
-func (x *Server_Asynq) GetEndpoint() string {
+func (x *Server_Asynq) GetRedisOpt() *Server_Asynq_RedisClientOpt {
 	if x != nil {
-		return x.Endpoint
+		if x, ok := x.RedisClientOpts.(*Server_Asynq_RedisOpt); ok {
+			return x.RedisOpt
+		}
 	}
-	return ""
+	return nil
 }
 
-func (x *Server_Asynq) GetPassword() string {
+func (x *Server_Asynq) GetRedisClusterOpt() *Server_Asynq_RedisClusterClientOpt {
 	if x != nil {
-		return x.Password
+		if x, ok := x.RedisClientOpts.(*Server_Asynq_RedisClusterOpt); ok {
+			return x.RedisClusterOpt
+		}
 	}
-	return ""
+	return nil
 }
 
-func (x *Server_Asynq) GetDb() int32 {
+func (x *Server_Asynq) GetRedisFailoverOpt() *Server_Asynq_RedisFailoverClientOpt {
 	if x != nil {
-		return x.Db
+		if x, ok := x.RedisClientOpts.(*Server_Asynq_RedisFailoverOpt); ok {
+			return x.RedisFailoverOpt
+		}
 	}
-	return 0
+	return nil
 }
 
 func (x *Server_Asynq) GetUri() string {
 	if x != nil {
-		return x.Uri
+		if x, ok := x.RedisClientOpts.(*Server_Asynq_Uri); ok {
+			return x.Uri
+		}
 	}
 	return ""
 }
 
-func (x *Server_Asynq) GetPoolSize() int32 {
-	if x != nil {
-		return x.PoolSize
+func (x *Server_Asynq) GetCodec() string {
+	if x != nil && x.Codec != nil {
+		return *x.Codec
 	}
-	return 0
+	return ""
 }
 
 func (x *Server_Asynq) GetTls() *TLS {
 	if x != nil {
 		return x.Tls
-	}
-	return nil
-}
-
-func (x *Server_Asynq) GetCodec() string {
-	if x != nil {
-		return x.Codec
-	}
-	return ""
-}
-
-func (x *Server_Asynq) GetLocation() string {
-	if x != nil {
-		return x.Location
-	}
-	return ""
-}
-
-func (x *Server_Asynq) GetConcurrency() int32 {
-	if x != nil {
-		return x.Concurrency
-	}
-	return 0
-}
-
-func (x *Server_Asynq) GetGroupMaxSize() int32 {
-	if x != nil {
-		return x.GroupMaxSize
-	}
-	return 0
-}
-
-func (x *Server_Asynq) GetQueues() map[string]int32 {
-	if x != nil {
-		return x.Queues
-	}
-	return nil
-}
-
-func (x *Server_Asynq) GetEnableGracefullyShutdown() bool {
-	if x != nil {
-		return x.EnableGracefullyShutdown
-	}
-	return false
-}
-
-func (x *Server_Asynq) GetEnableStrictPriority() bool {
-	if x != nil {
-		return x.EnableStrictPriority
-	}
-	return false
-}
-
-func (x *Server_Asynq) GetShutdownTimeout() *durationpb.Duration {
-	if x != nil {
-		return x.ShutdownTimeout
 	}
 	return nil
 }
@@ -1324,6 +1468,62 @@ func (x *Server_Asynq) GetReadTimeout() *durationpb.Duration {
 func (x *Server_Asynq) GetWriteTimeout() *durationpb.Duration {
 	if x != nil {
 		return x.WriteTimeout
+	}
+	return nil
+}
+
+func (x *Server_Asynq) GetLocation() string {
+	if x != nil && x.Location != nil {
+		return *x.Location
+	}
+	return ""
+}
+
+func (x *Server_Asynq) GetConcurrency() int32 {
+	if x != nil && x.Concurrency != nil {
+		return *x.Concurrency
+	}
+	return 0
+}
+
+func (x *Server_Asynq) GetGroupMaxSize() int32 {
+	if x != nil && x.GroupMaxSize != nil {
+		return *x.GroupMaxSize
+	}
+	return 0
+}
+
+func (x *Server_Asynq) GetQueues() map[string]int32 {
+	if x != nil {
+		return x.Queues
+	}
+	return nil
+}
+
+func (x *Server_Asynq) GetEnableGracefullyShutdown() bool {
+	if x != nil && x.EnableGracefullyShutdown != nil {
+		return *x.EnableGracefullyShutdown
+	}
+	return false
+}
+
+func (x *Server_Asynq) GetEnableStrictPriority() bool {
+	if x != nil && x.EnableStrictPriority != nil {
+		return *x.EnableStrictPriority
+	}
+	return false
+}
+
+func (x *Server_Asynq) GetShutdownTimeout() *durationpb.Duration {
+	if x != nil {
+		return x.ShutdownTimeout
+	}
+	return nil
+}
+
+func (x *Server_Asynq) GetTaskCheckInterval() *durationpb.Duration {
+	if x != nil {
+		return x.TaskCheckInterval
 	}
 	return nil
 }
@@ -1355,6 +1555,48 @@ func (x *Server_Asynq) GetGroupMaxDelay() *durationpb.Duration {
 	}
 	return nil
 }
+
+func (x *Server_Asynq) GetJanitorInterval() *durationpb.Duration {
+	if x != nil {
+		return x.JanitorInterval
+	}
+	return nil
+}
+
+func (x *Server_Asynq) GetJanitorBatchSize() int32 {
+	if x != nil && x.JanitorBatchSize != nil {
+		return *x.JanitorBatchSize
+	}
+	return 0
+}
+
+type isServer_Asynq_RedisClientOpts interface {
+	isServer_Asynq_RedisClientOpts()
+}
+
+type Server_Asynq_RedisOpt struct {
+	RedisOpt *Server_Asynq_RedisClientOpt `protobuf:"bytes,1,opt,name=redis_opt,json=redisOpt,proto3,oneof"`
+}
+
+type Server_Asynq_RedisClusterOpt struct {
+	RedisClusterOpt *Server_Asynq_RedisClusterClientOpt `protobuf:"bytes,2,opt,name=redis_cluster_opt,json=redisClusterOpt,proto3,oneof"`
+}
+
+type Server_Asynq_RedisFailoverOpt struct {
+	RedisFailoverOpt *Server_Asynq_RedisFailoverClientOpt `protobuf:"bytes,3,opt,name=redis_failover_opt,json=redisFailoverOpt,proto3,oneof"`
+}
+
+type Server_Asynq_Uri struct {
+	Uri string `protobuf:"bytes,4,opt,name=uri,proto3,oneof"` // Redis URI
+}
+
+func (*Server_Asynq_RedisOpt) isServer_Asynq_RedisClientOpts() {}
+
+func (*Server_Asynq_RedisClusterOpt) isServer_Asynq_RedisClientOpts() {}
+
+func (*Server_Asynq_RedisFailoverOpt) isServer_Asynq_RedisClientOpts() {}
+
+func (*Server_Asynq_Uri) isServer_Asynq_RedisClientOpts() {}
 
 // Machinery
 type Server_Machinery struct {
@@ -2312,6 +2554,362 @@ func (x *Server_REST_CORS) GetOrigins() []string {
 	return nil
 }
 
+type Server_Kafka_PlainMechanism struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"` // 用户名
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"` // 密码
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Server_Kafka_PlainMechanism) Reset() {
+	*x = Server_Kafka_PlainMechanism{}
+	mi := &file_v1_server_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Server_Kafka_PlainMechanism) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Server_Kafka_PlainMechanism) ProtoMessage() {}
+
+func (x *Server_Kafka_PlainMechanism) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_server_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Server_Kafka_PlainMechanism.ProtoReflect.Descriptor instead.
+func (*Server_Kafka_PlainMechanism) Descriptor() ([]byte, []int) {
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 4, 0}
+}
+
+func (x *Server_Kafka_PlainMechanism) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *Server_Kafka_PlainMechanism) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+type Server_Kafka_ScramMechanism struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Algorithm     string                 `protobuf:"bytes,1,opt,name=algorithm,proto3" json:"algorithm,omitempty"` // 算法
+	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`   // 用户名
+	Password      string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`   // 密码
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Server_Kafka_ScramMechanism) Reset() {
+	*x = Server_Kafka_ScramMechanism{}
+	mi := &file_v1_server_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Server_Kafka_ScramMechanism) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Server_Kafka_ScramMechanism) ProtoMessage() {}
+
+func (x *Server_Kafka_ScramMechanism) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_server_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Server_Kafka_ScramMechanism.ProtoReflect.Descriptor instead.
+func (*Server_Kafka_ScramMechanism) Descriptor() ([]byte, []int) {
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 4, 1}
+}
+
+func (x *Server_Kafka_ScramMechanism) GetAlgorithm() string {
+	if x != nil {
+		return x.Algorithm
+	}
+	return ""
+}
+
+func (x *Server_Kafka_ScramMechanism) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *Server_Kafka_ScramMechanism) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+type Server_Asynq_RedisClientOpt struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Network       string                 `protobuf:"bytes,1,opt,name=network,proto3" json:"network,omitempty"`                    // Redis对端网络地址样式：tcp、unix
+	Addr          string                 `protobuf:"bytes,2,opt,name=addr,proto3" json:"addr,omitempty"`                          // Redis对端网络地址
+	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`                  // Redis登录用户名
+	Password      string                 `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`                  // Redis登录密码
+	Db            int32                  `protobuf:"varint,5,opt,name=db,proto3" json:"db,omitempty"`                             // Redis数据库索引
+	PoolSize      int32                  `protobuf:"varint,9,opt,name=pool_size,json=poolSize,proto3" json:"pool_size,omitempty"` // Redis连接池大小
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Server_Asynq_RedisClientOpt) Reset() {
+	*x = Server_Asynq_RedisClientOpt{}
+	mi := &file_v1_server_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Server_Asynq_RedisClientOpt) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Server_Asynq_RedisClientOpt) ProtoMessage() {}
+
+func (x *Server_Asynq_RedisClientOpt) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_server_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Server_Asynq_RedisClientOpt.ProtoReflect.Descriptor instead.
+func (*Server_Asynq_RedisClientOpt) Descriptor() ([]byte, []int) {
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 12, 0}
+}
+
+func (x *Server_Asynq_RedisClientOpt) GetNetwork() string {
+	if x != nil {
+		return x.Network
+	}
+	return ""
+}
+
+func (x *Server_Asynq_RedisClientOpt) GetAddr() string {
+	if x != nil {
+		return x.Addr
+	}
+	return ""
+}
+
+func (x *Server_Asynq_RedisClientOpt) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *Server_Asynq_RedisClientOpt) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *Server_Asynq_RedisClientOpt) GetDb() int32 {
+	if x != nil {
+		return x.Db
+	}
+	return 0
+}
+
+func (x *Server_Asynq_RedisClientOpt) GetPoolSize() int32 {
+	if x != nil {
+		return x.PoolSize
+	}
+	return 0
+}
+
+type Server_Asynq_RedisClusterClientOpt struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Addrs         []string               `protobuf:"bytes,1,rep,name=addrs,proto3" json:"addrs,omitempty"`                                          // Redis对端网络地址
+	MaxRedirects  *int32                 `protobuf:"varint,2,opt,name=max_redirects,json=maxRedirects,proto3,oneof" json:"max_redirects,omitempty"` // Redis最大重定向次数
+	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`                                    // Redis登录用户名
+	Password      string                 `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`                                    // Redis登录密码
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Server_Asynq_RedisClusterClientOpt) Reset() {
+	*x = Server_Asynq_RedisClusterClientOpt{}
+	mi := &file_v1_server_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Server_Asynq_RedisClusterClientOpt) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Server_Asynq_RedisClusterClientOpt) ProtoMessage() {}
+
+func (x *Server_Asynq_RedisClusterClientOpt) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_server_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Server_Asynq_RedisClusterClientOpt.ProtoReflect.Descriptor instead.
+func (*Server_Asynq_RedisClusterClientOpt) Descriptor() ([]byte, []int) {
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 12, 1}
+}
+
+func (x *Server_Asynq_RedisClusterClientOpt) GetAddrs() []string {
+	if x != nil {
+		return x.Addrs
+	}
+	return nil
+}
+
+func (x *Server_Asynq_RedisClusterClientOpt) GetMaxRedirects() int32 {
+	if x != nil && x.MaxRedirects != nil {
+		return *x.MaxRedirects
+	}
+	return 0
+}
+
+func (x *Server_Asynq_RedisClusterClientOpt) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *Server_Asynq_RedisClusterClientOpt) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+type Server_Asynq_RedisFailoverClientOpt struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	MasterName       string                 `protobuf:"bytes,1,opt,name=master_name,json=masterName,proto3" json:"master_name,omitempty"`                   // Redis主节点名称
+	SentinelAddrs    []string               `protobuf:"bytes,2,rep,name=sentinel_addrs,json=sentinelAddrs,proto3" json:"sentinel_addrs,omitempty"`          // Redis对端网络地址
+	SentinelUsername string                 `protobuf:"bytes,3,opt,name=sentinel_username,json=sentinelUsername,proto3" json:"sentinel_username,omitempty"` // Redis Sentinel登录用户名
+	SentinelPassword string                 `protobuf:"bytes,4,opt,name=sentinel_password,json=sentinelPassword,proto3" json:"sentinel_password,omitempty"` // Redis Sentinel登录密码
+	Username         string                 `protobuf:"bytes,5,opt,name=username,proto3" json:"username,omitempty"`                                         // Redis登录用户名
+	Password         string                 `protobuf:"bytes,6,opt,name=password,proto3" json:"password,omitempty"`                                         // Redis登录密码
+	PoolSize         int32                  `protobuf:"varint,10,opt,name=pool_size,json=poolSize,proto3" json:"pool_size,omitempty"`                       // Redis连接池大小
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *Server_Asynq_RedisFailoverClientOpt) Reset() {
+	*x = Server_Asynq_RedisFailoverClientOpt{}
+	mi := &file_v1_server_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Server_Asynq_RedisFailoverClientOpt) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Server_Asynq_RedisFailoverClientOpt) ProtoMessage() {}
+
+func (x *Server_Asynq_RedisFailoverClientOpt) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_server_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Server_Asynq_RedisFailoverClientOpt.ProtoReflect.Descriptor instead.
+func (*Server_Asynq_RedisFailoverClientOpt) Descriptor() ([]byte, []int) {
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 12, 2}
+}
+
+func (x *Server_Asynq_RedisFailoverClientOpt) GetMasterName() string {
+	if x != nil {
+		return x.MasterName
+	}
+	return ""
+}
+
+func (x *Server_Asynq_RedisFailoverClientOpt) GetSentinelAddrs() []string {
+	if x != nil {
+		return x.SentinelAddrs
+	}
+	return nil
+}
+
+func (x *Server_Asynq_RedisFailoverClientOpt) GetSentinelUsername() string {
+	if x != nil {
+		return x.SentinelUsername
+	}
+	return ""
+}
+
+func (x *Server_Asynq_RedisFailoverClientOpt) GetSentinelPassword() string {
+	if x != nil {
+		return x.SentinelPassword
+	}
+	return ""
+}
+
+func (x *Server_Asynq_RedisFailoverClientOpt) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *Server_Asynq_RedisFailoverClientOpt) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *Server_Asynq_RedisFailoverClientOpt) GetPoolSize() int32 {
+	if x != nil {
+		return x.PoolSize
+	}
+	return 0
+}
+
 type Server_Machinery_Redis struct {
 	state                  protoimpl.MessageState `protogen:"open.v1"`
 	MaxIdle                int32                  `protobuf:"varint,1,opt,name=max_idle,json=maxIdle,proto3" json:"max_idle,omitempty"`
@@ -2331,7 +2929,7 @@ type Server_Machinery_Redis struct {
 
 func (x *Server_Machinery_Redis) Reset() {
 	*x = Server_Machinery_Redis{}
-	mi := &file_v1_server_proto_msgTypes[24]
+	mi := &file_v1_server_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2343,7 +2941,7 @@ func (x *Server_Machinery_Redis) String() string {
 func (*Server_Machinery_Redis) ProtoMessage() {}
 
 func (x *Server_Machinery_Redis) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[24]
+	mi := &file_v1_server_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2452,7 +3050,7 @@ type Server_Machinery_AMQP struct {
 
 func (x *Server_Machinery_AMQP) Reset() {
 	*x = Server_Machinery_AMQP{}
-	mi := &file_v1_server_proto_msgTypes[25]
+	mi := &file_v1_server_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2464,7 +3062,7 @@ func (x *Server_Machinery_AMQP) String() string {
 func (*Server_Machinery_AMQP) ProtoMessage() {}
 
 func (x *Server_Machinery_AMQP) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[25]
+	mi := &file_v1_server_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2546,7 +3144,7 @@ type Server_Machinery_SQS struct {
 
 func (x *Server_Machinery_SQS) Reset() {
 	*x = Server_Machinery_SQS{}
-	mi := &file_v1_server_proto_msgTypes[26]
+	mi := &file_v1_server_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2558,7 +3156,7 @@ func (x *Server_Machinery_SQS) String() string {
 func (*Server_Machinery_SQS) ProtoMessage() {}
 
 func (x *Server_Machinery_SQS) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[26]
+	mi := &file_v1_server_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2597,7 +3195,7 @@ type Server_Machinery_GCP struct {
 
 func (x *Server_Machinery_GCP) Reset() {
 	*x = Server_Machinery_GCP{}
-	mi := &file_v1_server_proto_msgTypes[27]
+	mi := &file_v1_server_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2609,7 +3207,7 @@ func (x *Server_Machinery_GCP) String() string {
 func (*Server_Machinery_GCP) ProtoMessage() {}
 
 func (x *Server_Machinery_GCP) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[27]
+	mi := &file_v1_server_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2641,7 +3239,7 @@ type Server_Machinery_MongoDB struct {
 
 func (x *Server_Machinery_MongoDB) Reset() {
 	*x = Server_Machinery_MongoDB{}
-	mi := &file_v1_server_proto_msgTypes[28]
+	mi := &file_v1_server_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2653,7 +3251,7 @@ func (x *Server_Machinery_MongoDB) String() string {
 func (*Server_Machinery_MongoDB) ProtoMessage() {}
 
 func (x *Server_Machinery_MongoDB) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[28]
+	mi := &file_v1_server_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2686,7 +3284,7 @@ type Server_Machinery_DynamoDB struct {
 
 func (x *Server_Machinery_DynamoDB) Reset() {
 	*x = Server_Machinery_DynamoDB{}
-	mi := &file_v1_server_proto_msgTypes[29]
+	mi := &file_v1_server_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2698,7 +3296,7 @@ func (x *Server_Machinery_DynamoDB) String() string {
 func (*Server_Machinery_DynamoDB) ProtoMessage() {}
 
 func (x *Server_Machinery_DynamoDB) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[29]
+	mi := &file_v1_server_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2732,7 +3330,7 @@ var File_v1_server_proto protoreflect.FileDescriptor
 
 const file_v1_server_proto_rawDesc = "" +
 	"\n" +
-	"\x0fv1/server.proto\x12\x04conf\x1a\x1egoogle/protobuf/duration.proto\x1a\x13v1/middleware.proto\x1a\fv1/tls.proto\"\xb5A\n" +
+	"\x0fv1/server.proto\x12\x04conf\x1a\x1egoogle/protobuf/duration.proto\x1a\x13v1/middleware.proto\x1a\fv1/tls.proto\"\x80V\n" +
 	"\x06Server\x12*\n" +
 	"\x04rest\x18\x01 \x01(\v2\x11.conf.Server.RESTH\x00R\x04rest\x88\x01\x01\x12*\n" +
 	"\x04grpc\x18\x02 \x01(\v2\x11.conf.Server.GRPCH\x01R\x04grpc\x88\x01\x01\x123\n" +
@@ -2795,11 +3393,55 @@ const file_v1_server_proto_rawDesc = "" +
 	"\busername\x18\x04 \x01(\tR\busername\x12\x1a\n" +
 	"\bpassword\x18\x05 \x01(\tR\bpassword\x12\x1b\n" +
 	"\tclient_id\x18\x06 \x01(\tR\bclientId\x12#\n" +
-	"\rclean_session\x18\a \x01(\bR\fcleanSession\x1aX\n" +
+	"\rclean_session\x18\a \x01(\bR\fcleanSession\x1a\xb2\n" +
+	"\n" +
 	"\x05Kafka\x12\x1c\n" +
 	"\tendpoints\x18\x01 \x03(\tR\tendpoints\x12\x14\n" +
 	"\x05codec\x18\x02 \x01(\tR\x05codec\x12\x1b\n" +
-	"\x03tls\x18\x03 \x01(\v2\t.conf.TLSR\x03tls\x1a[\n" +
+	"\x03tls\x18\x03 \x01(\v2\t.conf.TLSR\x03tls\x12&\n" +
+	"\fmax_attempts\x18\x04 \x01(\x05H\x01R\vmaxAttempts\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"batch_size\x18\x05 \x01(\x05H\x02R\tbatchSize\x88\x01\x01\x12$\n" +
+	"\vbatch_bytes\x18\x06 \x01(\x03H\x03R\n" +
+	"batchBytes\x88\x01\x01\x125\n" +
+	"\x14publish_max_attempts\x18\a \x01(\x05H\x04R\x12publishMaxAttempts\x88\x01\x01\x12C\n" +
+	"\rbatch_timeout\x18\n" +
+	" \x01(\v2\x19.google.protobuf.DurationH\x05R\fbatchTimeout\x88\x01\x01\x12A\n" +
+	"\fread_timeout\x18\v \x01(\v2\x19.google.protobuf.DurationH\x06R\vreadTimeout\x88\x01\x01\x12C\n" +
+	"\rwrite_timeout\x18\f \x01(\v2\x19.google.protobuf.DurationH\aR\fwriteTimeout\x88\x01\x01\x12A\n" +
+	"\x1benable_one_topic_one_writer\x18\x14 \x01(\bH\bR\x17enableOneTopicOneWriter\x88\x01\x01\x12M\n" +
+	"!allow_publish_auto_topic_creation\x18\x15 \x01(\bH\tR\x1dallowPublishAutoTopicCreation\x88\x01\x01\x12\x19\n" +
+	"\x05async\x18\x16 \x01(\bH\n" +
+	"R\x05async\x88\x01\x01\x12(\n" +
+	"\renable_logger\x18\x17 \x01(\bH\vR\fenableLogger\x88\x01\x01\x123\n" +
+	"\x13enable_error_logger\x18\x18 \x01(\bH\fR\x11enableErrorLogger\x88\x01\x01\x129\n" +
+	"\x05plain\x18\x1e \x01(\v2!.conf.Server.Kafka.PlainMechanismH\x00R\x05plain\x129\n" +
+	"\x05scram\x18\x1f \x01(\v2!.conf.Server.Kafka.ScramMechanismH\x00R\x05scram\x1aH\n" +
+	"\x0ePlainMechanism\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\x1a\x8b\x01\n" +
+	"\x0eScramMechanism\x12\x1c\n" +
+	"\talgorithm\x18\x01 \x01(\tR\talgorithm\x12\x1a\n" +
+	"\busername\x18\x02 \x01(\tR\busername\x12\x1a\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\"#\n" +
+	"\tAlgorithm\x12\n" +
+	"\n" +
+	"\x06SHA256\x10\x00\x12\n" +
+	"\n" +
+	"\x06SHA512\x10\x01B\x10\n" +
+	"\x0eauth_mechanismB\x0f\n" +
+	"\r_max_attemptsB\r\n" +
+	"\v_batch_sizeB\x0e\n" +
+	"\f_batch_bytesB\x17\n" +
+	"\x15_publish_max_attemptsB\x10\n" +
+	"\x0e_batch_timeoutB\x0f\n" +
+	"\r_read_timeoutB\x10\n" +
+	"\x0e_write_timeoutB\x1e\n" +
+	"\x1c_enable_one_topic_one_writerB$\n" +
+	"\"_allow_publish_auto_topic_creationB\b\n" +
+	"\x06_asyncB\x10\n" +
+	"\x0e_enable_loggerB\x16\n" +
+	"\x14_enable_error_logger\x1a[\n" +
 	"\bRabbitMQ\x12\x1c\n" +
 	"\tendpoints\x18\x01 \x03(\tR\tendpoints\x12\x14\n" +
 	"\x05codec\x18\x02 \x01(\tR\x05codec\x12\x1b\n" +
@@ -2840,34 +3482,78 @@ const file_v1_server_proto_rawDesc = "" +
 	"group_name\x18\n" +
 	" \x01(\tR\tgroupName\x12\x1b\n" +
 	"\x03tls\x18\v \x01(\v2\t.conf.TLSR\x03tls\x12!\n" +
-	"\fenable_trace\x18d \x01(\bR\venableTrace\x1a\xcd\b\n" +
-	"\x05Asynq\x12\x18\n" +
-	"\anetwork\x18\x01 \x01(\tR\anetwork\x12\x1a\n" +
-	"\bendpoint\x18\x02 \x01(\tR\bendpoint\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\x12\x0e\n" +
-	"\x02db\x18\x04 \x01(\x05R\x02db\x12\x10\n" +
-	"\x03uri\x18\x05 \x01(\tR\x03uri\x12\x1b\n" +
-	"\tpool_size\x18\x06 \x01(\x05R\bpoolSize\x12\x1b\n" +
-	"\x03tls\x18\a \x01(\v2\t.conf.TLSR\x03tls\x12\x14\n" +
-	"\x05codec\x18\b \x01(\tR\x05codec\x12\x1a\n" +
+	"\fenable_trace\x18d \x01(\bR\venableTrace\x1a\xbd\x13\n" +
+	"\x05Asynq\x12@\n" +
+	"\tredis_opt\x18\x01 \x01(\v2!.conf.Server.Asynq.RedisClientOptH\x00R\bredisOpt\x12V\n" +
+	"\x11redis_cluster_opt\x18\x02 \x01(\v2(.conf.Server.Asynq.RedisClusterClientOptH\x00R\x0fredisClusterOpt\x12Y\n" +
+	"\x12redis_failover_opt\x18\x03 \x01(\v2).conf.Server.Asynq.RedisFailoverClientOptH\x00R\x10redisFailoverOpt\x12\x12\n" +
+	"\x03uri\x18\x04 \x01(\tH\x00R\x03uri\x12\x19\n" +
+	"\x05codec\x18\x05 \x01(\tH\x01R\x05codec\x88\x01\x01\x12 \n" +
+	"\x03tls\x18\x06 \x01(\v2\t.conf.TLSH\x02R\x03tls\x88\x01\x01\x12A\n" +
+	"\fdial_timeout\x18\a \x01(\v2\x19.google.protobuf.DurationH\x03R\vdialTimeout\x88\x01\x01\x12A\n" +
+	"\fread_timeout\x18\b \x01(\v2\x19.google.protobuf.DurationH\x04R\vreadTimeout\x88\x01\x01\x12C\n" +
+	"\rwrite_timeout\x18\t \x01(\v2\x19.google.protobuf.DurationH\x05R\fwriteTimeout\x88\x01\x01\x12\x1f\n" +
 	"\blocation\x18\n" +
-	" \x01(\tR\blocation\x12 \n" +
-	"\vconcurrency\x18\v \x01(\x05R\vconcurrency\x12$\n" +
-	"\x0egroup_max_size\x18\f \x01(\x05R\fgroupMaxSize\x126\n" +
-	"\x06queues\x18\r \x03(\v2\x1e.conf.Server.Asynq.QueuesEntryR\x06queues\x12<\n" +
-	"\x1aenable_gracefully_shutdown\x18\x14 \x01(\bR\x18enableGracefullyShutdown\x124\n" +
-	"\x16enable_strict_priority\x18\x15 \x01(\bR\x14enableStrictPriority\x12D\n" +
-	"\x10shutdown_timeout\x18\x1e \x01(\v2\x19.google.protobuf.DurationR\x0fshutdownTimeout\x12<\n" +
-	"\fdial_timeout\x18\x1f \x01(\v2\x19.google.protobuf.DurationR\vdialTimeout\x12<\n" +
-	"\fread_timeout\x18  \x01(\v2\x19.google.protobuf.DurationR\vreadTimeout\x12>\n" +
-	"\rwrite_timeout\x18! \x01(\v2\x19.google.protobuf.DurationR\fwriteTimeout\x12M\n" +
-	"\x15health_check_interval\x18\" \x01(\v2\x19.google.protobuf.DurationR\x13healthCheckInterval\x12X\n" +
-	"\x1bdelayed_task_check_interval\x18# \x01(\v2\x19.google.protobuf.DurationR\x18delayedTaskCheckInterval\x12G\n" +
-	"\x12group_grace_period\x18$ \x01(\v2\x19.google.protobuf.DurationR\x10groupGracePeriod\x12A\n" +
-	"\x0fgroup_max_delay\x18% \x01(\v2\x19.google.protobuf.DurationR\rgroupMaxDelay\x1a9\n" +
+	" \x01(\tH\x06R\blocation\x88\x01\x01\x12%\n" +
+	"\vconcurrency\x18\v \x01(\x05H\aR\vconcurrency\x88\x01\x01\x12)\n" +
+	"\x0egroup_max_size\x18\f \x01(\x05H\bR\fgroupMaxSize\x88\x01\x01\x126\n" +
+	"\x06queues\x18\r \x03(\v2\x1e.conf.Server.Asynq.QueuesEntryR\x06queues\x12A\n" +
+	"\x1aenable_gracefully_shutdown\x18\x14 \x01(\bH\tR\x18enableGracefullyShutdown\x88\x01\x01\x129\n" +
+	"\x16enable_strict_priority\x18\x15 \x01(\bH\n" +
+	"R\x14enableStrictPriority\x88\x01\x01\x12I\n" +
+	"\x10shutdown_timeout\x18\x1e \x01(\v2\x19.google.protobuf.DurationH\vR\x0fshutdownTimeout\x88\x01\x01\x12N\n" +
+	"\x13task_check_interval\x18\x1f \x01(\v2\x19.google.protobuf.DurationH\fR\x11taskCheckInterval\x88\x01\x01\x12R\n" +
+	"\x15health_check_interval\x18  \x01(\v2\x19.google.protobuf.DurationH\rR\x13healthCheckInterval\x88\x01\x01\x12]\n" +
+	"\x1bdelayed_task_check_interval\x18! \x01(\v2\x19.google.protobuf.DurationH\x0eR\x18delayedTaskCheckInterval\x88\x01\x01\x12L\n" +
+	"\x12group_grace_period\x18\" \x01(\v2\x19.google.protobuf.DurationH\x0fR\x10groupGracePeriod\x88\x01\x01\x12F\n" +
+	"\x0fgroup_max_delay\x18# \x01(\v2\x19.google.protobuf.DurationH\x10R\rgroupMaxDelay\x88\x01\x01\x12I\n" +
+	"\x10janitor_interval\x18$ \x01(\v2\x19.google.protobuf.DurationH\x11R\x0fjanitorInterval\x88\x01\x01\x121\n" +
+	"\x12janitor_batch_size\x18% \x01(\x05H\x12R\x10janitorBatchSize\x88\x01\x01\x1a\xa3\x01\n" +
+	"\x0eRedisClientOpt\x12\x18\n" +
+	"\anetwork\x18\x01 \x01(\tR\anetwork\x12\x12\n" +
+	"\x04addr\x18\x02 \x01(\tR\x04addr\x12\x1a\n" +
+	"\busername\x18\x03 \x01(\tR\busername\x12\x1a\n" +
+	"\bpassword\x18\x04 \x01(\tR\bpassword\x12\x0e\n" +
+	"\x02db\x18\x05 \x01(\x05R\x02db\x12\x1b\n" +
+	"\tpool_size\x18\t \x01(\x05R\bpoolSize\x1a\xa1\x01\n" +
+	"\x15RedisClusterClientOpt\x12\x14\n" +
+	"\x05addrs\x18\x01 \x03(\tR\x05addrs\x12(\n" +
+	"\rmax_redirects\x18\x02 \x01(\x05H\x00R\fmaxRedirects\x88\x01\x01\x12\x1a\n" +
+	"\busername\x18\x03 \x01(\tR\busername\x12\x1a\n" +
+	"\bpassword\x18\x04 \x01(\tR\bpasswordB\x10\n" +
+	"\x0e_max_redirects\x1a\x8f\x02\n" +
+	"\x16RedisFailoverClientOpt\x12\x1f\n" +
+	"\vmaster_name\x18\x01 \x01(\tR\n" +
+	"masterName\x12%\n" +
+	"\x0esentinel_addrs\x18\x02 \x03(\tR\rsentinelAddrs\x12+\n" +
+	"\x11sentinel_username\x18\x03 \x01(\tR\x10sentinelUsername\x12+\n" +
+	"\x11sentinel_password\x18\x04 \x01(\tR\x10sentinelPassword\x12\x1a\n" +
+	"\busername\x18\x05 \x01(\tR\busername\x12\x1a\n" +
+	"\bpassword\x18\x06 \x01(\tR\bpassword\x12\x1b\n" +
+	"\tpool_size\x18\n" +
+	" \x01(\x05R\bpoolSize\x1a9\n" +
 	"\vQueuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\x1a\xbc\x11\n" +
+	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01B\x13\n" +
+	"\x11redis_client_optsB\b\n" +
+	"\x06_codecB\x06\n" +
+	"\x04_tlsB\x0f\n" +
+	"\r_dial_timeoutB\x0f\n" +
+	"\r_read_timeoutB\x10\n" +
+	"\x0e_write_timeoutB\v\n" +
+	"\t_locationB\x0e\n" +
+	"\f_concurrencyB\x11\n" +
+	"\x0f_group_max_sizeB\x1d\n" +
+	"\x1b_enable_gracefully_shutdownB\x19\n" +
+	"\x17_enable_strict_priorityB\x13\n" +
+	"\x11_shutdown_timeoutB\x16\n" +
+	"\x14_task_check_intervalB\x18\n" +
+	"\x16_health_check_intervalB\x1e\n" +
+	"\x1c_delayed_task_check_intervalB\x15\n" +
+	"\x13_group_grace_periodB\x12\n" +
+	"\x10_group_max_delayB\x13\n" +
+	"\x11_janitor_intervalB\x15\n" +
+	"\x13_janitor_batch_size\x1a\xbc\x11\n" +
 	"\tMachinery\x12\x1f\n" +
 	"\vbroker_type\x18\x01 \x01(\tR\n" +
 	"brokerType\x12\x1f\n" +
@@ -3046,121 +3732,138 @@ func file_v1_server_proto_rawDescGZIP() []byte {
 	return file_v1_server_proto_rawDescData
 }
 
-var file_v1_server_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
+var file_v1_server_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_v1_server_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
 var file_v1_server_proto_goTypes = []any{
-	(*Server)(nil),                    // 0: conf.Server
-	(*Server_REST)(nil),               // 1: conf.Server.REST
-	(*Server_GRPC)(nil),               // 2: conf.Server.GRPC
-	(*Server_Websocket)(nil),          // 3: conf.Server.Websocket
-	(*Server_Mqtt)(nil),               // 4: conf.Server.Mqtt
-	(*Server_Kafka)(nil),              // 5: conf.Server.Kafka
-	(*Server_RabbitMQ)(nil),           // 6: conf.Server.RabbitMQ
-	(*Server_ActiveMQ)(nil),           // 7: conf.Server.ActiveMQ
-	(*Server_NATS)(nil),               // 8: conf.Server.NATS
-	(*Server_NSQ)(nil),                // 9: conf.Server.NSQ
-	(*Server_Pulsar)(nil),             // 10: conf.Server.Pulsar
-	(*Server_Redis)(nil),              // 11: conf.Server.Redis
-	(*Server_RocketMQ)(nil),           // 12: conf.Server.RocketMQ
-	(*Server_Asynq)(nil),              // 13: conf.Server.Asynq
-	(*Server_Machinery)(nil),          // 14: conf.Server.Machinery
-	(*Server_SSE)(nil),                // 15: conf.Server.SSE
-	(*Server_SocketIO)(nil),           // 16: conf.Server.SocketIO
-	(*Server_SignalR)(nil),            // 17: conf.Server.SignalR
-	(*Server_MCP)(nil),                // 18: conf.Server.MCP
-	(*Server_GraphQL)(nil),            // 19: conf.Server.GraphQL
-	(*Server_Thrift)(nil),             // 20: conf.Server.Thrift
-	(*Server_KeepAlive)(nil),          // 21: conf.Server.KeepAlive
-	(*Server_REST_CORS)(nil),          // 22: conf.Server.REST.CORS
-	nil,                               // 23: conf.Server.Asynq.QueuesEntry
-	(*Server_Machinery_Redis)(nil),    // 24: conf.Server.Machinery.Redis
-	(*Server_Machinery_AMQP)(nil),     // 25: conf.Server.Machinery.AMQP
-	(*Server_Machinery_SQS)(nil),      // 26: conf.Server.Machinery.SQS
-	(*Server_Machinery_GCP)(nil),      // 27: conf.Server.Machinery.GCP
-	(*Server_Machinery_MongoDB)(nil),  // 28: conf.Server.Machinery.MongoDB
-	(*Server_Machinery_DynamoDB)(nil), // 29: conf.Server.Machinery.DynamoDB
-	nil,                               // 30: conf.Server.Machinery.AMQP.QueueDeclareArgsEntry
-	nil,                               // 31: conf.Server.Machinery.AMQP.QueueBindingArgsEntry
-	(*durationpb.Duration)(nil),       // 32: google.protobuf.Duration
-	(*Middleware)(nil),                // 33: conf.Middleware
-	(*TLS)(nil),                       // 34: conf.TLS
+	(Server_Kafka_ScramMechanism_Algorithm)(0), // 0: conf.Server.Kafka.ScramMechanism.Algorithm
+	(*Server)(nil),                              // 1: conf.Server
+	(*Server_REST)(nil),                         // 2: conf.Server.REST
+	(*Server_GRPC)(nil),                         // 3: conf.Server.GRPC
+	(*Server_Websocket)(nil),                    // 4: conf.Server.Websocket
+	(*Server_Mqtt)(nil),                         // 5: conf.Server.Mqtt
+	(*Server_Kafka)(nil),                        // 6: conf.Server.Kafka
+	(*Server_RabbitMQ)(nil),                     // 7: conf.Server.RabbitMQ
+	(*Server_ActiveMQ)(nil),                     // 8: conf.Server.ActiveMQ
+	(*Server_NATS)(nil),                         // 9: conf.Server.NATS
+	(*Server_NSQ)(nil),                          // 10: conf.Server.NSQ
+	(*Server_Pulsar)(nil),                       // 11: conf.Server.Pulsar
+	(*Server_Redis)(nil),                        // 12: conf.Server.Redis
+	(*Server_RocketMQ)(nil),                     // 13: conf.Server.RocketMQ
+	(*Server_Asynq)(nil),                        // 14: conf.Server.Asynq
+	(*Server_Machinery)(nil),                    // 15: conf.Server.Machinery
+	(*Server_SSE)(nil),                          // 16: conf.Server.SSE
+	(*Server_SocketIO)(nil),                     // 17: conf.Server.SocketIO
+	(*Server_SignalR)(nil),                      // 18: conf.Server.SignalR
+	(*Server_MCP)(nil),                          // 19: conf.Server.MCP
+	(*Server_GraphQL)(nil),                      // 20: conf.Server.GraphQL
+	(*Server_Thrift)(nil),                       // 21: conf.Server.Thrift
+	(*Server_KeepAlive)(nil),                    // 22: conf.Server.KeepAlive
+	(*Server_REST_CORS)(nil),                    // 23: conf.Server.REST.CORS
+	(*Server_Kafka_PlainMechanism)(nil),         // 24: conf.Server.Kafka.PlainMechanism
+	(*Server_Kafka_ScramMechanism)(nil),         // 25: conf.Server.Kafka.ScramMechanism
+	(*Server_Asynq_RedisClientOpt)(nil),         // 26: conf.Server.Asynq.RedisClientOpt
+	(*Server_Asynq_RedisClusterClientOpt)(nil),  // 27: conf.Server.Asynq.RedisClusterClientOpt
+	(*Server_Asynq_RedisFailoverClientOpt)(nil), // 28: conf.Server.Asynq.RedisFailoverClientOpt
+	nil,                               // 29: conf.Server.Asynq.QueuesEntry
+	(*Server_Machinery_Redis)(nil),    // 30: conf.Server.Machinery.Redis
+	(*Server_Machinery_AMQP)(nil),     // 31: conf.Server.Machinery.AMQP
+	(*Server_Machinery_SQS)(nil),      // 32: conf.Server.Machinery.SQS
+	(*Server_Machinery_GCP)(nil),      // 33: conf.Server.Machinery.GCP
+	(*Server_Machinery_MongoDB)(nil),  // 34: conf.Server.Machinery.MongoDB
+	(*Server_Machinery_DynamoDB)(nil), // 35: conf.Server.Machinery.DynamoDB
+	nil,                               // 36: conf.Server.Machinery.AMQP.QueueDeclareArgsEntry
+	nil,                               // 37: conf.Server.Machinery.AMQP.QueueBindingArgsEntry
+	(*durationpb.Duration)(nil),       // 38: google.protobuf.Duration
+	(*Middleware)(nil),                // 39: conf.Middleware
+	(*TLS)(nil),                       // 40: conf.TLS
 }
 var file_v1_server_proto_depIdxs = []int32{
-	1,  // 0: conf.Server.rest:type_name -> conf.Server.REST
-	2,  // 1: conf.Server.grpc:type_name -> conf.Server.GRPC
-	19, // 2: conf.Server.graphql:type_name -> conf.Server.GraphQL
-	20, // 3: conf.Server.thrift:type_name -> conf.Server.Thrift
-	21, // 4: conf.Server.keepalive:type_name -> conf.Server.KeepAlive
-	4,  // 5: conf.Server.mqtt:type_name -> conf.Server.Mqtt
-	5,  // 6: conf.Server.kafka:type_name -> conf.Server.Kafka
-	6,  // 7: conf.Server.rabbitmq:type_name -> conf.Server.RabbitMQ
-	7,  // 8: conf.Server.activemq:type_name -> conf.Server.ActiveMQ
-	8,  // 9: conf.Server.nats:type_name -> conf.Server.NATS
-	9,  // 10: conf.Server.nsq:type_name -> conf.Server.NSQ
-	10, // 11: conf.Server.pulsar:type_name -> conf.Server.Pulsar
-	11, // 12: conf.Server.redis:type_name -> conf.Server.Redis
-	12, // 13: conf.Server.rocketmq:type_name -> conf.Server.RocketMQ
-	3,  // 14: conf.Server.websocket:type_name -> conf.Server.Websocket
-	15, // 15: conf.Server.sse:type_name -> conf.Server.SSE
-	16, // 16: conf.Server.socketio:type_name -> conf.Server.SocketIO
-	17, // 17: conf.Server.signalr:type_name -> conf.Server.SignalR
-	18, // 18: conf.Server.mcp:type_name -> conf.Server.MCP
-	13, // 19: conf.Server.asynq:type_name -> conf.Server.Asynq
-	14, // 20: conf.Server.machinery:type_name -> conf.Server.Machinery
-	32, // 21: conf.Server.REST.timeout:type_name -> google.protobuf.Duration
-	22, // 22: conf.Server.REST.cors:type_name -> conf.Server.REST.CORS
-	33, // 23: conf.Server.REST.middleware:type_name -> conf.Middleware
-	34, // 24: conf.Server.REST.tls:type_name -> conf.TLS
-	32, // 25: conf.Server.GRPC.timeout:type_name -> google.protobuf.Duration
-	33, // 26: conf.Server.GRPC.middleware:type_name -> conf.Middleware
-	34, // 27: conf.Server.GRPC.tls:type_name -> conf.TLS
-	32, // 28: conf.Server.Websocket.timeout:type_name -> google.protobuf.Duration
-	34, // 29: conf.Server.Websocket.tls:type_name -> conf.TLS
-	34, // 30: conf.Server.Mqtt.tls:type_name -> conf.TLS
-	34, // 31: conf.Server.Kafka.tls:type_name -> conf.TLS
-	34, // 32: conf.Server.RabbitMQ.tls:type_name -> conf.TLS
-	34, // 33: conf.Server.ActiveMQ.tls:type_name -> conf.TLS
-	34, // 34: conf.Server.NATS.tls:type_name -> conf.TLS
-	34, // 35: conf.Server.NSQ.tls:type_name -> conf.TLS
-	34, // 36: conf.Server.Pulsar.tls:type_name -> conf.TLS
-	34, // 37: conf.Server.Redis.tls:type_name -> conf.TLS
-	34, // 38: conf.Server.RocketMQ.tls:type_name -> conf.TLS
-	34, // 39: conf.Server.Asynq.tls:type_name -> conf.TLS
-	23, // 40: conf.Server.Asynq.queues:type_name -> conf.Server.Asynq.QueuesEntry
-	32, // 41: conf.Server.Asynq.shutdown_timeout:type_name -> google.protobuf.Duration
-	32, // 42: conf.Server.Asynq.dial_timeout:type_name -> google.protobuf.Duration
-	32, // 43: conf.Server.Asynq.read_timeout:type_name -> google.protobuf.Duration
-	32, // 44: conf.Server.Asynq.write_timeout:type_name -> google.protobuf.Duration
-	32, // 45: conf.Server.Asynq.health_check_interval:type_name -> google.protobuf.Duration
-	32, // 46: conf.Server.Asynq.delayed_task_check_interval:type_name -> google.protobuf.Duration
-	32, // 47: conf.Server.Asynq.group_grace_period:type_name -> google.protobuf.Duration
-	32, // 48: conf.Server.Asynq.group_max_delay:type_name -> google.protobuf.Duration
-	34, // 49: conf.Server.Machinery.tls:type_name -> conf.TLS
-	24, // 50: conf.Server.Machinery.redis:type_name -> conf.Server.Machinery.Redis
-	25, // 51: conf.Server.Machinery.amqp:type_name -> conf.Server.Machinery.AMQP
-	26, // 52: conf.Server.Machinery.sqs:type_name -> conf.Server.Machinery.SQS
-	27, // 53: conf.Server.Machinery.gcp:type_name -> conf.Server.Machinery.GCP
-	28, // 54: conf.Server.Machinery.mongodb:type_name -> conf.Server.Machinery.MongoDB
-	29, // 55: conf.Server.Machinery.dynamodb:type_name -> conf.Server.Machinery.DynamoDB
-	34, // 56: conf.Server.SSE.tls:type_name -> conf.TLS
-	32, // 57: conf.Server.SSE.timeout:type_name -> google.protobuf.Duration
-	32, // 58: conf.Server.SSE.event_ttl:type_name -> google.protobuf.Duration
-	34, // 59: conf.Server.SocketIO.tls:type_name -> conf.TLS
-	34, // 60: conf.Server.SignalR.tls:type_name -> conf.TLS
-	32, // 61: conf.Server.SignalR.keep_alive_interval:type_name -> google.protobuf.Duration
-	32, // 62: conf.Server.SignalR.chan_receive_timeout:type_name -> google.protobuf.Duration
-	34, // 63: conf.Server.MCP.tls:type_name -> conf.TLS
-	32, // 64: conf.Server.GraphQL.timeout:type_name -> google.protobuf.Duration
-	34, // 65: conf.Server.GraphQL.tls:type_name -> conf.TLS
-	34, // 66: conf.Server.Thrift.tls:type_name -> conf.TLS
-	34, // 67: conf.Server.KeepAlive.tls:type_name -> conf.TLS
-	30, // 68: conf.Server.Machinery.AMQP.queue_declare_args:type_name -> conf.Server.Machinery.AMQP.QueueDeclareArgsEntry
-	31, // 69: conf.Server.Machinery.AMQP.queue_binding_args:type_name -> conf.Server.Machinery.AMQP.QueueBindingArgsEntry
-	32, // 70: conf.Server.Machinery.GCP.max_extension:type_name -> google.protobuf.Duration
-	71, // [71:71] is the sub-list for method output_type
-	71, // [71:71] is the sub-list for method input_type
-	71, // [71:71] is the sub-list for extension type_name
-	71, // [71:71] is the sub-list for extension extendee
-	0,  // [0:71] is the sub-list for field type_name
+	2,  // 0: conf.Server.rest:type_name -> conf.Server.REST
+	3,  // 1: conf.Server.grpc:type_name -> conf.Server.GRPC
+	20, // 2: conf.Server.graphql:type_name -> conf.Server.GraphQL
+	21, // 3: conf.Server.thrift:type_name -> conf.Server.Thrift
+	22, // 4: conf.Server.keepalive:type_name -> conf.Server.KeepAlive
+	5,  // 5: conf.Server.mqtt:type_name -> conf.Server.Mqtt
+	6,  // 6: conf.Server.kafka:type_name -> conf.Server.Kafka
+	7,  // 7: conf.Server.rabbitmq:type_name -> conf.Server.RabbitMQ
+	8,  // 8: conf.Server.activemq:type_name -> conf.Server.ActiveMQ
+	9,  // 9: conf.Server.nats:type_name -> conf.Server.NATS
+	10, // 10: conf.Server.nsq:type_name -> conf.Server.NSQ
+	11, // 11: conf.Server.pulsar:type_name -> conf.Server.Pulsar
+	12, // 12: conf.Server.redis:type_name -> conf.Server.Redis
+	13, // 13: conf.Server.rocketmq:type_name -> conf.Server.RocketMQ
+	4,  // 14: conf.Server.websocket:type_name -> conf.Server.Websocket
+	16, // 15: conf.Server.sse:type_name -> conf.Server.SSE
+	17, // 16: conf.Server.socketio:type_name -> conf.Server.SocketIO
+	18, // 17: conf.Server.signalr:type_name -> conf.Server.SignalR
+	19, // 18: conf.Server.mcp:type_name -> conf.Server.MCP
+	14, // 19: conf.Server.asynq:type_name -> conf.Server.Asynq
+	15, // 20: conf.Server.machinery:type_name -> conf.Server.Machinery
+	38, // 21: conf.Server.REST.timeout:type_name -> google.protobuf.Duration
+	23, // 22: conf.Server.REST.cors:type_name -> conf.Server.REST.CORS
+	39, // 23: conf.Server.REST.middleware:type_name -> conf.Middleware
+	40, // 24: conf.Server.REST.tls:type_name -> conf.TLS
+	38, // 25: conf.Server.GRPC.timeout:type_name -> google.protobuf.Duration
+	39, // 26: conf.Server.GRPC.middleware:type_name -> conf.Middleware
+	40, // 27: conf.Server.GRPC.tls:type_name -> conf.TLS
+	38, // 28: conf.Server.Websocket.timeout:type_name -> google.protobuf.Duration
+	40, // 29: conf.Server.Websocket.tls:type_name -> conf.TLS
+	40, // 30: conf.Server.Mqtt.tls:type_name -> conf.TLS
+	40, // 31: conf.Server.Kafka.tls:type_name -> conf.TLS
+	38, // 32: conf.Server.Kafka.batch_timeout:type_name -> google.protobuf.Duration
+	38, // 33: conf.Server.Kafka.read_timeout:type_name -> google.protobuf.Duration
+	38, // 34: conf.Server.Kafka.write_timeout:type_name -> google.protobuf.Duration
+	24, // 35: conf.Server.Kafka.plain:type_name -> conf.Server.Kafka.PlainMechanism
+	25, // 36: conf.Server.Kafka.scram:type_name -> conf.Server.Kafka.ScramMechanism
+	40, // 37: conf.Server.RabbitMQ.tls:type_name -> conf.TLS
+	40, // 38: conf.Server.ActiveMQ.tls:type_name -> conf.TLS
+	40, // 39: conf.Server.NATS.tls:type_name -> conf.TLS
+	40, // 40: conf.Server.NSQ.tls:type_name -> conf.TLS
+	40, // 41: conf.Server.Pulsar.tls:type_name -> conf.TLS
+	40, // 42: conf.Server.Redis.tls:type_name -> conf.TLS
+	40, // 43: conf.Server.RocketMQ.tls:type_name -> conf.TLS
+	26, // 44: conf.Server.Asynq.redis_opt:type_name -> conf.Server.Asynq.RedisClientOpt
+	27, // 45: conf.Server.Asynq.redis_cluster_opt:type_name -> conf.Server.Asynq.RedisClusterClientOpt
+	28, // 46: conf.Server.Asynq.redis_failover_opt:type_name -> conf.Server.Asynq.RedisFailoverClientOpt
+	40, // 47: conf.Server.Asynq.tls:type_name -> conf.TLS
+	38, // 48: conf.Server.Asynq.dial_timeout:type_name -> google.protobuf.Duration
+	38, // 49: conf.Server.Asynq.read_timeout:type_name -> google.protobuf.Duration
+	38, // 50: conf.Server.Asynq.write_timeout:type_name -> google.protobuf.Duration
+	29, // 51: conf.Server.Asynq.queues:type_name -> conf.Server.Asynq.QueuesEntry
+	38, // 52: conf.Server.Asynq.shutdown_timeout:type_name -> google.protobuf.Duration
+	38, // 53: conf.Server.Asynq.task_check_interval:type_name -> google.protobuf.Duration
+	38, // 54: conf.Server.Asynq.health_check_interval:type_name -> google.protobuf.Duration
+	38, // 55: conf.Server.Asynq.delayed_task_check_interval:type_name -> google.protobuf.Duration
+	38, // 56: conf.Server.Asynq.group_grace_period:type_name -> google.protobuf.Duration
+	38, // 57: conf.Server.Asynq.group_max_delay:type_name -> google.protobuf.Duration
+	38, // 58: conf.Server.Asynq.janitor_interval:type_name -> google.protobuf.Duration
+	40, // 59: conf.Server.Machinery.tls:type_name -> conf.TLS
+	30, // 60: conf.Server.Machinery.redis:type_name -> conf.Server.Machinery.Redis
+	31, // 61: conf.Server.Machinery.amqp:type_name -> conf.Server.Machinery.AMQP
+	32, // 62: conf.Server.Machinery.sqs:type_name -> conf.Server.Machinery.SQS
+	33, // 63: conf.Server.Machinery.gcp:type_name -> conf.Server.Machinery.GCP
+	34, // 64: conf.Server.Machinery.mongodb:type_name -> conf.Server.Machinery.MongoDB
+	35, // 65: conf.Server.Machinery.dynamodb:type_name -> conf.Server.Machinery.DynamoDB
+	40, // 66: conf.Server.SSE.tls:type_name -> conf.TLS
+	38, // 67: conf.Server.SSE.timeout:type_name -> google.protobuf.Duration
+	38, // 68: conf.Server.SSE.event_ttl:type_name -> google.protobuf.Duration
+	40, // 69: conf.Server.SocketIO.tls:type_name -> conf.TLS
+	40, // 70: conf.Server.SignalR.tls:type_name -> conf.TLS
+	38, // 71: conf.Server.SignalR.keep_alive_interval:type_name -> google.protobuf.Duration
+	38, // 72: conf.Server.SignalR.chan_receive_timeout:type_name -> google.protobuf.Duration
+	40, // 73: conf.Server.MCP.tls:type_name -> conf.TLS
+	38, // 74: conf.Server.GraphQL.timeout:type_name -> google.protobuf.Duration
+	40, // 75: conf.Server.GraphQL.tls:type_name -> conf.TLS
+	40, // 76: conf.Server.Thrift.tls:type_name -> conf.TLS
+	40, // 77: conf.Server.KeepAlive.tls:type_name -> conf.TLS
+	36, // 78: conf.Server.Machinery.AMQP.queue_declare_args:type_name -> conf.Server.Machinery.AMQP.QueueDeclareArgsEntry
+	37, // 79: conf.Server.Machinery.AMQP.queue_binding_args:type_name -> conf.Server.Machinery.AMQP.QueueBindingArgsEntry
+	38, // 80: conf.Server.Machinery.GCP.max_extension:type_name -> google.protobuf.Duration
+	81, // [81:81] is the sub-list for method output_type
+	81, // [81:81] is the sub-list for method input_type
+	81, // [81:81] is the sub-list for extension type_name
+	81, // [81:81] is the sub-list for extension extendee
+	0,  // [0:81] is the sub-list for field type_name
 }
 
 func init() { file_v1_server_proto_init() }
@@ -3171,19 +3874,31 @@ func file_v1_server_proto_init() {
 	file_v1_middleware_proto_init()
 	file_v1_tls_proto_init()
 	file_v1_server_proto_msgTypes[0].OneofWrappers = []any{}
+	file_v1_server_proto_msgTypes[5].OneofWrappers = []any{
+		(*Server_Kafka_Plain)(nil),
+		(*Server_Kafka_Scram)(nil),
+	}
+	file_v1_server_proto_msgTypes[13].OneofWrappers = []any{
+		(*Server_Asynq_RedisOpt)(nil),
+		(*Server_Asynq_RedisClusterOpt)(nil),
+		(*Server_Asynq_RedisFailoverOpt)(nil),
+		(*Server_Asynq_Uri)(nil),
+	}
 	file_v1_server_proto_msgTypes[26].OneofWrappers = []any{}
+	file_v1_server_proto_msgTypes[31].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_v1_server_proto_rawDesc), len(file_v1_server_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   32,
+			NumEnums:      1,
+			NumMessages:   37,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_v1_server_proto_goTypes,
 		DependencyIndexes: file_v1_server_proto_depIdxs,
+		EnumInfos:         file_v1_server_proto_enumTypes,
 		MessageInfos:      file_v1_server_proto_msgTypes,
 	}.Build()
 	File_v1_server_proto = out.File
