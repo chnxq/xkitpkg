@@ -1,0 +1,57 @@
+package gorm
+
+import (
+	"github.com/chnxq/XGoKit/log"
+
+	"github.com/chnxq/xkitpkg/conf/v1"
+
+	gormCrud "github.com/chnxq/x-crud/gorm"
+)
+
+// NewGormClient 创建GORM数据库客户端
+func NewGormClient(cfg *conf.ServerConfig, l *log.Helper, migrates []interface{}) (*gormCrud.Client, error) {
+	if cfg == nil || cfg.Data == nil || cfg.Data.Database == nil {
+		log.Warn("[GORM] database config is nil")
+		return nil, nil
+	}
+
+	var options []gormCrud.Option
+
+	if l != nil {
+		options = append(options, gormCrud.WithLogger(l))
+	}
+
+	if len(migrates) > 0 {
+		options = append(options, gormCrud.WithAutoMigrate(migrates...))
+	}
+
+	if cfg.Data.Database.GetDriver() != "" {
+		options = append(options, gormCrud.WithDriverName(cfg.Data.Database.GetDriver()))
+	}
+	if cfg.Data.Database.GetSource() != "" {
+		options = append(options, gormCrud.WithDSN(cfg.Data.Database.GetSource()))
+	}
+
+	options = append(options, gormCrud.WithEnableMigrate(cfg.Data.Database.GetMigrate()))
+	options = append(options, gormCrud.WithEnableTrace(cfg.Data.Database.GetEnableTrace()))
+	options = append(options, gormCrud.WithEnableMetrics(cfg.Data.Database.GetEnableMetrics()))
+	//options = append(options, gormCrud.WithEnableDbResolver(cfg.Data.Database.GetEnableDbResolver()))
+
+	if cfg.Data.Database.MaxIdleConnections != nil {
+		options = append(options, gormCrud.WithMaxIdleConns(int(cfg.Data.Database.GetMaxIdleConnections())))
+	}
+	if cfg.Data.Database.MaxOpenConnections != nil {
+		options = append(options, gormCrud.WithMaxOpenConns(int(cfg.Data.Database.GetMaxOpenConnections())))
+	}
+	if cfg.Data.Database.ConnectionMaxLifetime != nil {
+		options = append(options, gormCrud.WithConnMaxLifetime(cfg.Data.Database.GetConnectionMaxLifetime().AsDuration()))
+	}
+
+	db, err := gormCrud.NewClient(options...)
+	if err != nil {
+		log.Fatalf("[GORM] failed opening connection to db: %v", err)
+		return nil, err
+	}
+
+	return db, nil
+}
