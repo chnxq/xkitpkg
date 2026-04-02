@@ -1,4 +1,4 @@
-module github.com/xkitpkg/oss/minio
+module github.com/chnxq/xkitpkg/oss/minio
 
 go 1.26.0
 
