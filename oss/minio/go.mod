@@ -4,7 +4,7 @@ go 1.26.0
 
 require (
 	github.com/chnxq/XGoKit v0.0.0-20260330151520-d039f77f16be
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260401110945-3666652b8cab
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260402073645-d6ef4b7d2762
 	github.com/minio/minio-go/v7 v7.0.99
 )
 
