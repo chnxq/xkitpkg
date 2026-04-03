@@ -1,7 +1,7 @@
 package etcd
 
 import (
-	"log"
+	"github.com/chnxq/XGoKit/log"
 
 	clientv3 "go.etcd.io/etcd/client/v3"
 	"google.golang.org/grpc"
@@ -20,13 +20,13 @@ func ConfigFactory(cfg *conf.RemoteConfig) (config.Source, error) {
 		DialOptions: []grpc.DialOption{grpc.WithBlock()},
 	})
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("create remote config etcd client failed: ", err)
 	}
 
 	// configure the source, "path" is required
 	source, err := etcdcfg.New(client, etcdcfg.WithPath(cfg.GetEtcd().GetKey()), etcdcfg.WithPrefix(true))
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatal("create remote config etcd source failed: ", err)
 	}
 	return source, nil
 }

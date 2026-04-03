@@ -4,10 +4,10 @@ go 1.26.0
 
 require (
 	entgo.io/ent v0.14.6
-	github.com/chnxq/XGoKit v0.0.0-20260330151520-d039f77f16be
-	github.com/chnxq/x-crud/entgo v0.0.0-20260401165912-f07dc6e0475f
-	github.com/chnxq/x-crud/gorm v0.0.0-20260401165912-f07dc6e0475f
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260402082443-346bc28ccb51
+	github.com/chnxq/XGoKit v0.0.0-20260402122334-cb5d16e6b855
+	github.com/chnxq/x-crud/entgo v0.0.0-20260402123329-ca3f8859bb22
+	github.com/chnxq/x-crud/gorm v0.0.0-20260402123329-ca3f8859bb22
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260402121122-aa3cd8f46975
 )
 
 require (
@@ -16,7 +16,7 @@ require (
 	cloud.google.com/go/auth/oauth2adapt v0.2.8 // indirect
 	cloud.google.com/go/bigquery v1.75.0 // indirect
 	cloud.google.com/go/compute/metadata v0.9.0 // indirect
-	cloud.google.com/go/iam v1.6.0 // indirect
+	cloud.google.com/go/iam v1.7.0 // indirect
 	filippo.io/edwards25519 v1.2.0 // indirect
 	github.com/ClickHouse/ch-go v0.71.0 // indirect
 	github.com/ClickHouse/clickhouse-go/v2 v2.44.0 // indirect
@@ -26,8 +26,8 @@ require (
 	github.com/apache/arrow/go/v15 v15.0.2 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/chnxq/x-crud/api v0.0.0-20260401165912-f07dc6e0475f // indirect
-	github.com/chnxq/x-crud/pagination v0.0.0-20260401165912-f07dc6e0475f // indirect
+	github.com/chnxq/x-crud/api v0.0.0-20260402123329-ca3f8859bb22 // indirect
+	github.com/chnxq/x-crud/pagination v0.0.0-20260402123329-ca3f8859bb22 // indirect
 	github.com/chnxq/x-utils v0.0.0-20260331165454-35d20273b087 // indirect
 	github.com/chnxq/x-utils/mapper v0.0.0-20260331165454-35d20273b087 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
@@ -60,7 +60,7 @@ require (
 	github.com/klauspost/compress v1.18.5 // indirect
 	github.com/klauspost/cpuid/v2 v2.3.0 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
-	github.com/mattn/go-sqlite3 v1.14.38 // indirect
+	github.com/mattn/go-sqlite3 v1.14.40 // indirect
 	github.com/microsoft/go-mssqldb v1.9.8 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/ncruces/go-strftime v1.0.0 // indirect
@@ -80,9 +80,9 @@ require (
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.67.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.67.0 // indirect
-	go.opentelemetry.io/otel v1.42.0 // indirect
-	go.opentelemetry.io/otel/metric v1.42.0 // indirect
-	go.opentelemetry.io/otel/trace v1.42.0 // indirect
+	go.opentelemetry.io/otel v1.43.0 // indirect
+	go.opentelemetry.io/otel/metric v1.43.0 // indirect
+	go.opentelemetry.io/otel/trace v1.43.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.4 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/crypto v0.49.0 // indirect
@@ -97,7 +97,7 @@ require (
 	golang.org/x/time v0.15.0 // indirect
 	golang.org/x/tools v0.43.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
-	google.golang.org/api v0.273.1 // indirect
+	google.golang.org/api v0.274.0 // indirect
 	google.golang.org/genproto v0.0.0-20260401024825-9d38bb4040a9 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20260401024825-9d38bb4040a9 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260401024825-9d38bb4040a9 // indirect
@@ -117,5 +117,5 @@ require (
 	modernc.org/libc v1.70.0 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
-	modernc.org/sqlite v1.48.0 // indirect
+	modernc.org/sqlite v1.48.1 // indirect
 )

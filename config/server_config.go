@@ -12,6 +12,8 @@ import (
 	"github.com/chnxq/XGoKit/config"
 	fileKit "github.com/chnxq/XGoKit/config/file"
 	"github.com/chnxq/xkitpkg/conf/v1"
+	consulcfg "github.com/chnxq/xkitpkg/config/consul"
+	etcdcfg "github.com/chnxq/xkitpkg/config/etcd"
 )
 
 var (
@@ -45,14 +47,89 @@ func LoadServerConfig(configPath string) error {
 func CheckConfigProvider(configPath string) (config.Config, error) {
 	var err error
 	var cfg config.Config
+	var cfgRemote config.Config
+	var haveRemoteConfig bool = false
 
+	//检查远程配置文件是否存在
 	remoteConfigPath := filepath.Join(configPath, "remote_config.yaml")
 	if pathExists(remoteConfigPath) {
-		cfg = config.New(
+		haveRemoteConfig = true
+	} else {
+		remoteConfigPath = filepath.Join(configPath, "config.yaml")
+		if pathExists(remoteConfigPath) {
+			haveRemoteConfig = true
+		}
+	}
+	if haveRemoteConfig { // 有远程配置文件
+		cfgRemote = config.New(
 			config.WithSource(
 				NewFileConfigSource(remoteConfigPath),
 			),
 		)
+		defer func(cfg config.Config) {
+			if err := cfg.Close(); err != nil {
+				panic(err)
+			}
+			fmt.Println("close config remote source OK")
+		}(cfgRemote)
+
+		if err = cfgRemote.Load(); err != nil {
+			fmt.Printf("Load remote config failed: %v\n", err)
+			return nil, err
+		}
+
+		if err = scanConfigs(cfgRemote); err != nil {
+			fmt.Printf("Scan remote config failed: %v\n", err)
+			return nil, err
+		}
+		fmt.Printf("Have remote config: %v\n", configList)
+
+		rc := GetServerConfig().GetConfig() // 获取远程配置
+		if rc != nil {
+			// register remote configs factory
+			t := Type(rc.GetType())
+			switch t {
+			case TypeEtcd:
+				err = RegisterFactory(t, etcdcfg.ConfigFactory)
+				if err != nil {
+					fmt.Println("remote config error, type: ", t)
+					fmt.Println(err)
+				}
+			case TypeConsul:
+				err = RegisterFactory(t, consulcfg.ConfigFactory)
+				if err != nil {
+					fmt.Println("remote config error, type: ", t)
+					fmt.Println(err)
+				}
+			// todo: 其他远程配置类型
+			default:
+				fmt.Println("unknown remote config type: ", t)
+			}
+
+			rcs, err := NewProvider(rc)
+			if err != nil {
+				fmt.Printf("create remote config provider failed: %v\n", err)
+				cfg = config.New(
+					config.WithSource(
+						NewFileConfigSource(configPath),
+					),
+				)
+			} else {
+				// 有远程配置文件,且创建远程配置提供程序成功，创建远程+本地配置源，本地配置（如果有）会覆盖远程配置，其它情况均为本地文件配置
+				cfg = config.New(
+					config.WithSource(
+						rcs,
+						NewFileConfigSource(configPath),
+					),
+				)
+			}
+		} else {
+			cfg = config.New(
+				config.WithSource(
+					NewFileConfigSource(configPath),
+				),
+			)
+		}
 	} else {
 		cfg = config.New(
 			config.WithSource(
@@ -66,31 +143,6 @@ func CheckConfigProvider(configPath string) (config.Config, error) {
 		}
 		fmt.Println("check config source OK")
 	}(cfg)
-
-	if err = cfg.Load(); err != nil {
-		fmt.Printf("Load config failed: %v", err)
-		return nil, err
-	}
-
-	if err = scanConfigs(cfg); err != nil {
-		fmt.Printf("Scan config failed: %v", err)
-		return nil, err
-	}
-
-	rc := GetServerConfig().Config
-	if rc != nil {
-		rcs, err := NewProvider(rc)
-		if err != nil {
-			fmt.Printf("New config provider failed: %v", err)
-			return nil, err
-		}
-		cfg = config.New(
-			config.WithSource(
-				rcs,
-				NewFileConfigSource(configPath),
-			),
-		)
-	}
 	return cfg, nil
 }
 

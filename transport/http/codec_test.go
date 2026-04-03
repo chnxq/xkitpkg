@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"testing"
 
+	"github.com/chnxq/XGoKit/encoding"
 	"github.com/chnxq/XGoKit/errors"
 )
 

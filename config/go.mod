@@ -6,8 +6,10 @@ replace github.com/chnxq/xkitpkg/conf => ../conf/
 
 require (
 	github.com/chnxq/XGoKit v0.0.0-20260325104700-805f322e38a1
+	github.com/chnxq/XGoKit/libs/config/consul v0.0.0-20260330151520-d039f77f16be
 	github.com/chnxq/XGoKit/libs/config/etcd v0.0.0-20260325104700-805f322e38a1
 	github.com/chnxq/xkitpkg/conf v0.0.0-00010101000000-000000000000
+	github.com/hashicorp/consul/api v1.33.7
 	go.etcd.io/etcd/client/v3 v3.6.9
 	google.golang.org/grpc v1.79.3
 	google.golang.org/protobuf v1.36.11
@@ -15,16 +17,32 @@ require (
 
 require (
 	dario.cat/mergo v1.0.2 // indirect
+	github.com/armon/go-metrics v0.4.1 // indirect
 	github.com/coreos/go-semver v0.3.1 // indirect
 	github.com/coreos/go-systemd/v22 v22.7.0 // indirect
+	github.com/fatih/color v1.18.0 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
+	github.com/go-viper/mapstructure/v2 v2.5.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.28.0 // indirect
+	github.com/hashicorp/errwrap v1.1.0 // indirect
+	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
+	github.com/hashicorp/go-hclog v1.6.3 // indirect
+	github.com/hashicorp/go-immutable-radix v1.3.1 // indirect
+	github.com/hashicorp/go-metrics v0.5.4 // indirect
+	github.com/hashicorp/go-multierror v1.1.1 // indirect
+	github.com/hashicorp/go-rootcerts v1.0.2 // indirect
+	github.com/hashicorp/golang-lru v1.0.2 // indirect
+	github.com/hashicorp/serf v0.10.2 // indirect
+	github.com/mattn/go-colorable v0.1.14 // indirect
+	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	go.etcd.io/etcd/api/v3 v3.6.9 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.6.9 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.1 // indirect
+	golang.org/x/exp v0.0.0-20260312153236-7ab1446f8b90 // indirect
 	golang.org/x/net v0.52.0 // indirect
 	golang.org/x/sys v0.42.0 // indirect
 	golang.org/x/text v0.35.0 // indirect
