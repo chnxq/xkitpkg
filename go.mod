@@ -4,10 +4,9 @@ go 1.26.0
 
 require (
 	entgo.io/ent v0.14.6
-	github.com/chnxq/XGoKit v0.0.0-20260402122334-cb5d16e6b855
-	github.com/chnxq/x-crud/entgo v0.0.0-20260402123329-ca3f8859bb22
-	github.com/chnxq/x-crud/gorm v0.0.0-20260402123329-ca3f8859bb22
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260402121122-aa3cd8f46975
+	github.com/chnxq/x-crud/entgo v0.0.0-20260403174608-bbfe81b65aad
+	github.com/chnxq/x-crud/gorm v0.0.0-20260403174608-bbfe81b65aad
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260404145648-04e7c5308773
 )
 
 require (
@@ -26,8 +25,8 @@ require (
 	github.com/apache/arrow/go/v15 v15.0.2 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/chnxq/x-crud/api v0.0.0-20260402123329-ca3f8859bb22 // indirect
-	github.com/chnxq/x-crud/pagination v0.0.0-20260402123329-ca3f8859bb22 // indirect
+	github.com/chnxq/x-crud/api v0.0.0-20260403174608-bbfe81b65aad // indirect
+	github.com/chnxq/x-crud/pagination v0.0.0-20260403174608-bbfe81b65aad // indirect
 	github.com/chnxq/x-utils v0.0.0-20260331165454-35d20273b087 // indirect
 	github.com/chnxq/x-utils/mapper v0.0.0-20260331165454-35d20273b087 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect

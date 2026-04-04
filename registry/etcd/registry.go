@@ -2,17 +2,16 @@ package etcd
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"math/rand"
+	"strings"
+	"sync"
 	"time"
 
-	"github.com/chnxq/XGoKit/log"
-	"github.com/chnxq/XGoKit/registry"
-	"github.com/chnxq/xkitpkg/conf"
 	clientv3 "go.etcd.io/etcd/client/v3"
-	"google.golang.org/grpc"
+
+	"github.com/chnxq/XGoKit/registry"
 )
 
 var (
@@ -20,46 +19,14 @@ var (
 	_ registry.Discovery = (*Registry)(nil)
 )
 
-// Option is etcd registry option.
-type Option func(o *options)
-
-type options struct {
-	ctx       context.Context
-	namespace string
-	ttl       time.Duration
-	maxRetry  int
-}
-
-// Context with registry context.
-func Context(ctx context.Context) Option {
-	return func(o *options) { o.ctx = ctx }
-}
-
-// Namespace with registry namespace.
-func Namespace(ns string) Option {
-	return func(o *options) { o.namespace = ns }
-}
-
-// RegisterTTL with register ttl.
-func RegisterTTL(ttl time.Duration) Option {
-	return func(o *options) { o.ttl = ttl }
-}
-
-func MaxRetry(num int) Option {
-	return func(o *options) { o.maxRetry = num }
-}
-
 // Registry is etcd registry.
 type Registry struct {
-	opts   *options
-	client *clientv3.Client
-	kv     clientv3.KV
-	lease  clientv3.Lease
-	/*
-		ctxMap is used to store the context cancel function of each service instance.
-		When the service instance is deregistered, the corresponding context cancel function is called to stop the heartbeat.
-	*/
-	ctxMap map[*registry.ServiceInstance]context.CancelFunc
+	opts     *options
+	client   *clientv3.Client
+	kv       clientv3.KV
+	lease    clientv3.Lease
+	mu       sync.Mutex
+	hbCancel context.CancelFunc
 }
 
 // New creates etcd registry
@@ -77,56 +44,94 @@ func New(client *clientv3.Client, opts ...Option) (r *Registry) {
 		opts:   op,
 		client: client,
 		kv:     clientv3.NewKV(client),
-		ctxMap: make(map[*registry.ServiceInstance]context.CancelFunc),
 	}
 }
 
 // Register the registration.
 func (r *Registry) Register(ctx context.Context, service *registry.ServiceInstance) error {
-	key := fmt.Sprintf("%s/%s/%s", r.opts.namespace, service.Name, service.ID)
 	value, err := marshal(service)
 	if err != nil {
 		return err
 	}
-	if r.lease != nil {
-		r.lease.Close()
+
+	key := fmt.Sprintf("%s/%s/%s", r.opts.namespace, service.Name, service.ID)
+
+	// create new lease locally first
+	newLease := clientv3.NewLease(r.client)
+
+	// swap leases under lock
+	r.mu.Lock()
+	oldLease := r.lease
+	oldCancel := r.hbCancel
+	r.lease = newLease
+	r.hbCancel = nil
+	r.mu.Unlock()
+
+	// cancel old heartbeat and close old lease after swap
+	if oldCancel != nil {
+		oldCancel()
 	}
-	r.lease = clientv3.NewLease(r.client)
+	if oldLease != nil {
+		_ = oldLease.Close()
+	}
+
+	// try to register with KV using ctx
 	leaseID, err := r.registerWithKV(ctx, key, value)
 	if err != nil {
+		// rollback: restore old lease and close the new one
+		r.mu.Lock()
+		r.lease = oldLease
+		r.mu.Unlock()
+
+		_ = newLease.Close()
 		return err
 	}
 
-	hctx, cancel := context.WithCancel(r.opts.ctx)
-	r.ctxMap[service] = cancel
-	go r.heartBeat(hctx, leaseID, key, value)
+	// start heartbeat with registry-level context (long-living) and save cancel
+	hbCtx, hbCancel := context.WithCancel(r.opts.ctx)
+	r.mu.Lock()
+	r.hbCancel = hbCancel
+	r.mu.Unlock()
+	go r.heartBeat(hbCtx, leaseID, key, value)
+
 	return nil
 }
 
 // Deregister the registration.
 func (r *Registry) Deregister(ctx context.Context, service *registry.ServiceInstance) error {
-	defer func() {
-		if r.lease != nil {
-			r.lease.Close()
-		}
-	}()
-	// cancel heartbeat
-	if cancel, ok := r.ctxMap[service]; ok {
-		cancel()
-		delete(r.ctxMap, service)
-	}
+	// remove kv first
 	key := fmt.Sprintf("%s/%s/%s", r.opts.namespace, service.Name, service.ID)
 	_, err := r.client.Delete(ctx, key)
+	if err != nil {
+		return wrapConnError("delete key", key, err)
+	}
+
+	// stop heartbeat and close lease safely
+	r.mu.Lock()
+	cancel := r.hbCancel
+	l := r.lease
+	r.hbCancel = nil
+	r.lease = nil
+	r.mu.Unlock()
+
+	if cancel != nil {
+		cancel()
+	}
+	if l != nil {
+		_ = l.Close()
+	}
 	return err
 }
 
 // GetService return the service instances in memory according to the service name.
 func (r *Registry) GetService(ctx context.Context, name string) ([]*registry.ServiceInstance, error) {
 	key := fmt.Sprintf("%s/%s", r.opts.namespace, name)
+
 	resp, err := r.kv.Get(ctx, key, clientv3.WithPrefix())
 	if err != nil {
-		return nil, err
+		return nil, wrapConnError("get key prefix", key, err)
 	}
+
 	items := make([]*registry.ServiceInstance, 0, len(resp.Kvs))
 	for _, kv := range resp.Kvs {
 		si, err := unmarshal(kv.Value)
@@ -144,19 +149,33 @@ func (r *Registry) GetService(ctx context.Context, name string) ([]*registry.Ser
 // Watch creates a watcher according to the service name.
 func (r *Registry) Watch(ctx context.Context, name string) (registry.Watcher, error) {
 	key := fmt.Sprintf("%s/%s", r.opts.namespace, name)
-	return newWatcher(ctx, key, name, r.client)
+	w, err := newWatcher(ctx, key, name, r.client)
+	if err != nil {
+		return nil, wrapConnError("create watcher", key, err)
+	}
+	return w, nil
 }
 
 // registerWithKV create a new lease, return current leaseID
 func (r *Registry) registerWithKV(ctx context.Context, key string, value string) (clientv3.LeaseID, error) {
-	grant, err := r.lease.Grant(ctx, int64(r.opts.ttl.Seconds()))
-	if err != nil {
-		return 0, err
+	r.mu.Lock()
+	l := r.lease
+	r.mu.Unlock()
+
+	if l == nil {
+		return 0, errNoLease
 	}
-	_, err = r.client.Put(ctx, key, value, clientv3.WithLease(grant.ID))
+
+	grant, err := l.Grant(ctx, int64(r.opts.ttl.Seconds()))
 	if err != nil {
-		return 0, err
+		return 0, wrapConnError("grant lease", "", err)
 	}
+
+	_, err = r.kv.Put(ctx, key, value, clientv3.WithLease(grant.ID))
+	if err != nil {
+		return 0, wrapConnError("put key", key, err)
+	}
+
 	return grant.ID, nil
 }
 
@@ -166,7 +185,8 @@ func (r *Registry) heartBeat(ctx context.Context, leaseID clientv3.LeaseID, key 
 	if err != nil {
 		curLeaseID = 0
 	}
-	randSource := rand.New(rand.NewSource(time.Now().Unix()))
+
+	rnd := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	for {
 		if curLeaseID == 0 {
@@ -204,7 +224,7 @@ func (r *Registry) heartBeat(ctx context.Context, leaseID clientv3.LeaseID, key 
 					break
 				}
 				retreat = append(retreat, 1<<retryCnt)
-				time.Sleep(time.Duration(retreat[randSource.Intn(len(retreat))]) * time.Second)
+				time.Sleep(time.Duration(retreat[rnd.Intn(len(retreat))]) * time.Second)
 			}
 			if _, ok := <-kac; !ok {
 				// retry failed
@@ -229,67 +249,38 @@ func (r *Registry) heartBeat(ctx context.Context, leaseID clientv3.LeaseID, key 
 	}
 }
 
-func RegistrarFactory(cfg *conf.Registry) (registry.Registrar, error) {
-	var err error
-
-	etcdCfg := cfg.GetEtcd()
-	if etcdCfg == nil {
-		err = errors.New("etcd registry config error")
-		panic(err)
+// isConnError returns true when the error looks like a connection/server unreachable error.
+func isConnError(err error) bool {
+	if err == nil {
+		return false
 	}
-	var client *clientv3.Client
-	client, err = clientv3.New(clientv3.Config{
-		Endpoints:   etcdCfg.GetEndpoints(),
-		DialTimeout: time.Second,
-		DialOptions: []grpc.DialOption{grpc.WithBlock()},
-	})
-	if err != nil {
-		log.Error("请检查etcd服务及配置! ")
-		panic(err)
+	if errors.Is(err, context.DeadlineExceeded) || errors.Is(err, context.Canceled) {
+		return true
 	}
-	r := New(client,
-		Namespace(
-			etcdCfg.GetNameSpace()),
-		MaxRetry(int(etcdCfg.GetMaxRetry())),
-		RegisterTTL(etcdCfg.GetTimeout().AsDuration()))
-
-	return r, nil
+	e := strings.ToLower(err.Error())
+	indicators := []string{
+		"connection refused", "connection reset", "no available endpoints",
+		"transport is closing", "i/o timeout", "timeout", "connection timed out",
+		"tls:", "connection refused", "connection reset by peer", "eof",
+	}
+	for _, sub := range indicators {
+		if strings.Contains(e, sub) {
+			return true
+		}
+	}
+	return false
 }
 
-func DiscoveryFactory(cfg *conf.Registry) (registry.Discovery, error) {
-	var err error
-
-	etcdCfg := cfg.GetEtcd()
-	if etcdCfg == nil {
-		err = errors.New("etcd discovery config error")
-		panic(err)
+// wrapConnError returns a clearer error message for connection related errors.
+func wrapConnError(op string, key string, err error) error {
+	if err == nil {
+		return nil
 	}
-	var client *clientv3.Client
-	client, err = clientv3.New(clientv3.Config{
-		Endpoints:   etcdCfg.GetEndpoints(),
-		DialTimeout: time.Second,
-		DialOptions: []grpc.DialOption{grpc.WithBlock()},
-	})
-	if err != nil {
-		panic(err)
+	if isConnError(err) {
+		if key == "" {
+			return fmt.Errorf("etcd: %s failed (cannot reach etcd server): %w", op, err)
+		}
+		return fmt.Errorf("etcd: %s failed for key %s (cannot reach etcd server): %w", op, key, err)
 	}
-	r := New(client,
-		Namespace(
-			etcdCfg.GetNameSpace()),
-		MaxRetry(int(etcdCfg.GetMaxRetry())),
-		RegisterTTL(etcdCfg.GetTimeout().AsDuration()))
-	return r, nil
-}
-
-func marshal(si *registry.ServiceInstance) (string, error) {
-	data, err := json.Marshal(si)
-	if err != nil {
-		return "", err
-	}
-	return string(data), nil
-}
-
-func unmarshal(data []byte) (si *registry.ServiceInstance, err error) {
-	err = json.Unmarshal(data, &si)
-	return
+	return fmt.Errorf("etcd: %s failed: %w", op, err)
 }
