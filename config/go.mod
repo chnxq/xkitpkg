@@ -4,7 +4,7 @@ go 1.26
 
 require (
 	github.com/chnxq/XGoKit v0.0.0-20260330151520-d039f77f16be
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260403174937-415c3a5bff1a
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260404145648-04e7c5308773
 	google.golang.org/protobuf v1.36.11
 )
 
