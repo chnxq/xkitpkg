@@ -7,8 +7,6 @@ import (
 	"strings"
 
 	"github.com/chnxq/XGoKit/log"
-	"github.com/chnxq/XGoKit/middleware/tracing"
-
 	"github.com/chnxq/xkitpkg/conf/v1"
 )
 
@@ -61,12 +59,13 @@ func NewLoggerProvider(cfg *conf.Logger, appInfo *conf.AppInfo) log.Logger {
 	}
 
 	// build base fields - always include timestamp, caller, trace/span ids
-	fields := []interface{}{
-		//"ts", log.DefaultTimestamp,
-		"caller", log.DefaultCaller,
-		"trace_id", tracing.TraceID(),
-		"span_id", tracing.SpanID(),
-	}
+	fields := []interface{}{}
+	//fields := []interface{}{
+	//	//"ts", log.DefaultTimestamp,
+	//	"caller", log.DefaultCaller,
+	//	"trace_id", tracing.TraceID(),
+	//	"span_id", tracing.SpanID(),
+	//}
 
 	// attach service fields only if appInfo is provided
 	if appInfo != nil {
