@@ -7,13 +7,11 @@ import (
 	"reflect"
 	"sync"
 
+	"github.com/chnxq/xkitpkg/conf"
 	"google.golang.org/protobuf/proto"
 
 	"github.com/chnxq/XGoKit/config"
 	fileKit "github.com/chnxq/XGoKit/config/file"
-	"github.com/chnxq/xkitpkg/conf/v1"
-	consulcfg "github.com/chnxq/xkitpkg/config/consul"
-	etcdcfg "github.com/chnxq/xkitpkg/config/etcd"
 )
 
 var (
@@ -86,26 +84,6 @@ func CheckConfigProvider(configPath string) (config.Config, error) {
 
 		rc := GetServerConfig().GetConfig() // 获取远程配置
 		if rc != nil {
-			// register remote configs factory
-			t := Type(rc.GetType())
-			switch t {
-			case TypeEtcd:
-				err = RegisterFactory(t, etcdcfg.ConfigFactory)
-				if err != nil {
-					fmt.Println("remote config error, type: ", t)
-					fmt.Println(err)
-				}
-			case TypeConsul:
-				err = RegisterFactory(t, consulcfg.ConfigFactory)
-				if err != nil {
-					fmt.Println("remote config error, type: ", t)
-					fmt.Println(err)
-				}
-			// todo: 其他远程配置类型
-			default:
-				fmt.Println("unknown remote config type: ", t)
-			}
-
 			rcs, err := NewProvider(rc)
 			if err != nil {
 				fmt.Printf("create remote config provider failed: %v\n", err)
