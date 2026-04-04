@@ -8,18 +8,18 @@ import (
 )
 
 func init() {
-	_ = logger.Register(logger.Fluent, func(cfg *conf.Logger) (log.Logger, error) {
+	_ = logger.RegisterFactory(logger.Fluentd, func(cfg *conf.Logger) (log.Logger, error) {
 		return NewLogger(cfg)
 	})
 }
 
 // NewLogger 创建一个新的日志记录器 - Fluent
 func NewLogger(cfg *conf.Logger) (log.Logger, error) {
-	if cfg == nil || cfg.Fluent == nil {
+	if cfg == nil || cfg.Fluentd == nil {
 		return nil, nil
 	}
 
-	wrapped, err := NewFluentLogger(cfg.Fluent.Endpoint)
+	wrapped, err := NewFluentLogger(cfg.Fluentd.Endpoint)
 	if err != nil {
 		return nil, err
 	}

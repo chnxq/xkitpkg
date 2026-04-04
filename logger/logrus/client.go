@@ -9,7 +9,7 @@ import (
 )
 
 func init() {
-	_ = logger.Register(logger.Logrus, func(cfg *conf.Logger) (log.Logger, error) {
+	_ = logger.RegisterFactory(logger.Logrus, func(cfg *conf.Logger) (log.Logger, error) {
 		return NewLogger(cfg)
 	})
 }

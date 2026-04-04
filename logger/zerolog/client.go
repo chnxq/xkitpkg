@@ -11,7 +11,7 @@ import (
 )
 
 func init() {
-	_ = logger.Register(logger.Zerelog, func(cfg *conf.Logger) (log.Logger, error) {
+	_ = logger.RegisterFactory(logger.Zerelog, func(cfg *conf.Logger) (log.Logger, error) {
 		return NewLogger(cfg)
 	})
 }

@@ -3,12 +3,12 @@ package tencent
 import (
 	"github.com/chnxq/XGoKit/log"
 
-	conf "github.com/tx7do/kratos-bootstrap/api/gen/go/conf/v1"
-	"github.com/tx7do/kratos-bootstrap/logger"
+	conf "github.com/chnxq/xkitpkg/conf/v1"
+	"github.com/chnxq/xkitpkg/logger"
 )
 
 func init() {
-	_ = logger.Register(logger.Tencent, func(cfg *conf.Logger) (log.Logger, error) {
+	_ = logger.RegisterFactory(logger.Tencent, func(cfg *conf.Logger) (log.Logger, error) {
 		return NewLogger(cfg)
 	})
 }

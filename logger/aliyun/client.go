@@ -10,7 +10,7 @@ import (
 )
 
 func init() {
-	_ = logger.Register(logger.Aliyun, func(cfg *conf.Logger) (log.Logger, error) {
+	_ = logger.RegisterFactory(logger.Aliyun, func(cfg *conf.Logger) (log.Logger, error) {
 		return NewLogger(cfg)
 	})
 }
