@@ -26,16 +26,19 @@ var (
 func LoadServerConfig(configPath string) error {
 	cfg, err := CheckConfigProvider(configPath)
 	if err != nil {
+		fmt.Printf("check remote config provider failed: %v\n", err)
 		return err
 	}
 
 	if err = cfg.Load(); err != nil {
+		fmt.Printf("Load config failed: %v\n", err)
 		return err
 	}
 
 	initServerConfig()
 
 	if err = scanConfigs(cfg); err != nil {
+		fmt.Printf("Scan config failed: %v\n", err)
 		return err
 	}
 
@@ -65,10 +68,10 @@ func CheckConfigProvider(configPath string) (config.Config, error) {
 			),
 		)
 		defer func(cfg config.Config) {
-			if err := cfg.Close(); err != nil {
+			if err := cfgRemote.Close(); err != nil {
 				panic(err)
 			}
-			fmt.Println("close config remote source OK")
+			//fmt.Println("End of check remote config source")
 		}(cfgRemote)
 
 		if err = cfgRemote.Load(); err != nil {
@@ -86,7 +89,7 @@ func CheckConfigProvider(configPath string) (config.Config, error) {
 		if rc != nil {
 			rcs, err := NewProvider(rc)
 			if err != nil {
-				fmt.Printf("create remote config provider failed: %v\n", err)
+				fmt.Printf("Create remote config provider failed: %v\n", err)
 				cfg = config.New(
 					config.WithSource(
 						NewFileConfigSource(configPath),
@@ -100,6 +103,7 @@ func CheckConfigProvider(configPath string) (config.Config, error) {
 						NewFileConfigSource(configPath),
 					),
 				)
+				fmt.Printf("Create remote config provider success: %v\n", rc)
 			}
 		} else {
 			cfg = config.New(
@@ -115,12 +119,6 @@ func CheckConfigProvider(configPath string) (config.Config, error) {
 			),
 		)
 	}
-	defer func(cfg config.Config) {
-		if err := cfg.Close(); err != nil {
-			panic(err)
-		}
-		fmt.Println("check config source OK")
-	}(cfg)
 	return cfg, nil
 }
 

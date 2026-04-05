@@ -24,11 +24,12 @@ message Logger {
   message Zap {
     string log_file_path = 1; // 日志文件路径
     string level = 2; // 日志等级
-    bool log_to_console = 3; // 是否输出到控制台
-    bool export_to_otel = 4; //日志是否导出到OTEL
-    int32 max_size = 5; // 单个日志文件最大大小（MB）
-    int32 max_age = 6; // 日志文件最大保存时间（天）
-    int32 max_backups = 7; // 最大备份文件数
+    string caller = 3; // Caller显示格式(short, full, xkit), default: short
+    bool log_to_console = 5; // 是否输出到控制台
+    bool export_to_otel = 6; //日志是否导出到OTEL
+    int32 max_size = 7; // 单个日志文件最大大小（MB）
+    int32 max_age = 8; // 日志文件最大保存时间（天）
+    int32 max_backups = 9; // 最大备份文件数
   }
 
   // logrus
