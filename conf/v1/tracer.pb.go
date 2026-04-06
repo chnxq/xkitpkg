@@ -24,7 +24,7 @@ const (
 // 链路追踪
 type Tracer struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// exporter 名称，例如: "otlp-grpc", "otlp-http", "zipkin", "stdout"
+	// exporter 名称，例如: "otlp-grpc", "otlp-http", "stdout"
 	Exporter string `protobuf:"bytes,1,opt,name=exporter,proto3" json:"exporter,omitempty"`
 	// 目标 endpoint，例如 "localhost:4317" 或 "http://host:9411/api/v2/spans"
 	Endpoint string  `protobuf:"bytes,2,opt,name=endpoint,proto3" json:"endpoint,omitempty"`

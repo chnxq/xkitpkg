@@ -5,6 +5,7 @@ import (
 
 	traceSdk "go.opentelemetry.io/otel/sdk/trace"
 
+	"go.opentelemetry.io/otel/exporters/jaeger"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"
@@ -22,10 +23,10 @@ func NewZipkinExporter(_ context.Context, endpoint string) (traceSdk.SpanExporte
 	return zipkin.New(endpoint)
 }
 
-//// NewJaegerExporter 创建一个jaeger导出器，默认对端地址：http://localhost:14268/api/traces
-//func NewJaegerExporter(_ context.Context, endpoint string) (traceSdk.SpanExporter, error) {
-//	return jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint(endpoint)))
-//}
+// NewJaegerExporter 创建一个jaeger导出器，默认对端地址：http://localhost:14268/api/traces
+func NewJaegerExporter(_ context.Context, endpoint string) (traceSdk.SpanExporter, error) {
+	return jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint(endpoint)))
+}
 
 // NewOtlpHttpExporter 创建OTLP/HTTP导出器，默认端口：4318
 func NewOtlpHttpExporter(ctx context.Context, endpoint string, insecure bool, options ...otlptracehttp.Option) (traceSdk.SpanExporter, error) {

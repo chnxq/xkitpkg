@@ -179,17 +179,20 @@ func (x *Logger) GetZerolog() *Logger_Zerolog {
 
 // Zap
 type Logger_Zap struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	LogFilePath   string                 `protobuf:"bytes,1,opt,name=log_file_path,json=logFilePath,proto3" json:"log_file_path,omitempty"`     // 日志文件路径
-	Level         string                 `protobuf:"bytes,2,opt,name=level,proto3" json:"level,omitempty"`                                      // 日志等级
-	Caller        string                 `protobuf:"bytes,3,opt,name=caller,proto3" json:"caller,omitempty"`                                    // Caller显示格式(short, full, xkit), default: short
-	LogToConsole  bool                   `protobuf:"varint,5,opt,name=log_to_console,json=logToConsole,proto3" json:"log_to_console,omitempty"` // 是否输出到控制台
-	ExportToOtel  bool                   `protobuf:"varint,6,opt,name=export_to_otel,json=exportToOtel,proto3" json:"export_to_otel,omitempty"` //日志是否导出到OTEL
-	MaxSize       int32                  `protobuf:"varint,7,opt,name=max_size,json=maxSize,proto3" json:"max_size,omitempty"`                  // 单个日志文件最大大小（MB）
-	MaxAge        int32                  `protobuf:"varint,8,opt,name=max_age,json=maxAge,proto3" json:"max_age,omitempty"`                     // 日志文件最大保存时间（天）
-	MaxBackups    int32                  `protobuf:"varint,9,opt,name=max_backups,json=maxBackups,proto3" json:"max_backups,omitempty"`         // 最大备份文件数
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	LogFilePath  string                 `protobuf:"bytes,1,opt,name=log_file_path,json=logFilePath,proto3" json:"log_file_path,omitempty"`     // 日志文件路径
+	Level        string                 `protobuf:"bytes,2,opt,name=level,proto3" json:"level,omitempty"`                                      // 日志等级
+	Caller       string                 `protobuf:"bytes,3,opt,name=caller,proto3" json:"caller,omitempty"`                                    // Caller显示格式(short, full, xkit), default: short
+	LogToConsole bool                   `protobuf:"varint,5,opt,name=log_to_console,json=logToConsole,proto3" json:"log_to_console,omitempty"` // 是否输出到控制台
+	ExportToOtel bool                   `protobuf:"varint,6,opt,name=export_to_otel,json=exportToOtel,proto3" json:"export_to_otel,omitempty"` //日志是否导出到OTEL
+	MaxSize      int32                  `protobuf:"varint,7,opt,name=max_size,json=maxSize,proto3" json:"max_size,omitempty"`                  // 单个日志文件最大大小（MB）
+	MaxAge       int32                  `protobuf:"varint,8,opt,name=max_age,json=maxAge,proto3" json:"max_age,omitempty"`                     // 日志文件最大保存时间（天）
+	MaxBackups   int32                  `protobuf:"varint,9,opt,name=max_backups,json=maxBackups,proto3" json:"max_backups,omitempty"`         // 最大备份文件数
+	// 导出OTEL endpoint，例如 "localhost:4317" 或 "http://host:9411/api/v2/spans"
+	ExporterEndpoint string `protobuf:"bytes,10,opt,name=exporter_endpoint,json=exporterEndpoint,proto3" json:"exporter_endpoint,omitempty"`
+	ExporterInsecure bool   `protobuf:"varint,11,opt,name=exporter_insecure,json=exporterInsecure,proto3" json:"exporter_insecure,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Logger_Zap) Reset() {
@@ -276,6 +279,20 @@ func (x *Logger_Zap) GetMaxBackups() int32 {
 		return x.MaxBackups
 	}
 	return 0
+}
+
+func (x *Logger_Zap) GetExporterEndpoint() string {
+	if x != nil {
+		return x.ExporterEndpoint
+	}
+	return ""
+}
+
+func (x *Logger_Zap) GetExporterInsecure() bool {
+	if x != nil {
+		return x.ExporterInsecure
+	}
+	return false
 }
 
 // logrus
@@ -715,7 +732,7 @@ var File_v1_logger_proto protoreflect.FileDescriptor
 
 const file_v1_logger_proto_rawDesc = "" +
 	"\n" +
-	"\x0fv1/logger.proto\x12\x04conf\x1a\x1egoogle/protobuf/duration.proto\"\xcc\x0e\n" +
+	"\x0fv1/logger.proto\x12\x04conf\x1a\x1egoogle/protobuf/duration.proto\"\xa6\x0f\n" +
 	"\x06Logger\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12'\n" +
 	"\x03zap\x18\x02 \x01(\v2\x10.conf.Logger.ZapH\x00R\x03zap\x88\x01\x01\x120\n" +
@@ -723,7 +740,7 @@ const file_v1_logger_proto_rawDesc = "" +
 	"\afluentd\x18\x04 \x01(\v2\x13.conf.Logger.FlentdH\x02R\afluentd\x88\x01\x01\x120\n" +
 	"\x06aliyun\x18\x05 \x01(\v2\x13.conf.Logger.AliyunH\x03R\x06aliyun\x88\x01\x01\x123\n" +
 	"\atencent\x18\x06 \x01(\v2\x14.conf.Logger.TencentH\x04R\atencent\x88\x01\x01\x123\n" +
-	"\azerolog\x18\a \x01(\v2\x14.conf.Logger.ZerologH\x05R\azerolog\x88\x01\x01\x1a\xf8\x01\n" +
+	"\azerolog\x18\a \x01(\v2\x14.conf.Logger.ZerologH\x05R\azerolog\x88\x01\x01\x1a\xd2\x02\n" +
 	"\x03Zap\x12\"\n" +
 	"\rlog_file_path\x18\x01 \x01(\tR\vlogFilePath\x12\x14\n" +
 	"\x05level\x18\x02 \x01(\tR\x05level\x12\x16\n" +
@@ -733,7 +750,10 @@ const file_v1_logger_proto_rawDesc = "" +
 	"\bmax_size\x18\a \x01(\x05R\amaxSize\x12\x17\n" +
 	"\amax_age\x18\b \x01(\x05R\x06maxAge\x12\x1f\n" +
 	"\vmax_backups\x18\t \x01(\x05R\n" +
-	"maxBackups\x1a\xbb\x01\n" +
+	"maxBackups\x12+\n" +
+	"\x11exporter_endpoint\x18\n" +
+	" \x01(\tR\x10exporterEndpoint\x12+\n" +
+	"\x11exporter_insecure\x18\v \x01(\bR\x10exporterInsecure\x1a\xbb\x01\n" +
 	"\x06Logrus\x12\x14\n" +
 	"\x05level\x18\x01 \x01(\tR\x05level\x12\x1c\n" +
 	"\tformatter\x18\x02 \x01(\tR\tformatter\x12)\n" +

@@ -6,7 +6,7 @@ option go_package = "github.com/chnxq/xkitpkg/conf/v1;conf";
 
 // 链路追踪
 message Tracer {
-  // exporter 名称，例如: "otlp-grpc", "otlp-http", "zipkin", "stdout"
+  // exporter 名称，例如: "otlp-grpc", "otlp-http", "stdout"
   string exporter = 1;
 
   // 目标 endpoint，例如 "localhost:4317" 或 "http://host:9411/api/v2/spans"

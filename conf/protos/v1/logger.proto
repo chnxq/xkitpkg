@@ -30,6 +30,9 @@ message Logger {
     int32 max_size = 7; // 单个日志文件最大大小（MB）
     int32 max_age = 8; // 日志文件最大保存时间（天）
     int32 max_backups = 9; // 最大备份文件数
+    // 导出OTEL endpoint，例如 "localhost:4317" 或 "http://host:9411/api/v2/spans"
+    string exporter_endpoint = 10;
+    bool exporter_insecure = 11;
   }
 
   // logrus

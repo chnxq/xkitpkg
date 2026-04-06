@@ -2,7 +2,6 @@ package tracer
 
 import (
 	"context"
-	"errors"
 	"sync"
 
 	"github.com/chnxq/xkitpkg/conf/v1"
@@ -36,7 +35,7 @@ func init() {
 
 	// legacy/unsupported entries can be mapped to explicit errors
 	RegisterExporter(string(Jaeger), func(ctx context.Context, cfg *conf.Tracer) (traceSdk.SpanExporter, error) {
-		return nil, errors.New("tracer: jaeger exporter is not supported in this build; use otlp-http or otlp-grpc instead")
+		return NewJaegerExporter(ctx, cfg.GetEndpoint())
 	})
 }
 
