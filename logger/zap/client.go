@@ -106,14 +106,17 @@ func NewLogger(cfg *conf.Logger) (log.Logger, error) {
 			return nil, err
 		}
 
-		lp, err := newLoggerProvider(context.Background(), res)
+		lp, err := newLoggerProvider(context.Background(), res, cfg.Zap.ExporterEndpoint, cfg.Zap.ExporterInsecure)
 		if err != nil {
-			fmt.Println("failed to create logger: %w", err)
+			fmt.Println("failed to create logger exporter: %w", err)
 			return nil, err
 		}
-
-		otelCore := otelzap.NewCore("TestLogger", otelzap.WithLoggerProvider(lp))
-		coreArr = append(coreArr, core, otelCore)
+		if lp != nil {
+			otelCore := otelzap.NewCore("OtelLogger", otelzap.WithLoggerProvider(lp))
+			coreArr = append(coreArr, core, otelCore)
+		} else {
+			coreArr = append(coreArr, core)
+		}
 	} else {
 		coreArr = append(coreArr, core)
 	}
@@ -185,12 +188,16 @@ func trimPath(caller zapcore.EntryCaller) string {
 }
 
 // newLoggerProvider creates a new logger provider with the OTLP gRPC exporter.
-func newLoggerProvider(ctx context.Context, res *resource.Resource) (*otelLog.LoggerProvider, error) {
+func newLoggerProvider(ctx context.Context, res *resource.Resource, exporterEndpoint string, exporterInsecure bool) (*otelLog.LoggerProvider, error) {
 	opts := []otlploggrpc.Option{}
-
-	opts = append(opts, otlploggrpc.WithInsecure())
-	opts = append(opts, otlploggrpc.WithEndpoint("localhost:4317"))
-
+	if exporterInsecure {
+		opts = append(opts, otlploggrpc.WithInsecure())
+	}
+	if exporterEndpoint != "" {
+		opts = append(opts, otlploggrpc.WithEndpoint(exporterEndpoint))
+	} else {
+		return nil, errors.New("exporter endpoint is required")
+	}
 	exporter, err := otlploggrpc.New(ctx, opts...)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create OTLP log exporter: %w", err)
