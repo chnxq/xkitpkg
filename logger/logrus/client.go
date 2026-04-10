@@ -1,11 +1,11 @@
 package logrus
 
 import (
-	"github.com/chnxq/XGoKit/log"
 	"github.com/sirupsen/logrus"
 
 	conf "github.com/chnxq/xkitpkg/conf/v1"
 	"github.com/chnxq/xkitpkg/logger"
+	"github.com/chnxq/xkitpkg/logger/log"
 )
 
 func init() {

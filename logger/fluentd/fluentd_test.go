@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/chnxq/XGoKit/log"
+	"github.com/chnxq/xkitpkg/logger/log"
 )
 
 func TestMain(m *testing.M) {

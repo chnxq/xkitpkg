@@ -14,7 +14,7 @@ import (
 	otelLog "go.opentelemetry.io/otel/sdk/log"
 	"go.opentelemetry.io/otel/sdk/resource"
 
-	"github.com/chnxq/XGoKit/log"
+	"github.com/chnxq/xkitpkg/logger/log"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 

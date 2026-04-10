@@ -1,10 +1,9 @@
 package tencent
 
 import (
-	"github.com/chnxq/XGoKit/log"
-
 	conf "github.com/chnxq/xkitpkg/conf/v1"
 	"github.com/chnxq/xkitpkg/logger"
+	"github.com/chnxq/xkitpkg/logger/log"
 )
 
 func init() {

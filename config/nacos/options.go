@@ -2,7 +2,7 @@ package nacos
 
 const (
 	DefaultGroup  = "DEFAULT_GROUP"
-	DefaultDataID = "bootstrap.yaml"
+	DefaultDataID = "remote_config.yaml"
 )
 
 type Option func(*options)
