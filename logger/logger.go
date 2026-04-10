@@ -6,8 +6,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/chnxq/XGoKit/log"
 	"github.com/chnxq/xkitpkg/conf/v1"
+	"github.com/chnxq/xkitpkg/logger/log"
 )
 
 // NewLogger 动态创建日志实例
