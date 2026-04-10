@@ -8,7 +8,7 @@ import (
 
 	kHttp "github.com/chnxq/xkitpkg/transport/http"
 	"github.com/chnxq/xkitpkg/transport/http/binding"
-	api "github.com/chnxq/xkitpkg/transport/testing/api/protobuf"
+	pb "github.com/chnxq/xkitpkg/transport/internal/testdata/helloworld"
 	"github.com/gin-gonic/gin"
 
 	"github.com/stretchr/testify/assert"
@@ -32,10 +32,9 @@ func TestServer(t *testing.T) {
 		c.String(200, "Hello World!")
 	})
 
-	srv.GET("/hygrothermograph", func(c *gin.Context) {
-		var out api.Hygrothermograph
-		out.Humidity = strconv.FormatInt(int64(rand.Intn(100)), 10)
-		out.Temperature = strconv.FormatInt(int64(rand.Intn(100)), 10)
+	srv.GET("/hello", func(c *gin.Context) {
+		var out pb.HelloReply
+		out.Message = strconv.FormatInt(int64(rand.Intn(100)), 10)
 		c.JSON(200, &out)
 	})
 
@@ -64,13 +63,13 @@ func TestClient(t *testing.T) {
 	t.Log(resp)
 }
 
-func GetHygrothermograph(ctx context.Context, cli *kHttp.Client, in *api.Hygrothermograph, opts ...kHttp.CallOption) (*api.Hygrothermograph, error) {
-	var out api.Hygrothermograph
+func GetHygrothermograph(ctx context.Context, cli *kHttp.Client, in *pb.HelloRequest, opts ...kHttp.CallOption) (*pb.HelloReply, error) {
+	var out pb.HelloReply
 
-	pattern := "/hygrothermograph"
+	pattern := "/hello"
 	path := binding.EncodeURL(pattern, in, true)
 
-	opts = append(opts, kHttp.Operation("/GetHygrothermograph"))
+	opts = append(opts, kHttp.Operation("/GetHello"))
 	opts = append(opts, kHttp.PathTemplate(pattern))
 
 	err := cli.Invoke(ctx, "GET", path, nil, &out, opts...)
