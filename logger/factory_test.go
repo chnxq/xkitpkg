@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/chnxq/xkitmod/log"
 	"github.com/chnxq/xkitpkg/conf/v1"
-	"github.com/chnxq/xkitpkg/log"
 )
 
 func TestRegisterAndNewLogger(t *testing.T) {

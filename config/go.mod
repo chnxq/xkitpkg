@@ -3,17 +3,15 @@ module github.com/chnxq/xkitpkg/config
 go 1.26.0
 
 require (
-	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260411023928-3a8183abd618
+	github.com/chnxq/xkitmod v0.0.0-20260411043701-ee2a753a6fb2
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411025242-24c4353f6783
 	google.golang.org/protobuf v1.36.11
 )
 
 require (
 	dario.cat/mergo v1.0.2 // indirect
+	github.com/chnxq/xkitmod/log v0.0.0-20260411043701-ee2a753a6fb2 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
-	github.com/kr/pretty v0.3.1 // indirect
-	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	golang.org/x/sys v0.43.0 // indirect
-	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

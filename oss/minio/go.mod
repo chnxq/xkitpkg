@@ -3,8 +3,8 @@ module github.com/chnxq/xkitpkg/oss/minio
 go 1.26.0
 
 require (
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260410091830-4581cad9b650
-	github.com/chnxq/xkitpkg/log v0.0.0-20260411023928-3a8183abd618
+	github.com/chnxq/xkitmod/log v0.0.0-20260411043701-ee2a753a6fb2
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411025242-24c4353f6783
 	github.com/minio/minio-go/v7 v7.0.100
 )
 
