@@ -3,7 +3,7 @@ package consul
 import (
 	"context"
 
-	"github.com/chnxq/XGoKit/registry"
+	"github.com/chnxq/xkitmod/registry"
 )
 
 type watcher struct {

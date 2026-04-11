@@ -4,13 +4,13 @@ import (
 	"context"
 	"fmt"
 
+	ic "github.com/chnxq/xkitpkg/internal/context"
+	"github.com/chnxq/xkitpkg/internal/matcher"
 	"google.golang.org/grpc"
 	grpcmd "google.golang.org/grpc/metadata"
 
-	"github.com/chnxq/xkitmod/middleware"
+	"github.com/chnxq/xkitpkg/middleware"
 	"github.com/chnxq/xkitpkg/transport"
-	ic "github.com/chnxq/xkitpkg/transport/internal/context"
-	"github.com/chnxq/xkitpkg/transport/internal/matcher"
 )
 
 // unaryServerInterceptor is a gRPC unary server interceptor

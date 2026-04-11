@@ -8,7 +8,7 @@ import (
 	"github.com/nacos-group/nacos-sdk-go/v2/model"
 	"github.com/nacos-group/nacos-sdk-go/v2/vo"
 
-	"github.com/chnxq/XGoKit/registry"
+	"github.com/chnxq/xkitmod/registry"
 )
 
 var _ registry.Watcher = (*watcher)(nil)

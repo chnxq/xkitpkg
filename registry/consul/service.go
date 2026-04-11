@@ -4,7 +4,7 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/chnxq/XGoKit/registry"
+	"github.com/chnxq/xkitmod/registry"
 )
 
 type serviceSet struct {

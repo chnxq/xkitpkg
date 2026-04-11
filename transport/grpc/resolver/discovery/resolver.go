@@ -6,13 +6,13 @@ import (
 	"errors"
 	"time"
 
+	"github.com/chnxq/xkitpkg/internal/endpoint"
 	"google.golang.org/grpc/attributes"
 	"google.golang.org/grpc/resolver"
 
 	"github.com/chnxq/xkitmod/algs/subset"
 	"github.com/chnxq/xkitmod/log"
 	"github.com/chnxq/xkitmod/registry"
-	"github.com/chnxq/xkitpkg/transport/internal/endpoint"
 )
 
 type discoveryResolver struct {

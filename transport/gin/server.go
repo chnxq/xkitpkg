@@ -11,7 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/chnxq/xkitmod/errors"
-	"github.com/chnxq/xkitmod/middleware"
+	"github.com/chnxq/xkitpkg/middleware"
 	xTransport "github.com/chnxq/xkitpkg/transport"
 	kHttp "github.com/chnxq/xkitpkg/transport/http"
 )

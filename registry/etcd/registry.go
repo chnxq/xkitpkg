@@ -11,7 +11,7 @@ import (
 
 	clientv3 "go.etcd.io/etcd/client/v3"
 
-	"github.com/chnxq/XGoKit/registry"
+	"github.com/chnxq/xkitmod/registry"
 )
 
 var (

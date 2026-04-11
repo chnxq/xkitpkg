@@ -11,7 +11,7 @@ import (
 	"go.opentelemetry.io/otel/trace"
 
 	"github.com/chnxq/xkitmod/log"
-	"github.com/chnxq/xkitmod/middleware"
+	"github.com/chnxq/xkitpkg/middleware"
 	kHttp "github.com/chnxq/xkitpkg/transport/http"
 )
 

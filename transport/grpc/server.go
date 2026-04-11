@@ -7,6 +7,9 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/chnxq/xkitpkg/internal/endpoint"
+	"github.com/chnxq/xkitpkg/internal/host"
+	"github.com/chnxq/xkitpkg/internal/matcher"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/admin"
 	"google.golang.org/grpc/credentials"
@@ -16,11 +19,8 @@ import (
 
 	//apimd "github.com/chnxq/xkitmod/api/metadata"	//TODO: register metadata server
 	"github.com/chnxq/xkitmod/log"
-	"github.com/chnxq/xkitmod/middleware"
+	"github.com/chnxq/xkitpkg/middleware"
 	"github.com/chnxq/xkitpkg/transport"
-	"github.com/chnxq/xkitpkg/transport/internal/endpoint"
-	"github.com/chnxq/xkitpkg/transport/internal/host"
-	"github.com/chnxq/xkitpkg/transport/internal/matcher"
 )
 
 var (

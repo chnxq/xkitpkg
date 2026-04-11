@@ -17,8 +17,8 @@ import (
 
 	"github.com/chnxq/XGoKit/selector"
 	cnfserrors "github.com/chnxq/xkitmod/errors"
-	"github.com/chnxq/xkitmod/middleware"
 	"github.com/chnxq/xkitmod/registry"
+	"github.com/chnxq/xkitpkg/middleware"
 )
 
 type mockRoundTripper struct{}

@@ -7,13 +7,13 @@ import (
 	"strings"
 	"time"
 
+	"github.com/chnxq/xkitpkg/internal/endpoint"
 	"github.com/google/uuid"
 
 	subset "github.com/chnxq/xkitmod/algs/subset"
 	"github.com/chnxq/xkitmod/log"
 	"github.com/chnxq/xkitmod/registry"
 	"github.com/chnxq/xkitmod/selector"
-	"github.com/chnxq/xkitpkg/transport/internal/endpoint"
 )
 
 // Target is resolver target

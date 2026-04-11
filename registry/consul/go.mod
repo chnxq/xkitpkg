@@ -3,9 +3,10 @@ module github.com/chnxq/xkitpkg/registry/consul
 go 1.26.0
 
 require (
-	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260410091830-4581cad9b650
-	github.com/chnxq/xkitpkg/registry v0.0.0-20260410091830-4581cad9b650
+	github.com/chnxq/xkitmod v0.0.0-20260411114116-d55e51a225f9
+	github.com/chnxq/xkitmod/log v0.0.0-20260411114116-d55e51a225f9
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411123202-bc5bbe2b398b
+	github.com/chnxq/xkitpkg/registry v0.0.0-20260411123202-bc5bbe2b398b
 	github.com/hashicorp/consul/api v1.34.0
 	github.com/stretchr/testify v1.11.1
 )
@@ -28,7 +29,7 @@ require (
 	github.com/mattn/go-isatty v0.0.21 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
-	golang.org/x/exp v0.0.0-20260312153236-7ab1446f8b90 // indirect
+	golang.org/x/exp v0.0.0-20260410095643-746e56fc9e2f // indirect
 	golang.org/x/sys v0.43.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect

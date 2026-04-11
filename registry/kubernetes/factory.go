@@ -3,8 +3,8 @@ package kubernetes
 import (
 	"path/filepath"
 
-	"github.com/chnxq/XGoKit/registry"
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitmod/log"
+	"github.com/chnxq/xkitmod/registry"
 
 	k8s "k8s.io/client-go/kubernetes"
 	k8sRest "k8s.io/client-go/rest"

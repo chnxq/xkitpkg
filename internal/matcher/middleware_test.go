@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/chnxq/XGoKit/middleware"
+	"github.com/chnxq/xkitpkg/middleware"
 )
 
 func logging(module string) middleware.Middleware {

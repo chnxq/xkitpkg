@@ -12,11 +12,15 @@ cd %DIR%\conf
 go get all
 go mod tidy
 
-cd %DIR%\config
+cd %DIR%\conf\consul
 go get all
 go mod tidy
 
-cd %DIR%\log
+cd %DIR%\conf\etcd
+go get all
+go mod tidy
+
+cd %DIR%\config
 go get all
 go mod tidy
 
@@ -50,6 +54,14 @@ go mod tidy
 
 
 cd %DIR%\registry
+go get all
+go mod tidy
+
+cd %DIR%\registry\consul
+go get all
+go mod tidy
+
+cd %DIR%\registry\etcd
 go get all
 go mod tidy
 

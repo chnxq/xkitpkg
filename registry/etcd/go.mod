@@ -3,9 +3,10 @@ module github.com/chnxq/xkitpkg/registry/etcd
 go 1.26.0
 
 require (
-	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260410091830-4581cad9b650
-	github.com/chnxq/xkitpkg/registry v0.0.0-20260410091830-4581cad9b650
+	github.com/chnxq/xkitmod v0.0.0-20260411114116-d55e51a225f9
+	github.com/chnxq/xkitmod/log v0.0.0-20260411114116-d55e51a225f9
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411123202-bc5bbe2b398b
+	github.com/chnxq/xkitpkg/registry v0.0.0-20260411123202-bc5bbe2b398b
 	github.com/stretchr/testify v1.11.1
 	go.etcd.io/etcd/client/v3 v3.6.10
 	google.golang.org/grpc v1.80.0
@@ -21,6 +22,8 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	go.etcd.io/etcd/api/v3 v3.6.10 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.6.10 // indirect
+	go.opentelemetry.io/otel v1.43.0 // indirect
+	go.opentelemetry.io/otel/sdk/metric v1.43.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.1 // indirect
 	golang.org/x/net v0.53.0 // indirect

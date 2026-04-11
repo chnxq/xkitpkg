@@ -10,7 +10,7 @@ import (
 
 	clientv3 "go.etcd.io/etcd/client/v3"
 
-	"github.com/chnxq/XGoKit/registry"
+	"github.com/chnxq/xkitmod/registry"
 )
 
 func createTestEtcdClient() (*clientv3.Client, error) {

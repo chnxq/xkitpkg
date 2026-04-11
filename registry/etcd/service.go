@@ -3,7 +3,7 @@ package etcd
 import (
 	"encoding/json"
 
-	"github.com/chnxq/XGoKit/registry"
+	"github.com/chnxq/xkitmod/registry"
 )
 
 func marshal(si *registry.ServiceInstance) (string, error) {

@@ -9,8 +9,8 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/chnxq/xkitmod/middleware"
 	"github.com/chnxq/xkitmod/registry"
+	"github.com/chnxq/xkitpkg/middleware"
 )
 
 func TestWithEndpoint(t *testing.T) {

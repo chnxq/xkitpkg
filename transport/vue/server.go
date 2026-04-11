@@ -13,9 +13,9 @@ import (
 
 	"github.com/chnxq/xkitmod/log"
 	"github.com/chnxq/xkitpkg/conf/v1"
+	"github.com/chnxq/xkitpkg/internal/endpoint"
+	"github.com/chnxq/xkitpkg/internal/host"
 	"github.com/chnxq/xkitpkg/transport"
-	"github.com/chnxq/xkitpkg/transport/internal/endpoint"
-	"github.com/chnxq/xkitpkg/transport/internal/host"
 )
 
 var (

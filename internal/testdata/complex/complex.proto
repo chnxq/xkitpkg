@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/chnxq/XGoKitcmd/protoc-gen-go-http/internal/encoding/complex/;complex";
+option go_package = "github.com/chnxq/xkitpkg/internal/testdata/complex/;complex";
 
 package testproto;
 

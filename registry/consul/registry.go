@@ -9,7 +9,7 @@ import (
 
 	"github.com/hashicorp/consul/api"
 
-	"github.com/chnxq/XGoKit/registry"
+	"github.com/chnxq/xkitmod/registry"
 )
 
 var (

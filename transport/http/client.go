@@ -11,13 +11,13 @@ import (
 
 	"github.com/chnxq/xkitmod/encoding"
 	"github.com/chnxq/xkitmod/errors"
-	"github.com/chnxq/xkitmod/middleware"
 	"github.com/chnxq/xkitmod/registry"
 	"github.com/chnxq/xkitmod/selector"
 	"github.com/chnxq/xkitmod/selector/wrr"
+	"github.com/chnxq/xkitpkg/internal/host"
+	"github.com/chnxq/xkitpkg/internal/httputil"
+	"github.com/chnxq/xkitpkg/middleware"
 	"github.com/chnxq/xkitpkg/transport"
-	"github.com/chnxq/xkitpkg/transport/internal/host"
-	"github.com/chnxq/xkitpkg/transport/internal/httputil"
 )
 
 func init() {

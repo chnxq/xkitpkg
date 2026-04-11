@@ -2,11 +2,17 @@ module github.com/chnxq/xkitpkg/transport
 
 go 1.26.0
 
+replace github.com/chnxq/xkitpkg/middleware => ../middleware
+
 require (
-	github.com/chnxq/xkitmod v0.0.0-20260411100726-6b8872455ab6
-	github.com/chnxq/xkitmod/algs v0.0.0-20260411100726-6b8872455ab6
-	github.com/chnxq/xkitmod/log v0.0.0-20260411100726-6b8872455ab6
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260411104355-d8e1563efd12
+	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32
+	github.com/chnxq/xkitmod v0.0.0-20260411132219-50da08594d1b
+	github.com/chnxq/xkitmod/algs v0.0.0-20260411132219-50da08594d1b
+	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
+	github.com/chnxq/xkitmod/selector v0.0.0-20260411132219-50da08594d1b
+	github.com/chnxq/xkitpkg v0.0.0-20260411132324-bea7b90507aa
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411132324-bea7b90507aa
+	github.com/chnxq/xkitpkg/middleware v0.0.0-00010101000000-000000000000
 	github.com/gin-gonic/gin v1.12.0
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/mux v1.8.1
@@ -15,7 +21,6 @@ require (
 	go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin v0.68.0
 	go.opentelemetry.io/otel v1.43.0
 	go.opentelemetry.io/otel/trace v1.43.0
-	google.golang.org/genproto/googleapis/api v0.0.0-20260406210006-6f92a3bedf2d
 	google.golang.org/grpc v1.80.0
 	google.golang.org/protobuf v1.36.11
 	gopkg.in/cenkalti/backoff.v1 v1.1.0
@@ -26,6 +31,7 @@ require (
 	github.com/bytedance/sonic v1.15.0 // indirect
 	github.com/bytedance/sonic/loader v0.5.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
+	github.com/chnxq/XGoKit/libs/alg v0.0.0-20260405045602-b14613affb8f // indirect
 	github.com/cloudwego/base64x v0.1.6 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
@@ -61,10 +67,10 @@ require (
 	golang.org/x/arch v0.26.0 // indirect
 	golang.org/x/crypto v0.50.0 // indirect
 	golang.org/x/net v0.53.0 // indirect
-	golang.org/x/sync v0.20.0 // indirect
 	golang.org/x/sys v0.43.0 // indirect
 	golang.org/x/text v0.36.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20260406210006-6f92a3bedf2d // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260406210006-6f92a3bedf2d // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

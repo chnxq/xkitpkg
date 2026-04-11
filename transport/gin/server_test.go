@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"testing"
 
+	pb "github.com/chnxq/xkitpkg/internal/testdata/helloworld"
 	kHttp "github.com/chnxq/xkitpkg/transport/http"
 	"github.com/chnxq/xkitpkg/transport/http/binding"
-	pb "github.com/chnxq/xkitpkg/transport/internal/testdata/helloworld"
 	"github.com/gin-gonic/gin"
 
 	"github.com/stretchr/testify/assert"
@@ -33,7 +33,7 @@ func TestServer(t *testing.T) {
 	})
 
 	srv.GET("/hello", func(c *gin.Context) {
-		var out pb.HelloReply
+		var out helloworld.HelloReply
 		out.Message = strconv.FormatInt(int64(rand.Intn(100)), 10)
 		c.JSON(200, &out)
 	})
@@ -63,8 +63,8 @@ func TestClient(t *testing.T) {
 	t.Log(resp)
 }
 
-func GetHygrothermograph(ctx context.Context, cli *kHttp.Client, in *pb.HelloRequest, opts ...kHttp.CallOption) (*pb.HelloReply, error) {
-	var out pb.HelloReply
+func GetHygrothermograph(ctx context.Context, cli *kHttp.Client, in *helloworld.HelloRequest, opts ...kHttp.CallOption) (*helloworld.HelloReply, error) {
+	var out helloworld.HelloReply
 
 	pattern := "/hello"
 	path := binding.EncodeURL(pattern, in, true)

@@ -6,20 +6,19 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/chnxq/xkitpkg/internal/matcher"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	grpcinsecure "google.golang.org/grpc/credentials/insecure"
 	grpcmd "google.golang.org/grpc/metadata"
 
 	"github.com/chnxq/xkitmod/log"
-	"github.com/chnxq/xkitmod/middleware"
 	"github.com/chnxq/xkitmod/registry"
 	"github.com/chnxq/xkitmod/selector"
 	"github.com/chnxq/xkitmod/selector/wrr"
+	"github.com/chnxq/xkitpkg/middleware"
 	"github.com/chnxq/xkitpkg/transport"
 	"github.com/chnxq/xkitpkg/transport/grpc/resolver/discovery"
-	"github.com/chnxq/xkitpkg/transport/internal/matcher"
-
 	// init resolver
 	_ "github.com/chnxq/xkitpkg/transport/grpc/resolver/direct"
 )
