@@ -6,30 +6,30 @@ import (
 
 	"github.com/gorilla/handlers"
 
-	"github.com/chnxq/XGoKit/libs/alg/ratelimit"
-	"github.com/chnxq/XGoKit/libs/alg/ratelimit/bbr"
+	"github.com/chnxq/xkitmod/algs/ratelimit"
+	"github.com/chnxq/xkitmod/algs/ratelimit/bbr"
 
-	kratosRest "github.com/chnxq/XGoKit/transport/http"
+	kRest "github.com/chnxq/XGoKit/transport/http"
 
-	"github.com/chnxq/XGoKit/middleware"
-	"github.com/chnxq/XGoKit/middleware/metadata"
-	midRateLimit "github.com/chnxq/XGoKit/middleware/ratelimit"
-	"github.com/chnxq/XGoKit/middleware/recovery"
-	"github.com/chnxq/XGoKit/middleware/selector"
-	"github.com/chnxq/XGoKit/middleware/tracing"
+	"github.com/chnxq/xkitpkg/middleware"
+	"github.com/chnxq/xkitpkg/middleware/metadata"
+	midRateLimit "github.com/chnxq/xkitpkg/middleware/ratelimit"
+	"github.com/chnxq/xkitpkg/middleware/recovery"
+	"github.com/chnxq/xkitpkg/middleware/selector"
+	"github.com/chnxq/xkitpkg/middleware/tracing"
 
 	conf "github.com/chnxq/xkitpkg/conf/v1"
 	"github.com/chnxq/xkitpkg/server_utils/middleware/validate"
 )
 
 // CreateRestServer 创建REST服务端
-func CreateRestServer(cfg *conf.ServerConfig, mds ...middleware.Middleware) (*kratosRest.Server, error) {
+func CreateRestServer(cfg *conf.ServerConfig, mds ...middleware.Middleware) (*kRest.Server, error) {
 	options, err := initRestConfig(cfg, mds...)
 	if err != nil {
 		return nil, err
 	}
 
-	srv := kratosRest.NewServer(options...)
+	srv := kRest.NewServer(options...)
 
 	if cfg != nil && cfg.Server != nil && cfg.Server.Rest != nil && cfg.Server.Rest.GetEnablePprof() {
 		registerHttpPprof(srv)
@@ -39,15 +39,15 @@ func CreateRestServer(cfg *conf.ServerConfig, mds ...middleware.Middleware) (*kr
 }
 
 // initRestConfig 初始化REST服务配置
-func initRestConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kratosRest.ServerOption, error) {
+func initRestConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kRest.ServerOption, error) {
 	if cfg == nil || cfg.Server == nil || cfg.Server.Rest == nil {
 		return nil, nil
 	}
 
-	var options []kratosRest.ServerOption
+	var options []kRest.ServerOption
 
 	if cfg.Server.Rest.Cors != nil {
-		options = append(options, kratosRest.Filter(handlers.CORS(
+		options = append(options, kRest.Filter(handlers.CORS(
 			handlers.AllowedHeaders(cfg.Server.Rest.Cors.Headers),
 			handlers.AllowedMethods(cfg.Server.Rest.Cors.Methods),
 			handlers.AllowedOrigins(cfg.Server.Rest.Cors.Origins),
@@ -81,16 +81,16 @@ func initRestConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kra
 	}
 	ms = append(ms, mds...)
 
-	options = append(options, kratosRest.Middleware(ms...))
+	options = append(options, kRest.Middleware(ms...))
 
 	if cfg.Server.Rest.Network != "" {
-		options = append(options, kratosRest.Network(cfg.Server.Rest.Network))
+		options = append(options, kRest.Network(cfg.Server.Rest.Network))
 	}
 	if cfg.Server.Rest.Addr != "" {
-		options = append(options, kratosRest.Address(cfg.Server.Rest.Addr))
+		options = append(options, kRest.Address(cfg.Server.Rest.Addr))
 	}
 	if cfg.Server.Rest.Timeout != nil {
-		options = append(options, kratosRest.Timeout(cfg.Server.Rest.Timeout.AsDuration()))
+		options = append(options, kRest.Timeout(cfg.Server.Rest.Timeout.AsDuration()))
 	}
 
 	if cfg.Server.Rest.Tls != nil {
@@ -102,7 +102,7 @@ func initRestConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kra
 		}
 
 		if tlsCfg != nil {
-			options = append(options, kratosRest.TLSConfig(tlsCfg))
+			options = append(options, kRest.TLSConfig(tlsCfg))
 		}
 	}
 
@@ -110,7 +110,7 @@ func initRestConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kra
 }
 
 // registerHttpPprof 注册pprof路由
-func registerHttpPprof(s *kratosRest.Server) {
+func registerHttpPprof(s *kRest.Server) {
 	s.HandleFunc("/debug/pprof", pprof.Index)
 
 	s.HandleFunc("/debug/cmdline", pprof.Cmdline)

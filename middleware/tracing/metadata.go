@@ -3,7 +3,6 @@ package tracing
 import (
 	"context"
 
-	"github.com/chnxq/XGoKit"
 	"go.opentelemetry.io/otel/propagation"
 
 	"github.com/chnxq/xkitmod/metadata"
@@ -18,10 +17,10 @@ var _ propagation.TextMapPropagator = Metadata{}
 
 // Inject sets metadata key-values from ctx into the carrier.
 func (b Metadata) Inject(ctx context.Context, carrier propagation.TextMapCarrier) {
-	app, ok := XGoKit.FromContext(ctx)
-	if ok {
-		carrier.Set(serviceHeader, app.Name())
-	}
+	//app, ok := XGoKit.FromContext(ctx)	//TODO: temporary solution 112
+	//if ok {
+	//	carrier.Set(serviceHeader, app.Name())
+	//}
 }
 
 // Extract returns a copy of parent with the metadata from the carrier added.

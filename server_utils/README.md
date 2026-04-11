@@ -66,7 +66,7 @@ import (
     
     "github.com/chnxq/xkitpkg/server_utils"
     "github.com/chnxq/xkitpkg/conf"
-    kratosRest "github.com/chnxq/XGoKit/transport/http"
+    kRest "github.com/chnxq/XGoKit/transport/http"
 )
 
 func main() {
@@ -199,7 +199,7 @@ server:
 
 ### Server Creation Functions
 
-#### `CreateRestServer(cfg *conf.ServerConfig, mds ...middleware.Middleware) (*kratosRest.Server, error)`
+#### `CreateRestServer(cfg *conf.ServerConfig, mds ...middleware.Middleware) (*kRest.Server, error)`
 Creates and configures a REST server instance based on the provided configuration. Additional middleware can be passed as variadic parameters.
 
 #### `NewRestWhiteListMatcher() selector.MatchFunc`
@@ -327,7 +327,7 @@ ms = append(ms, selector.Server(
 
 ### Public Functions
 
-#### `func CreateRestServer(cfg *conf.ServerConfig, mds ...middleware.Middleware) (*kratosRest.Server, error)`
+#### `func CreateRestServer(cfg *conf.ServerConfig, mds ...middleware.Middleware) (*kRest.Server, error)`
 Creates a new REST server with the provided configuration and optional additional middleware.
 
 Parameters:
@@ -335,7 +335,7 @@ Parameters:
 - `mds`: Optional additional middleware to apply after configured middleware
 
 Returns:
-- `*kratosRest.Server`: The configured server instance
+- `*kRest.Server`: The configured server instance
 - `error`: Any error during server creation
 
 #### `func AddWhiteList(ops ...string)`
@@ -435,7 +435,7 @@ import (
     
     "github.com/chnxq/XGoKit/middleware/recovery"
     "github.com/chnxq/XGoKit/middleware/tracing"
-    kratosRest "github.com/chnxq/XGoKit/transport/http"
+    kRest "github.com/chnxq/XGoKit/transport/http"
     "github.com/chnxq/xkitpkg/server_utils"
     "github.com/chnxq/xkitpkg/conf"
 )

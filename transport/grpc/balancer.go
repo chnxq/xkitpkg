@@ -5,8 +5,8 @@ import (
 	"google.golang.org/grpc/balancer/base"
 	"google.golang.org/grpc/metadata"
 
-	"github.com/chnxq/XGoKit/registry"
-	"github.com/chnxq/XGoKit/selector"
+	"github.com/chnxq/xkitmod/registry"
+	"github.com/chnxq/xkitmod/selector"
 	"github.com/chnxq/xkitpkg/transport"
 )
 

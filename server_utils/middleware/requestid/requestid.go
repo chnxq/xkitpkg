@@ -5,7 +5,7 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/chnxq/XGoKit/middleware"
+	"github.com/chnxq/xkitpkg/middleware"
 )
 
 const DefaultRequestIDHeader = "X-Request-Id"

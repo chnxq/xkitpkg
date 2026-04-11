@@ -7,7 +7,7 @@ import (
 
 	"google.golang.org/grpc/metadata"
 
-	"github.com/chnxq/XGoKit/selector"
+	"github.com/chnxq/xkitmod/selector"
 )
 
 func TestTrailer(t *testing.T) {

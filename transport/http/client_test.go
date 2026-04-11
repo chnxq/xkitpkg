@@ -15,9 +15,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/chnxq/XGoKit/selector"
 	cnfserrors "github.com/chnxq/xkitmod/errors"
 	"github.com/chnxq/xkitmod/registry"
+	"github.com/chnxq/xkitmod/selector"
 	"github.com/chnxq/xkitpkg/middleware"
 )
 

@@ -3,8 +3,8 @@ package validate
 import (
 	"context"
 
-	"github.com/chnxq/XGoKit/errors"
-	"github.com/chnxq/XGoKit/middleware"
+	"github.com/chnxq/xkitmod/errors"
+	"github.com/chnxq/xkitpkg/middleware"
 
 	"buf.build/go/protovalidate"
 	"google.golang.org/protobuf/proto"
