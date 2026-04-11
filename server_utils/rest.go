@@ -9,7 +9,7 @@ import (
 	"github.com/chnxq/xkitmod/algs/ratelimit"
 	"github.com/chnxq/xkitmod/algs/ratelimit/bbr"
 
-	kRest "github.com/chnxq/XGoKit/transport/http"
+	kRest "github.com/chnxq/xkitpkg/transport/http"
 
 	"github.com/chnxq/xkitpkg/middleware"
 	"github.com/chnxq/xkitpkg/middleware/metadata"

@@ -6,9 +6,8 @@ require (
 	github.com/chnxq/xkitmod v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/algs v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg v0.0.0-20260411135730-0b47684939b1
-	github.com/chnxq/xkitpkg/transport v0.0.0-20260411135730-0b47684939b1
-	github.com/go-kratos/aegis v0.2.0
+	github.com/chnxq/xkitpkg v0.0.0-20260411150755-730cedf1327b
+	github.com/chnxq/xkitpkg/transport v0.0.0-20260411150755-730cedf1327b
 	github.com/golang-jwt/jwt/v5 v5.3.1
 	go.opentelemetry.io/otel v1.43.0
 	go.opentelemetry.io/otel/metric v1.43.0

@@ -8,8 +8,8 @@ package helloworld
 
 import (
 	context "context"
-	http "github.com/chnxq/XGoKit/transport/http"
-	binding "github.com/chnxq/XGoKit/transport/http/binding"
+	http "github.com/chnxq/xkitpkg/transport/http"
+	binding "github.com/chnxq/xkitpkg/transport/http/binding"
 )
 
 // This is a compile-time assertion to ensure that this generated file

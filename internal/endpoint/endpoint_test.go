@@ -17,9 +17,9 @@ func TestNewEndpoint(t *testing.T) {
 		want *url.URL
 	}{
 		{
-			name: "https://github.com/chnxq/XGoKit/",
-			args: args{"https", "github.com/chnxq/XGoKit/"},
-			want: &url.URL{Scheme: "https", Host: "github.com/chnxq/XGoKit/"},
+			name: "https://github.com/chnxq/xkitpkg/",
+			args: args{"https", "github.com/chnxq/xkitpkg/"},
+			want: &url.URL{Scheme: "https", Host: "github.com/chnxq/xkitpkg/"},
 		},
 		{
 			name: "https://go-cnf.dev/",
@@ -54,8 +54,8 @@ func TestParseEndpoint(t *testing.T) {
 	}{
 		{
 			name:    "cnf",
-			args:    args{endpoints: []string{"https://github.com/chnxq/XGoKit"}, scheme: "https"},
-			want:    "github.com",
+			args:    args{endpoints: []string{"https://github.com/chnxq/xkitpkg/"}, scheme: "https"},
+			want:    "github.com/chnxq/xkitpkg/",
 			wantErr: false,
 		},
 		{

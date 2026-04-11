@@ -125,7 +125,7 @@ const file_helloworld_proto_rawDesc = "" +
 	"\amessage\x18\x01 \x01(\tR\amessage2\xab\x01\n" +
 	"\aGreeter\x12X\n" +
 	"\bSayHello\x12\x18.helloworld.HelloRequest\x1a\x16.helloworld.HelloReply\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/helloworld/{name}\x12F\n" +
-	"\x0eSayHelloStream\x12\x18.helloworld.HelloRequest\x1a\x16.helloworld.HelloReply(\x010\x01B6Z4github.com/chnxq/XGoKit/internal/testdata/helloworldb\x06proto3"
+	"\x0eSayHelloStream\x12\x18.helloworld.HelloRequest\x1a\x16.helloworld.HelloReply(\x010\x01B7Z5github.com/chnxq/xkitpkg/internal/testdata/helloworldb\x06proto3"
 
 var (
 	file_helloworld_proto_rawDescOnce sync.Once
