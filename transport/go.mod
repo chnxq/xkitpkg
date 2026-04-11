@@ -7,9 +7,9 @@ require (
 	github.com/chnxq/xkitmod/algs v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/selector v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg v0.0.0-20260411143413-473fd09410d2
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260411143413-473fd09410d2
-	github.com/chnxq/xkitpkg/middleware v0.0.0-20260411143413-473fd09410d2
+	github.com/chnxq/xkitpkg v0.0.0-20260411151207-f4a3e6c48938
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411151207-f4a3e6c48938
+	github.com/chnxq/xkitpkg/middleware v0.0.0-20260411151207-f4a3e6c48938
 	github.com/gin-gonic/gin v1.12.0
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/mux v1.8.1
@@ -28,8 +28,6 @@ require (
 	github.com/bytedance/sonic v1.15.0 // indirect
 	github.com/bytedance/sonic/loader v0.5.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32 // indirect
-	github.com/chnxq/XGoKit/libs/alg v0.0.0-20260405133730-f2df3fec0a32 // indirect
 	github.com/cloudwego/base64x v0.1.6 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
