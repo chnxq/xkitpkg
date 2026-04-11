@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/chnxq/XGoKit/conf"
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitmod/log"
+	"github.com/chnxq/xkitpkg/conf/v1"
 	"github.com/chnxq/xkitpkg/transport"
 	"github.com/chnxq/xkitpkg/transport/internal/endpoint"
 	"github.com/chnxq/xkitpkg/transport/internal/host"

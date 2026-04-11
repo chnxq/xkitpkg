@@ -9,7 +9,7 @@ import (
 
 	"google.golang.org/grpc/resolver"
 
-	"github.com/chnxq/XGoKit/registry"
+	"github.com/chnxq/xkitmod/registry"
 )
 
 type testClientConn struct {

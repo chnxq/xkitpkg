@@ -5,11 +5,11 @@ import (
 	"net/url"
 
 	// init encoding
-	_ "github.com/chnxq/XGoKit/encoding/form"
-	_ "github.com/chnxq/XGoKit/encoding/json"
-	_ "github.com/chnxq/XGoKit/encoding/proto"
-	_ "github.com/chnxq/XGoKit/encoding/xml"
-	_ "github.com/chnxq/XGoKit/encoding/yaml"
+	_ "github.com/chnxq/xkitmod/encoding/form"
+	_ "github.com/chnxq/xkitmod/encoding/json"
+	_ "github.com/chnxq/xkitmod/encoding/proto"
+	_ "github.com/chnxq/xkitmod/encoding/xml"
+	_ "github.com/chnxq/xkitmod/encoding/yaml"
 )
 
 // Server is transport server.

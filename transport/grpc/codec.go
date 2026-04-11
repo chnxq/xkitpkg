@@ -6,8 +6,8 @@ import (
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/protobuf/proto"
 
-	enc "github.com/chnxq/XGoKit/encoding"
-	"github.com/chnxq/XGoKit/encoding/json"
+	enc "github.com/chnxq/xkitmod/encoding"
+	"github.com/chnxq/xkitmod/encoding/json"
 )
 
 func init() {

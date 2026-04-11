@@ -5,7 +5,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/chnxq/XGoKit/encoding"
+	"github.com/chnxq/xkitmod/encoding"
 )
 
 const DefaultBufferSize = 1024

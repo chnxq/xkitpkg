@@ -8,8 +8,8 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/chnxq/XGoKit/encoding"
-	"github.com/chnxq/XGoKit/errors"
+	"github.com/chnxq/xkitmod/encoding"
+	"github.com/chnxq/xkitmod/errors"
 
 	"github.com/gorilla/mux"
 

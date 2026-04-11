@@ -8,8 +8,8 @@ import (
 	"net/url"
 	"sync/atomic"
 
-	"github.com/chnxq/XGoKit/errors"
-	"github.com/chnxq/XGoKit/log"
+	"github.com/chnxq/xkitmod/errors"
+	"github.com/chnxq/xkitmod/log"
 	"github.com/chnxq/xkitpkg/transport"
 
 	"google.golang.org/grpc"

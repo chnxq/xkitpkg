@@ -4,8 +4,8 @@ import (
 	"crypto/tls"
 	"time"
 
-	"github.com/chnxq/XGoKit/encoding"
-	"github.com/chnxq/XGoKit/log"
+	"github.com/chnxq/xkitmod/encoding"
+	"github.com/chnxq/xkitmod/log"
 	"github.com/hibiken/asynq"
 )
 

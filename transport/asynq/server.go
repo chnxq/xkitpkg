@@ -12,7 +12,7 @@ import (
 
 	"github.com/hibiken/asynq"
 
-	"github.com/chnxq/XGoKit/encoding"
+	"github.com/chnxq/xkitmod/encoding"
 	kTransport "github.com/chnxq/xkitpkg/transport"
 
 	"github.com/chnxq/xkitpkg/transport/keepalive"

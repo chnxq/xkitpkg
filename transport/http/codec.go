@@ -9,8 +9,8 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/chnxq/XGoKit/encoding"
-	"github.com/chnxq/XGoKit/errors"
+	"github.com/chnxq/xkitmod/encoding"
+	"github.com/chnxq/xkitmod/errors"
 	"github.com/chnxq/xkitpkg/transport/http/binding"
 	"github.com/chnxq/xkitpkg/transport/internal/httputil"
 )

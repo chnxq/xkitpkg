@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/chnxq/XGoKit/encoding"
-	"github.com/chnxq/XGoKit/encoding/form"
-	"github.com/chnxq/XGoKit/errors"
+	"github.com/chnxq/xkitmod/encoding"
+	"github.com/chnxq/xkitmod/encoding/form"
+	"github.com/chnxq/xkitmod/errors"
 )
 
 // BindQuery bind vars parameters to target.

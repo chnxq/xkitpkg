@@ -3,7 +3,7 @@ package sse
 import (
 	"fmt"
 
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitmod/log"
 )
 
 const (

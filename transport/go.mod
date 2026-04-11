@@ -3,9 +3,10 @@ module github.com/chnxq/xkitpkg/transport
 go 1.26.0
 
 require (
-	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32
-	github.com/chnxq/XGoKit/libs/alg v0.0.0-20260405133730-f2df3fec0a32
-	github.com/chnxq/xkitpkg/log v0.0.0-20260411023928-3a8183abd618
+	github.com/chnxq/xkitmod v0.0.0-20260411100726-6b8872455ab6
+	github.com/chnxq/xkitmod/algs v0.0.0-20260411100726-6b8872455ab6
+	github.com/chnxq/xkitmod/log v0.0.0-20260411100726-6b8872455ab6
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411104355-d8e1563efd12
 	github.com/gin-gonic/gin v1.12.0
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/mux v1.8.1
@@ -60,6 +61,7 @@ require (
 	golang.org/x/arch v0.26.0 // indirect
 	golang.org/x/crypto v0.50.0 // indirect
 	golang.org/x/net v0.53.0 // indirect
+	golang.org/x/sync v0.20.0 // indirect
 	golang.org/x/sys v0.43.0 // indirect
 	golang.org/x/text v0.36.0 // indirect
 	golang.org/x/time v0.15.0 // indirect

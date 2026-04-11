@@ -1,7 +1,7 @@
 package asynq
 
 import (
-	"github.com/chnxq/XGoKit/selector"
+	"github.com/chnxq/xkitmod/selector"
 	kTransport "github.com/chnxq/xkitpkg/transport"
 )
 

@@ -10,8 +10,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/chnxq/XGoKit/errors"
-	"github.com/chnxq/XGoKit/middleware"
+	"github.com/chnxq/xkitmod/errors"
+	"github.com/chnxq/xkitmod/middleware"
 	xTransport "github.com/chnxq/xkitpkg/transport"
 	kHttp "github.com/chnxq/xkitpkg/transport/http"
 )

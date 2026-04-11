@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	cnferror "github.com/chnxq/XGoKit/errors"
+	cnferror "github.com/chnxq/xkitmod/errors"
 )
 
 type (

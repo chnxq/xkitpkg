@@ -5,9 +5,9 @@ import (
 	"encoding/gob"
 	"errors"
 
-	"github.com/chnxq/XGoKit/encoding"
-	_ "github.com/chnxq/XGoKit/encoding/json"
-	_ "github.com/chnxq/XGoKit/encoding/proto"
+	"github.com/chnxq/xkitmod/encoding"
+	_ "github.com/chnxq/xkitmod/encoding/json"
+	_ "github.com/chnxq/xkitmod/encoding/proto"
 )
 
 // Marshal encodes a message into bytes using the provided codec.

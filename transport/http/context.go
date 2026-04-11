@@ -11,7 +11,7 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/chnxq/XGoKit/middleware"
+	"github.com/chnxq/xkitmod/middleware"
 	"github.com/chnxq/xkitpkg/transport"
 	"github.com/chnxq/xkitpkg/transport/http/binding"
 )

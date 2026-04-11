@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/chnxq/XGoKit/registry"
-	"github.com/chnxq/XGoKit/selector"
+	"github.com/chnxq/xkitmod/registry"
+	"github.com/chnxq/xkitmod/selector"
 )
 
 func TestParseTarget(t *testing.T) {

@@ -14,9 +14,9 @@ import (
 	"google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/reflection"
 
-	apimd "github.com/chnxq/XGoKit/api/metadata"
-	"github.com/chnxq/XGoKit/middleware"
-	"github.com/chnxq/xkitpkg/logger/log"
+	//apimd "github.com/chnxq/xkitmod/api/metadata"	//TODO: register metadata server
+	"github.com/chnxq/xkitmod/log"
+	"github.com/chnxq/xkitmod/middleware"
 	"github.com/chnxq/xkitpkg/transport"
 	"github.com/chnxq/xkitpkg/transport/internal/endpoint"
 	"github.com/chnxq/xkitpkg/transport/internal/host"
@@ -130,22 +130,22 @@ func Options(opts ...grpc.ServerOption) ServerOption {
 // Server is a gRPC server wrapper.
 type Server struct {
 	*grpc.Server
-	baseCtx           context.Context
-	tlsConf           *tls.Config
-	lis               net.Listener
-	err               error
-	network           string
-	address           string
-	endpoint          *url.URL
-	timeout           time.Duration
-	middleware        matcher.Matcher
-	streamMiddleware  matcher.Matcher
-	unaryInts         []grpc.UnaryServerInterceptor
-	streamInts        []grpc.StreamServerInterceptor
-	grpcOpts          []grpc.ServerOption
-	health            *health.Server
-	customHealth      bool
-	metadata          *apimd.Server
+	baseCtx          context.Context
+	tlsConf          *tls.Config
+	lis              net.Listener
+	err              error
+	network          string
+	address          string
+	endpoint         *url.URL
+	timeout          time.Duration
+	middleware       matcher.Matcher
+	streamMiddleware matcher.Matcher
+	unaryInts        []grpc.UnaryServerInterceptor
+	streamInts       []grpc.StreamServerInterceptor
+	grpcOpts         []grpc.ServerOption
+	health           *health.Server
+	customHealth     bool
+	//metadata          *apimd.Server	//TODO: register metadata server
 	adminClean        func()
 	disableReflection bool
 }
@@ -187,12 +187,12 @@ func NewServer(opts ...ServerOption) *Server {
 		grpcOpts = append(grpcOpts, srv.grpcOpts...)
 	}
 	srv.Server = grpc.NewServer(grpcOpts...)
-	srv.metadata = apimd.NewServer(srv.Server)
+	//srv.metadata = apimd.NewServer(srv.Server)	//TODO: register metadata server
 	// internal register
 	if !srv.customHealth {
 		grpc_health_v1.RegisterHealthServer(srv.Server, srv.health)
 	}
-	apimd.RegisterMetadataServer(srv.Server, srv.metadata)
+	//apimd.RegisterMetadataServer(srv.Server, srv.metadata)	//TODO: register metadata server
 	// reflection register
 	if !srv.disableReflection {
 		reflection.Register(srv.Server)

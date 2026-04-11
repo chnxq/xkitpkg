@@ -1,8 +1,6 @@
 package gin
 
 import (
-	"github.com/chnxq/xkitpkg/logger/log"
-	"github.com/gin-gonic/gin"
 	"net"
 	"net/http"
 	"net/http/httputil"
@@ -10,6 +8,9 @@ import (
 	"runtime/debug"
 	"strings"
 	"time"
+
+	"github.com/chnxq/xkitmod/log"
+	"github.com/gin-gonic/gin"
 )
 
 // GinLogger 接收gin框架默认的日志

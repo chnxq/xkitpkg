@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/chnxq/XGoKit/encoding"
-	"github.com/chnxq/XGoKit/errors"
+	"github.com/chnxq/xkitmod/encoding"
+	"github.com/chnxq/xkitmod/errors"
 )
 
 func TestDefaultRequestDecoder(t *testing.T) {

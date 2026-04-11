@@ -2,8 +2,9 @@ package vue
 
 import (
 	"crypto/tls"
-	"github.com/chnxq/XGoKit/conf"
 	"time"
+
+	"github.com/chnxq/xkitpkg/conf/v1"
 )
 
 type ServerOption func(o *Server)

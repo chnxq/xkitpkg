@@ -3,7 +3,7 @@ package keepalive
 import (
 	"google.golang.org/grpc/metadata"
 
-	"github.com/chnxq/XGoKit/selector"
+	"github.com/chnxq/xkitmod/selector"
 	"github.com/chnxq/xkitpkg/transport"
 )
 

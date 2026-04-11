@@ -9,10 +9,10 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/chnxq/XGoKit/libs/alg/subset"
-	"github.com/chnxq/XGoKit/log"
-	"github.com/chnxq/XGoKit/registry"
-	"github.com/chnxq/XGoKit/selector"
+	subset "github.com/chnxq/xkitmod/algs/subset"
+	"github.com/chnxq/xkitmod/log"
+	"github.com/chnxq/xkitmod/registry"
+	"github.com/chnxq/xkitmod/selector"
 	"github.com/chnxq/xkitpkg/transport/internal/endpoint"
 )
 

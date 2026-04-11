@@ -7,7 +7,7 @@ import (
 
 	"google.golang.org/protobuf/proto"
 
-	"github.com/chnxq/XGoKit/encoding/form"
+	"github.com/chnxq/xkitmod/encoding/form"
 )
 
 var reg = regexp.MustCompile(`{[\\.\w]+}`)

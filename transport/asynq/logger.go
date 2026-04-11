@@ -3,7 +3,7 @@ package asynq
 import (
 	"fmt"
 
-	"github.com/chnxq/XGoKit/log"
+	"github.com/chnxq/xkitmod/log"
 	"github.com/hibiken/asynq"
 )
 
