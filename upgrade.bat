@@ -24,6 +24,31 @@ cd %DIR%\logger
 go get all
 go mod tidy
 
+cd %DIR%\logger\aliyun
+go get all
+go mod tidy
+
+cd %DIR%\logger\fluentd
+go get all
+go mod tidy
+
+cd %DIR%\logger\logrus
+go get all
+go mod tidy
+
+cd %DIR%\logger\tencent
+go get all
+go mod tidy
+
+cd %DIR%\logger\zerolog
+go get all
+go mod tidy
+
+cd %DIR%\logger\zap
+go get all
+go mod tidy
+
+
 cd %DIR%\registry
 go get all
 go mod tidy

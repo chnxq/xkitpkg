@@ -3,8 +3,8 @@ module github.com/chnxq/xkitpkg/cache/redis
 go 1.26.0
 
 require (
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260410145318-72f42dfa1e02
-	github.com/chnxq/xkitpkg/logger v0.0.0-20260410145318-72f42dfa1e02
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411023928-3a8183abd618
+	github.com/chnxq/xkitpkg/log v0.0.0-20260411023928-3a8183abd618
 	github.com/redis/go-redis/extra/redisotel/v9 v9.18.0
 	github.com/redis/go-redis/v9 v9.18.0
 )

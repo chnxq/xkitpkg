@@ -5,7 +5,7 @@ import (
 	"sync"
 
 	"github.com/chnxq/xkitpkg/conf/v1"
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitpkg/log"
 )
 
 type FactoryFunc func(cfg *conf.Logger) (log.Logger, error)

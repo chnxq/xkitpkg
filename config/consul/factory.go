@@ -2,7 +2,7 @@ package consul
 
 import (
 	"github.com/chnxq/XGoKit/config"
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitpkg/log"
 
 	consulApi "github.com/hashicorp/consul/api"
 

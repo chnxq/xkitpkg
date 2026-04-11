@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/chnxq/xkitpkg/conf/v1"
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitpkg/log"
 )
 
 // NewLogger 动态创建日志实例

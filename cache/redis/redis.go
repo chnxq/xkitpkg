@@ -5,7 +5,7 @@ import (
 	"github.com/redis/go-redis/v9"
 
 	"github.com/chnxq/xkitpkg/conf/v1"
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitpkg/log"
 )
 
 // NewClient create go-redis client

@@ -5,6 +5,7 @@ go 1.26.0
 require (
 	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32
 	github.com/chnxq/XGoKit/libs/alg v0.0.0-20260405133730-f2df3fec0a32
+	github.com/chnxq/xkitpkg/log v0.0.0-20260411023928-3a8183abd618
 	github.com/gin-gonic/gin v1.12.0
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/mux v1.8.1
@@ -56,7 +57,7 @@ require (
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/otel/metric v1.43.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
-	golang.org/x/arch v0.25.0 // indirect
+	golang.org/x/arch v0.26.0 // indirect
 	golang.org/x/crypto v0.50.0 // indirect
 	golang.org/x/net v0.53.0 // indirect
 	golang.org/x/sys v0.43.0 // indirect

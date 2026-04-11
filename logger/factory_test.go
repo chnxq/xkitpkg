@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/chnxq/xkitpkg/conf/v1"
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitpkg/log"
 )
 
 func TestRegisterAndNewLogger(t *testing.T) {

@@ -3,8 +3,8 @@ module github.com/chnxq/xkitpkg/oss/minio
 go 1.26.0
 
 require (
-	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32
 	github.com/chnxq/xkitpkg/conf v0.0.0-20260410091830-4581cad9b650
+	github.com/chnxq/xkitpkg/log v0.0.0-20260411023928-3a8183abd618
 	github.com/minio/minio-go/v7 v7.0.100
 )
 
@@ -19,6 +19,7 @@ require (
 	github.com/minio/md5-simd v1.1.2 // indirect
 	github.com/philhofer/fwd v1.2.0 // indirect
 	github.com/rs/xid v1.6.0 // indirect
+	github.com/stretchr/testify v1.11.1 // indirect
 	github.com/tinylib/msgp v1.6.3 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/crypto v0.50.0 // indirect
