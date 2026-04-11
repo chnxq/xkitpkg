@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package conf;
+
+option go_package = "github.com/chnxq/xkitpkg/conf/v1;conf";
+
+// 服务代理
+message Proxy {
+  bool isUrl = 1; // url：true，本地路径静态资源，false
+  string prefix = 2; // 前缀
+  string addr = 3; // 转发地址
+}

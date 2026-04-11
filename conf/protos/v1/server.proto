@@ -8,6 +8,7 @@ import "google/protobuf/duration.proto";
 
 import "v1/middleware.proto";
 import "v1/tls.proto";
+import "v1/proxy.proto";
 
 // 服务器
 message Server {
@@ -41,6 +42,24 @@ message Server {
     Middleware middleware = 4;
 
     TLS tls = 5;  // TLS配置
+  }
+
+  //Gin服务配置
+  message Gin {
+    string Mode = 1;
+    string network = 2;
+    string addr = 3;
+    google.protobuf.Duration timeout = 4;
+    TLS tls = 5;
+  }
+
+  //Vue服务配置
+  message Vue {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+    TLS tls = 4;
+    repeated Proxy proxy = 7; // 服务代理
   }
 
   // Websocket

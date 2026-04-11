@@ -65,7 +65,7 @@ func (x Server_Kafka_ScramMechanism_Algorithm) Number() protoreflect.EnumNumber 
 
 // Deprecated: Use Server_Kafka_ScramMechanism_Algorithm.Descriptor instead.
 func (Server_Kafka_ScramMechanism_Algorithm) EnumDescriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 4, 1, 0}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 6, 1, 0}
 }
 
 // 服务器
@@ -451,6 +451,160 @@ func (x *Server_GRPC) GetTls() *TLS {
 	return nil
 }
 
+// Gin服务配置
+type Server_Gin struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Mode          string                 `protobuf:"bytes,1,opt,name=Mode,proto3" json:"Mode,omitempty"`
+	Network       string                 `protobuf:"bytes,2,opt,name=network,proto3" json:"network,omitempty"`
+	Addr          string                 `protobuf:"bytes,3,opt,name=addr,proto3" json:"addr,omitempty"`
+	Timeout       *durationpb.Duration   `protobuf:"bytes,4,opt,name=timeout,proto3" json:"timeout,omitempty"`
+	Tls           *TLS                   `protobuf:"bytes,5,opt,name=tls,proto3" json:"tls,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Server_Gin) Reset() {
+	*x = Server_Gin{}
+	mi := &file_v1_server_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Server_Gin) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Server_Gin) ProtoMessage() {}
+
+func (x *Server_Gin) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_server_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Server_Gin.ProtoReflect.Descriptor instead.
+func (*Server_Gin) Descriptor() ([]byte, []int) {
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 2}
+}
+
+func (x *Server_Gin) GetMode() string {
+	if x != nil {
+		return x.Mode
+	}
+	return ""
+}
+
+func (x *Server_Gin) GetNetwork() string {
+	if x != nil {
+		return x.Network
+	}
+	return ""
+}
+
+func (x *Server_Gin) GetAddr() string {
+	if x != nil {
+		return x.Addr
+	}
+	return ""
+}
+
+func (x *Server_Gin) GetTimeout() *durationpb.Duration {
+	if x != nil {
+		return x.Timeout
+	}
+	return nil
+}
+
+func (x *Server_Gin) GetTls() *TLS {
+	if x != nil {
+		return x.Tls
+	}
+	return nil
+}
+
+// Vue服务配置
+type Server_Vue struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Network       string                 `protobuf:"bytes,1,opt,name=network,proto3" json:"network,omitempty"`
+	Addr          string                 `protobuf:"bytes,2,opt,name=addr,proto3" json:"addr,omitempty"`
+	Timeout       *durationpb.Duration   `protobuf:"bytes,3,opt,name=timeout,proto3" json:"timeout,omitempty"`
+	Tls           *TLS                   `protobuf:"bytes,4,opt,name=tls,proto3" json:"tls,omitempty"`
+	Proxy         []*Proxy               `protobuf:"bytes,7,rep,name=proxy,proto3" json:"proxy,omitempty"` // 服务代理
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Server_Vue) Reset() {
+	*x = Server_Vue{}
+	mi := &file_v1_server_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Server_Vue) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Server_Vue) ProtoMessage() {}
+
+func (x *Server_Vue) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_server_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Server_Vue.ProtoReflect.Descriptor instead.
+func (*Server_Vue) Descriptor() ([]byte, []int) {
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 3}
+}
+
+func (x *Server_Vue) GetNetwork() string {
+	if x != nil {
+		return x.Network
+	}
+	return ""
+}
+
+func (x *Server_Vue) GetAddr() string {
+	if x != nil {
+		return x.Addr
+	}
+	return ""
+}
+
+func (x *Server_Vue) GetTimeout() *durationpb.Duration {
+	if x != nil {
+		return x.Timeout
+	}
+	return nil
+}
+
+func (x *Server_Vue) GetTls() *TLS {
+	if x != nil {
+		return x.Tls
+	}
+	return nil
+}
+
+func (x *Server_Vue) GetProxy() []*Proxy {
+	if x != nil {
+		return x.Proxy
+	}
+	return nil
+}
+
 // Websocket
 type Server_Websocket struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -466,7 +620,7 @@ type Server_Websocket struct {
 
 func (x *Server_Websocket) Reset() {
 	*x = Server_Websocket{}
-	mi := &file_v1_server_proto_msgTypes[3]
+	mi := &file_v1_server_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -478,7 +632,7 @@ func (x *Server_Websocket) String() string {
 func (*Server_Websocket) ProtoMessage() {}
 
 func (x *Server_Websocket) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[3]
+	mi := &file_v1_server_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -491,7 +645,7 @@ func (x *Server_Websocket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Websocket.ProtoReflect.Descriptor instead.
 func (*Server_Websocket) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 2}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 4}
 }
 
 func (x *Server_Websocket) GetNetwork() string {
@@ -552,7 +706,7 @@ type Server_Mqtt struct {
 
 func (x *Server_Mqtt) Reset() {
 	*x = Server_Mqtt{}
-	mi := &file_v1_server_proto_msgTypes[4]
+	mi := &file_v1_server_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -564,7 +718,7 @@ func (x *Server_Mqtt) String() string {
 func (*Server_Mqtt) ProtoMessage() {}
 
 func (x *Server_Mqtt) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[4]
+	mi := &file_v1_server_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -577,7 +731,7 @@ func (x *Server_Mqtt) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Mqtt.ProtoReflect.Descriptor instead.
 func (*Server_Mqtt) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 3}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 5}
 }
 
 func (x *Server_Mqtt) GetEndpoint() string {
@@ -658,7 +812,7 @@ type Server_Kafka struct {
 
 func (x *Server_Kafka) Reset() {
 	*x = Server_Kafka{}
-	mi := &file_v1_server_proto_msgTypes[5]
+	mi := &file_v1_server_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -670,7 +824,7 @@ func (x *Server_Kafka) String() string {
 func (*Server_Kafka) ProtoMessage() {}
 
 func (x *Server_Kafka) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[5]
+	mi := &file_v1_server_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -683,7 +837,7 @@ func (x *Server_Kafka) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Kafka.ProtoReflect.Descriptor instead.
 func (*Server_Kafka) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 4}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 6}
 }
 
 func (x *Server_Kafka) GetEndpoints() []string {
@@ -844,7 +998,7 @@ type Server_RabbitMQ struct {
 
 func (x *Server_RabbitMQ) Reset() {
 	*x = Server_RabbitMQ{}
-	mi := &file_v1_server_proto_msgTypes[6]
+	mi := &file_v1_server_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -856,7 +1010,7 @@ func (x *Server_RabbitMQ) String() string {
 func (*Server_RabbitMQ) ProtoMessage() {}
 
 func (x *Server_RabbitMQ) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[6]
+	mi := &file_v1_server_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -869,7 +1023,7 @@ func (x *Server_RabbitMQ) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_RabbitMQ.ProtoReflect.Descriptor instead.
 func (*Server_RabbitMQ) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 5}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 7}
 }
 
 func (x *Server_RabbitMQ) GetEndpoints() []string {
@@ -905,7 +1059,7 @@ type Server_ActiveMQ struct {
 
 func (x *Server_ActiveMQ) Reset() {
 	*x = Server_ActiveMQ{}
-	mi := &file_v1_server_proto_msgTypes[7]
+	mi := &file_v1_server_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -917,7 +1071,7 @@ func (x *Server_ActiveMQ) String() string {
 func (*Server_ActiveMQ) ProtoMessage() {}
 
 func (x *Server_ActiveMQ) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[7]
+	mi := &file_v1_server_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -930,7 +1084,7 @@ func (x *Server_ActiveMQ) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_ActiveMQ.ProtoReflect.Descriptor instead.
 func (*Server_ActiveMQ) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 6}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 8}
 }
 
 func (x *Server_ActiveMQ) GetEndpoint() string {
@@ -966,7 +1120,7 @@ type Server_NATS struct {
 
 func (x *Server_NATS) Reset() {
 	*x = Server_NATS{}
-	mi := &file_v1_server_proto_msgTypes[8]
+	mi := &file_v1_server_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -978,7 +1132,7 @@ func (x *Server_NATS) String() string {
 func (*Server_NATS) ProtoMessage() {}
 
 func (x *Server_NATS) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[8]
+	mi := &file_v1_server_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -991,7 +1145,7 @@ func (x *Server_NATS) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_NATS.ProtoReflect.Descriptor instead.
 func (*Server_NATS) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 7}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 9}
 }
 
 func (x *Server_NATS) GetEndpoint() string {
@@ -1027,7 +1181,7 @@ type Server_NSQ struct {
 
 func (x *Server_NSQ) Reset() {
 	*x = Server_NSQ{}
-	mi := &file_v1_server_proto_msgTypes[9]
+	mi := &file_v1_server_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1039,7 +1193,7 @@ func (x *Server_NSQ) String() string {
 func (*Server_NSQ) ProtoMessage() {}
 
 func (x *Server_NSQ) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[9]
+	mi := &file_v1_server_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1052,7 +1206,7 @@ func (x *Server_NSQ) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_NSQ.ProtoReflect.Descriptor instead.
 func (*Server_NSQ) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 8}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 10}
 }
 
 func (x *Server_NSQ) GetEndpoint() string {
@@ -1088,7 +1242,7 @@ type Server_Pulsar struct {
 
 func (x *Server_Pulsar) Reset() {
 	*x = Server_Pulsar{}
-	mi := &file_v1_server_proto_msgTypes[10]
+	mi := &file_v1_server_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1100,7 +1254,7 @@ func (x *Server_Pulsar) String() string {
 func (*Server_Pulsar) ProtoMessage() {}
 
 func (x *Server_Pulsar) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[10]
+	mi := &file_v1_server_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1113,7 +1267,7 @@ func (x *Server_Pulsar) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Pulsar.ProtoReflect.Descriptor instead.
 func (*Server_Pulsar) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 9}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 11}
 }
 
 func (x *Server_Pulsar) GetEndpoint() string {
@@ -1149,7 +1303,7 @@ type Server_Redis struct {
 
 func (x *Server_Redis) Reset() {
 	*x = Server_Redis{}
-	mi := &file_v1_server_proto_msgTypes[11]
+	mi := &file_v1_server_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1161,7 +1315,7 @@ func (x *Server_Redis) String() string {
 func (*Server_Redis) ProtoMessage() {}
 
 func (x *Server_Redis) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[11]
+	mi := &file_v1_server_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1174,7 +1328,7 @@ func (x *Server_Redis) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Redis.ProtoReflect.Descriptor instead.
 func (*Server_Redis) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 10}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 12}
 }
 
 func (x *Server_Redis) GetEndpoint() string {
@@ -1219,7 +1373,7 @@ type Server_RocketMQ struct {
 
 func (x *Server_RocketMQ) Reset() {
 	*x = Server_RocketMQ{}
-	mi := &file_v1_server_proto_msgTypes[12]
+	mi := &file_v1_server_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1231,7 +1385,7 @@ func (x *Server_RocketMQ) String() string {
 func (*Server_RocketMQ) ProtoMessage() {}
 
 func (x *Server_RocketMQ) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[12]
+	mi := &file_v1_server_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1244,7 +1398,7 @@ func (x *Server_RocketMQ) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_RocketMQ.ProtoReflect.Descriptor instead.
 func (*Server_RocketMQ) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 11}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 13}
 }
 
 func (x *Server_RocketMQ) GetVersion() string {
@@ -1366,7 +1520,7 @@ type Server_Asynq struct {
 
 func (x *Server_Asynq) Reset() {
 	*x = Server_Asynq{}
-	mi := &file_v1_server_proto_msgTypes[13]
+	mi := &file_v1_server_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1378,7 +1532,7 @@ func (x *Server_Asynq) String() string {
 func (*Server_Asynq) ProtoMessage() {}
 
 func (x *Server_Asynq) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[13]
+	mi := &file_v1_server_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1391,7 +1545,7 @@ func (x *Server_Asynq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Asynq.ProtoReflect.Descriptor instead.
 func (*Server_Asynq) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 12}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 14}
 }
 
 func (x *Server_Asynq) GetRedisClientOpts() isServer_Asynq_RedisClientOpts {
@@ -1629,7 +1783,7 @@ type Server_Machinery struct {
 
 func (x *Server_Machinery) Reset() {
 	*x = Server_Machinery{}
-	mi := &file_v1_server_proto_msgTypes[14]
+	mi := &file_v1_server_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1641,7 +1795,7 @@ func (x *Server_Machinery) String() string {
 func (*Server_Machinery) ProtoMessage() {}
 
 func (x *Server_Machinery) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[14]
+	mi := &file_v1_server_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1654,7 +1808,7 @@ func (x *Server_Machinery) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Machinery.ProtoReflect.Descriptor instead.
 func (*Server_Machinery) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 13}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 15}
 }
 
 func (x *Server_Machinery) GetBrokerType() string {
@@ -1831,7 +1985,7 @@ type Server_SSE struct {
 
 func (x *Server_SSE) Reset() {
 	*x = Server_SSE{}
-	mi := &file_v1_server_proto_msgTypes[15]
+	mi := &file_v1_server_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1843,7 +1997,7 @@ func (x *Server_SSE) String() string {
 func (*Server_SSE) ProtoMessage() {}
 
 func (x *Server_SSE) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[15]
+	mi := &file_v1_server_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1856,7 +2010,7 @@ func (x *Server_SSE) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_SSE.ProtoReflect.Descriptor instead.
 func (*Server_SSE) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 14}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 16}
 }
 
 func (x *Server_SSE) GetNetwork() string {
@@ -1950,7 +2104,7 @@ type Server_SocketIO struct {
 
 func (x *Server_SocketIO) Reset() {
 	*x = Server_SocketIO{}
-	mi := &file_v1_server_proto_msgTypes[16]
+	mi := &file_v1_server_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1962,7 +2116,7 @@ func (x *Server_SocketIO) String() string {
 func (*Server_SocketIO) ProtoMessage() {}
 
 func (x *Server_SocketIO) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[16]
+	mi := &file_v1_server_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1975,7 +2129,7 @@ func (x *Server_SocketIO) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_SocketIO.ProtoReflect.Descriptor instead.
 func (*Server_SocketIO) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 15}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 17}
 }
 
 func (x *Server_SocketIO) GetNetwork() string {
@@ -2030,7 +2184,7 @@ type Server_SignalR struct {
 
 func (x *Server_SignalR) Reset() {
 	*x = Server_SignalR{}
-	mi := &file_v1_server_proto_msgTypes[17]
+	mi := &file_v1_server_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2042,7 +2196,7 @@ func (x *Server_SignalR) String() string {
 func (*Server_SignalR) ProtoMessage() {}
 
 func (x *Server_SignalR) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[17]
+	mi := &file_v1_server_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2055,7 +2209,7 @@ func (x *Server_SignalR) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_SignalR.ProtoReflect.Descriptor instead.
 func (*Server_SignalR) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 16}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 18}
 }
 
 func (x *Server_SignalR) GetNetwork() string {
@@ -2135,7 +2289,7 @@ type Server_MCP struct {
 
 func (x *Server_MCP) Reset() {
 	*x = Server_MCP{}
-	mi := &file_v1_server_proto_msgTypes[18]
+	mi := &file_v1_server_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2147,7 +2301,7 @@ func (x *Server_MCP) String() string {
 func (*Server_MCP) ProtoMessage() {}
 
 func (x *Server_MCP) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[18]
+	mi := &file_v1_server_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2160,7 +2314,7 @@ func (x *Server_MCP) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_MCP.ProtoReflect.Descriptor instead.
 func (*Server_MCP) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 17}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 19}
 }
 
 func (x *Server_MCP) GetServerName() string {
@@ -2263,7 +2417,7 @@ type Server_GraphQL struct {
 
 func (x *Server_GraphQL) Reset() {
 	*x = Server_GraphQL{}
-	mi := &file_v1_server_proto_msgTypes[19]
+	mi := &file_v1_server_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2275,7 +2429,7 @@ func (x *Server_GraphQL) String() string {
 func (*Server_GraphQL) ProtoMessage() {}
 
 func (x *Server_GraphQL) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[19]
+	mi := &file_v1_server_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2288,7 +2442,7 @@ func (x *Server_GraphQL) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_GraphQL.ProtoReflect.Descriptor instead.
 func (*Server_GraphQL) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 18}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 20}
 }
 
 func (x *Server_GraphQL) GetNetwork() string {
@@ -2356,7 +2510,7 @@ type Server_Thrift struct {
 
 func (x *Server_Thrift) Reset() {
 	*x = Server_Thrift{}
-	mi := &file_v1_server_proto_msgTypes[20]
+	mi := &file_v1_server_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2368,7 +2522,7 @@ func (x *Server_Thrift) String() string {
 func (*Server_Thrift) ProtoMessage() {}
 
 func (x *Server_Thrift) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[20]
+	mi := &file_v1_server_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2381,7 +2535,7 @@ func (x *Server_Thrift) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Thrift.ProtoReflect.Descriptor instead.
 func (*Server_Thrift) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 19}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 21}
 }
 
 func (x *Server_Thrift) GetNetwork() string {
@@ -2445,7 +2599,7 @@ type Server_KeepAlive struct {
 
 func (x *Server_KeepAlive) Reset() {
 	*x = Server_KeepAlive{}
-	mi := &file_v1_server_proto_msgTypes[21]
+	mi := &file_v1_server_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2457,7 +2611,7 @@ func (x *Server_KeepAlive) String() string {
 func (*Server_KeepAlive) ProtoMessage() {}
 
 func (x *Server_KeepAlive) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[21]
+	mi := &file_v1_server_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2470,7 +2624,7 @@ func (x *Server_KeepAlive) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_KeepAlive.ProtoReflect.Descriptor instead.
 func (*Server_KeepAlive) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 20}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 22}
 }
 
 func (x *Server_KeepAlive) GetNetwork() string {
@@ -2505,7 +2659,7 @@ type Server_REST_CORS struct {
 
 func (x *Server_REST_CORS) Reset() {
 	*x = Server_REST_CORS{}
-	mi := &file_v1_server_proto_msgTypes[22]
+	mi := &file_v1_server_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2517,7 +2671,7 @@ func (x *Server_REST_CORS) String() string {
 func (*Server_REST_CORS) ProtoMessage() {}
 
 func (x *Server_REST_CORS) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[22]
+	mi := &file_v1_server_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2564,7 +2718,7 @@ type Server_Kafka_PlainMechanism struct {
 
 func (x *Server_Kafka_PlainMechanism) Reset() {
 	*x = Server_Kafka_PlainMechanism{}
-	mi := &file_v1_server_proto_msgTypes[23]
+	mi := &file_v1_server_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2576,7 +2730,7 @@ func (x *Server_Kafka_PlainMechanism) String() string {
 func (*Server_Kafka_PlainMechanism) ProtoMessage() {}
 
 func (x *Server_Kafka_PlainMechanism) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[23]
+	mi := &file_v1_server_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2589,7 +2743,7 @@ func (x *Server_Kafka_PlainMechanism) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Kafka_PlainMechanism.ProtoReflect.Descriptor instead.
 func (*Server_Kafka_PlainMechanism) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 4, 0}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 6, 0}
 }
 
 func (x *Server_Kafka_PlainMechanism) GetUsername() string {
@@ -2617,7 +2771,7 @@ type Server_Kafka_ScramMechanism struct {
 
 func (x *Server_Kafka_ScramMechanism) Reset() {
 	*x = Server_Kafka_ScramMechanism{}
-	mi := &file_v1_server_proto_msgTypes[24]
+	mi := &file_v1_server_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2629,7 +2783,7 @@ func (x *Server_Kafka_ScramMechanism) String() string {
 func (*Server_Kafka_ScramMechanism) ProtoMessage() {}
 
 func (x *Server_Kafka_ScramMechanism) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[24]
+	mi := &file_v1_server_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2642,7 +2796,7 @@ func (x *Server_Kafka_ScramMechanism) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Kafka_ScramMechanism.ProtoReflect.Descriptor instead.
 func (*Server_Kafka_ScramMechanism) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 4, 1}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 6, 1}
 }
 
 func (x *Server_Kafka_ScramMechanism) GetAlgorithm() string {
@@ -2680,7 +2834,7 @@ type Server_Asynq_RedisClientOpt struct {
 
 func (x *Server_Asynq_RedisClientOpt) Reset() {
 	*x = Server_Asynq_RedisClientOpt{}
-	mi := &file_v1_server_proto_msgTypes[25]
+	mi := &file_v1_server_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2692,7 +2846,7 @@ func (x *Server_Asynq_RedisClientOpt) String() string {
 func (*Server_Asynq_RedisClientOpt) ProtoMessage() {}
 
 func (x *Server_Asynq_RedisClientOpt) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[25]
+	mi := &file_v1_server_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2705,7 +2859,7 @@ func (x *Server_Asynq_RedisClientOpt) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Asynq_RedisClientOpt.ProtoReflect.Descriptor instead.
 func (*Server_Asynq_RedisClientOpt) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 12, 0}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 14, 0}
 }
 
 func (x *Server_Asynq_RedisClientOpt) GetNetwork() string {
@@ -2762,7 +2916,7 @@ type Server_Asynq_RedisClusterClientOpt struct {
 
 func (x *Server_Asynq_RedisClusterClientOpt) Reset() {
 	*x = Server_Asynq_RedisClusterClientOpt{}
-	mi := &file_v1_server_proto_msgTypes[26]
+	mi := &file_v1_server_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2774,7 +2928,7 @@ func (x *Server_Asynq_RedisClusterClientOpt) String() string {
 func (*Server_Asynq_RedisClusterClientOpt) ProtoMessage() {}
 
 func (x *Server_Asynq_RedisClusterClientOpt) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[26]
+	mi := &file_v1_server_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2787,7 +2941,7 @@ func (x *Server_Asynq_RedisClusterClientOpt) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use Server_Asynq_RedisClusterClientOpt.ProtoReflect.Descriptor instead.
 func (*Server_Asynq_RedisClusterClientOpt) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 12, 1}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 14, 1}
 }
 
 func (x *Server_Asynq_RedisClusterClientOpt) GetAddrs() []string {
@@ -2833,7 +2987,7 @@ type Server_Asynq_RedisFailoverClientOpt struct {
 
 func (x *Server_Asynq_RedisFailoverClientOpt) Reset() {
 	*x = Server_Asynq_RedisFailoverClientOpt{}
-	mi := &file_v1_server_proto_msgTypes[27]
+	mi := &file_v1_server_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2845,7 +2999,7 @@ func (x *Server_Asynq_RedisFailoverClientOpt) String() string {
 func (*Server_Asynq_RedisFailoverClientOpt) ProtoMessage() {}
 
 func (x *Server_Asynq_RedisFailoverClientOpt) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[27]
+	mi := &file_v1_server_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2858,7 +3012,7 @@ func (x *Server_Asynq_RedisFailoverClientOpt) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use Server_Asynq_RedisFailoverClientOpt.ProtoReflect.Descriptor instead.
 func (*Server_Asynq_RedisFailoverClientOpt) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 12, 2}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 14, 2}
 }
 
 func (x *Server_Asynq_RedisFailoverClientOpt) GetMasterName() string {
@@ -2929,7 +3083,7 @@ type Server_Machinery_Redis struct {
 
 func (x *Server_Machinery_Redis) Reset() {
 	*x = Server_Machinery_Redis{}
-	mi := &file_v1_server_proto_msgTypes[29]
+	mi := &file_v1_server_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2941,7 +3095,7 @@ func (x *Server_Machinery_Redis) String() string {
 func (*Server_Machinery_Redis) ProtoMessage() {}
 
 func (x *Server_Machinery_Redis) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[29]
+	mi := &file_v1_server_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2954,7 +3108,7 @@ func (x *Server_Machinery_Redis) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Machinery_Redis.ProtoReflect.Descriptor instead.
 func (*Server_Machinery_Redis) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 13, 0}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 15, 0}
 }
 
 func (x *Server_Machinery_Redis) GetMaxIdle() int32 {
@@ -3050,7 +3204,7 @@ type Server_Machinery_AMQP struct {
 
 func (x *Server_Machinery_AMQP) Reset() {
 	*x = Server_Machinery_AMQP{}
-	mi := &file_v1_server_proto_msgTypes[30]
+	mi := &file_v1_server_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3062,7 +3216,7 @@ func (x *Server_Machinery_AMQP) String() string {
 func (*Server_Machinery_AMQP) ProtoMessage() {}
 
 func (x *Server_Machinery_AMQP) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[30]
+	mi := &file_v1_server_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3075,7 +3229,7 @@ func (x *Server_Machinery_AMQP) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Machinery_AMQP.ProtoReflect.Descriptor instead.
 func (*Server_Machinery_AMQP) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 13, 1}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 15, 1}
 }
 
 func (x *Server_Machinery_AMQP) GetExchange() string {
@@ -3144,7 +3298,7 @@ type Server_Machinery_SQS struct {
 
 func (x *Server_Machinery_SQS) Reset() {
 	*x = Server_Machinery_SQS{}
-	mi := &file_v1_server_proto_msgTypes[31]
+	mi := &file_v1_server_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3156,7 +3310,7 @@ func (x *Server_Machinery_SQS) String() string {
 func (*Server_Machinery_SQS) ProtoMessage() {}
 
 func (x *Server_Machinery_SQS) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[31]
+	mi := &file_v1_server_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3169,7 +3323,7 @@ func (x *Server_Machinery_SQS) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Machinery_SQS.ProtoReflect.Descriptor instead.
 func (*Server_Machinery_SQS) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 13, 2}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 15, 2}
 }
 
 func (x *Server_Machinery_SQS) GetReceiveWaitTimeSeconds() int32 {
@@ -3195,7 +3349,7 @@ type Server_Machinery_GCP struct {
 
 func (x *Server_Machinery_GCP) Reset() {
 	*x = Server_Machinery_GCP{}
-	mi := &file_v1_server_proto_msgTypes[32]
+	mi := &file_v1_server_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3207,7 +3361,7 @@ func (x *Server_Machinery_GCP) String() string {
 func (*Server_Machinery_GCP) ProtoMessage() {}
 
 func (x *Server_Machinery_GCP) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[32]
+	mi := &file_v1_server_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3220,7 +3374,7 @@ func (x *Server_Machinery_GCP) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Machinery_GCP.ProtoReflect.Descriptor instead.
 func (*Server_Machinery_GCP) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 13, 3}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 15, 3}
 }
 
 func (x *Server_Machinery_GCP) GetMaxExtension() *durationpb.Duration {
@@ -3239,7 +3393,7 @@ type Server_Machinery_MongoDB struct {
 
 func (x *Server_Machinery_MongoDB) Reset() {
 	*x = Server_Machinery_MongoDB{}
-	mi := &file_v1_server_proto_msgTypes[33]
+	mi := &file_v1_server_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3251,7 +3405,7 @@ func (x *Server_Machinery_MongoDB) String() string {
 func (*Server_Machinery_MongoDB) ProtoMessage() {}
 
 func (x *Server_Machinery_MongoDB) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[33]
+	mi := &file_v1_server_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3264,7 +3418,7 @@ func (x *Server_Machinery_MongoDB) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Machinery_MongoDB.ProtoReflect.Descriptor instead.
 func (*Server_Machinery_MongoDB) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 13, 4}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 15, 4}
 }
 
 func (x *Server_Machinery_MongoDB) GetDatabase() string {
@@ -3284,7 +3438,7 @@ type Server_Machinery_DynamoDB struct {
 
 func (x *Server_Machinery_DynamoDB) Reset() {
 	*x = Server_Machinery_DynamoDB{}
-	mi := &file_v1_server_proto_msgTypes[34]
+	mi := &file_v1_server_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3296,7 +3450,7 @@ func (x *Server_Machinery_DynamoDB) String() string {
 func (*Server_Machinery_DynamoDB) ProtoMessage() {}
 
 func (x *Server_Machinery_DynamoDB) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_server_proto_msgTypes[34]
+	mi := &file_v1_server_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3309,7 +3463,7 @@ func (x *Server_Machinery_DynamoDB) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Server_Machinery_DynamoDB.ProtoReflect.Descriptor instead.
 func (*Server_Machinery_DynamoDB) Descriptor() ([]byte, []int) {
-	return file_v1_server_proto_rawDescGZIP(), []int{0, 13, 5}
+	return file_v1_server_proto_rawDescGZIP(), []int{0, 15, 5}
 }
 
 func (x *Server_Machinery_DynamoDB) GetTaskStatesTable() string {
@@ -3330,7 +3484,7 @@ var File_v1_server_proto protoreflect.FileDescriptor
 
 const file_v1_server_proto_rawDesc = "" +
 	"\n" +
-	"\x0fv1/server.proto\x12\x04conf\x1a\x1egoogle/protobuf/duration.proto\x1a\x13v1/middleware.proto\x1a\fv1/tls.proto\"\x80V\n" +
+	"\x0fv1/server.proto\x12\x04conf\x1a\x1egoogle/protobuf/duration.proto\x1a\x13v1/middleware.proto\x1a\fv1/tls.proto\x1a\x0ev1/proxy.proto\"\xc7X\n" +
 	"\x06Server\x12*\n" +
 	"\x04rest\x18\x01 \x01(\v2\x11.conf.Server.RESTH\x00R\x04rest\x88\x01\x01\x12*\n" +
 	"\x04grpc\x18\x02 \x01(\v2\x11.conf.Server.GRPCH\x01R\x04grpc\x88\x01\x01\x123\n" +
@@ -3378,7 +3532,19 @@ const file_v1_server_proto_rawDesc = "" +
 	"\n" +
 	"middleware\x18\x04 \x01(\v2\x10.conf.MiddlewareR\n" +
 	"middleware\x12\x1b\n" +
-	"\x03tls\x18\x05 \x01(\v2\t.conf.TLSR\x03tls\x1a\xb5\x01\n" +
+	"\x03tls\x18\x05 \x01(\v2\t.conf.TLSR\x03tls\x1a\x99\x01\n" +
+	"\x03Gin\x12\x12\n" +
+	"\x04Mode\x18\x01 \x01(\tR\x04Mode\x12\x18\n" +
+	"\anetwork\x18\x02 \x01(\tR\anetwork\x12\x12\n" +
+	"\x04addr\x18\x03 \x01(\tR\x04addr\x123\n" +
+	"\atimeout\x18\x04 \x01(\v2\x19.google.protobuf.DurationR\atimeout\x12\x1b\n" +
+	"\x03tls\x18\x05 \x01(\v2\t.conf.TLSR\x03tls\x1a\xa8\x01\n" +
+	"\x03Vue\x12\x18\n" +
+	"\anetwork\x18\x01 \x01(\tR\anetwork\x12\x12\n" +
+	"\x04addr\x18\x02 \x01(\tR\x04addr\x123\n" +
+	"\atimeout\x18\x03 \x01(\v2\x19.google.protobuf.DurationR\atimeout\x12\x1b\n" +
+	"\x03tls\x18\x04 \x01(\v2\t.conf.TLSR\x03tls\x12!\n" +
+	"\x05proxy\x18\a \x03(\v2\v.conf.ProxyR\x05proxy\x1a\xb5\x01\n" +
 	"\tWebsocket\x12\x18\n" +
 	"\anetwork\x18\x01 \x01(\tR\anetwork\x12\x12\n" +
 	"\x04addr\x18\x02 \x01(\tR\x04addr\x12\x12\n" +
@@ -3733,137 +3899,145 @@ func file_v1_server_proto_rawDescGZIP() []byte {
 }
 
 var file_v1_server_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_v1_server_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
+var file_v1_server_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
 var file_v1_server_proto_goTypes = []any{
 	(Server_Kafka_ScramMechanism_Algorithm)(0), // 0: conf.Server.Kafka.ScramMechanism.Algorithm
 	(*Server)(nil),                              // 1: conf.Server
 	(*Server_REST)(nil),                         // 2: conf.Server.REST
 	(*Server_GRPC)(nil),                         // 3: conf.Server.GRPC
-	(*Server_Websocket)(nil),                    // 4: conf.Server.Websocket
-	(*Server_Mqtt)(nil),                         // 5: conf.Server.Mqtt
-	(*Server_Kafka)(nil),                        // 6: conf.Server.Kafka
-	(*Server_RabbitMQ)(nil),                     // 7: conf.Server.RabbitMQ
-	(*Server_ActiveMQ)(nil),                     // 8: conf.Server.ActiveMQ
-	(*Server_NATS)(nil),                         // 9: conf.Server.NATS
-	(*Server_NSQ)(nil),                          // 10: conf.Server.NSQ
-	(*Server_Pulsar)(nil),                       // 11: conf.Server.Pulsar
-	(*Server_Redis)(nil),                        // 12: conf.Server.Redis
-	(*Server_RocketMQ)(nil),                     // 13: conf.Server.RocketMQ
-	(*Server_Asynq)(nil),                        // 14: conf.Server.Asynq
-	(*Server_Machinery)(nil),                    // 15: conf.Server.Machinery
-	(*Server_SSE)(nil),                          // 16: conf.Server.SSE
-	(*Server_SocketIO)(nil),                     // 17: conf.Server.SocketIO
-	(*Server_SignalR)(nil),                      // 18: conf.Server.SignalR
-	(*Server_MCP)(nil),                          // 19: conf.Server.MCP
-	(*Server_GraphQL)(nil),                      // 20: conf.Server.GraphQL
-	(*Server_Thrift)(nil),                       // 21: conf.Server.Thrift
-	(*Server_KeepAlive)(nil),                    // 22: conf.Server.KeepAlive
-	(*Server_REST_CORS)(nil),                    // 23: conf.Server.REST.CORS
-	(*Server_Kafka_PlainMechanism)(nil),         // 24: conf.Server.Kafka.PlainMechanism
-	(*Server_Kafka_ScramMechanism)(nil),         // 25: conf.Server.Kafka.ScramMechanism
-	(*Server_Asynq_RedisClientOpt)(nil),         // 26: conf.Server.Asynq.RedisClientOpt
-	(*Server_Asynq_RedisClusterClientOpt)(nil),  // 27: conf.Server.Asynq.RedisClusterClientOpt
-	(*Server_Asynq_RedisFailoverClientOpt)(nil), // 28: conf.Server.Asynq.RedisFailoverClientOpt
-	nil,                               // 29: conf.Server.Asynq.QueuesEntry
-	(*Server_Machinery_Redis)(nil),    // 30: conf.Server.Machinery.Redis
-	(*Server_Machinery_AMQP)(nil),     // 31: conf.Server.Machinery.AMQP
-	(*Server_Machinery_SQS)(nil),      // 32: conf.Server.Machinery.SQS
-	(*Server_Machinery_GCP)(nil),      // 33: conf.Server.Machinery.GCP
-	(*Server_Machinery_MongoDB)(nil),  // 34: conf.Server.Machinery.MongoDB
-	(*Server_Machinery_DynamoDB)(nil), // 35: conf.Server.Machinery.DynamoDB
-	nil,                               // 36: conf.Server.Machinery.AMQP.QueueDeclareArgsEntry
-	nil,                               // 37: conf.Server.Machinery.AMQP.QueueBindingArgsEntry
-	(*durationpb.Duration)(nil),       // 38: google.protobuf.Duration
-	(*Middleware)(nil),                // 39: conf.Middleware
-	(*TLS)(nil),                       // 40: conf.TLS
+	(*Server_Gin)(nil),                          // 4: conf.Server.Gin
+	(*Server_Vue)(nil),                          // 5: conf.Server.Vue
+	(*Server_Websocket)(nil),                    // 6: conf.Server.Websocket
+	(*Server_Mqtt)(nil),                         // 7: conf.Server.Mqtt
+	(*Server_Kafka)(nil),                        // 8: conf.Server.Kafka
+	(*Server_RabbitMQ)(nil),                     // 9: conf.Server.RabbitMQ
+	(*Server_ActiveMQ)(nil),                     // 10: conf.Server.ActiveMQ
+	(*Server_NATS)(nil),                         // 11: conf.Server.NATS
+	(*Server_NSQ)(nil),                          // 12: conf.Server.NSQ
+	(*Server_Pulsar)(nil),                       // 13: conf.Server.Pulsar
+	(*Server_Redis)(nil),                        // 14: conf.Server.Redis
+	(*Server_RocketMQ)(nil),                     // 15: conf.Server.RocketMQ
+	(*Server_Asynq)(nil),                        // 16: conf.Server.Asynq
+	(*Server_Machinery)(nil),                    // 17: conf.Server.Machinery
+	(*Server_SSE)(nil),                          // 18: conf.Server.SSE
+	(*Server_SocketIO)(nil),                     // 19: conf.Server.SocketIO
+	(*Server_SignalR)(nil),                      // 20: conf.Server.SignalR
+	(*Server_MCP)(nil),                          // 21: conf.Server.MCP
+	(*Server_GraphQL)(nil),                      // 22: conf.Server.GraphQL
+	(*Server_Thrift)(nil),                       // 23: conf.Server.Thrift
+	(*Server_KeepAlive)(nil),                    // 24: conf.Server.KeepAlive
+	(*Server_REST_CORS)(nil),                    // 25: conf.Server.REST.CORS
+	(*Server_Kafka_PlainMechanism)(nil),         // 26: conf.Server.Kafka.PlainMechanism
+	(*Server_Kafka_ScramMechanism)(nil),         // 27: conf.Server.Kafka.ScramMechanism
+	(*Server_Asynq_RedisClientOpt)(nil),         // 28: conf.Server.Asynq.RedisClientOpt
+	(*Server_Asynq_RedisClusterClientOpt)(nil),  // 29: conf.Server.Asynq.RedisClusterClientOpt
+	(*Server_Asynq_RedisFailoverClientOpt)(nil), // 30: conf.Server.Asynq.RedisFailoverClientOpt
+	nil,                               // 31: conf.Server.Asynq.QueuesEntry
+	(*Server_Machinery_Redis)(nil),    // 32: conf.Server.Machinery.Redis
+	(*Server_Machinery_AMQP)(nil),     // 33: conf.Server.Machinery.AMQP
+	(*Server_Machinery_SQS)(nil),      // 34: conf.Server.Machinery.SQS
+	(*Server_Machinery_GCP)(nil),      // 35: conf.Server.Machinery.GCP
+	(*Server_Machinery_MongoDB)(nil),  // 36: conf.Server.Machinery.MongoDB
+	(*Server_Machinery_DynamoDB)(nil), // 37: conf.Server.Machinery.DynamoDB
+	nil,                               // 38: conf.Server.Machinery.AMQP.QueueDeclareArgsEntry
+	nil,                               // 39: conf.Server.Machinery.AMQP.QueueBindingArgsEntry
+	(*durationpb.Duration)(nil),       // 40: google.protobuf.Duration
+	(*Middleware)(nil),                // 41: conf.Middleware
+	(*TLS)(nil),                       // 42: conf.TLS
+	(*Proxy)(nil),                     // 43: conf.Proxy
 }
 var file_v1_server_proto_depIdxs = []int32{
 	2,  // 0: conf.Server.rest:type_name -> conf.Server.REST
 	3,  // 1: conf.Server.grpc:type_name -> conf.Server.GRPC
-	20, // 2: conf.Server.graphql:type_name -> conf.Server.GraphQL
-	21, // 3: conf.Server.thrift:type_name -> conf.Server.Thrift
-	22, // 4: conf.Server.keepalive:type_name -> conf.Server.KeepAlive
-	5,  // 5: conf.Server.mqtt:type_name -> conf.Server.Mqtt
-	6,  // 6: conf.Server.kafka:type_name -> conf.Server.Kafka
-	7,  // 7: conf.Server.rabbitmq:type_name -> conf.Server.RabbitMQ
-	8,  // 8: conf.Server.activemq:type_name -> conf.Server.ActiveMQ
-	9,  // 9: conf.Server.nats:type_name -> conf.Server.NATS
-	10, // 10: conf.Server.nsq:type_name -> conf.Server.NSQ
-	11, // 11: conf.Server.pulsar:type_name -> conf.Server.Pulsar
-	12, // 12: conf.Server.redis:type_name -> conf.Server.Redis
-	13, // 13: conf.Server.rocketmq:type_name -> conf.Server.RocketMQ
-	4,  // 14: conf.Server.websocket:type_name -> conf.Server.Websocket
-	16, // 15: conf.Server.sse:type_name -> conf.Server.SSE
-	17, // 16: conf.Server.socketio:type_name -> conf.Server.SocketIO
-	18, // 17: conf.Server.signalr:type_name -> conf.Server.SignalR
-	19, // 18: conf.Server.mcp:type_name -> conf.Server.MCP
-	14, // 19: conf.Server.asynq:type_name -> conf.Server.Asynq
-	15, // 20: conf.Server.machinery:type_name -> conf.Server.Machinery
-	38, // 21: conf.Server.REST.timeout:type_name -> google.protobuf.Duration
-	23, // 22: conf.Server.REST.cors:type_name -> conf.Server.REST.CORS
-	39, // 23: conf.Server.REST.middleware:type_name -> conf.Middleware
-	40, // 24: conf.Server.REST.tls:type_name -> conf.TLS
-	38, // 25: conf.Server.GRPC.timeout:type_name -> google.protobuf.Duration
-	39, // 26: conf.Server.GRPC.middleware:type_name -> conf.Middleware
-	40, // 27: conf.Server.GRPC.tls:type_name -> conf.TLS
-	38, // 28: conf.Server.Websocket.timeout:type_name -> google.protobuf.Duration
-	40, // 29: conf.Server.Websocket.tls:type_name -> conf.TLS
-	40, // 30: conf.Server.Mqtt.tls:type_name -> conf.TLS
-	40, // 31: conf.Server.Kafka.tls:type_name -> conf.TLS
-	38, // 32: conf.Server.Kafka.batch_timeout:type_name -> google.protobuf.Duration
-	38, // 33: conf.Server.Kafka.read_timeout:type_name -> google.protobuf.Duration
-	38, // 34: conf.Server.Kafka.write_timeout:type_name -> google.protobuf.Duration
-	24, // 35: conf.Server.Kafka.plain:type_name -> conf.Server.Kafka.PlainMechanism
-	25, // 36: conf.Server.Kafka.scram:type_name -> conf.Server.Kafka.ScramMechanism
-	40, // 37: conf.Server.RabbitMQ.tls:type_name -> conf.TLS
-	40, // 38: conf.Server.ActiveMQ.tls:type_name -> conf.TLS
-	40, // 39: conf.Server.NATS.tls:type_name -> conf.TLS
-	40, // 40: conf.Server.NSQ.tls:type_name -> conf.TLS
-	40, // 41: conf.Server.Pulsar.tls:type_name -> conf.TLS
-	40, // 42: conf.Server.Redis.tls:type_name -> conf.TLS
-	40, // 43: conf.Server.RocketMQ.tls:type_name -> conf.TLS
-	26, // 44: conf.Server.Asynq.redis_opt:type_name -> conf.Server.Asynq.RedisClientOpt
-	27, // 45: conf.Server.Asynq.redis_cluster_opt:type_name -> conf.Server.Asynq.RedisClusterClientOpt
-	28, // 46: conf.Server.Asynq.redis_failover_opt:type_name -> conf.Server.Asynq.RedisFailoverClientOpt
-	40, // 47: conf.Server.Asynq.tls:type_name -> conf.TLS
-	38, // 48: conf.Server.Asynq.dial_timeout:type_name -> google.protobuf.Duration
-	38, // 49: conf.Server.Asynq.read_timeout:type_name -> google.protobuf.Duration
-	38, // 50: conf.Server.Asynq.write_timeout:type_name -> google.protobuf.Duration
-	29, // 51: conf.Server.Asynq.queues:type_name -> conf.Server.Asynq.QueuesEntry
-	38, // 52: conf.Server.Asynq.shutdown_timeout:type_name -> google.protobuf.Duration
-	38, // 53: conf.Server.Asynq.task_check_interval:type_name -> google.protobuf.Duration
-	38, // 54: conf.Server.Asynq.health_check_interval:type_name -> google.protobuf.Duration
-	38, // 55: conf.Server.Asynq.delayed_task_check_interval:type_name -> google.protobuf.Duration
-	38, // 56: conf.Server.Asynq.group_grace_period:type_name -> google.protobuf.Duration
-	38, // 57: conf.Server.Asynq.group_max_delay:type_name -> google.protobuf.Duration
-	38, // 58: conf.Server.Asynq.janitor_interval:type_name -> google.protobuf.Duration
-	40, // 59: conf.Server.Machinery.tls:type_name -> conf.TLS
-	30, // 60: conf.Server.Machinery.redis:type_name -> conf.Server.Machinery.Redis
-	31, // 61: conf.Server.Machinery.amqp:type_name -> conf.Server.Machinery.AMQP
-	32, // 62: conf.Server.Machinery.sqs:type_name -> conf.Server.Machinery.SQS
-	33, // 63: conf.Server.Machinery.gcp:type_name -> conf.Server.Machinery.GCP
-	34, // 64: conf.Server.Machinery.mongodb:type_name -> conf.Server.Machinery.MongoDB
-	35, // 65: conf.Server.Machinery.dynamodb:type_name -> conf.Server.Machinery.DynamoDB
-	40, // 66: conf.Server.SSE.tls:type_name -> conf.TLS
-	38, // 67: conf.Server.SSE.timeout:type_name -> google.protobuf.Duration
-	38, // 68: conf.Server.SSE.event_ttl:type_name -> google.protobuf.Duration
-	40, // 69: conf.Server.SocketIO.tls:type_name -> conf.TLS
-	40, // 70: conf.Server.SignalR.tls:type_name -> conf.TLS
-	38, // 71: conf.Server.SignalR.keep_alive_interval:type_name -> google.protobuf.Duration
-	38, // 72: conf.Server.SignalR.chan_receive_timeout:type_name -> google.protobuf.Duration
-	40, // 73: conf.Server.MCP.tls:type_name -> conf.TLS
-	38, // 74: conf.Server.GraphQL.timeout:type_name -> google.protobuf.Duration
-	40, // 75: conf.Server.GraphQL.tls:type_name -> conf.TLS
-	40, // 76: conf.Server.Thrift.tls:type_name -> conf.TLS
-	40, // 77: conf.Server.KeepAlive.tls:type_name -> conf.TLS
-	36, // 78: conf.Server.Machinery.AMQP.queue_declare_args:type_name -> conf.Server.Machinery.AMQP.QueueDeclareArgsEntry
-	37, // 79: conf.Server.Machinery.AMQP.queue_binding_args:type_name -> conf.Server.Machinery.AMQP.QueueBindingArgsEntry
-	38, // 80: conf.Server.Machinery.GCP.max_extension:type_name -> google.protobuf.Duration
-	81, // [81:81] is the sub-list for method output_type
-	81, // [81:81] is the sub-list for method input_type
-	81, // [81:81] is the sub-list for extension type_name
-	81, // [81:81] is the sub-list for extension extendee
-	0,  // [0:81] is the sub-list for field type_name
+	22, // 2: conf.Server.graphql:type_name -> conf.Server.GraphQL
+	23, // 3: conf.Server.thrift:type_name -> conf.Server.Thrift
+	24, // 4: conf.Server.keepalive:type_name -> conf.Server.KeepAlive
+	7,  // 5: conf.Server.mqtt:type_name -> conf.Server.Mqtt
+	8,  // 6: conf.Server.kafka:type_name -> conf.Server.Kafka
+	9,  // 7: conf.Server.rabbitmq:type_name -> conf.Server.RabbitMQ
+	10, // 8: conf.Server.activemq:type_name -> conf.Server.ActiveMQ
+	11, // 9: conf.Server.nats:type_name -> conf.Server.NATS
+	12, // 10: conf.Server.nsq:type_name -> conf.Server.NSQ
+	13, // 11: conf.Server.pulsar:type_name -> conf.Server.Pulsar
+	14, // 12: conf.Server.redis:type_name -> conf.Server.Redis
+	15, // 13: conf.Server.rocketmq:type_name -> conf.Server.RocketMQ
+	6,  // 14: conf.Server.websocket:type_name -> conf.Server.Websocket
+	18, // 15: conf.Server.sse:type_name -> conf.Server.SSE
+	19, // 16: conf.Server.socketio:type_name -> conf.Server.SocketIO
+	20, // 17: conf.Server.signalr:type_name -> conf.Server.SignalR
+	21, // 18: conf.Server.mcp:type_name -> conf.Server.MCP
+	16, // 19: conf.Server.asynq:type_name -> conf.Server.Asynq
+	17, // 20: conf.Server.machinery:type_name -> conf.Server.Machinery
+	40, // 21: conf.Server.REST.timeout:type_name -> google.protobuf.Duration
+	25, // 22: conf.Server.REST.cors:type_name -> conf.Server.REST.CORS
+	41, // 23: conf.Server.REST.middleware:type_name -> conf.Middleware
+	42, // 24: conf.Server.REST.tls:type_name -> conf.TLS
+	40, // 25: conf.Server.GRPC.timeout:type_name -> google.protobuf.Duration
+	41, // 26: conf.Server.GRPC.middleware:type_name -> conf.Middleware
+	42, // 27: conf.Server.GRPC.tls:type_name -> conf.TLS
+	40, // 28: conf.Server.Gin.timeout:type_name -> google.protobuf.Duration
+	42, // 29: conf.Server.Gin.tls:type_name -> conf.TLS
+	40, // 30: conf.Server.Vue.timeout:type_name -> google.protobuf.Duration
+	42, // 31: conf.Server.Vue.tls:type_name -> conf.TLS
+	43, // 32: conf.Server.Vue.proxy:type_name -> conf.Proxy
+	40, // 33: conf.Server.Websocket.timeout:type_name -> google.protobuf.Duration
+	42, // 34: conf.Server.Websocket.tls:type_name -> conf.TLS
+	42, // 35: conf.Server.Mqtt.tls:type_name -> conf.TLS
+	42, // 36: conf.Server.Kafka.tls:type_name -> conf.TLS
+	40, // 37: conf.Server.Kafka.batch_timeout:type_name -> google.protobuf.Duration
+	40, // 38: conf.Server.Kafka.read_timeout:type_name -> google.protobuf.Duration
+	40, // 39: conf.Server.Kafka.write_timeout:type_name -> google.protobuf.Duration
+	26, // 40: conf.Server.Kafka.plain:type_name -> conf.Server.Kafka.PlainMechanism
+	27, // 41: conf.Server.Kafka.scram:type_name -> conf.Server.Kafka.ScramMechanism
+	42, // 42: conf.Server.RabbitMQ.tls:type_name -> conf.TLS
+	42, // 43: conf.Server.ActiveMQ.tls:type_name -> conf.TLS
+	42, // 44: conf.Server.NATS.tls:type_name -> conf.TLS
+	42, // 45: conf.Server.NSQ.tls:type_name -> conf.TLS
+	42, // 46: conf.Server.Pulsar.tls:type_name -> conf.TLS
+	42, // 47: conf.Server.Redis.tls:type_name -> conf.TLS
+	42, // 48: conf.Server.RocketMQ.tls:type_name -> conf.TLS
+	28, // 49: conf.Server.Asynq.redis_opt:type_name -> conf.Server.Asynq.RedisClientOpt
+	29, // 50: conf.Server.Asynq.redis_cluster_opt:type_name -> conf.Server.Asynq.RedisClusterClientOpt
+	30, // 51: conf.Server.Asynq.redis_failover_opt:type_name -> conf.Server.Asynq.RedisFailoverClientOpt
+	42, // 52: conf.Server.Asynq.tls:type_name -> conf.TLS
+	40, // 53: conf.Server.Asynq.dial_timeout:type_name -> google.protobuf.Duration
+	40, // 54: conf.Server.Asynq.read_timeout:type_name -> google.protobuf.Duration
+	40, // 55: conf.Server.Asynq.write_timeout:type_name -> google.protobuf.Duration
+	31, // 56: conf.Server.Asynq.queues:type_name -> conf.Server.Asynq.QueuesEntry
+	40, // 57: conf.Server.Asynq.shutdown_timeout:type_name -> google.protobuf.Duration
+	40, // 58: conf.Server.Asynq.task_check_interval:type_name -> google.protobuf.Duration
+	40, // 59: conf.Server.Asynq.health_check_interval:type_name -> google.protobuf.Duration
+	40, // 60: conf.Server.Asynq.delayed_task_check_interval:type_name -> google.protobuf.Duration
+	40, // 61: conf.Server.Asynq.group_grace_period:type_name -> google.protobuf.Duration
+	40, // 62: conf.Server.Asynq.group_max_delay:type_name -> google.protobuf.Duration
+	40, // 63: conf.Server.Asynq.janitor_interval:type_name -> google.protobuf.Duration
+	42, // 64: conf.Server.Machinery.tls:type_name -> conf.TLS
+	32, // 65: conf.Server.Machinery.redis:type_name -> conf.Server.Machinery.Redis
+	33, // 66: conf.Server.Machinery.amqp:type_name -> conf.Server.Machinery.AMQP
+	34, // 67: conf.Server.Machinery.sqs:type_name -> conf.Server.Machinery.SQS
+	35, // 68: conf.Server.Machinery.gcp:type_name -> conf.Server.Machinery.GCP
+	36, // 69: conf.Server.Machinery.mongodb:type_name -> conf.Server.Machinery.MongoDB
+	37, // 70: conf.Server.Machinery.dynamodb:type_name -> conf.Server.Machinery.DynamoDB
+	42, // 71: conf.Server.SSE.tls:type_name -> conf.TLS
+	40, // 72: conf.Server.SSE.timeout:type_name -> google.protobuf.Duration
+	40, // 73: conf.Server.SSE.event_ttl:type_name -> google.protobuf.Duration
+	42, // 74: conf.Server.SocketIO.tls:type_name -> conf.TLS
+	42, // 75: conf.Server.SignalR.tls:type_name -> conf.TLS
+	40, // 76: conf.Server.SignalR.keep_alive_interval:type_name -> google.protobuf.Duration
+	40, // 77: conf.Server.SignalR.chan_receive_timeout:type_name -> google.protobuf.Duration
+	42, // 78: conf.Server.MCP.tls:type_name -> conf.TLS
+	40, // 79: conf.Server.GraphQL.timeout:type_name -> google.protobuf.Duration
+	42, // 80: conf.Server.GraphQL.tls:type_name -> conf.TLS
+	42, // 81: conf.Server.Thrift.tls:type_name -> conf.TLS
+	42, // 82: conf.Server.KeepAlive.tls:type_name -> conf.TLS
+	38, // 83: conf.Server.Machinery.AMQP.queue_declare_args:type_name -> conf.Server.Machinery.AMQP.QueueDeclareArgsEntry
+	39, // 84: conf.Server.Machinery.AMQP.queue_binding_args:type_name -> conf.Server.Machinery.AMQP.QueueBindingArgsEntry
+	40, // 85: conf.Server.Machinery.GCP.max_extension:type_name -> google.protobuf.Duration
+	86, // [86:86] is the sub-list for method output_type
+	86, // [86:86] is the sub-list for method input_type
+	86, // [86:86] is the sub-list for extension type_name
+	86, // [86:86] is the sub-list for extension extendee
+	0,  // [0:86] is the sub-list for field type_name
 }
 
 func init() { file_v1_server_proto_init() }
@@ -3873,26 +4047,27 @@ func file_v1_server_proto_init() {
 	}
 	file_v1_middleware_proto_init()
 	file_v1_tls_proto_init()
+	file_v1_proxy_proto_init()
 	file_v1_server_proto_msgTypes[0].OneofWrappers = []any{}
-	file_v1_server_proto_msgTypes[5].OneofWrappers = []any{
+	file_v1_server_proto_msgTypes[7].OneofWrappers = []any{
 		(*Server_Kafka_Plain)(nil),
 		(*Server_Kafka_Scram)(nil),
 	}
-	file_v1_server_proto_msgTypes[13].OneofWrappers = []any{
+	file_v1_server_proto_msgTypes[15].OneofWrappers = []any{
 		(*Server_Asynq_RedisOpt)(nil),
 		(*Server_Asynq_RedisClusterOpt)(nil),
 		(*Server_Asynq_RedisFailoverOpt)(nil),
 		(*Server_Asynq_Uri)(nil),
 	}
-	file_v1_server_proto_msgTypes[26].OneofWrappers = []any{}
-	file_v1_server_proto_msgTypes[31].OneofWrappers = []any{}
+	file_v1_server_proto_msgTypes[28].OneofWrappers = []any{}
+	file_v1_server_proto_msgTypes[33].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_v1_server_proto_rawDesc), len(file_v1_server_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   37,
+			NumMessages:   39,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
