@@ -5,7 +5,7 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/chnxq/XGoKit/registry"
+	"github.com/chnxq/xkitmod/registry"
 	"github.com/chnxq/xkitpkg/conf/v1"
 )
 

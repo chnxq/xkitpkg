@@ -6,7 +6,7 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitmod/log"
 )
 
 var _ log.Logger = (*Logger)(nil)

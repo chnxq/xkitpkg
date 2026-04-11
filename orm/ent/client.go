@@ -5,7 +5,7 @@ import (
 
 	"entgo.io/ent/dialect/sql"
 
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitmod/log"
 
 	"github.com/chnxq/xkitpkg/conf/v1"
 

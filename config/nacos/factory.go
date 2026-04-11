@@ -1,8 +1,8 @@
 package nacos
 
 import (
-	"github.com/chnxq/XGoKit/config"
-	"github.com/chnxq/xkitpkg/log"
+	"github.com/chnxq/xkitmod/config"
+	"github.com/chnxq/xkitmod/log"
 
 	nacosClients "github.com/nacos-group/nacos-sdk-go/v2/clients"
 	nacosConstant "github.com/nacos-group/nacos-sdk-go/v2/common/constant"

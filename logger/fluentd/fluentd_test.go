@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitmod/log"
 )
 
 func TestMain(m *testing.M) {

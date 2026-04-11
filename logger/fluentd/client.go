@@ -1,7 +1,7 @@
 package fluentd
 
 import (
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitmod/log"
 
 	conf "github.com/chnxq/xkitpkg/conf/v1"
 	"github.com/chnxq/xkitpkg/logger"

@@ -13,7 +13,7 @@ import (
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 
-	"github.com/chnxq/XGoKit/config"
+	"github.com/chnxq/xkitmod/config"
 )
 
 type kube struct {

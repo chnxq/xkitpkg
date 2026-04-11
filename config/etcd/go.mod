@@ -3,16 +3,18 @@ module github.com/chnxq/xkitpkg/config/etcd
 go 1.26.0
 
 require (
-	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260410145318-72f42dfa1e02
-	github.com/chnxq/xkitpkg/config v0.0.0-20260410145318-72f42dfa1e02
-	github.com/chnxq/xkitpkg/logger v0.0.0-20260410145318-72f42dfa1e02
+	github.com/chnxq/xkitmod/config v0.0.0-20260411114116-d55e51a225f9
+	github.com/chnxq/xkitmod/log v0.0.0-20260411114116-d55e51a225f9
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411104713-16904a57573d
+	github.com/chnxq/xkitpkg/config v0.0.0-20260411104713-16904a57573d
 	go.etcd.io/etcd/client/v3 v3.6.10
 	google.golang.org/grpc v1.80.0
 )
 
 require (
 	dario.cat/mergo v1.0.2 // indirect
+	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32 // indirect
+	github.com/chnxq/xkitmod v0.0.0-20260411114116-d55e51a225f9 // indirect
 	github.com/coreos/go-semver v0.3.1 // indirect
 	github.com/coreos/go-systemd/v22 v22.7.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect

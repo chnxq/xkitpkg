@@ -3,8 +3,8 @@ package etcd
 import (
 	"time"
 
-	"github.com/chnxq/XGoKit/config"
-	"github.com/chnxq/xkitpkg/log"
+	"github.com/chnxq/xkitmod/config"
+	"github.com/chnxq/xkitmod/log"
 	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/keepalive"

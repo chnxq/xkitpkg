@@ -14,14 +14,13 @@ import (
 	otelLog "go.opentelemetry.io/otel/sdk/log"
 	"go.opentelemetry.io/otel/sdk/resource"
 
-	"github.com/chnxq/xkitpkg/logger/log"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
-	"gopkg.in/natefinch/lumberjack.v2"
-
+	"github.com/chnxq/xkitmod/log"
 	conf "github.com/chnxq/xkitpkg/conf/v1"
 	"github.com/chnxq/xkitpkg/logger"
+	"gopkg.in/natefinch/lumberjack.v2"
 )
 
 func init() {

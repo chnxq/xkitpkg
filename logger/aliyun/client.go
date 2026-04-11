@@ -3,9 +3,9 @@ package aliyun
 import (
 	"errors"
 
+	"github.com/chnxq/xkitmod/log"
 	conf "github.com/chnxq/xkitpkg/conf/v1"
 	"github.com/chnxq/xkitpkg/logger"
-	"github.com/chnxq/xkitpkg/logger/log"
 )
 
 func init() {

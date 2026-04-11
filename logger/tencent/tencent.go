@@ -9,7 +9,7 @@ import (
 	cls "github.com/tencentcloud/tencentcloud-cls-sdk-go"
 	"google.golang.org/protobuf/proto"
 
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitmod/log"
 )
 
 type Logger interface {

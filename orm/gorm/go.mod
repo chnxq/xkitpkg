@@ -3,16 +3,16 @@ module github.com/chnxq/xkitpkg/orm/gorm
 go 1.26.0
 
 require (
-	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32
-	github.com/chnxq/x-crud/gorm v0.0.0-20260404174952-cb722340828e
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260410091830-4581cad9b650
+	github.com/chnxq/x-crud/gorm v0.0.0-20260411051743-72a5a38c608a
+	github.com/chnxq/xkitmod/log v0.0.0-20260411114116-d55e51a225f9
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411104713-16904a57573d
 )
 
 require (
 	cloud.google.com/go v0.123.0 // indirect
 	cloud.google.com/go/auth v0.20.0 // indirect
 	cloud.google.com/go/auth/oauth2adapt v0.2.8 // indirect
-	cloud.google.com/go/bigquery v1.75.0 // indirect
+	cloud.google.com/go/bigquery v1.76.0 // indirect
 	cloud.google.com/go/compute/metadata v0.9.0 // indirect
 	cloud.google.com/go/iam v1.8.0 // indirect
 	filippo.io/edwards25519 v1.2.0 // indirect
@@ -23,10 +23,11 @@ require (
 	github.com/apache/arrow/go/v15 v15.0.2 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/chnxq/x-crud/api v0.0.0-20260404174952-cb722340828e // indirect
-	github.com/chnxq/x-crud/pagination v0.0.0-20260404174952-cb722340828e // indirect
+	github.com/chnxq/x-crud/api v0.0.0-20260411051743-72a5a38c608a // indirect
+	github.com/chnxq/x-crud/pagination v0.0.0-20260411051743-72a5a38c608a // indirect
 	github.com/chnxq/x-utils v0.0.0-20260331165454-35d20273b087 // indirect
 	github.com/chnxq/x-utils/mapper v0.0.0-20260331165454-35d20273b087 // indirect
+	github.com/chnxq/xkitmod v0.0.0-20260411114116-d55e51a225f9 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/glebarez/go-sqlite v1.22.0 // indirect
@@ -83,7 +84,7 @@ require (
 	go.yaml.in/yaml/v2 v2.4.4 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/crypto v0.50.0 // indirect
-	golang.org/x/exp v0.0.0-20260312153236-7ab1446f8b90 // indirect
+	golang.org/x/exp v0.0.0-20260410095643-746e56fc9e2f // indirect
 	golang.org/x/mod v0.35.0 // indirect
 	golang.org/x/net v0.53.0 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect
@@ -111,7 +112,7 @@ require (
 	gorm.io/plugin/dbresolver v1.6.2 // indirect
 	gorm.io/plugin/opentelemetry v0.1.16 // indirect
 	gorm.io/plugin/prometheus v0.1.0 // indirect
-	modernc.org/libc v1.71.0 // indirect
+	modernc.org/libc v1.72.0 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
 	modernc.org/sqlite v1.48.2 // indirect

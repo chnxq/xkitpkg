@@ -3,8 +3,9 @@ module github.com/chnxq/xkitpkg/logger/logrus
 go 1.26.0
 
 require (
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260410144743-edc9b5952fea
-	github.com/chnxq/xkitpkg/logger v0.0.0-20260410144743-edc9b5952fea
+	github.com/chnxq/xkitmod/log v0.0.0-20260411114116-d55e51a225f9
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411104713-16904a57573d
+	github.com/chnxq/xkitpkg/logger v0.0.0-20260411104713-16904a57573d
 	github.com/sirupsen/logrus v1.9.4
 )
 

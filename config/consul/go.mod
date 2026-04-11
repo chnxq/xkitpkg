@@ -5,16 +5,18 @@ go 1.26.0
 replace github.com/armon/go-metrics => github.com/hashicorp/go-metrics v0.4.1
 
 require (
-	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260410145318-72f42dfa1e02
-	github.com/chnxq/xkitpkg/config v0.0.0-20260410145318-72f42dfa1e02
-	github.com/chnxq/xkitpkg/logger v0.0.0-20260410145318-72f42dfa1e02
+	github.com/chnxq/xkitmod/config v0.0.0-20260411114116-d55e51a225f9
+	github.com/chnxq/xkitmod/log v0.0.0-20260411114116-d55e51a225f9
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411104713-16904a57573d
+	github.com/chnxq/xkitpkg/config v0.0.0-20260411104713-16904a57573d
 	github.com/hashicorp/consul/api v1.34.0
 )
 
 require (
 	dario.cat/mergo v1.0.2 // indirect
 	github.com/armon/go-metrics v0.5.4 // indirect
+	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32 // indirect
+	github.com/chnxq/xkitmod v0.0.0-20260411114116-d55e51a225f9 // indirect
 	github.com/fatih/color v1.19.0 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/go-viper/mapstructure/v2 v2.5.0 // indirect

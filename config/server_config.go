@@ -10,8 +10,8 @@ import (
 	"github.com/chnxq/xkitpkg/conf"
 	"google.golang.org/protobuf/proto"
 
-	"github.com/chnxq/XGoKit/config"
-	fileKit "github.com/chnxq/XGoKit/config/file"
+	"github.com/chnxq/xkitmod/config"
+	fileKit "github.com/chnxq/xkitmod/config/file"
 )
 
 var (

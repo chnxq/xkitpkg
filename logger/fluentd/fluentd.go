@@ -8,7 +8,7 @@ import (
 
 	"github.com/fluent/fluent-logger-golang/fluent"
 
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitmod/log"
 )
 
 var _ log.Logger = (*Logger)(nil)

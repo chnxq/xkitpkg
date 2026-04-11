@@ -9,7 +9,7 @@ import (
 	"github.com/nacos-group/nacos-sdk-go/v2/common/constant"
 	"github.com/nacos-group/nacos-sdk-go/v2/vo"
 
-	"github.com/chnxq/XGoKit/config"
+	"github.com/chnxq/xkitmod/config"
 )
 
 func TestConfig_Load(t *testing.T) {

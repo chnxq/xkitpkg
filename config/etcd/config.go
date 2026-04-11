@@ -9,7 +9,7 @@ import (
 
 	clientv3 "go.etcd.io/etcd/client/v3"
 
-	"github.com/chnxq/XGoKit/config"
+	"github.com/chnxq/xkitmod/config"
 )
 
 type source struct {

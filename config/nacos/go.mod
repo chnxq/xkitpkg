@@ -3,9 +3,10 @@ module github.com/chnxq/xkitpkg/config/nacos
 go 1.26.0
 
 require (
-	github.com/chnxq/XGoKit v0.0.0-20260330151520-d039f77f16be
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260404145648-04e7c5308773
-	github.com/chnxq/xkitpkg/config v0.0.0-20260404145648-04e7c5308773
+	github.com/chnxq/xkitmod/config v0.0.0-20260411114116-d55e51a225f9
+	github.com/chnxq/xkitmod/log v0.0.0-20260411114116-d55e51a225f9
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411104713-16904a57573d
+	github.com/chnxq/xkitpkg/config v0.0.0-20260411104713-16904a57573d
 	github.com/nacos-group/nacos-sdk-go/v2 v2.3.5
 )
 
@@ -34,6 +35,8 @@ require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
+	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32 // indirect
+	github.com/chnxq/xkitmod v0.0.0-20260411114116-d55e51a225f9 // indirect
 	github.com/clbanning/mxj/v2 v2.7.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/deckarep/golang-set v1.7.1 // indirect
@@ -55,14 +58,14 @@ require (
 	github.com/tjfoc/gmsm v1.4.1 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.1 // indirect
-	golang.org/x/crypto v0.49.0 // indirect
-	golang.org/x/net v0.52.0 // indirect
+	golang.org/x/crypto v0.50.0 // indirect
+	golang.org/x/net v0.53.0 // indirect
 	golang.org/x/sync v0.20.0 // indirect
-	golang.org/x/sys v0.42.0 // indirect
-	golang.org/x/text v0.35.0 // indirect
+	golang.org/x/sys v0.43.0 // indirect
+	golang.org/x/text v0.36.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260319201613-d00831a3d3e7 // indirect
-	google.golang.org/grpc v1.79.3 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260406210006-6f92a3bedf2d // indirect
+	google.golang.org/grpc v1.80.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect

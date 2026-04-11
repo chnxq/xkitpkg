@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitmod/log"
 )
 
 func TestWithEndpoint(t *testing.T) {

@@ -3,7 +3,7 @@ package zerolog
 import (
 	"github.com/rs/zerolog"
 
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitmod/log"
 )
 
 var _ log.Logger = (*Logger)(nil)

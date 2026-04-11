@@ -3,7 +3,7 @@ package zerolog
 import (
 	"strings"
 
-	"github.com/chnxq/xkitpkg/logger/log"
+	"github.com/chnxq/xkitmod/log"
 	"github.com/rs/zerolog"
 
 	conf "github.com/chnxq/xkitpkg/conf/v1"

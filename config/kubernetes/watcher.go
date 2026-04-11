@@ -8,7 +8,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/watch"
 
-	"github.com/chnxq/XGoKit/config"
+	"github.com/chnxq/xkitmod/config"
 )
 
 type watcher struct {

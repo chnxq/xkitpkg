@@ -7,7 +7,7 @@ import (
 
 	"github.com/nacos-group/nacos-sdk-go/v2/vo"
 
-	"github.com/chnxq/XGoKit/config"
+	"github.com/chnxq/xkitmod/config"
 )
 
 type Watcher struct {

@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/consul/api"
 	"github.com/hashicorp/consul/api/watch"
 
-	"github.com/chnxq/XGoKit/config"
+	"github.com/chnxq/xkitmod/config"
 )
 
 type watcher struct {

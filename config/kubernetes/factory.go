@@ -1,7 +1,7 @@
 package kubernetes
 
 import (
-	"github.com/chnxq/XGoKit/config"
+	"github.com/chnxq/xkitmod/config"
 
 	conf "github.com/chnxq/xkitpkg/conf/v1"
 	bConfig "github.com/chnxq/xkitpkg/config"
