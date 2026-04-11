@@ -4,14 +4,13 @@ go 1.26.0
 
 require (
 	buf.build/go/protovalidate v1.1.3
-	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32
 	github.com/chnxq/x-utils v0.0.0-20260331165454-35d20273b087
 	github.com/chnxq/xkitmod v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/algs v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260411142209-9ba051e9a07d
-	github.com/chnxq/xkitpkg/middleware v0.0.0-20260411142209-9ba051e9a07d
-	github.com/chnxq/xkitpkg/transport v0.0.0-20260411142209-9ba051e9a07d
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411143413-473fd09410d2
+	github.com/chnxq/xkitpkg/middleware v0.0.0-20260411143413-473fd09410d2
+	github.com/chnxq/xkitpkg/transport v0.0.0-20260411143413-473fd09410d2
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/handlers v1.5.2
 	google.golang.org/grpc v1.80.0
@@ -23,9 +22,8 @@ require (
 	cel.dev/expr v0.25.1 // indirect
 	github.com/antlr4-go/antlr/v4 v4.13.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/chnxq/XGoKit/libs/alg v0.0.0-20260405133730-f2df3fec0a32 // indirect
 	github.com/chnxq/xkitmod/selector v0.0.0-20260411132219-50da08594d1b // indirect
-	github.com/chnxq/xkitpkg v0.0.0-20260411142209-9ba051e9a07d // indirect
+	github.com/chnxq/xkitpkg v0.0.0-20260411143413-473fd09410d2 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/go-kratos/aegis v0.2.0 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect

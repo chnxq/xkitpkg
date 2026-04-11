@@ -5,7 +5,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/chnxq/XGoKit/middleware/selector"
+	"github.com/chnxq/xkitpkg/middleware/selector"
 )
 
 // MatcherMode controls matching strategy

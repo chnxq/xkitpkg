@@ -30,7 +30,7 @@ func TestOnce(t *testing.T) {
 
 func TestNotPanic(t *testing.T) {
 	next := func(_ context.Context, req any) (any, error) {
-		return req.(string) + "https://go-kratos.dev", nil
+		return req.(string) + "https://xkit.dev", nil
 	}
 
 	_, e := Recovery(WithHandler(func(_ context.Context, _ any, err any) error {

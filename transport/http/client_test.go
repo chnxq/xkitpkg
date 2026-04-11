@@ -319,7 +319,7 @@ func TestNewClient(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	_, err = NewClient(context.Background(), WithDiscovery(&mockDiscovery{}), WithEndpoint("discovery:///go-kratos"))
+	_, err = NewClient(context.Background(), WithDiscovery(&mockDiscovery{}), WithEndpoint("discovery:///xkit"))
 	if err != nil {
 		t.Error(err)
 	}
@@ -331,7 +331,7 @@ func TestNewClient(t *testing.T) {
 	if err == nil {
 		t.Error("except a parseTarget error")
 	}
-	_, err = NewClient(context.Background(), WithDiscovery(&mockDiscovery{}), WithEndpoint("https://go-kratos.dev/"))
+	_, err = NewClient(context.Background(), WithDiscovery(&mockDiscovery{}), WithEndpoint("https://xkit.dev/"))
 	if err == nil {
 		t.Error("err should not be equal to nil")
 	}
@@ -339,7 +339,7 @@ func TestNewClient(t *testing.T) {
 	client, err := NewClient(
 		context.Background(),
 		WithDiscovery(&mockDiscovery{}),
-		WithEndpoint("discovery:///go-kratos"),
+		WithEndpoint("discovery:///xkit"),
 		WithMiddleware(func(handler middleware.Handler) middleware.Handler {
 			t.Logf("handle in middleware")
 			return func(ctx context.Context, req any) (any, error) {

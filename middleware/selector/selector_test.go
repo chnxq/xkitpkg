@@ -161,8 +161,8 @@ func TestFunc(t *testing.T) {
 			ctx:  transport.NewServerContext(context.Background(), &Transport{operation: "/test.Name/1234"}),
 		},
 		{
-			name: "/go-kratos.dev/kratos",
-			ctx:  transport.NewServerContext(context.Background(), &Transport{operation: "/go-kratos.dev/kratos"}),
+			name: "/xkit.dev/kratos",
+			ctx:  transport.NewServerContext(context.Background(), &Transport{operation: "/xkit.dev/kratos"}),
 		},
 	}
 	for _, test := range tests {
@@ -172,7 +172,7 @@ func TestFunc(t *testing.T) {
 				return "reply", nil
 			}
 			next = Server(testMiddleware).Match(func(_ context.Context, operation string) bool {
-				if strings.HasPrefix(operation, "/go-kratos.dev") || strings.HasSuffix(operation, "world") {
+				if strings.HasPrefix(operation, "/xkit.dev") || strings.HasSuffix(operation, "world") {
 					return true
 				}
 				return false
@@ -204,7 +204,7 @@ func TestHeaderFunc(t *testing.T) {
 			name: "/hi.Create/world",
 			ctx: transport.NewServerContext(context.Background(), &Transport{
 				operation: "/hi.Create/world",
-				headers:   &mockHeader{map[string][]string{"X-Test": {"test2"}, "go-kratos": {"kratos"}}},
+				headers:   &mockHeader{map[string][]string{"X-Test": {"test2"}, "xkit": {"kratos"}}},
 			}),
 		},
 		{
@@ -215,9 +215,9 @@ func TestHeaderFunc(t *testing.T) {
 			}),
 		},
 		{
-			name: "/go-kratos.dev/kratos",
+			name: "/xkit.dev/kratos",
 			ctx: transport.NewServerContext(context.Background(), &Transport{
-				operation: "/go-kratos.dev/kratos",
+				operation: "/xkit.dev/kratos",
 				headers:   &mockHeader{map[string][]string{"X-Test": {"test"}}},
 			}),
 		},
@@ -236,7 +236,7 @@ func TestHeaderFunc(t *testing.T) {
 				if tr.RequestHeader().Get("X-Test") == "test" {
 					return true
 				}
-				if tr.RequestHeader().Get("go-kratos") == "kratos" {
+				if tr.RequestHeader().Get("xkit") == "kratos" {
 					return true
 				}
 				return false

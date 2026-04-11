@@ -54,7 +54,7 @@ func TestContextForm(t *testing.T) {
 func TestContextQuery(t *testing.T) {
 	w := wrapper{
 		router: testRouter,
-		req:    &http.Request{URL: &url.URL{Scheme: "https", Host: "github.com", Path: "go-kratos/kratos", RawQuery: "page=1"}, Method: http.MethodPost},
+		req:    &http.Request{URL: &url.URL{Scheme: "https", Host: "github.com", Path: "xkit/kratos", RawQuery: "page=1"}, Method: http.MethodPost},
 		res:    nil,
 		w:      responseWriter{},
 	}
@@ -131,7 +131,7 @@ func TestResponseUnwrap(t *testing.T) {
 func TestContextBindQuery(t *testing.T) {
 	w := wrapper{
 		router: testRouter,
-		req:    &http.Request{URL: &url.URL{Scheme: "https", Host: "go-kratos-dev", RawQuery: "page=2"}},
+		req:    &http.Request{URL: &url.URL{Scheme: "https", Host: "xkit-dev", RawQuery: "page=2"}},
 		res:    nil,
 		w:      responseWriter{},
 	}
@@ -151,7 +151,7 @@ func TestContextBindQuery(t *testing.T) {
 func TestContextBindForm(t *testing.T) {
 	w := wrapper{
 		router: testRouter,
-		req:    &http.Request{URL: &url.URL{Scheme: "https", Host: "go-kratos-dev"}, Form: map[string][]string{"page": {"2"}}},
+		req:    &http.Request{URL: &url.URL{Scheme: "https", Host: "xkit-dev"}, Form: map[string][]string{"page": {"2"}}},
 		res:    nil,
 		w:      responseWriter{},
 	}

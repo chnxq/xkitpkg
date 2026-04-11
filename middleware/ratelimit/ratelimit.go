@@ -3,8 +3,8 @@ package ratelimit
 import (
 	"context"
 
-	"github.com/go-kratos/aegis/ratelimit"
-	"github.com/go-kratos/aegis/ratelimit/bbr"
+	"github.com/chnxq/xkitmod/algs/ratelimit"
+	"github.com/chnxq/xkitmod/algs/ratelimit/bbr"
 
 	"github.com/chnxq/xkitmod/errors"
 	"github.com/chnxq/xkitpkg/middleware"

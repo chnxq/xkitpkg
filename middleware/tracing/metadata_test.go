@@ -21,14 +21,14 @@ func TestMetadata_Inject(t *testing.T) {
 		want string
 	}{
 		{
-			name: "https://go-kratos.dev",
-			args: args{"https://go-kratos.dev", propagation.HeaderCarrier{}},
-			want: "https://go-kratos.dev",
+			name: "https://xkit.dev",
+			args: args{"https://xkit.dev", propagation.HeaderCarrier{}},
+			want: "https://xkit.dev",
 		},
 		{
-			name: "https://github.com/go-kratos/kratos",
-			args: args{"https://github.com/go-kratos/kratos", propagation.HeaderCarrier{"mode": []string{"test"}}},
-			want: "https://github.com/go-kratos/kratos",
+			name: "https://github.com/xkit/kratos",
+			args: args{"https://github.com/xkit/kratos", propagation.HeaderCarrier{"mode": []string{"test"}}},
+			want: "https://github.com/xkit/kratos",
 		},
 	}
 	for _, tt := range tests {
@@ -56,23 +56,23 @@ func TestMetadata_Extract(t *testing.T) {
 		crash bool
 	}{
 		{
-			name: "https://go-kratos.dev",
+			name: "https://xkit.dev",
 			args: args{
 				parent:  context.Background(),
-				carrier: propagation.HeaderCarrier{"X-Md-Service-Name": []string{"https://go-kratos.dev"}},
+				carrier: propagation.HeaderCarrier{"X-Md-Service-Name": []string{"https://xkit.dev"}},
 			},
-			want: "https://go-kratos.dev",
+			want: "https://xkit.dev",
 		},
 		{
-			name: "https://github.com/go-kratos/kratos",
+			name: "https://github.com/xkit/kratos",
 			args: args{
 				parent:  metadata.NewServerContext(context.Background(), metadata.Metadata{}),
-				carrier: propagation.HeaderCarrier{"X-Md-Service-Name": []string{"https://github.com/go-kratos/kratos"}},
+				carrier: propagation.HeaderCarrier{"X-Md-Service-Name": []string{"https://github.com/xkit/kratos"}},
 			},
-			want: "https://github.com/go-kratos/kratos",
+			want: "https://github.com/xkit/kratos",
 		},
 		{
-			name: "https://github.com/go-kratos/kratos",
+			name: "https://github.com/xkit/kratos",
 			args: args{
 				parent:  metadata.NewServerContext(context.Background(), metadata.Metadata{}),
 				carrier: propagation.HeaderCarrier{"X-Md-Service-Name": nil},

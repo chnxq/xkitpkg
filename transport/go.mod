@@ -2,16 +2,14 @@ module github.com/chnxq/xkitpkg/transport
 
 go 1.26.0
 
-replace github.com/chnxq/xkitpkg/middleware => ../middleware
-
 require (
 	github.com/chnxq/xkitmod v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/algs v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/selector v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg v0.0.0-20260411142209-9ba051e9a07d
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260411142209-9ba051e9a07d
-	github.com/chnxq/xkitpkg/middleware v0.0.0-20260411142209-9ba051e9a07d
+	github.com/chnxq/xkitpkg v0.0.0-20260411143413-473fd09410d2
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411143413-473fd09410d2
+	github.com/chnxq/xkitpkg/middleware v0.0.0-20260411143413-473fd09410d2
 	github.com/gin-gonic/gin v1.12.0
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/mux v1.8.1
