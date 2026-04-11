@@ -15,8 +15,8 @@ import (
 	"google.golang.org/grpc/reflection"
 
 	apimd "github.com/chnxq/XGoKit/api/metadata"
-	"github.com/chnxq/XGoKit/log"
 	"github.com/chnxq/XGoKit/middleware"
+	"github.com/chnxq/xkitpkg/logger/log"
 	"github.com/chnxq/xkitpkg/transport"
 	"github.com/chnxq/xkitpkg/transport/internal/endpoint"
 	"github.com/chnxq/xkitpkg/transport/internal/host"

@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/chnxq/XGoKit/log"
 	"github.com/chnxq/XGoKit/registry"
+	"github.com/chnxq/xkitpkg/logger/log"
 
 	"github.com/hashicorp/consul/api"
 )

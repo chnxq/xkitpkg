@@ -11,8 +11,8 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/chnxq/XGoKit/log"
 	"github.com/chnxq/XGoKit/middleware"
+	"github.com/chnxq/xkitpkg/logger/log"
 	"github.com/chnxq/xkitpkg/transport"
 	"github.com/chnxq/xkitpkg/transport/internal/endpoint"
 	"github.com/chnxq/xkitpkg/transport/internal/host"

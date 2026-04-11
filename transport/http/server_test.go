@@ -18,7 +18,7 @@ import (
 	"time"
 
 	cnferrors "github.com/chnxq/XGoKit/errors"
-	"github.com/chnxq/XGoKit/log"
+	"github.com/chnxq/xkitpkg/logger/log"
 	"github.com/chnxq/xkitpkg/transport/internal/host"
 )
 

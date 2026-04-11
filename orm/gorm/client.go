@@ -1,7 +1,7 @@
 package gorm
 
 import (
-	"github.com/chnxq/XGoKit/log"
+	"github.com/chnxq/xkitpkg/logger/log"
 
 	"github.com/chnxq/xkitpkg/conf/v1"
 

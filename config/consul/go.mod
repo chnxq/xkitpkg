@@ -5,10 +5,11 @@ go 1.26.0
 replace github.com/armon/go-metrics => github.com/hashicorp/go-metrics v0.4.1
 
 require (
-	github.com/chnxq/XGoKit v0.0.0-20260330151520-d039f77f16be
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260404145648-04e7c5308773
-	github.com/chnxq/xkitpkg/config v0.0.0-20260404145648-04e7c5308773
-	github.com/hashicorp/consul/api v1.33.7
+	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260410145318-72f42dfa1e02
+	github.com/chnxq/xkitpkg/config v0.0.0-20260410145318-72f42dfa1e02
+	github.com/chnxq/xkitpkg/logger v0.0.0-20260410145318-72f42dfa1e02
+	github.com/hashicorp/consul/api v1.34.0
 )
 
 require (
@@ -28,11 +29,11 @@ require (
 	github.com/hashicorp/golang-lru v1.0.2 // indirect
 	github.com/hashicorp/serf v0.10.2 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
-	github.com/mattn/go-isatty v0.0.20 // indirect
+	github.com/mattn/go-isatty v0.0.21 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
-	golang.org/x/exp v0.0.0-20260312153236-7ab1446f8b90 // indirect
-	golang.org/x/sys v0.42.0 // indirect
+	golang.org/x/exp v0.0.0-20260410095643-746e56fc9e2f // indirect
+	golang.org/x/sys v0.43.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

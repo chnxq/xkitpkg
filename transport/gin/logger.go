@@ -3,7 +3,7 @@ package gin
 import (
 	"fmt"
 
-	"github.com/chnxq/XGoKit/log"
+	"github.com/chnxq/xkitpkg/logger/log"
 )
 
 const (

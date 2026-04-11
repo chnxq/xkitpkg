@@ -17,8 +17,8 @@ import (
 	"google.golang.org/grpc/metadata"
 
 	"github.com/chnxq/XGoKit/errors"
-	"github.com/chnxq/XGoKit/log"
 	"github.com/chnxq/XGoKit/middleware"
+	"github.com/chnxq/xkitpkg/logger/log"
 	"github.com/chnxq/xkitpkg/transport"
 	"github.com/chnxq/xkitpkg/transport/internal/matcher"
 	pb "github.com/chnxq/xkitpkg/transport/internal/testdata/helloworld"

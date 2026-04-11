@@ -1,7 +1,7 @@
 package gin
 
 import (
-	"github.com/chnxq/XGoKit/log"
+	"github.com/chnxq/xkitpkg/logger/log"
 	"github.com/gin-gonic/gin"
 	"net"
 	"net/http"

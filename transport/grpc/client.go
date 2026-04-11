@@ -11,11 +11,11 @@ import (
 	grpcinsecure "google.golang.org/grpc/credentials/insecure"
 	grpcmd "google.golang.org/grpc/metadata"
 
-	"github.com/chnxq/XGoKit/log"
 	"github.com/chnxq/XGoKit/middleware"
 	"github.com/chnxq/XGoKit/registry"
 	"github.com/chnxq/XGoKit/selector"
 	"github.com/chnxq/XGoKit/selector/wrr"
+	"github.com/chnxq/xkitpkg/logger/log"
 	"github.com/chnxq/xkitpkg/transport"
 	"github.com/chnxq/xkitpkg/transport/grpc/resolver/discovery"
 	"github.com/chnxq/xkitpkg/transport/internal/matcher"

@@ -10,8 +10,8 @@ import (
 	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/trace"
 
-	"github.com/chnxq/XGoKit/log"
 	"github.com/chnxq/XGoKit/middleware"
+	"github.com/chnxq/xkitpkg/logger/log"
 	kHttp "github.com/chnxq/xkitpkg/transport/http"
 )
 

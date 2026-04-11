@@ -1,8 +1,8 @@
 package minio
 
 import (
-	"github.com/chnxq/XGoKit/log"
 	"github.com/chnxq/xkitpkg/conf"
+	"github.com/chnxq/xkitpkg/logger/log"
 
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"

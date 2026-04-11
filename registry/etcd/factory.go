@@ -1,8 +1,8 @@
 package etcd
 
 import (
-	"github.com/chnxq/XGoKit/log"
 	"github.com/chnxq/XGoKit/registry"
+	"github.com/chnxq/xkitpkg/logger/log"
 
 	etcdClient "go.etcd.io/etcd/client/v3"
 

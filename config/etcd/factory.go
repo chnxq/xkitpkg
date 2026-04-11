@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/chnxq/XGoKit/config"
-	"github.com/chnxq/XGoKit/log"
+	"github.com/chnxq/xkitpkg/logger/log"
 	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/keepalive"

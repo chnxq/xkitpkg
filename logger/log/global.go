@@ -7,7 +7,7 @@ import (
 	"sync"
 )
 
-// Colors
+// Colors are the colors of log message.
 const (
 	Reset       = "\033[0m"
 	Red         = "\033[31m"

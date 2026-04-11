@@ -11,6 +11,9 @@ import (
 )
 
 // NewLogger 动态创建日志实例
+// 返回一个新的标准日志记录器实例
+// 当无法创建自定义日志记录器时，此函数提供一个默认的标准日志记录器
+// 作为备选方案，确保系统始终有一个可用的日志记录器  return NewStdLogger(), nil
 func NewLogger(cfg *conf.Logger) (log.Logger, error) {
 	if cfg == nil {
 		return nil, nil
@@ -77,7 +80,7 @@ func NewLoggerProvider(cfg *conf.Logger, appInfo *conf.AppInfo) log.Logger {
 	}
 	newlogger := log.With(l, fields...)
 	log.SetLogger(newlogger)
-	log.Infof("logger %s created successfully", cfg.GetType())
+	log.Infof("Logger %s created successfully", cfg.GetType())
 	return newlogger
 }
 

@@ -1,8 +1,8 @@
 package consul
 
 import (
-	"github.com/chnxq/XGoKit/log"
 	"github.com/chnxq/XGoKit/registry"
+	"github.com/chnxq/xkitpkg/logger/log"
 
 	consulClient "github.com/hashicorp/consul/api"
 
