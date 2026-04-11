@@ -4,7 +4,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/chnxq/xkitmod/middleware"
+	"github.com/chnxq/xkitpkg/middleware"
 )
 
 // Matcher is a middleware matcher.
