@@ -3,10 +3,10 @@ module github.com/chnxq/xkitpkg/registry/etcd
 go 1.26.0
 
 require (
-	github.com/chnxq/xkitmod v0.0.0-20260411114116-d55e51a225f9
-	github.com/chnxq/xkitmod/log v0.0.0-20260411114116-d55e51a225f9
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260411123202-bc5bbe2b398b
-	github.com/chnxq/xkitpkg/registry v0.0.0-20260411123202-bc5bbe2b398b
+	github.com/chnxq/xkitmod v0.0.0-20260411132219-50da08594d1b
+	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411142209-9ba051e9a07d
+	github.com/chnxq/xkitpkg/registry v0.0.0-20260411142209-9ba051e9a07d
 	github.com/stretchr/testify v1.11.1
 	go.etcd.io/etcd/client/v3 v3.6.10
 	google.golang.org/grpc v1.80.0

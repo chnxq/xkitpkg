@@ -5,18 +5,17 @@ go 1.26.0
 replace github.com/armon/go-metrics => github.com/hashicorp/go-metrics v0.4.1
 
 require (
-	github.com/chnxq/xkitmod/config v0.0.0-20260411114116-d55e51a225f9
-	github.com/chnxq/xkitmod/log v0.0.0-20260411114116-d55e51a225f9
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260411104713-16904a57573d
-	github.com/chnxq/xkitpkg/config v0.0.0-20260411104713-16904a57573d
+	github.com/chnxq/xkitmod/config v0.0.0-20260411132219-50da08594d1b
+	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411142209-9ba051e9a07d
+	github.com/chnxq/xkitpkg/config v0.0.0-20260411142209-9ba051e9a07d
 	github.com/hashicorp/consul/api v1.34.0
 )
 
 require (
 	dario.cat/mergo v1.0.2 // indirect
 	github.com/armon/go-metrics v0.5.4 // indirect
-	github.com/chnxq/XGoKit v0.0.0-20260405133730-f2df3fec0a32 // indirect
-	github.com/chnxq/xkitmod v0.0.0-20260411114116-d55e51a225f9 // indirect
+	github.com/chnxq/xkitmod v0.0.0-20260411132219-50da08594d1b // indirect
 	github.com/fatih/color v1.19.0 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/go-viper/mapstructure/v2 v2.5.0 // indirect
@@ -33,7 +32,7 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.21 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
-	github.com/stretchr/objx v0.5.2 // indirect
+	github.com/stretchr/testify v1.11.1 // indirect
 	golang.org/x/exp v0.0.0-20260410095643-746e56fc9e2f // indirect
 	golang.org/x/sys v0.43.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect

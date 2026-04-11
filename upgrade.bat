@@ -12,17 +12,26 @@ cd %DIR%\conf
 go get all
 go mod tidy
 
-cd %DIR%\conf\consul
-go get all
-go mod tidy
-
-cd %DIR%\conf\etcd
-go get all
-go mod tidy
-
 cd %DIR%\config
 go get all
 go mod tidy
+
+cd %DIR%\config\consul
+go get all
+go mod tidy
+
+cd %DIR%\config\etcd
+go get all
+go mod tidy
+
+cd %DIR%\config\kubernetes
+go get all
+go mod tidy
+
+cd %DIR%\config\nacos
+go get all
+go mod tidy
+
 
 cd %DIR%\logger
 go get all
@@ -62,6 +71,10 @@ go get all
 go mod tidy
 
 cd %DIR%\registry\etcd
+go get all
+go mod tidy
+
+cd %DIR%\registry\nacos
 go get all
 go mod tidy
 
