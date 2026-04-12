@@ -5,8 +5,8 @@ go 1.26.0
 require (
 	github.com/chnxq/xkitmod v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260411142209-9ba051e9a07d
-	github.com/chnxq/xkitpkg/registry v0.0.0-20260411142209-9ba051e9a07d
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411151307-f4b1647fa88b
+	github.com/chnxq/xkitpkg/registry v0.0.0-20260411151307-f4b1647fa88b
 	github.com/nacos-group/nacos-sdk-go/v2 v2.3.5
 	github.com/stretchr/testify v1.11.1
 )

@@ -4,8 +4,8 @@ go 1.26.0
 
 require (
 	github.com/chnxq/xkitmod/config v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260411142209-9ba051e9a07d
-	github.com/chnxq/xkitpkg/config v0.0.0-20260411142209-9ba051e9a07d
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411151307-f4b1647fa88b
+	github.com/chnxq/xkitpkg/config v0.0.0-20260411151307-f4b1647fa88b
 	k8s.io/api v0.35.3
 	k8s.io/apimachinery v0.35.3
 	k8s.io/client-go v0.35.3

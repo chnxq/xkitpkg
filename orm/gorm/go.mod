@@ -3,9 +3,9 @@ module github.com/chnxq/xkitpkg/orm/gorm
 go 1.26.0
 
 require (
-	github.com/chnxq/x-crud/gorm v0.0.0-20260411051743-72a5a38c608a
-	github.com/chnxq/xkitmod/log v0.0.0-20260411114116-d55e51a225f9
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260411104713-16904a57573d
+	github.com/chnxq/x-crud/gorm v0.0.0-20260411151944-a61448f9f7bc
+	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411151307-f4b1647fa88b
 )
 
 require (
@@ -27,7 +27,7 @@ require (
 	github.com/chnxq/x-crud/pagination v0.0.0-20260411051743-72a5a38c608a // indirect
 	github.com/chnxq/x-utils v0.0.0-20260331165454-35d20273b087 // indirect
 	github.com/chnxq/x-utils/mapper v0.0.0-20260331165454-35d20273b087 // indirect
-	github.com/chnxq/xkitmod v0.0.0-20260411114116-d55e51a225f9 // indirect
+	github.com/chnxq/xkitmod v0.0.0-20260411132219-50da08594d1b // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/glebarez/go-sqlite v1.22.0 // indirect

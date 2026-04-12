@@ -8,9 +8,9 @@ require (
 	github.com/chnxq/xkitmod v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/algs v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260411150755-730cedf1327b
-	github.com/chnxq/xkitpkg/middleware v0.0.0-20260411150755-730cedf1327b
-	github.com/chnxq/xkitpkg/transport v0.0.0-20260411150755-730cedf1327b
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260411151307-f4b1647fa88b
+	github.com/chnxq/xkitpkg/middleware v0.0.0-20260411151307-f4b1647fa88b
+	github.com/chnxq/xkitpkg/transport v0.0.0-20260411151307-f4b1647fa88b
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/handlers v1.5.2
 	google.golang.org/grpc v1.80.0
@@ -23,7 +23,7 @@ require (
 	github.com/antlr4-go/antlr/v4 v4.13.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/chnxq/xkitmod/selector v0.0.0-20260411132219-50da08594d1b // indirect
-	github.com/chnxq/xkitpkg v0.0.0-20260411150755-730cedf1327b // indirect
+	github.com/chnxq/xkitpkg v0.0.0-20260411151307-f4b1647fa88b // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
