@@ -25,13 +25,13 @@ const (
 // 应用/实例信息
 type AppInfo struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// 项目唯一标识（小写 + 连字符，如 gowind、finance）
+	// 项目唯一标识（小写 + 连字符，如 xadmin、finance）
 	Project string `protobuf:"bytes,1,opt,name=project,proto3" json:"project,omitempty"`
 	// 纯微服务名（小写 + 连字符，如：user-service、admin-service）
 	AppId string `protobuf:"bytes,2,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
-	// 实例 ID，比如：gowind-user-service@172.16.0.12:8080@ajk2n8d3789z
+	// 实例 ID，比如：xadmin-user-service@172.16.0.12:8080@ajk2n8d3789z
 	InstanceId string `protobuf:"bytes,3,opt,name=instance_id,json=instanceId,proto3" json:"instance_id,omitempty"`
-	// 「项目名 + 服务名」的自然语言描述，比如：Gowind用户服务、Gowind管理服务
+	// 「项目名 + 服务名」的自然语言描述，比如：XAdmin用户服务、XAdmin管理服务
 	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	// 语义化版本号（SemVer），：v1.2.3、2.0.0-beta
 	Version string `protobuf:"bytes,5,opt,name=version,proto3" json:"version,omitempty"`
