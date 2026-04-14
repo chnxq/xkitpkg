@@ -45,8 +45,8 @@ func Server(logger log.Logger) middleware.Middleware {
 			}
 			level, stack := extractError(err)
 			log.NewHelper(log.WithContext(ctx, logger)).Log(level,
-				"kind", "server",
-				"component", kind,
+				"kind", kind,
+				"component", "server",
 				"operation", operation,
 				"args", extractArgs(req),
 				"code", code,
