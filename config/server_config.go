@@ -1,12 +1,12 @@
 package config
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"reflect"
 	"sync"
 
+	"github.com/chnxq/xkitmod/log"
 	"github.com/chnxq/xkitpkg/conf"
 	"google.golang.org/protobuf/proto"
 
@@ -26,19 +26,19 @@ var (
 func LoadServerConfig(configPath string) error {
 	cfg, err := CheckConfigProvider(configPath)
 	if err != nil {
-		fmt.Printf("check remote config provider failed: %v\n", err)
+		log.Errorf("check remote config provider failed: %v\n", err)
 		return err
 	}
 
 	if err = cfg.Load(); err != nil {
-		fmt.Printf("Load config failed: %v\n", err)
+		log.Errorf("Load config failed: %v\n", err)
 		return err
 	}
 
 	initServerConfig()
 
 	if err = scanConfigs(cfg); err != nil {
-		fmt.Printf("Scan config failed: %v\n", err)
+		log.Errorf("Scan config failed: %v\n", err)
 		return err
 	}
 
@@ -71,25 +71,25 @@ func CheckConfigProvider(configPath string) (config.Config, error) {
 			if err := cfgRemote.Close(); err != nil {
 				panic(err)
 			}
-			//fmt.Println("End of check remote config source")
+			//log.Infof("End of check remote config source")
 		}(cfgRemote)
 
 		if err = cfgRemote.Load(); err != nil {
-			fmt.Printf("Load remote config failed: %v\n", err)
+			log.Errorf("Load remote config failed: %v\n", err)
 			return nil, err
 		}
 
 		if err = scanConfigs(cfgRemote); err != nil {
-			fmt.Printf("Scan remote config failed: %v\n", err)
+			log.Errorf("Scan remote config failed: %v\n", err)
 			return nil, err
 		}
-		fmt.Printf("Have remote config: %v\n", configList)
+		log.Infof("Have remote config: %v", configList)
 
 		rc := GetServerConfig().GetConfig() // 获取远程配置
 		if rc != nil {
 			rcs, err := NewProvider(rc)
 			if err != nil {
-				fmt.Printf("Create remote config provider failed: %v\n", err)
+				log.Errorf("Create remote config provider failed: %v\n", err)
 				cfg = config.New(
 					config.WithSource(
 						NewFileConfigSource(configPath),
@@ -103,7 +103,7 @@ func CheckConfigProvider(configPath string) (config.Config, error) {
 						NewFileConfigSource(configPath),
 					),
 				)
-				fmt.Printf("Create remote config provider success: %v\n", rc)
+				log.Infof("Create remote config provider success: %v", rc)
 			}
 		} else {
 			cfg = config.New(

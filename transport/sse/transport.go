@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	KindSSE = "sse"
+	KindSSE = "SSE"
 )
 
 var _ Transporter = &Transport{}

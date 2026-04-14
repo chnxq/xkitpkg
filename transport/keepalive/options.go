@@ -39,6 +39,6 @@ func WithEndpoint(endpoint *url.URL) ServerOption {
 
 func WithServiceKind(name string) ServerOption {
 	return func(s *Server) {
-		s.serviceKind = name
+		s.serviceKind = name + ":" + KindKeepAlive
 	}
 }
