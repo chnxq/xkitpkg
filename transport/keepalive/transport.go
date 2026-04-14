@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	KindKeepAlive = "Keepalive"
+	KindKeepAlive = "keepalive"
 )
 
 var _ transport.Transporter = (*Transport)(nil)

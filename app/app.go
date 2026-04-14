@@ -43,6 +43,10 @@ type App struct {
 func NewApp(appCtx *AppCtx, srv ...transport.Server) *App {
 	var opts []Option
 
+	if appCtx.appInfo.Name != "" {
+		opts = append(opts, Name(appCtx.appInfo.Name))
+	}
+
 	if appCtx.logger != nil {
 		opts = append(opts, Logger(appCtx.logger))
 	}
@@ -56,14 +60,19 @@ func NewApp(appCtx *AppCtx, srv ...transport.Server) *App {
 	if appCtx.appInfo.Metadata != nil {
 		opts = append(opts, Metadata(appCtx.appInfo.Metadata))
 	}
-	if appCtx.appInfo.AppId != "" {
-		registerName := appCtx.appInfo.Project + "/" + appCtx.appInfo.AppId
-		// 根据注册中心类型规范化 AppId
-		if bConfig.GetServerConfig().Registry != nil && bConfig.GetServerConfig().Registry.GetType() != "" {
-			registerName = bRegistry.NormalizeForRegistry(registerName, bConfig.GetServerConfig().Registry.GetType())
-		}
-		opts = append(opts, Name(registerName))
+
+	if appCtx.appInfo.AppId == "" {
+		// 项目名称为空时，默认使用服务名称作为 AppId
+		appCtx.appInfo.AppId = "service/" + appCtx.appInfo.Name
 	}
+
+	registerName := appCtx.appInfo.Project + "/" + appCtx.appInfo.AppId
+	// 根据注册中心类型规范化 AppId
+	if bConfig.GetServerConfig().Registry != nil && bConfig.GetServerConfig().Registry.GetType() != "" {
+		registerName = bRegistry.NormalizeForRegistry(registerName, bConfig.GetServerConfig().Registry.GetType())
+	}
+	opts = append(opts, Name(registerName))
+
 	if appCtx.appInfo.Version != "" {
 		opts = append(opts, Version(appCtx.appInfo.Version))
 	}

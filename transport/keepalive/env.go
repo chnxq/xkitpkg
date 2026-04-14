@@ -3,8 +3,8 @@ package keepalive
 import "os"
 
 const (
-	EnvKeyHost      = "KRATOS_TRANSPORT_KEEPALIVE_HOST"
-	EnvKeyInterface = "KRATOS_TRANSPORT_KEEPALIVE_INTERFACE"
+	EnvKeyHost      = "XKIT_TRANSPORT_KEEPALIVE_HOST"
+	EnvKeyInterface = "XKIT_TRANSPORT_KEEPALIVE_INTERFACE"
 )
 
 // SetKeepAliveHost sets the host for the keep-alive service.

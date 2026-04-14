@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	KindAsynq = "ASYNCQ"
+	KindAsynq = "asyncq"
 )
 
 var _ kTransport.Transporter = &Transport{}

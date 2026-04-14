@@ -31,7 +31,8 @@ func NewRegistry(c *conf.Registry) (*Registry, error) {
 		log.Fatal(err)
 	}
 
-	reg := New(cli)
+	opt := Namespace(c.Etcd.NameSpace)
+	reg := New(cli, opt)
 
 	return reg, nil
 }

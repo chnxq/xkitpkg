@@ -19,7 +19,24 @@ type Redacter interface {
 	Redact() string
 }
 
-// Server is an server logging middleware.
+// Server 创建一个服务器端日志中间件
+// 该中间件用于记录服务器端请求的详细日志信息，包括请求类型、操作、参数、响应码、错误信息和执行时间等
+//
+// 参数:
+//
+//	logger log.Logger - 日志记录器实例，用于输出日志信息
+//
+// 返回值:
+//
+//	middleware.Middleware - 服务器端日志中间件实例，可以被插入到请求处理链中
+//
+// 功能说明:
+//  1. 记录请求开始时间以计算处理延迟
+//  2. 从传输上下文中提取请求类型(kind)和操作(operation)信息
+//  3. 执行原始请求处理器
+//  4. 分析响应错误并提取错误码和原因
+//  5. 根据错误级别决定日志级别并记录完整的请求信息
+//  6. 包括延迟时间在内的所有相关信息都会被记录
 func Server(logger log.Logger) middleware.Middleware {
 	return func(handler middleware.Handler) middleware.Handler {
 		return func(ctx context.Context, req any) (reply any, err error) {
