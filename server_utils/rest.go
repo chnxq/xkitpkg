@@ -9,7 +9,7 @@ import (
 	"github.com/chnxq/xkitmod/algs/ratelimit"
 	"github.com/chnxq/xkitmod/algs/ratelimit/bbr"
 
-	kRest "github.com/chnxq/xkitpkg/transport/http"
+	kHttp "github.com/chnxq/xkitpkg/transport/http"
 
 	"github.com/chnxq/xkitpkg/middleware"
 	"github.com/chnxq/xkitpkg/middleware/metadata"
@@ -19,17 +19,17 @@ import (
 	"github.com/chnxq/xkitpkg/middleware/tracing"
 
 	conf "github.com/chnxq/xkitpkg/conf/v1"
-	"github.com/chnxq/xkitpkg/server_utils/middleware/validate"
+	"github.com/chnxq/xkitpkg/middleware/validate"
 )
 
 // CreateRestServer 创建REST服务端
-func CreateRestServer(cfg *conf.ServerConfig, mds ...middleware.Middleware) (*kRest.Server, error) {
+func CreateRestServer(cfg *conf.ServerConfig, mds ...middleware.Middleware) (*kHttp.Server, error) {
 	options, err := initRestConfig(cfg, mds...)
 	if err != nil {
 		return nil, err
 	}
 
-	srv := kRest.NewServer(options...)
+	srv := kHttp.NewServer(options...)
 
 	if cfg != nil && cfg.Server != nil && cfg.Server.Rest != nil && cfg.Server.Rest.GetEnablePprof() {
 		registerHttpPprof(srv)
@@ -39,15 +39,15 @@ func CreateRestServer(cfg *conf.ServerConfig, mds ...middleware.Middleware) (*kR
 }
 
 // initRestConfig 初始化REST服务配置
-func initRestConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kRest.ServerOption, error) {
+func initRestConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kHttp.ServerOption, error) {
 	if cfg == nil || cfg.Server == nil || cfg.Server.Rest == nil {
 		return nil, nil
 	}
 
-	var options []kRest.ServerOption
+	var options []kHttp.ServerOption
 
 	if cfg.Server.Rest.Cors != nil {
-		options = append(options, kRest.Filter(handlers.CORS(
+		options = append(options, kHttp.Filter(handlers.CORS(
 			handlers.AllowedHeaders(cfg.Server.Rest.Cors.Headers),
 			handlers.AllowedMethods(cfg.Server.Rest.Cors.Methods),
 			handlers.AllowedOrigins(cfg.Server.Rest.Cors.Origins),
@@ -66,6 +66,7 @@ func initRestConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kRe
 			ms = append(ms, validate.ProtoValidate())
 		}
 		if cfg.Server.Rest.Middleware.GetEnableCircuitBreaker() {
+			//ms = append(ms, circuitbreaker.NewBreaker()) //Fixme: 待实现 XQ
 		}
 		if cfg.Server.Rest.Middleware.Limiter != nil {
 			var limiter ratelimit.Limiter
@@ -81,16 +82,16 @@ func initRestConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kRe
 	}
 	ms = append(ms, mds...)
 
-	options = append(options, kRest.Middleware(ms...))
+	options = append(options, kHttp.Middleware(ms...))
 
 	if cfg.Server.Rest.Network != "" {
-		options = append(options, kRest.Network(cfg.Server.Rest.Network))
+		options = append(options, kHttp.Network(cfg.Server.Rest.Network))
 	}
 	if cfg.Server.Rest.Addr != "" {
-		options = append(options, kRest.Address(cfg.Server.Rest.Addr))
+		options = append(options, kHttp.Address(cfg.Server.Rest.Addr))
 	}
 	if cfg.Server.Rest.Timeout != nil {
-		options = append(options, kRest.Timeout(cfg.Server.Rest.Timeout.AsDuration()))
+		options = append(options, kHttp.Timeout(cfg.Server.Rest.Timeout.AsDuration()))
 	}
 
 	if cfg.Server.Rest.Tls != nil {
@@ -102,7 +103,7 @@ func initRestConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kRe
 		}
 
 		if tlsCfg != nil {
-			options = append(options, kRest.TLSConfig(tlsCfg))
+			options = append(options, kHttp.TLSConfig(tlsCfg))
 		}
 	}
 
@@ -110,7 +111,7 @@ func initRestConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kRe
 }
 
 // registerHttpPprof 注册pprof路由
-func registerHttpPprof(s *kRest.Server) {
+func registerHttpPprof(s *kHttp.Server) {
 	s.HandleFunc("/debug/pprof", pprof.Index)
 
 	s.HandleFunc("/debug/cmdline", pprof.Cmdline)

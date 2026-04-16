@@ -21,7 +21,7 @@ import (
 	kratosGrpc "github.com/chnxq/xkitpkg/transport/grpc"
 
 	conf "github.com/chnxq/xkitpkg/conf/v1"
-	"github.com/chnxq/xkitpkg/server_utils/middleware/validate"
+	"github.com/chnxq/xkitpkg/middleware/validate"
 )
 
 const defaultTimeout = 5 * time.Second
