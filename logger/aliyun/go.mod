@@ -5,8 +5,8 @@ go 1.26.0
 require (
 	github.com/aliyun/aliyun-log-go-sdk v0.1.117
 	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260411151307-f4b1647fa88b
-	github.com/chnxq/xkitpkg/logger v0.0.0-20260411151307-f4b1647fa88b
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260414172720-f4c5f6acbb3a
+	github.com/chnxq/xkitpkg/logger v0.0.0-20260414172720-f4c5f6acbb3a
 	google.golang.org/protobuf v1.36.11
 )
 
@@ -29,7 +29,7 @@ require (
 	github.com/prometheus/client_model v0.6.2 // indirect
 	github.com/prometheus/common v0.67.5 // indirect
 	github.com/prometheus/procfs v0.20.1 // indirect
-	github.com/prometheus/prometheus v0.311.1 // indirect
+	github.com/prometheus/prometheus v0.311.2 // indirect
 	go.opentelemetry.io/otel v1.43.0 // indirect
 	go.opentelemetry.io/otel/metric v1.43.0 // indirect
 	go.opentelemetry.io/otel/trace v1.43.0 // indirect

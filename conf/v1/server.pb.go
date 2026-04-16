@@ -275,17 +275,19 @@ func (x *Server) GetMachinery() *Server_Machinery {
 
 // REST
 type Server_REST struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Network       string                 `protobuf:"bytes,1,opt,name=network,proto3" json:"network,omitempty"`                                    // 网络
-	Addr          string                 `protobuf:"bytes,2,opt,name=addr,proto3" json:"addr,omitempty"`                                          // 服务监听地址
-	Timeout       *durationpb.Duration   `protobuf:"bytes,3,opt,name=timeout,proto3" json:"timeout,omitempty"`                                    // 超时时间
-	Cors          *Server_REST_CORS      `protobuf:"bytes,10,opt,name=cors,proto3" json:"cors,omitempty"`                                         // 服务监听地址
-	Middleware    *Middleware            `protobuf:"bytes,11,opt,name=middleware,proto3" json:"middleware,omitempty"`                             // 中间件
-	Tls           *TLS                   `protobuf:"bytes,12,opt,name=tls,proto3" json:"tls,omitempty"`                                           // TLS配置
-	EnableSwagger bool                   `protobuf:"varint,20,opt,name=enable_swagger,json=enableSwagger,proto3" json:"enable_swagger,omitempty"` // 启用SwaggerUI
-	EnablePprof   bool                   `protobuf:"varint,21,opt,name=enable_pprof,json=enablePprof,proto3" json:"enable_pprof,omitempty"`       // 启用pprof
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Network             string                 `protobuf:"bytes,1,opt,name=network,proto3" json:"network,omitempty"`                                                          // 网络
+	Addr                string                 `protobuf:"bytes,2,opt,name=addr,proto3" json:"addr,omitempty"`                                                                // 服务监听地址
+	Timeout             *durationpb.Duration   `protobuf:"bytes,3,opt,name=timeout,proto3" json:"timeout,omitempty"`                                                          // 超时时间
+	Cors                *Server_REST_CORS      `protobuf:"bytes,10,opt,name=cors,proto3" json:"cors,omitempty"`                                                               // 服务监听地址
+	Middleware          *Middleware            `protobuf:"bytes,11,opt,name=middleware,proto3" json:"middleware,omitempty"`                                                   // 中间件
+	Tls                 *TLS                   `protobuf:"bytes,12,opt,name=tls,proto3" json:"tls,omitempty"`                                                                 // TLS配置
+	SkipRedisTokenCheck bool                   `protobuf:"varint,18,opt,name=skip_redis_token_check,json=skipRedisTokenCheck,proto3" json:"skip_redis_token_check,omitempty"` // 跳过Redis令牌检查
+	EnableDbLogging     bool                   `protobuf:"varint,19,opt,name=enable_db_logging,json=enableDbLogging,proto3" json:"enable_db_logging,omitempty"`               // 启用API的数据库日志中间件
+	EnableSwagger       bool                   `protobuf:"varint,20,opt,name=enable_swagger,json=enableSwagger,proto3" json:"enable_swagger,omitempty"`                       // 启用SwaggerUI
+	EnablePprof         bool                   `protobuf:"varint,21,opt,name=enable_pprof,json=enablePprof,proto3" json:"enable_pprof,omitempty"`                             // 启用pprof
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *Server_REST) Reset() {
@@ -358,6 +360,20 @@ func (x *Server_REST) GetTls() *TLS {
 		return x.Tls
 	}
 	return nil
+}
+
+func (x *Server_REST) GetSkipRedisTokenCheck() bool {
+	if x != nil {
+		return x.SkipRedisTokenCheck
+	}
+	return false
+}
+
+func (x *Server_REST) GetEnableDbLogging() bool {
+	if x != nil {
+		return x.EnableDbLogging
+	}
+	return false
 }
 
 func (x *Server_REST) GetEnableSwagger() bool {
@@ -3484,7 +3500,7 @@ var File_v1_server_proto protoreflect.FileDescriptor
 
 const file_v1_server_proto_rawDesc = "" +
 	"\n" +
-	"\x0fv1/server.proto\x12\x04conf\x1a\x1egoogle/protobuf/duration.proto\x1a\x13v1/middleware.proto\x1a\fv1/tls.proto\x1a\x0ev1/proxy.proto\"\xc7X\n" +
+	"\x0fv1/server.proto\x12\x04conf\x1a\x1egoogle/protobuf/duration.proto\x1a\x13v1/middleware.proto\x1a\fv1/tls.proto\x1a\x0ev1/proxy.proto\"\xa8Y\n" +
 	"\x06Server\x12*\n" +
 	"\x04rest\x18\x01 \x01(\v2\x11.conf.Server.RESTH\x00R\x04rest\x88\x01\x01\x12*\n" +
 	"\x04grpc\x18\x02 \x01(\v2\x11.conf.Server.GRPCH\x01R\x04grpc\x88\x01\x01\x123\n" +
@@ -3508,7 +3524,7 @@ const file_v1_server_proto_rawDesc = "" +
 	"\asignalr\x18\x17 \x01(\v2\x14.conf.Server.SignalRH\x11R\asignalr\x88\x01\x01\x12'\n" +
 	"\x03mcp\x18\x18 \x01(\v2\x10.conf.Server.MCPH\x12R\x03mcp\x88\x01\x01\x12-\n" +
 	"\x05asynq\x18\x1e \x01(\v2\x12.conf.Server.AsynqH\x13R\x05asynq\x88\x01\x01\x129\n" +
-	"\tmachinery\x18\x1f \x01(\v2\x16.conf.Server.MachineryH\x14R\tmachinery\x88\x01\x01\x1a\x84\x03\n" +
+	"\tmachinery\x18\x1f \x01(\v2\x16.conf.Server.MachineryH\x14R\tmachinery\x88\x01\x01\x1a\xe5\x03\n" +
 	"\x04REST\x12\x18\n" +
 	"\anetwork\x18\x01 \x01(\tR\anetwork\x12\x12\n" +
 	"\x04addr\x18\x02 \x01(\tR\x04addr\x123\n" +
@@ -3518,7 +3534,9 @@ const file_v1_server_proto_rawDesc = "" +
 	"\n" +
 	"middleware\x18\v \x01(\v2\x10.conf.MiddlewareR\n" +
 	"middleware\x12\x1b\n" +
-	"\x03tls\x18\f \x01(\v2\t.conf.TLSR\x03tls\x12%\n" +
+	"\x03tls\x18\f \x01(\v2\t.conf.TLSR\x03tls\x123\n" +
+	"\x16skip_redis_token_check\x18\x12 \x01(\bR\x13skipRedisTokenCheck\x12*\n" +
+	"\x11enable_db_logging\x18\x13 \x01(\bR\x0fenableDbLogging\x12%\n" +
 	"\x0eenable_swagger\x18\x14 \x01(\bR\renableSwagger\x12!\n" +
 	"\fenable_pprof\x18\x15 \x01(\bR\venablePprof\x1aT\n" +
 	"\x04CORS\x12\x18\n" +

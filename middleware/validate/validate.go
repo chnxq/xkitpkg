@@ -3,6 +3,9 @@ package validate
 import (
 	"context"
 
+	"buf.build/go/protovalidate"
+	"google.golang.org/protobuf/proto"
+
 	"github.com/chnxq/xkitmod/errors"
 	"github.com/chnxq/xkitpkg/middleware"
 )
@@ -54,6 +57,28 @@ func Validator(validators ...ValidatorFunc) middleware.Middleware {
 					return nil, errors.BadRequest("VALIDATOR", err.Error()).WithCause(err)
 				}
 			}
+			return handler(ctx, req)
+		}
+	}
+}
+
+// ProtoValidate is a middleware that validates the request message with [protovalidate](https://github.com/bufbuild/protovalidate)
+func ProtoValidate() middleware.Middleware {
+	return func(handler middleware.Handler) middleware.Handler {
+		return func(ctx context.Context, req any) (reply any, err error) {
+			if msg, ok := req.(proto.Message); ok {
+				if err := protovalidate.Validate(msg); err != nil {
+					return nil, errors.BadRequest("VALIDATOR", err.Error()).WithCause(err)
+				}
+			}
+
+			// to compatible with the [old validator](https://github.com/envoyproxy/protoc-gen-validate)
+			if v, ok := req.(validator); ok {
+				if err := v.Validate(); err != nil {
+					return nil, errors.BadRequest("VALIDATOR", err.Error()).WithCause(err)
+				}
+			}
+
 			return handler(ctx, req)
 		}
 	}

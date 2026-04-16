@@ -28,6 +28,8 @@ message Server {
     Middleware middleware = 11;  // 中间件
     TLS tls = 12;  // TLS配置
 
+    bool skip_redis_token_check = 18;  // 跳过Redis令牌检查
+    bool enable_db_logging = 19;  // 启用API的数据库日志中间件
     bool enable_swagger = 20;  // 启用SwaggerUI
     bool enable_pprof = 21;  // 启用pprof
   }
@@ -40,7 +42,6 @@ message Server {
     google.protobuf.Duration timeout = 3; // 超时时间
 
     Middleware middleware = 4;
-
     TLS tls = 5;  // TLS配置
   }
 
