@@ -8,6 +8,13 @@ import "google/protobuf/duration.proto";
 
 // 中间件
 message Middleware {
+  // JWT白名单列表
+  message WhiteList {
+    repeated string prefix = 1;
+    repeated string regex = 2;
+    repeated string path = 3;
+    repeated string match = 4;
+  }
   // JWT校验
   message Auth {
     string method = 1; // JWT签名的算法，支持算法：HS256
@@ -18,6 +25,8 @@ message Middleware {
 
     optional string access_token_key_prefix = 5; // 访问令牌键前缀
     optional string refresh_token_key_prefix  = 6; // 刷新令牌键前缀
+
+    WhiteList white_list = 7; // JWT白名单列表(内置JWT+Casbin中间件时采用)
   }
 
   // 限流器

@@ -2664,6 +2664,7 @@ func (x *Server_KeepAlive) GetTls() *TLS {
 	return nil
 }
 
+// CORS配置
 type Server_REST_CORS struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Headers       []string               `protobuf:"bytes,1,rep,name=headers,proto3" json:"headers,omitempty"` // 允许的HTTP头

@@ -131,6 +131,75 @@ func (x *Middleware) GetEnableMetadata() bool {
 	return false
 }
 
+// JWT白名单列表
+type Middleware_WhiteList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Prefix        []string               `protobuf:"bytes,1,rep,name=prefix,proto3" json:"prefix,omitempty"`
+	Regex         []string               `protobuf:"bytes,2,rep,name=regex,proto3" json:"regex,omitempty"`
+	Path          []string               `protobuf:"bytes,3,rep,name=path,proto3" json:"path,omitempty"`
+	Match         []string               `protobuf:"bytes,4,rep,name=match,proto3" json:"match,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Middleware_WhiteList) Reset() {
+	*x = Middleware_WhiteList{}
+	mi := &file_v1_middleware_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Middleware_WhiteList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Middleware_WhiteList) ProtoMessage() {}
+
+func (x *Middleware_WhiteList) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_middleware_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Middleware_WhiteList.ProtoReflect.Descriptor instead.
+func (*Middleware_WhiteList) Descriptor() ([]byte, []int) {
+	return file_v1_middleware_proto_rawDescGZIP(), []int{0, 0}
+}
+
+func (x *Middleware_WhiteList) GetPrefix() []string {
+	if x != nil {
+		return x.Prefix
+	}
+	return nil
+}
+
+func (x *Middleware_WhiteList) GetRegex() []string {
+	if x != nil {
+		return x.Regex
+	}
+	return nil
+}
+
+func (x *Middleware_WhiteList) GetPath() []string {
+	if x != nil {
+		return x.Path
+	}
+	return nil
+}
+
+func (x *Middleware_WhiteList) GetMatch() []string {
+	if x != nil {
+		return x.Match
+	}
+	return nil
+}
+
 // JWT校验
 type Middleware_Auth struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
@@ -140,13 +209,14 @@ type Middleware_Auth struct {
 	RefreshTokenExpires   *durationpb.Duration   `protobuf:"bytes,4,opt,name=refresh_token_expires,json=refreshTokenExpires,proto3,oneof" json:"refresh_token_expires,omitempty"`         // 刷新令牌过期时间
 	AccessTokenKeyPrefix  *string                `protobuf:"bytes,5,opt,name=access_token_key_prefix,json=accessTokenKeyPrefix,proto3,oneof" json:"access_token_key_prefix,omitempty"`    // 访问令牌键前缀
 	RefreshTokenKeyPrefix *string                `protobuf:"bytes,6,opt,name=refresh_token_key_prefix,json=refreshTokenKeyPrefix,proto3,oneof" json:"refresh_token_key_prefix,omitempty"` // 刷新令牌键前缀
+	WhiteList             *Middleware_WhiteList  `protobuf:"bytes,7,opt,name=white_list,json=whiteList,proto3" json:"white_list,omitempty"`                                               // JWT白名单列表(内置JWT+Casbin中间件时采用)
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
 
 func (x *Middleware_Auth) Reset() {
 	*x = Middleware_Auth{}
-	mi := &file_v1_middleware_proto_msgTypes[1]
+	mi := &file_v1_middleware_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -158,7 +228,7 @@ func (x *Middleware_Auth) String() string {
 func (*Middleware_Auth) ProtoMessage() {}
 
 func (x *Middleware_Auth) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_middleware_proto_msgTypes[1]
+	mi := &file_v1_middleware_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -171,7 +241,7 @@ func (x *Middleware_Auth) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Middleware_Auth.ProtoReflect.Descriptor instead.
 func (*Middleware_Auth) Descriptor() ([]byte, []int) {
-	return file_v1_middleware_proto_rawDescGZIP(), []int{0, 0}
+	return file_v1_middleware_proto_rawDescGZIP(), []int{0, 1}
 }
 
 func (x *Middleware_Auth) GetMethod() string {
@@ -216,6 +286,13 @@ func (x *Middleware_Auth) GetRefreshTokenKeyPrefix() string {
 	return ""
 }
 
+func (x *Middleware_Auth) GetWhiteList() *Middleware_WhiteList {
+	if x != nil {
+		return x.WhiteList
+	}
+	return nil
+}
+
 // 限流器
 type Middleware_RateLimiter struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -226,7 +303,7 @@ type Middleware_RateLimiter struct {
 
 func (x *Middleware_RateLimiter) Reset() {
 	*x = Middleware_RateLimiter{}
-	mi := &file_v1_middleware_proto_msgTypes[2]
+	mi := &file_v1_middleware_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -238,7 +315,7 @@ func (x *Middleware_RateLimiter) String() string {
 func (*Middleware_RateLimiter) ProtoMessage() {}
 
 func (x *Middleware_RateLimiter) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_middleware_proto_msgTypes[2]
+	mi := &file_v1_middleware_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -251,7 +328,7 @@ func (x *Middleware_RateLimiter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Middleware_RateLimiter.ProtoReflect.Descriptor instead.
 func (*Middleware_RateLimiter) Descriptor() ([]byte, []int) {
-	return file_v1_middleware_proto_rawDescGZIP(), []int{0, 1}
+	return file_v1_middleware_proto_rawDescGZIP(), []int{0, 2}
 }
 
 func (x *Middleware_RateLimiter) GetName() string {
@@ -274,7 +351,7 @@ type Middleware_Metrics struct {
 
 func (x *Middleware_Metrics) Reset() {
 	*x = Middleware_Metrics{}
-	mi := &file_v1_middleware_proto_msgTypes[3]
+	mi := &file_v1_middleware_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -286,7 +363,7 @@ func (x *Middleware_Metrics) String() string {
 func (*Middleware_Metrics) ProtoMessage() {}
 
 func (x *Middleware_Metrics) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_middleware_proto_msgTypes[3]
+	mi := &file_v1_middleware_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -299,7 +376,7 @@ func (x *Middleware_Metrics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Middleware_Metrics.ProtoReflect.Descriptor instead.
 func (*Middleware_Metrics) Descriptor() ([]byte, []int) {
-	return file_v1_middleware_proto_rawDescGZIP(), []int{0, 2}
+	return file_v1_middleware_proto_rawDescGZIP(), []int{0, 3}
 }
 
 func (x *Middleware_Metrics) GetHistogram() bool {
@@ -334,7 +411,7 @@ var File_v1_middleware_proto protoreflect.FileDescriptor
 
 const file_v1_middleware_proto_rawDesc = "" +
 	"\n" +
-	"\x13v1/middleware.proto\x12\x04conf\x1a\x1egoogle/protobuf/duration.proto\"\xf7\a\n" +
+	"\x13v1/middleware.proto\x12\x04conf\x1a\x1egoogle/protobuf/duration.proto\"\x97\t\n" +
 	"\n" +
 	"Middleware\x126\n" +
 	"\alimiter\x18\x01 \x01(\v2\x1c.conf.Middleware.RateLimiterR\alimiter\x122\n" +
@@ -346,14 +423,21 @@ const file_v1_middleware_proto_rawDesc = "" +
 	"\x0eenable_tracing\x18\f \x01(\bR\renableTracing\x12'\n" +
 	"\x0fenable_validate\x18\r \x01(\bR\x0eenableValidate\x124\n" +
 	"\x16enable_circuit_breaker\x18\x0e \x01(\bR\x14enableCircuitBreaker\x12'\n" +
-	"\x0fenable_metadata\x18\x0f \x01(\bR\x0eenableMetadata\x1a\xbc\x03\n" +
+	"\x0fenable_metadata\x18\x0f \x01(\bR\x0eenableMetadata\x1ac\n" +
+	"\tWhiteList\x12\x16\n" +
+	"\x06prefix\x18\x01 \x03(\tR\x06prefix\x12\x14\n" +
+	"\x05regex\x18\x02 \x03(\tR\x05regex\x12\x12\n" +
+	"\x04path\x18\x03 \x03(\tR\x04path\x12\x14\n" +
+	"\x05match\x18\x04 \x03(\tR\x05match\x1a\xf7\x03\n" +
 	"\x04Auth\x12\x16\n" +
 	"\x06method\x18\x01 \x01(\tR\x06method\x12\x10\n" +
 	"\x03key\x18\x02 \x01(\tR\x03key\x12P\n" +
 	"\x14access_token_expires\x18\x03 \x01(\v2\x19.google.protobuf.DurationH\x00R\x12accessTokenExpires\x88\x01\x01\x12R\n" +
 	"\x15refresh_token_expires\x18\x04 \x01(\v2\x19.google.protobuf.DurationH\x01R\x13refreshTokenExpires\x88\x01\x01\x12:\n" +
 	"\x17access_token_key_prefix\x18\x05 \x01(\tH\x02R\x14accessTokenKeyPrefix\x88\x01\x01\x12<\n" +
-	"\x18refresh_token_key_prefix\x18\x06 \x01(\tH\x03R\x15refreshTokenKeyPrefix\x88\x01\x01B\x17\n" +
+	"\x18refresh_token_key_prefix\x18\x06 \x01(\tH\x03R\x15refreshTokenKeyPrefix\x88\x01\x01\x129\n" +
+	"\n" +
+	"white_list\x18\a \x01(\v2\x1a.conf.Middleware.WhiteListR\twhiteListB\x17\n" +
 	"\x15_access_token_expiresB\x18\n" +
 	"\x16_refresh_token_expiresB\x1a\n" +
 	"\x18_access_token_key_prefixB\x1b\n" +
@@ -378,25 +462,27 @@ func file_v1_middleware_proto_rawDescGZIP() []byte {
 	return file_v1_middleware_proto_rawDescData
 }
 
-var file_v1_middleware_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_v1_middleware_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_v1_middleware_proto_goTypes = []any{
 	(*Middleware)(nil),             // 0: conf.Middleware
-	(*Middleware_Auth)(nil),        // 1: conf.Middleware.Auth
-	(*Middleware_RateLimiter)(nil), // 2: conf.Middleware.RateLimiter
-	(*Middleware_Metrics)(nil),     // 3: conf.Middleware.Metrics
-	(*durationpb.Duration)(nil),    // 4: google.protobuf.Duration
+	(*Middleware_WhiteList)(nil),   // 1: conf.Middleware.WhiteList
+	(*Middleware_Auth)(nil),        // 2: conf.Middleware.Auth
+	(*Middleware_RateLimiter)(nil), // 3: conf.Middleware.RateLimiter
+	(*Middleware_Metrics)(nil),     // 4: conf.Middleware.Metrics
+	(*durationpb.Duration)(nil),    // 5: google.protobuf.Duration
 }
 var file_v1_middleware_proto_depIdxs = []int32{
-	2, // 0: conf.Middleware.limiter:type_name -> conf.Middleware.RateLimiter
-	3, // 1: conf.Middleware.metrics:type_name -> conf.Middleware.Metrics
-	1, // 2: conf.Middleware.auth:type_name -> conf.Middleware.Auth
-	4, // 3: conf.Middleware.Auth.access_token_expires:type_name -> google.protobuf.Duration
-	4, // 4: conf.Middleware.Auth.refresh_token_expires:type_name -> google.protobuf.Duration
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	3, // 0: conf.Middleware.limiter:type_name -> conf.Middleware.RateLimiter
+	4, // 1: conf.Middleware.metrics:type_name -> conf.Middleware.Metrics
+	2, // 2: conf.Middleware.auth:type_name -> conf.Middleware.Auth
+	5, // 3: conf.Middleware.Auth.access_token_expires:type_name -> google.protobuf.Duration
+	5, // 4: conf.Middleware.Auth.refresh_token_expires:type_name -> google.protobuf.Duration
+	1, // 5: conf.Middleware.Auth.white_list:type_name -> conf.Middleware.WhiteList
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_v1_middleware_proto_init() }
@@ -404,14 +490,14 @@ func file_v1_middleware_proto_init() {
 	if File_v1_middleware_proto != nil {
 		return
 	}
-	file_v1_middleware_proto_msgTypes[1].OneofWrappers = []any{}
+	file_v1_middleware_proto_msgTypes[2].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_v1_middleware_proto_rawDesc), len(file_v1_middleware_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

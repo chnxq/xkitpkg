@@ -14,6 +14,7 @@ import "v1/proxy.proto";
 message Server {
   // REST
   message REST {
+    // CORS配置
     message CORS {
       repeated string headers = 1;  // 允许的HTTP头
       repeated string methods = 2;  // 允许的HTTP方法
