@@ -23,6 +23,8 @@ import (
 )
 
 // CreateRestServer 创建REST服务端
+// cfg 服务配置
+// mds 中间件集合 (通常包含：访问日志，认证授权...)
 func CreateRestServer(cfg *conf.ServerConfig, mds ...middleware.Middleware) (*kHttp.Server, error) {
 	options, err := initRestConfig(cfg, mds...)
 	if err != nil {
@@ -39,6 +41,7 @@ func CreateRestServer(cfg *conf.ServerConfig, mds ...middleware.Middleware) (*kH
 }
 
 // initRestConfig 初始化REST服务配置
+// include：recovery, tracing, validate, circuit breaker, rate limit, metadata)
 func initRestConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kHttp.ServerOption, error) {
 	if cfg == nil || cfg.Server == nil || cfg.Server.Rest == nil {
 		return nil, nil
