@@ -3,7 +3,7 @@ module github.com/chnxq/xkitpkg/tracer
 go 1.26
 
 require (
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260416153812-618f4beb7d78
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260417145708-1fba65f27586
 	go.opentelemetry.io/otel v1.43.0
 	go.opentelemetry.io/otel/exporters/jaeger v1.17.0
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.43.0

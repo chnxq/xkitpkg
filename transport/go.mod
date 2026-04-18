@@ -7,9 +7,9 @@ require (
 	github.com/chnxq/xkitmod/algs v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/selector v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg v0.0.0-20260416153812-618f4beb7d78
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260416153812-618f4beb7d78
-	github.com/chnxq/xkitpkg/middleware v0.0.0-20260416153812-618f4beb7d78
+	github.com/chnxq/xkitpkg v0.0.0-20260417145708-1fba65f27586
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260417145708-1fba65f27586
+	github.com/chnxq/xkitpkg/middleware v0.0.0-20260417145708-1fba65f27586
 	github.com/gin-gonic/gin v1.12.0
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/mux v1.8.1
