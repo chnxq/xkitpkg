@@ -3,13 +3,13 @@ module github.com/chnxq/xkitpkg/app
 go 1.26.0
 
 require (
-	github.com/chnxq/x-utils v0.0.0-20260331165454-35d20273b087
+	github.com/chnxq/x-utils v0.0.0-20260417172026-26dca83dffdf
 	github.com/chnxq/xkitmod v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260413152101-92ac4a23ffa1
-	github.com/chnxq/xkitpkg/config v0.0.0-20260413152101-92ac4a23ffa1
-	github.com/chnxq/xkitpkg/registry v0.0.0-20260413152101-92ac4a23ffa1
-	github.com/chnxq/xkitpkg/transport v0.0.0-20260413152101-92ac4a23ffa1
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260418035512-1c3a2a7d2edc
+	github.com/chnxq/xkitpkg/config v0.0.0-20260418035512-1c3a2a7d2edc
+	github.com/chnxq/xkitpkg/registry v0.0.0-20260418035512-1c3a2a7d2edc
+	github.com/chnxq/xkitpkg/transport v0.0.0-20260418035512-1c3a2a7d2edc
 	github.com/google/uuid v1.6.0
 	golang.org/x/sync v0.20.0
 	google.golang.org/protobuf v1.36.11

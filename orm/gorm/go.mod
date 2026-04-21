@@ -5,7 +5,7 @@ go 1.26.0
 require (
 	github.com/chnxq/x-crud/gorm v0.0.0-20260411151944-a61448f9f7bc
 	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260411151307-f4b1647fa88b
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260418035512-1c3a2a7d2edc
 )
 
 require (
@@ -14,19 +14,19 @@ require (
 	cloud.google.com/go/auth/oauth2adapt v0.2.8 // indirect
 	cloud.google.com/go/bigquery v1.76.0 // indirect
 	cloud.google.com/go/compute/metadata v0.9.0 // indirect
-	cloud.google.com/go/iam v1.8.0 // indirect
+	cloud.google.com/go/iam v1.9.0 // indirect
 	filippo.io/edwards25519 v1.2.0 // indirect
 	github.com/ClickHouse/ch-go v0.71.0 // indirect
-	github.com/ClickHouse/clickhouse-go/v2 v2.44.0 // indirect
+	github.com/ClickHouse/clickhouse-go/v2 v2.45.0 // indirect
 	github.com/HuaweiCloudDeveloper/gaussdb-go v1.0.0-rc1 // indirect
 	github.com/andybalholm/brotli v1.2.1 // indirect
 	github.com/apache/arrow/go/v15 v15.0.2 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/chnxq/x-crud/api v0.0.0-20260411051743-72a5a38c608a // indirect
-	github.com/chnxq/x-crud/pagination v0.0.0-20260411051743-72a5a38c608a // indirect
-	github.com/chnxq/x-utils v0.0.0-20260331165454-35d20273b087 // indirect
-	github.com/chnxq/x-utils/mapper v0.0.0-20260331165454-35d20273b087 // indirect
+	github.com/chnxq/x-crud/api v0.0.0-20260411151944-a61448f9f7bc // indirect
+	github.com/chnxq/x-crud/pagination v0.0.0-20260411151944-a61448f9f7bc // indirect
+	github.com/chnxq/x-utils v0.0.0-20260417172026-26dca83dffdf // indirect
+	github.com/chnxq/x-utils/mapper v0.0.0-20260417172026-26dca83dffdf // indirect
 	github.com/chnxq/xkitmod v0.0.0-20260411132219-50da08594d1b // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
@@ -45,12 +45,12 @@ require (
 	github.com/google/gnostic-models v0.7.1 // indirect
 	github.com/google/s2a-go v0.1.9 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/googleapis/enterprise-certificate-proxy v0.3.14 // indirect
-	github.com/googleapis/gax-go/v2 v2.21.0 // indirect
+	github.com/googleapis/enterprise-certificate-proxy v0.3.15 // indirect
+	github.com/googleapis/gax-go/v2 v2.22.0 // indirect
 	github.com/hashicorp/go-version v1.9.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
-	github.com/jackc/pgx/v5 v5.9.1 // indirect
+	github.com/jackc/pgx/v5 v5.9.2 // indirect
 	github.com/jackc/puddle/v2 v2.2.2 // indirect
 	github.com/jinzhu/copier v0.4.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
@@ -74,7 +74,7 @@ require (
 	github.com/sirupsen/logrus v1.9.4 // indirect
 	github.com/tjfoc/gmsm v1.4.1 // indirect
 	github.com/zeebo/xxh3 v1.1.0 // indirect
-	go.einride.tech/aip v0.84.0 // indirect
+	go.einride.tech/aip v0.85.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.68.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.68.0 // indirect
@@ -90,15 +90,15 @@ require (
 	golang.org/x/oauth2 v0.36.0 // indirect
 	golang.org/x/sync v0.20.0 // indirect
 	golang.org/x/sys v0.43.0 // indirect
-	golang.org/x/telemetry v0.0.0-20260409153401-be6f6cb8b1fa // indirect
+	golang.org/x/telemetry v0.0.0-20260414141209-fac6e1c83189 // indirect
 	golang.org/x/text v0.36.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
 	golang.org/x/tools v0.44.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
-	google.golang.org/api v0.275.0 // indirect
-	google.golang.org/genproto v0.0.0-20260406210006-6f92a3bedf2d // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20260406210006-6f92a3bedf2d // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260406210006-6f92a3bedf2d // indirect
+	google.golang.org/api v0.276.0 // indirect
+	google.golang.org/genproto v0.0.0-20260420184626-e10c466a9529 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20260420184626-e10c466a9529 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260420184626-e10c466a9529 // indirect
 	google.golang.org/grpc v1.80.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 	gorm.io/driver/bigquery v1.2.0 // indirect
@@ -115,5 +115,5 @@ require (
 	modernc.org/libc v1.72.0 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
-	modernc.org/sqlite v1.48.2 // indirect
+	modernc.org/sqlite v1.49.1 // indirect
 )

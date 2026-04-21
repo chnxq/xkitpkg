@@ -7,9 +7,9 @@ require (
 	github.com/chnxq/xkitmod/algs v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/selector v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg v0.0.0-20260417145708-1fba65f27586
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260417145708-1fba65f27586
-	github.com/chnxq/xkitpkg/middleware v0.0.0-20260417145708-1fba65f27586
+	github.com/chnxq/xkitpkg v0.0.0-20260418035512-1c3a2a7d2edc
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260418035512-1c3a2a7d2edc
+	github.com/chnxq/xkitpkg/middleware v0.0.0-20260418035512-1c3a2a7d2edc
 	github.com/gin-gonic/gin v1.12.0
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/mux v1.8.1
@@ -66,7 +66,7 @@ require (
 	golang.org/x/sys v0.43.0 // indirect
 	golang.org/x/text v0.36.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20260414002931-afd174a4e478 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260414002931-afd174a4e478 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20260420184626-e10c466a9529 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260420184626-e10c466a9529 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

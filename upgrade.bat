@@ -4,6 +4,10 @@ set DIR=%cd%
 go get all
 go mod tidy
 
+cd %DIR%\app
+go get all
+go mod tidy
+
 cd %DIR%\cache\redis
 go get all
 go mod tidy

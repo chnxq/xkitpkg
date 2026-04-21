@@ -4,8 +4,8 @@ go 1.26.0
 
 require (
 	github.com/chnxq/xkitmod/config v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260417145708-1fba65f27586
-	github.com/chnxq/xkitpkg/config v0.0.0-20260417145708-1fba65f27586
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260418035512-1c3a2a7d2edc
+	github.com/chnxq/xkitpkg/config v0.0.0-20260418035512-1c3a2a7d2edc
 	k8s.io/api v0.35.4
 	k8s.io/apimachinery v0.35.4
 	k8s.io/client-go v0.35.4
@@ -20,7 +20,7 @@ require (
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/fxamacker/cbor/v2 v2.9.1 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
-	github.com/go-openapi/jsonpointer v0.23.0 // indirect
+	github.com/go-openapi/jsonpointer v0.23.1 // indirect
 	github.com/go-openapi/jsonreference v0.21.5 // indirect
 	github.com/go-openapi/swag v0.26.0 // indirect
 	github.com/go-openapi/swag/cmdutils v0.26.0 // indirect

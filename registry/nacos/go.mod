@@ -5,8 +5,8 @@ go 1.26.0
 require (
 	github.com/chnxq/xkitmod v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260417145708-1fba65f27586
-	github.com/chnxq/xkitpkg/registry v0.0.0-20260417145708-1fba65f27586
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260418035512-1c3a2a7d2edc
+	github.com/chnxq/xkitpkg/registry v0.0.0-20260418035512-1c3a2a7d2edc
 	github.com/nacos-group/nacos-sdk-go/v2 v2.3.5
 	github.com/stretchr/testify v1.11.1
 )
@@ -67,7 +67,7 @@ require (
 	golang.org/x/sys v0.43.0 // indirect
 	golang.org/x/text v0.36.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260414002931-afd174a4e478 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260420184626-e10c466a9529 // indirect
 	google.golang.org/grpc v1.80.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/ini.v1 v1.67.1 // indirect

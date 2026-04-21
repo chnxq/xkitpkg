@@ -7,8 +7,8 @@ replace github.com/armon/go-metrics => github.com/hashicorp/go-metrics v0.4.1
 require (
 	github.com/chnxq/xkitmod/config v0.0.0-20260411132219-50da08594d1b
 	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260417145708-1fba65f27586
-	github.com/chnxq/xkitpkg/config v0.0.0-20260417145708-1fba65f27586
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260418035512-1c3a2a7d2edc
+	github.com/chnxq/xkitpkg/config v0.0.0-20260418035512-1c3a2a7d2edc
 	github.com/hashicorp/consul/api v1.34.1
 )
 
