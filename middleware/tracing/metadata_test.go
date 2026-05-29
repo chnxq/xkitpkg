@@ -26,9 +26,9 @@ func TestMetadata_Inject(t *testing.T) {
 			want: "https://xkit.dev",
 		},
 		{
-			name: "https://github.com/xkit/kratos",
-			args: args{"https://github.com/xkit/kratos", propagation.HeaderCarrier{"mode": []string{"test"}}},
-			want: "https://github.com/xkit/kratos",
+			name: "https://github.com/xkit/xkit",
+			args: args{"https://github.com/xkit/xkit", propagation.HeaderCarrier{"mode": []string{"test"}}},
+			want: "https://github.com/xkit/xkit",
 		},
 	}
 	for _, tt := range tests {
@@ -64,15 +64,15 @@ func TestMetadata_Extract(t *testing.T) {
 			want: "https://xkit.dev",
 		},
 		{
-			name: "https://github.com/xkit/kratos",
+			name: "https://github.com/xkit/xkit",
 			args: args{
 				parent:  metadata.NewServerContext(context.Background(), metadata.Metadata{}),
-				carrier: propagation.HeaderCarrier{"X-Md-Service-Name": []string{"https://github.com/xkit/kratos"}},
+				carrier: propagation.HeaderCarrier{"X-Md-Service-Name": []string{"https://github.com/xkit/xkit"}},
 			},
-			want: "https://github.com/xkit/kratos",
+			want: "https://github.com/xkit/xkit",
 		},
 		{
-			name: "https://github.com/xkit/kratos",
+			name: "https://github.com/xkit/xkit",
 			args: args{
 				parent:  metadata.NewServerContext(context.Background(), metadata.Metadata{}),
 				carrier: propagation.HeaderCarrier{"X-Md-Service-Name": nil},

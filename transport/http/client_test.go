@@ -165,7 +165,7 @@ type mockWatcher struct{}
 func (m *mockWatcher) Next() ([]*registry.ServiceInstance, error) {
 	instance := &registry.ServiceInstance{
 		ID:        "1",
-		Name:      "kratos",
+		Name:      "xkit",
 		Version:   "v1",
 		Metadata:  map[string]string{},
 		Endpoints: []string{fmt.Sprintf("http://127.0.0.1:9001?isSecure=%s", strconv.FormatBool(false))},
@@ -315,7 +315,7 @@ func TestNewClient(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	_, err = NewClient(context.Background(), WithEndpoint("127.0.0.1:9999"), WithTLSConfig(&tls.Config{ServerName: "www.kratos.com", RootCAs: nil}))
+	_, err = NewClient(context.Background(), WithEndpoint("127.0.0.1:9999"), WithTLSConfig(&tls.Config{ServerName: "www.xkit.com", RootCAs: nil}))
 	if err != nil {
 		t.Error(err)
 	}
@@ -351,18 +351,18 @@ func TestNewClient(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err = client.Invoke(context.Background(), http.MethodPost, "/go", map[string]string{"name": "kratos"}, nil, EmptyCallOption{}, &mockCallOption{})
+	err = client.Invoke(context.Background(), http.MethodPost, "/go", map[string]string{"name": "xkit"}, nil, EmptyCallOption{}, &mockCallOption{})
 	if err == nil {
 		t.Error("err should not be equal to nil")
 	}
-	err = client.Invoke(context.Background(), http.MethodPost, "/go", map[string]string{"name": "kratos"}, nil, EmptyCallOption{}, &mockCallOption{needErr: true})
+	err = client.Invoke(context.Background(), http.MethodPost, "/go", map[string]string{"name": "xkit"}, nil, EmptyCallOption{}, &mockCallOption{needErr: true})
 	if err == nil {
 		t.Error("err should be equal to callOption err")
 	}
 	client.opts.encoder = func(context.Context, string, any) (body []byte, err error) {
 		return nil, errors.New("mock test encoder error")
 	}
-	err = client.Invoke(context.Background(), http.MethodPost, "/go", map[string]string{"name": "kratos"}, nil, EmptyCallOption{})
+	err = client.Invoke(context.Background(), http.MethodPost, "/go", map[string]string{"name": "xkit"}, nil, EmptyCallOption{})
 	if err == nil {
 		t.Error("err should be equal to encoder error")
 	}

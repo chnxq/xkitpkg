@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/chnxq/xkitmod/algs/circuitbreaker"
-	kratoserrors "github.com/chnxq/xkitmod/errors"
+	xkiterrors "github.com/chnxq/xkitmod/errors"
 
 	"github.com/chnxq/xkitpkg/transport"
 
@@ -65,7 +65,7 @@ func TestServer(_ *testing.T) {
 		return "Hello valid", nil
 	}
 	nextInvalid := func(context.Context, any) (any, error) {
-		return nil, kratoserrors.InternalServer("", "")
+		return nil, xkiterrors.InternalServer("", "")
 	}
 
 	ctx := transport.NewClientContext(context.Background(), &transportMock{})

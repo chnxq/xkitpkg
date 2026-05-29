@@ -3,7 +3,7 @@ version: v1
 deps:
   - 'buf.build/googleapis/googleapis'
   - 'buf.build/envoyproxy/protoc-gen-validate'
-  - 'buf.build/kratos/apis'
+  - 'buf.build/xkit/apis'
   - 'buf.build/gnostic/gnostic'
   - 'buf.build/gogo/protobuf'
 

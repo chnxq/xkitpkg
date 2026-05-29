@@ -18,7 +18,7 @@ import (
 	"github.com/chnxq/xkitpkg/middleware/recovery"
 	"github.com/chnxq/xkitpkg/middleware/selector"
 	"github.com/chnxq/xkitpkg/middleware/tracing"
-	kratosGrpc "github.com/chnxq/xkitpkg/transport/grpc"
+	xkitGrpc "github.com/chnxq/xkitpkg/transport/grpc"
 
 	conf "github.com/chnxq/xkitpkg/conf/v1"
 	"github.com/chnxq/xkitpkg/middleware/validate"
@@ -28,9 +28,9 @@ const defaultTimeout = 5 * time.Second
 
 // CreateGrpcClient 创建GRPC客户端
 func CreateGrpcClient(ctx context.Context, r registry.Discovery, serviceName string, cfg *conf.ServerConfig, mds ...middleware.Middleware) (grpc.ClientConnInterface, error) {
-	var options []kratosGrpc.ClientOption
+	var options []xkitGrpc.ClientOption
 
-	options = append(options, kratosGrpc.WithDiscovery(r))
+	options = append(options, xkitGrpc.WithDiscovery(r))
 
 	var endpoint string
 	if strings.HasPrefix(serviceName, "discovery:///") {
@@ -38,7 +38,7 @@ func CreateGrpcClient(ctx context.Context, r registry.Discovery, serviceName str
 	} else {
 		endpoint = "discovery:///" + serviceName
 	}
-	options = append(options, kratosGrpc.WithEndpoint(endpoint))
+	options = append(options, xkitGrpc.WithEndpoint(endpoint))
 
 	cfgs, err := initGrpcClientConfig(cfg, mds...)
 	if err != nil {
@@ -48,7 +48,7 @@ func CreateGrpcClient(ctx context.Context, r registry.Discovery, serviceName str
 
 	options = append(options, cfgs...)
 
-	conn, err := kratosGrpc.DialInsecure(ctx, options...)
+	conn, err := xkitGrpc.DialInsecure(ctx, options...)
 	if err != nil {
 		log.Fatalf("dial grpc client [%s] failed: %s", serviceName, err.Error())
 	}
@@ -56,18 +56,18 @@ func CreateGrpcClient(ctx context.Context, r registry.Discovery, serviceName str
 	return conn, nil
 }
 
-func initGrpcClientConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kratosGrpc.ClientOption, error) {
+func initGrpcClientConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]xkitGrpc.ClientOption, error) {
 	if cfg.Client == nil || cfg.Client.Grpc == nil {
 		return nil, nil
 	}
 
-	var options []kratosGrpc.ClientOption
+	var options []xkitGrpc.ClientOption
 
 	timeout := defaultTimeout
 	if cfg.Client.Grpc.Timeout != nil {
 		timeout = cfg.Client.Grpc.Timeout.AsDuration()
 	}
-	options = append(options, kratosGrpc.WithTimeout(timeout))
+	options = append(options, xkitGrpc.WithTimeout(timeout))
 
 	var ms []middleware.Middleware
 	if cfg.Client.Grpc.Middleware != nil {
@@ -86,7 +86,7 @@ func initGrpcClientConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) 
 	}
 	ms = append(ms, mds...)
 
-	options = append(options, kratosGrpc.WithMiddleware(ms...))
+	options = append(options, xkitGrpc.WithMiddleware(ms...))
 
 	if cfg.Client.Grpc.Tls != nil {
 		var tlsCfg *tls.Config
@@ -97,7 +97,7 @@ func initGrpcClientConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) 
 		}
 
 		if tlsCfg != nil {
-			options = append(options, kratosGrpc.WithTLSConfig(tlsCfg))
+			options = append(options, xkitGrpc.WithTLSConfig(tlsCfg))
 		}
 	}
 
@@ -105,8 +105,8 @@ func initGrpcClientConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) 
 }
 
 // CreateGrpcServer 创建GRPC服务端
-func CreateGrpcServer(cfg *conf.ServerConfig, mds ...middleware.Middleware) (*kratosGrpc.Server, error) {
-	var options []kratosGrpc.ServerOption
+func CreateGrpcServer(cfg *conf.ServerConfig, mds ...middleware.Middleware) (*xkitGrpc.Server, error) {
+	var options []xkitGrpc.ServerOption
 
 	cfgs, err := initGrpcServerConfig(cfg, mds...)
 	if err != nil {
@@ -116,17 +116,17 @@ func CreateGrpcServer(cfg *conf.ServerConfig, mds ...middleware.Middleware) (*kr
 
 	options = append(options, cfgs...)
 
-	srv := kratosGrpc.NewServer(options...)
+	srv := xkitGrpc.NewServer(options...)
 
 	return srv, nil
 }
 
-func initGrpcServerConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kratosGrpc.ServerOption, error) {
+func initGrpcServerConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]xkitGrpc.ServerOption, error) {
 	if cfg.Server == nil || cfg.Server.Grpc == nil {
 		return nil, nil
 	}
 
-	var options []kratosGrpc.ServerOption
+	var options []xkitGrpc.ServerOption
 
 	var ms []middleware.Middleware
 	if cfg.Server.Grpc.Middleware != nil {
@@ -155,7 +155,7 @@ func initGrpcServerConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) 
 	}
 	ms = append(ms, mds...)
 
-	options = append(options, kratosGrpc.Middleware(ms...))
+	options = append(options, xkitGrpc.Middleware(ms...))
 
 	if cfg.Server.Grpc.Tls != nil {
 		var tlsCfg *tls.Config
@@ -166,18 +166,18 @@ func initGrpcServerConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) 
 		}
 
 		if tlsCfg != nil {
-			options = append(options, kratosGrpc.TLSConfig(tlsCfg))
+			options = append(options, xkitGrpc.TLSConfig(tlsCfg))
 		}
 	}
 
 	if cfg.Server.Grpc.Network != "" {
-		options = append(options, kratosGrpc.Network(cfg.Server.Grpc.Network))
+		options = append(options, xkitGrpc.Network(cfg.Server.Grpc.Network))
 	}
 	if cfg.Server.Grpc.Addr != "" {
-		options = append(options, kratosGrpc.Address(cfg.Server.Grpc.Addr))
+		options = append(options, xkitGrpc.Address(cfg.Server.Grpc.Addr))
 	}
 	if cfg.Server.Grpc.Timeout != nil {
-		options = append(options, kratosGrpc.Timeout(cfg.Server.Grpc.Timeout.AsDuration()))
+		options = append(options, xkitGrpc.Timeout(cfg.Server.Grpc.Timeout.AsDuration()))
 	}
 
 	return options, nil

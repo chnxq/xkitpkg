@@ -86,7 +86,7 @@ This project uses external protobuf definitions from:
 
 - Google APIs (`buf.build/googleapis/googleapis`)
 - Protobuf Validation (`buf.build/envoyproxy/protoc-gen-validate`)
-- Kratos APIs (`buf.build/kratos/apis`)
+- xkit APIs (`buf.build/xkit/apis`)
 - Gnostic (`buf.build/gnostic/gnostic`)
 - Gogo Protobuf (`buf.build/gogo/protobuf`)
 

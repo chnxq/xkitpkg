@@ -96,8 +96,8 @@ func TestSetOperation(t *testing.T) {
 	tr := &Transport{}
 	ctx := transport.NewServerContext(context.Background(), tr)
 	SetOperation(ctx, "cnf")
-	if !reflect.DeepEqual(tr.operation, "kratos") {
-		t.Errorf("expect %v, got %v", "kratos", tr.operation)
+	if !reflect.DeepEqual(tr.operation, "xkit") {
+		t.Errorf("expect %v, got %v", "xkit", tr.operation)
 	}
 }
 

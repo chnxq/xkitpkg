@@ -16,7 +16,7 @@ import (
 	"github.com/chnxq/xkitmod/registry"
 )
 
-var ErrServiceInstanceNameEmpty = errors.New("kratos/nacos: ServiceInstance.Name can not be empty")
+var ErrServiceInstanceNameEmpty = errors.New("xkit/nacos: ServiceInstance.Name can not be empty")
 
 var (
 	_ registry.Registrar = (*Registry)(nil)

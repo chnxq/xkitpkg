@@ -41,20 +41,20 @@ func TestContextForm(t *testing.T) {
 
 	w = wrapper{
 		router: testRouter,
-		req:    &http.Request{Form: map[string][]string{"name": {"kratos"}}},
+		req:    &http.Request{Form: map[string][]string{"name": {"xkit"}}},
 		res:    nil,
 		w:      responseWriter{},
 	}
 	form = w.Form()
-	if !reflect.DeepEqual(form, url.Values{"name": {"kratos"}}) {
-		t.Errorf("expected %v, got %v", url.Values{"name": {"kratos"}}, form)
+	if !reflect.DeepEqual(form, url.Values{"name": {"xkit"}}) {
+		t.Errorf("expected %v, got %v", url.Values{"name": {"xkit"}}, form)
 	}
 }
 
 func TestContextQuery(t *testing.T) {
 	w := wrapper{
 		router: testRouter,
-		req:    &http.Request{URL: &url.URL{Scheme: "https", Host: "github.com", Path: "xkit/kratos", RawQuery: "page=1"}, Method: http.MethodPost},
+		req:    &http.Request{URL: &url.URL{Scheme: "https", Host: "github.com", Path: "xkit/xkit", RawQuery: "page=1"}, Method: http.MethodPost},
 		res:    nil,
 		w:      responseWriter{},
 	}

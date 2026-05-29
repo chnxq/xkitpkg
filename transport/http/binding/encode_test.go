@@ -90,31 +90,31 @@ func TestEncodeURL(t *testing.T) {
 			pathTemplate: "http://helloworld.Greeter/helloworld/[{}]/sub/[{sub.naming}]",
 			request:      &binding.HelloRequest{Sub: &binding.Sub{Name: "cnf"}},
 			needQuery:    false,
-			want:         "http://helloworld.Greeter/helloworld/[{}]/sub/[kratos]",
+			want:         "http://helloworld.Greeter/helloworld/[{}]/sub/[xkit]",
 		},
 		{
 			pathTemplate: "http://helloworld.Greeter/helloworld/[{}]/sub/[{sub.naming}]/{[]}",
-			request:      &binding.HelloRequest{Sub: &binding.Sub{Name: "kratos"}},
+			request:      &binding.HelloRequest{Sub: &binding.Sub{Name: "xkit"}},
 			needQuery:    false,
-			want:         "http://helloworld.Greeter/helloworld/[{}]/sub/[kratos]/{[]}",
+			want:         "http://helloworld.Greeter/helloworld/[{}]/sub/[xkit]/{[]}",
 		},
 		{
 			pathTemplate: "http://helloworld.Greeter/helloworld/{[sub]}/[{sub.naming}]",
-			request:      &binding.HelloRequest{Sub: &binding.Sub{Name: "kratos"}},
+			request:      &binding.HelloRequest{Sub: &binding.Sub{Name: "xkit"}},
 			needQuery:    false,
-			want:         "http://helloworld.Greeter/helloworld/{[sub]}/[kratos]",
+			want:         "http://helloworld.Greeter/helloworld/{[sub]}/[xkit]",
 		},
 		{
 			pathTemplate: "http://helloworld.Greeter/helloworld/{[name]}/[{sub.naming}]",
-			request:      &binding.HelloRequest{Name: "test", Sub: &binding.Sub{Name: "kratos"}},
+			request:      &binding.HelloRequest{Name: "test", Sub: &binding.Sub{Name: "xkit"}},
 			needQuery:    false,
-			want:         "http://helloworld.Greeter/helloworld/{[name]}/[kratos]",
+			want:         "http://helloworld.Greeter/helloworld/{[name]}/[xkit]",
 		},
 		{
 			pathTemplate: "http://helloworld.Greeter/helloworld/{}/[]/[{sub.naming}]",
-			request:      &binding.HelloRequest{Sub: &binding.Sub{Name: "kratos"}},
+			request:      &binding.HelloRequest{Sub: &binding.Sub{Name: "xkit"}},
 			needQuery:    false,
-			want:         "http://helloworld.Greeter/helloworld/{}/[]/[kratos]",
+			want:         "http://helloworld.Greeter/helloworld/{}/[]/[xkit]",
 		},
 	}
 
@@ -137,7 +137,7 @@ func BenchmarkEncodeURL(b *testing.B) {
 			pathTemplate: "http://helloworld.Greeter/helloworld/sub",
 			msg: &binding.HelloRequest{
 				Name: "test",
-				Sub:  &binding.Sub{Name: "kratos"},
+				Sub:  &binding.Sub{Name: "xkit"},
 			},
 			needQuery: false,
 		},
@@ -146,7 +146,7 @@ func BenchmarkEncodeURL(b *testing.B) {
 			pathTemplate: "http://helloworld.Greeter/helloworld/sub",
 			msg: &binding.HelloRequest{
 				Name: "test",
-				Sub:  &binding.Sub{Name: "kratos"},
+				Sub:  &binding.Sub{Name: "xkit"},
 				UpdateMask: &fieldmaskpb.FieldMask{
 					Paths: []string{"name", "sub.naming"},
 				},
@@ -158,7 +158,7 @@ func BenchmarkEncodeURL(b *testing.B) {
 			pathTemplate: "http://helloworld.Greeter/helloworld/{name}/sub/{sub.naming}",
 			msg: &binding.HelloRequest{
 				Name: "test",
-				Sub:  &binding.Sub{Name: "kratos"},
+				Sub:  &binding.Sub{Name: "xkit"},
 			},
 			needQuery: false,
 		},
@@ -167,7 +167,7 @@ func BenchmarkEncodeURL(b *testing.B) {
 			pathTemplate: "http://helloworld.Greeter/helloworld/{name}/sub/{sub.naming}",
 			msg: &binding.HelloRequest{
 				Name: "test",
-				Sub:  &binding.Sub{Name: "kratos"},
+				Sub:  &binding.Sub{Name: "xkit"},
 				UpdateMask: &fieldmaskpb.FieldMask{
 					Paths: []string{"name", "sub.naming"},
 				},

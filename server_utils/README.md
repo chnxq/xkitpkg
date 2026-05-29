@@ -18,7 +18,7 @@ The `server_utils` package provides utilities for building REST and gRPC service
 
 ## Overview
 
-The `server_utils` package offers a comprehensive solution for HTTP (Kratos REST) and gRPC service development. It provides:
+The `server_utils` package offers a comprehensive solution for HTTP (xkit REST) and gRPC service development. It provides:
 
 - Service creation and configuration utilities
 - Built-in middleware registration points
@@ -36,7 +36,7 @@ The `server_utils` package offers a comprehensive solution for HTTP (Kratos REST
 
 ## Features
 
-- **REST Server Creation**: Easy setup of Kratos-based REST servers
+- **REST Server Creation**: Easy setup of xkit-based REST servers
 - **gRPC Support**: Unified approach for both REST and gRPC services
 - **Built-in Middleware**: Comprehensive collection of common middleware
 - **Whitelist System**: Flexible mechanism to bypass specific middleware

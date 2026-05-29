@@ -84,7 +84,7 @@ func NewLoggerProvider(cfg *conf.Logger, appInfo *conf.AppInfo) log.Logger {
 	return newlogger
 }
 
-// NewStdLogger 创建一个新的日志记录器 - Kratos内置，控制台输出
+// NewStdLogger 创建一个新的日志记录器 - xkit内置，控制台输出
 func NewStdLogger() log.Logger {
 	l := log.NewStdLogger(os.Stdout)
 	return l

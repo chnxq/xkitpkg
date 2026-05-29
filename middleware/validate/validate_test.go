@@ -5,7 +5,7 @@ import (
 	"errors"
 	"testing"
 
-	kratoserrors "github.com/chnxq/xkitmod/errors"
+	xkiterrors "github.com/chnxq/xkitmod/errors"
 	"github.com/chnxq/xkitpkg/middleware"
 )
 
@@ -35,7 +35,7 @@ func TestTable(t *testing.T) {
 		t.Run(test.name, func(t *testing.T) {
 			v := Validator()(mock)
 			_, err := v(context.Background(), test)
-			if want, have := test.isErr, kratoserrors.IsBadRequest(err); want != have {
+			if want, have := test.isErr, xkiterrors.IsBadRequest(err); want != have {
 				t.Errorf("fail data %v, want %v, have %v", test, want, have)
 			}
 		})

@@ -90,8 +90,8 @@ func TestMatch(t *testing.T) {
 			ctx:  transport.NewServerContext(context.Background(), &Transport{operation: "/test/1234"}),
 		},
 		{
-			name: "/example/kratos",
-			ctx:  transport.NewServerContext(context.Background(), &Transport{operation: "/example/kratos"}),
+			name: "/example/xkit",
+			ctx:  transport.NewServerContext(context.Background(), &Transport{operation: "/example/xkit"}),
 		},
 	}
 	for _, test := range tests {
@@ -101,7 +101,7 @@ func TestMatch(t *testing.T) {
 				return "reply", nil
 			}
 			next = Server(testMiddleware).Prefix("/hello/").Regex(`/test/[0-9]+`).
-				Path("/example/kratos").Build()(next)
+				Path("/example/xkit").Build()(next)
 			_, _ = next(test.ctx, test.name)
 		})
 	}
@@ -126,8 +126,8 @@ func TestMatchClient(t *testing.T) {
 			ctx:  transport.NewClientContext(context.Background(), &Transport{operation: "/test/1234"}),
 		},
 		{
-			name: "/example/kratos",
-			ctx:  transport.NewClientContext(context.Background(), &Transport{operation: "/example/kratos"}),
+			name: "/example/xkit",
+			ctx:  transport.NewClientContext(context.Background(), &Transport{operation: "/example/xkit"}),
 		},
 	}
 	for _, test := range tests {
@@ -137,7 +137,7 @@ func TestMatchClient(t *testing.T) {
 				return "reply", nil
 			}
 			next = Client(testMiddleware).Prefix("/hello/").Regex(`/test/[0-9]+`).
-				Path("/example/kratos").Build()(next)
+				Path("/example/xkit").Build()(next)
 			_, _ = next(test.ctx, test.name)
 		})
 	}
@@ -161,8 +161,8 @@ func TestFunc(t *testing.T) {
 			ctx:  transport.NewServerContext(context.Background(), &Transport{operation: "/test.Name/1234"}),
 		},
 		{
-			name: "/xkit.dev/kratos",
-			ctx:  transport.NewServerContext(context.Background(), &Transport{operation: "/xkit.dev/kratos"}),
+			name: "/xkit.dev/xkit",
+			ctx:  transport.NewServerContext(context.Background(), &Transport{operation: "/xkit.dev/xkit"}),
 		},
 	}
 	for _, test := range tests {
@@ -204,7 +204,7 @@ func TestHeaderFunc(t *testing.T) {
 			name: "/hi.Create/world",
 			ctx: transport.NewServerContext(context.Background(), &Transport{
 				operation: "/hi.Create/world",
-				headers:   &mockHeader{map[string][]string{"X-Test": {"test2"}, "xkit": {"kratos"}}},
+				headers:   &mockHeader{map[string][]string{"X-Test": {"test2"}, "xkit": {"xkit"}}},
 			}),
 		},
 		{
@@ -215,9 +215,9 @@ func TestHeaderFunc(t *testing.T) {
 			}),
 		},
 		{
-			name: "/xkit.dev/kratos",
+			name: "/xkit.dev/xkit",
 			ctx: transport.NewServerContext(context.Background(), &Transport{
-				operation: "/xkit.dev/kratos",
+				operation: "/xkit.dev/xkit",
 				headers:   &mockHeader{map[string][]string{"X-Test": {"test"}}},
 			}),
 		},
@@ -236,7 +236,7 @@ func TestHeaderFunc(t *testing.T) {
 				if tr.RequestHeader().Get("X-Test") == "test" {
 					return true
 				}
-				if tr.RequestHeader().Get("xkit") == "kratos" {
+				if tr.RequestHeader().Get("xkit") == "xkit" {
 					return true
 				}
 				return false
