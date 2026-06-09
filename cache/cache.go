@@ -17,15 +17,18 @@ func NewCache(cfg *conf.Data) (AdapterCache, error) {
 	if cfg.GetRedis() == nil || cfg.GetRedis().GetAddr() == "" {
 		cache = NewMemory()
 		log.Info("Memory cache init OK.")
-	} else if len(strings.Split(cfg.GetRedis().GetAddr(), ",")) <= 1 {
-		cache = NewClusterRedis(cfg, log.NewHelper(log.GetLogger()))
-		if cache != nil {
-			log.Info("Redis-Cluster cache init OK.")
-		}
 	} else {
-		cache = NewRedis(cfg, log.NewHelper(log.GetLogger()))
-		if cache != nil {
-			log.Info("Redis cache init OK.")
+		addrs := strings.Split(cfg.GetRedis().GetAddr(), ",")
+		if len(addrs) <= 1 {
+			cache = NewRedis(cfg, log.NewHelper(log.GetLogger()))
+			if cache != nil {
+				log.Info("Redis cache init OK.")
+			}
+		} else {
+			cache = NewClusterRedis(cfg, log.NewHelper(log.GetLogger()))
+			if cache != nil {
+				log.Info("Redis-Cluster cache init OK.")
+			}
 		}
 	}
 	if cache == nil {
