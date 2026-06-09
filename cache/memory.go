@@ -4,8 +4,6 @@ import (
 	"errors"
 	"sync"
 	"time"
-
-	"github.com/chnxq/xkitmod/log"
 )
 
 type strItem struct {
@@ -26,7 +24,6 @@ type Memory struct {
 }
 
 func NewMemory() AdapterCache {
-	log.Debug("Memory cache init.")
 	return &Memory{
 		strItems: make(map[string]*strItem),
 		mapItems: make(map[string]*mapItem),
