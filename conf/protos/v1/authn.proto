@@ -8,16 +8,24 @@ import "google/protobuf/duration.proto";
 
 // 认证
 message Authentication {
+  message Registration {
+    uint32 default_tenant_id = 1;
+    string default_tenant_code = 2;
+    string default_role_code = 3;
+    string default_org_unit_code = 4;
+    string default_position_code = 5;
+  }
+
   // JWT
   message Jwt {
-    string method = 1; // JWT签名的算法，支持算法：HS256
-    string key = 2; // JWT 秘钥
+    string method = 1; // JWT签名算法，支持 HS256
+    string key = 2; // JWT 密钥
   }
 
   message OIDC {
     string issuer_url = 1;
     string audience = 2;
-    string method = 3; // JWT签名的算法，支持算法：HS256
+    string method = 3; // JWT签名算法，支持 HS256
   }
 
   message PresharedKey {
@@ -29,4 +37,5 @@ message Authentication {
   optional Jwt jwt = 2; // JWT 认证
   optional OIDC oidc = 3; // OIDC
   optional PresharedKey preshared_key = 4; // 预共享密钥
+  optional Registration registration = 5; // 注册默认归属配置
 }
