@@ -9,7 +9,6 @@ package conf
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/known/durationpb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -22,14 +21,19 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// 认证
+// 认证配置。
 type Authentication struct {
-	state         protoimpl.MessageState       `protogen:"open.v1"`
-	Type          string                       `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	Jwt           *Authentication_Jwt          `protobuf:"bytes,2,opt,name=jwt,proto3,oneof" json:"jwt,omitempty"`                                       // JWT 认证
-	Oidc          *Authentication_OIDC         `protobuf:"bytes,3,opt,name=oidc,proto3,oneof" json:"oidc,omitempty"`                                     // OIDC
-	PresharedKey  *Authentication_PresharedKey `protobuf:"bytes,4,opt,name=preshared_key,json=presharedKey,proto3,oneof" json:"preshared_key,omitempty"` // 预共享密钥
-	Registration  *Authentication_Registration `protobuf:"bytes,5,opt,name=registration,proto3,oneof" json:"registration,omitempty"`                     // 注册默认归属配置
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// 认证类型，例如 jwt、oidc、preshared_key。
+	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	// JWT 认证配置。
+	Jwt *Authentication_Jwt `protobuf:"bytes,2,opt,name=jwt,proto3,oneof" json:"jwt,omitempty"`
+	// OIDC 认证配置。
+	Oidc *Authentication_OIDC `protobuf:"bytes,3,opt,name=oidc,proto3,oneof" json:"oidc,omitempty"`
+	// 预共享密钥认证配置。
+	PresharedKey *Authentication_PresharedKey `protobuf:"bytes,4,opt,name=preshared_key,json=presharedKey,proto3,oneof" json:"preshared_key,omitempty"`
+	// 用户注册默认归属配置。
+	Registration  *Authentication_Registration `protobuf:"bytes,5,opt,name=registration,proto3,oneof" json:"registration,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -99,20 +103,191 @@ func (x *Authentication) GetRegistration() *Authentication_Registration {
 	return nil
 }
 
+// JWT 认证配置。
+type Authentication_Jwt struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// JWT 签名算法，例如 HS256。
+	Method string `protobuf:"bytes,1,opt,name=method,proto3" json:"method,omitempty"`
+	// JWT 签名密钥。
+	Key           string `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Authentication_Jwt) Reset() {
+	*x = Authentication_Jwt{}
+	mi := &file_v1_authn_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Authentication_Jwt) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Authentication_Jwt) ProtoMessage() {}
+
+func (x *Authentication_Jwt) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_authn_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Authentication_Jwt.ProtoReflect.Descriptor instead.
+func (*Authentication_Jwt) Descriptor() ([]byte, []int) {
+	return file_v1_authn_proto_rawDescGZIP(), []int{0, 0}
+}
+
+func (x *Authentication_Jwt) GetMethod() string {
+	if x != nil {
+		return x.Method
+	}
+	return ""
+}
+
+func (x *Authentication_Jwt) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+// OIDC 认证配置。
+type Authentication_OIDC struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// OIDC Issuer URL。
+	IssuerUrl string `protobuf:"bytes,1,opt,name=issuer_url,json=issuerUrl,proto3" json:"issuer_url,omitempty"`
+	// OIDC Audience。
+	Audience string `protobuf:"bytes,2,opt,name=audience,proto3" json:"audience,omitempty"`
+	// OIDC 场景下用于校验 JWT 的签名算法。
+	Method        string `protobuf:"bytes,3,opt,name=method,proto3" json:"method,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Authentication_OIDC) Reset() {
+	*x = Authentication_OIDC{}
+	mi := &file_v1_authn_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Authentication_OIDC) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Authentication_OIDC) ProtoMessage() {}
+
+func (x *Authentication_OIDC) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_authn_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Authentication_OIDC.ProtoReflect.Descriptor instead.
+func (*Authentication_OIDC) Descriptor() ([]byte, []int) {
+	return file_v1_authn_proto_rawDescGZIP(), []int{0, 1}
+}
+
+func (x *Authentication_OIDC) GetIssuerUrl() string {
+	if x != nil {
+		return x.IssuerUrl
+	}
+	return ""
+}
+
+func (x *Authentication_OIDC) GetAudience() string {
+	if x != nil {
+		return x.Audience
+	}
+	return ""
+}
+
+func (x *Authentication_OIDC) GetMethod() string {
+	if x != nil {
+		return x.Method
+	}
+	return ""
+}
+
+// 预共享密钥认证配置。
+type Authentication_PresharedKey struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// 可接受的预共享密钥列表。
+	ValidKeys     []string `protobuf:"bytes,1,rep,name=valid_keys,json=validKeys,proto3" json:"valid_keys,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Authentication_PresharedKey) Reset() {
+	*x = Authentication_PresharedKey{}
+	mi := &file_v1_authn_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Authentication_PresharedKey) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Authentication_PresharedKey) ProtoMessage() {}
+
+func (x *Authentication_PresharedKey) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_authn_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Authentication_PresharedKey.ProtoReflect.Descriptor instead.
+func (*Authentication_PresharedKey) Descriptor() ([]byte, []int) {
+	return file_v1_authn_proto_rawDescGZIP(), []int{0, 2}
+}
+
+func (x *Authentication_PresharedKey) GetValidKeys() []string {
+	if x != nil {
+		return x.ValidKeys
+	}
+	return nil
+}
+
+// 用户注册默认归属配置。
 type Authentication_Registration struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	DefaultTenantId     uint32                 `protobuf:"varint,1,opt,name=default_tenant_id,json=defaultTenantId,proto3" json:"default_tenant_id,omitempty"`
-	DefaultTenantCode   string                 `protobuf:"bytes,2,opt,name=default_tenant_code,json=defaultTenantCode,proto3" json:"default_tenant_code,omitempty"`
-	DefaultRoleCode     string                 `protobuf:"bytes,3,opt,name=default_role_code,json=defaultRoleCode,proto3" json:"default_role_code,omitempty"`
-	DefaultOrgUnitCode  string                 `protobuf:"bytes,4,opt,name=default_org_unit_code,json=defaultOrgUnitCode,proto3" json:"default_org_unit_code,omitempty"`
-	DefaultPositionCode string                 `protobuf:"bytes,5,opt,name=default_position_code,json=defaultPositionCode,proto3" json:"default_position_code,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// 默认租户 ID。
+	DefaultTenantId uint32 `protobuf:"varint,1,opt,name=default_tenant_id,json=defaultTenantId,proto3" json:"default_tenant_id,omitempty"`
+	// 默认租户编码。
+	DefaultTenantCode string `protobuf:"bytes,2,opt,name=default_tenant_code,json=defaultTenantCode,proto3" json:"default_tenant_code,omitempty"`
+	// 默认角色编码。
+	DefaultRoleCode string `protobuf:"bytes,3,opt,name=default_role_code,json=defaultRoleCode,proto3" json:"default_role_code,omitempty"`
+	// 默认组织编码。
+	DefaultOrgUnitCode string `protobuf:"bytes,4,opt,name=default_org_unit_code,json=defaultOrgUnitCode,proto3" json:"default_org_unit_code,omitempty"`
+	// 默认岗位编码。
+	DefaultPositionCode string `protobuf:"bytes,5,opt,name=default_position_code,json=defaultPositionCode,proto3" json:"default_position_code,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
 
 func (x *Authentication_Registration) Reset() {
 	*x = Authentication_Registration{}
-	mi := &file_v1_authn_proto_msgTypes[1]
+	mi := &file_v1_authn_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -124,7 +299,7 @@ func (x *Authentication_Registration) String() string {
 func (*Authentication_Registration) ProtoMessage() {}
 
 func (x *Authentication_Registration) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_authn_proto_msgTypes[1]
+	mi := &file_v1_authn_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -137,7 +312,7 @@ func (x *Authentication_Registration) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Authentication_Registration.ProtoReflect.Descriptor instead.
 func (*Authentication_Registration) Descriptor() ([]byte, []int) {
-	return file_v1_authn_proto_rawDescGZIP(), []int{0, 0}
+	return file_v1_authn_proto_rawDescGZIP(), []int{0, 3}
 }
 
 func (x *Authentication_Registration) GetDefaultTenantId() uint32 {
@@ -175,180 +350,17 @@ func (x *Authentication_Registration) GetDefaultPositionCode() string {
 	return ""
 }
 
-// JWT
-type Authentication_Jwt struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Method        string                 `protobuf:"bytes,1,opt,name=method,proto3" json:"method,omitempty"` // JWT签名算法，支持 HS256
-	Key           string                 `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`       // JWT 密钥
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Authentication_Jwt) Reset() {
-	*x = Authentication_Jwt{}
-	mi := &file_v1_authn_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Authentication_Jwt) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Authentication_Jwt) ProtoMessage() {}
-
-func (x *Authentication_Jwt) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_authn_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Authentication_Jwt.ProtoReflect.Descriptor instead.
-func (*Authentication_Jwt) Descriptor() ([]byte, []int) {
-	return file_v1_authn_proto_rawDescGZIP(), []int{0, 1}
-}
-
-func (x *Authentication_Jwt) GetMethod() string {
-	if x != nil {
-		return x.Method
-	}
-	return ""
-}
-
-func (x *Authentication_Jwt) GetKey() string {
-	if x != nil {
-		return x.Key
-	}
-	return ""
-}
-
-type Authentication_OIDC struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	IssuerUrl     string                 `protobuf:"bytes,1,opt,name=issuer_url,json=issuerUrl,proto3" json:"issuer_url,omitempty"`
-	Audience      string                 `protobuf:"bytes,2,opt,name=audience,proto3" json:"audience,omitempty"`
-	Method        string                 `protobuf:"bytes,3,opt,name=method,proto3" json:"method,omitempty"` // JWT签名算法，支持 HS256
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Authentication_OIDC) Reset() {
-	*x = Authentication_OIDC{}
-	mi := &file_v1_authn_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Authentication_OIDC) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Authentication_OIDC) ProtoMessage() {}
-
-func (x *Authentication_OIDC) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_authn_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Authentication_OIDC.ProtoReflect.Descriptor instead.
-func (*Authentication_OIDC) Descriptor() ([]byte, []int) {
-	return file_v1_authn_proto_rawDescGZIP(), []int{0, 2}
-}
-
-func (x *Authentication_OIDC) GetIssuerUrl() string {
-	if x != nil {
-		return x.IssuerUrl
-	}
-	return ""
-}
-
-func (x *Authentication_OIDC) GetAudience() string {
-	if x != nil {
-		return x.Audience
-	}
-	return ""
-}
-
-func (x *Authentication_OIDC) GetMethod() string {
-	if x != nil {
-		return x.Method
-	}
-	return ""
-}
-
-type Authentication_PresharedKey struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ValidKeys     []string               `protobuf:"bytes,1,rep,name=valid_keys,json=validKeys,proto3" json:"valid_keys,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Authentication_PresharedKey) Reset() {
-	*x = Authentication_PresharedKey{}
-	mi := &file_v1_authn_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Authentication_PresharedKey) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Authentication_PresharedKey) ProtoMessage() {}
-
-func (x *Authentication_PresharedKey) ProtoReflect() protoreflect.Message {
-	mi := &file_v1_authn_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Authentication_PresharedKey.ProtoReflect.Descriptor instead.
-func (*Authentication_PresharedKey) Descriptor() ([]byte, []int) {
-	return file_v1_authn_proto_rawDescGZIP(), []int{0, 3}
-}
-
-func (x *Authentication_PresharedKey) GetValidKeys() []string {
-	if x != nil {
-		return x.ValidKeys
-	}
-	return nil
-}
-
 var File_v1_authn_proto protoreflect.FileDescriptor
 
 const file_v1_authn_proto_rawDesc = "" +
 	"\n" +
-	"\x0ev1/authn.proto\x12\x04conf\x1a\x1egoogle/protobuf/duration.proto\"\x91\x06\n" +
+	"\x0ev1/authn.proto\x12\x04conf\"\x91\x06\n" +
 	"\x0eAuthentication\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12/\n" +
 	"\x03jwt\x18\x02 \x01(\v2\x18.conf.Authentication.JwtH\x00R\x03jwt\x88\x01\x01\x122\n" +
 	"\x04oidc\x18\x03 \x01(\v2\x19.conf.Authentication.OIDCH\x01R\x04oidc\x88\x01\x01\x12K\n" +
 	"\rpreshared_key\x18\x04 \x01(\v2!.conf.Authentication.PresharedKeyH\x02R\fpresharedKey\x88\x01\x01\x12J\n" +
-	"\fregistration\x18\x05 \x01(\v2!.conf.Authentication.RegistrationH\x03R\fregistration\x88\x01\x01\x1a\xfd\x01\n" +
-	"\fRegistration\x12*\n" +
-	"\x11default_tenant_id\x18\x01 \x01(\rR\x0fdefaultTenantId\x12.\n" +
-	"\x13default_tenant_code\x18\x02 \x01(\tR\x11defaultTenantCode\x12*\n" +
-	"\x11default_role_code\x18\x03 \x01(\tR\x0fdefaultRoleCode\x121\n" +
-	"\x15default_org_unit_code\x18\x04 \x01(\tR\x12defaultOrgUnitCode\x122\n" +
-	"\x15default_position_code\x18\x05 \x01(\tR\x13defaultPositionCode\x1a/\n" +
+	"\fregistration\x18\x05 \x01(\v2!.conf.Authentication.RegistrationH\x03R\fregistration\x88\x01\x01\x1a/\n" +
 	"\x03Jwt\x12\x16\n" +
 	"\x06method\x18\x01 \x01(\tR\x06method\x12\x10\n" +
 	"\x03key\x18\x02 \x01(\tR\x03key\x1aY\n" +
@@ -359,7 +371,13 @@ const file_v1_authn_proto_rawDesc = "" +
 	"\x06method\x18\x03 \x01(\tR\x06method\x1a-\n" +
 	"\fPresharedKey\x12\x1d\n" +
 	"\n" +
-	"valid_keys\x18\x01 \x03(\tR\tvalidKeysB\x06\n" +
+	"valid_keys\x18\x01 \x03(\tR\tvalidKeys\x1a\xfd\x01\n" +
+	"\fRegistration\x12*\n" +
+	"\x11default_tenant_id\x18\x01 \x01(\rR\x0fdefaultTenantId\x12.\n" +
+	"\x13default_tenant_code\x18\x02 \x01(\tR\x11defaultTenantCode\x12*\n" +
+	"\x11default_role_code\x18\x03 \x01(\tR\x0fdefaultRoleCode\x121\n" +
+	"\x15default_org_unit_code\x18\x04 \x01(\tR\x12defaultOrgUnitCode\x122\n" +
+	"\x15default_position_code\x18\x05 \x01(\tR\x13defaultPositionCodeB\x06\n" +
 	"\x04_jwtB\a\n" +
 	"\x05_oidcB\x10\n" +
 	"\x0e_preshared_keyB\x0f\n" +
@@ -380,16 +398,16 @@ func file_v1_authn_proto_rawDescGZIP() []byte {
 var file_v1_authn_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_v1_authn_proto_goTypes = []any{
 	(*Authentication)(nil),              // 0: conf.Authentication
-	(*Authentication_Registration)(nil), // 1: conf.Authentication.Registration
-	(*Authentication_Jwt)(nil),          // 2: conf.Authentication.Jwt
-	(*Authentication_OIDC)(nil),         // 3: conf.Authentication.OIDC
-	(*Authentication_PresharedKey)(nil), // 4: conf.Authentication.PresharedKey
+	(*Authentication_Jwt)(nil),          // 1: conf.Authentication.Jwt
+	(*Authentication_OIDC)(nil),         // 2: conf.Authentication.OIDC
+	(*Authentication_PresharedKey)(nil), // 3: conf.Authentication.PresharedKey
+	(*Authentication_Registration)(nil), // 4: conf.Authentication.Registration
 }
 var file_v1_authn_proto_depIdxs = []int32{
-	2, // 0: conf.Authentication.jwt:type_name -> conf.Authentication.Jwt
-	3, // 1: conf.Authentication.oidc:type_name -> conf.Authentication.OIDC
-	4, // 2: conf.Authentication.preshared_key:type_name -> conf.Authentication.PresharedKey
-	1, // 3: conf.Authentication.registration:type_name -> conf.Authentication.Registration
+	1, // 0: conf.Authentication.jwt:type_name -> conf.Authentication.Jwt
+	2, // 1: conf.Authentication.oidc:type_name -> conf.Authentication.OIDC
+	3, // 2: conf.Authentication.preshared_key:type_name -> conf.Authentication.PresharedKey
+	4, // 3: conf.Authentication.registration:type_name -> conf.Authentication.Registration
 	4, // [4:4] is the sub-list for method output_type
 	4, // [4:4] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name

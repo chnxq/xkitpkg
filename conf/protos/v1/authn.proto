@@ -4,38 +4,65 @@ package conf;
 
 option go_package = "github.com/chnxq/xkitpkg/conf/v1;conf";
 
-import "google/protobuf/duration.proto";
-
-// 认证
+// 认证配置。
 message Authentication {
-  message Registration {
-    uint32 default_tenant_id = 1;
-    string default_tenant_code = 2;
-    string default_role_code = 3;
-    string default_org_unit_code = 4;
-    string default_position_code = 5;
-  }
-
-  // JWT
+  // JWT 认证配置。
   message Jwt {
-    string method = 1; // JWT签名算法，支持 HS256
-    string key = 2; // JWT 密钥
+    // JWT 签名算法，例如 HS256。
+    string method = 1;
+
+    // JWT 签名密钥。
+    string key = 2;
   }
 
+  // OIDC 认证配置。
   message OIDC {
+    // OIDC Issuer URL。
     string issuer_url = 1;
+
+    // OIDC Audience。
     string audience = 2;
-    string method = 3; // JWT签名算法，支持 HS256
+
+    // OIDC 场景下用于校验 JWT 的签名算法。
+    string method = 3;
   }
 
+  // 预共享密钥认证配置。
   message PresharedKey {
+    // 可接受的预共享密钥列表。
     repeated string valid_keys = 1;
   }
 
+  // 用户注册默认归属配置。
+  message Registration {
+    // 默认租户 ID。
+    uint32 default_tenant_id = 1;
+
+    // 默认租户编码。
+    string default_tenant_code = 2;
+
+    // 默认角色编码。
+    string default_role_code = 3;
+
+    // 默认组织编码。
+    string default_org_unit_code = 4;
+
+    // 默认岗位编码。
+    string default_position_code = 5;
+  }
+
+  // 认证类型，例如 jwt、oidc、preshared_key。
   string type = 1;
 
-  optional Jwt jwt = 2; // JWT 认证
-  optional OIDC oidc = 3; // OIDC
-  optional PresharedKey preshared_key = 4; // 预共享密钥
-  optional Registration registration = 5; // 注册默认归属配置
+  // JWT 认证配置。
+  optional Jwt jwt = 2;
+
+  // OIDC 认证配置。
+  optional OIDC oidc = 3;
+
+  // 预共享密钥认证配置。
+  optional PresharedKey preshared_key = 4;
+
+  // 用户注册默认归属配置。
+  optional Registration registration = 5;
 }
