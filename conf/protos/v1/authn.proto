@@ -17,7 +17,7 @@ message Authentication {
 
   // OIDC 认证配置。
   message OIDC {
-    // OIDC Issuer URL。
+    // OIDC Issuer 地址。
     string issuer_url = 1;
 
     // OIDC Audience。
@@ -51,6 +51,54 @@ message Authentication {
     string default_position_code = 5;
   }
 
+  // 通用第三方登录提供商配置。
+  message SocialProvider {
+    // 是否启用。
+    bool enabled = 1;
+
+    // 第三方应用标识。
+    string client_id = 2;
+
+    // 第三方应用密钥。
+    string client_secret = 3;
+
+    // 回调地址。
+    string redirect_uri = 4;
+
+    // 授权地址。
+    string auth_url = 5;
+
+    // 访问令牌交换地址。
+    string token_url = 6;
+
+    // 用户信息地址。
+    string user_api_url = 7;
+
+    // 默认授权范围。
+    repeated string scopes = 8;
+  }
+
+  // 第三方登录配置。
+  message SocialAuth {
+    // GitHub 网页 OAuth。
+    optional SocialProvider github = 1;
+
+    // 钉钉网页登录。
+    optional SocialProvider dingtalk = 2;
+
+    // 微信网页登录。
+    optional SocialProvider wechat_web = 3;
+
+    // 微信小程序登录。
+    optional SocialProvider wechat_miniapp = 4;
+
+    // 支付宝网页登录 / 小程序登录。
+    optional SocialProvider alipay = 5;
+
+    // 抖音开放平台登录。
+    optional SocialProvider douyin = 6;
+  }
+
   // 认证类型，例如 jwt、oidc、preshared_key。
   string type = 1;
 
@@ -65,4 +113,7 @@ message Authentication {
 
   // 用户注册默认归属配置。
   optional Registration registration = 5;
+
+  // 第三方登录配置。
+  optional SocialAuth social_auth = 6;
 }

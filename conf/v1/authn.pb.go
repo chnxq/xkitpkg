@@ -33,7 +33,9 @@ type Authentication struct {
 	// 预共享密钥认证配置。
 	PresharedKey *Authentication_PresharedKey `protobuf:"bytes,4,opt,name=preshared_key,json=presharedKey,proto3,oneof" json:"preshared_key,omitempty"`
 	// 用户注册默认归属配置。
-	Registration  *Authentication_Registration `protobuf:"bytes,5,opt,name=registration,proto3,oneof" json:"registration,omitempty"`
+	Registration *Authentication_Registration `protobuf:"bytes,5,opt,name=registration,proto3,oneof" json:"registration,omitempty"`
+	// 第三方登录配置。
+	SocialAuth    *Authentication_SocialAuth `protobuf:"bytes,6,opt,name=social_auth,json=socialAuth,proto3,oneof" json:"social_auth,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -103,6 +105,13 @@ func (x *Authentication) GetRegistration() *Authentication_Registration {
 	return nil
 }
 
+func (x *Authentication) GetSocialAuth() *Authentication_SocialAuth {
+	if x != nil {
+		return x.SocialAuth
+	}
+	return nil
+}
+
 // JWT 认证配置。
 type Authentication_Jwt struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -161,7 +170,7 @@ func (x *Authentication_Jwt) GetKey() string {
 // OIDC 认证配置。
 type Authentication_OIDC struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// OIDC Issuer URL。
+	// OIDC Issuer 地址。
 	IssuerUrl string `protobuf:"bytes,1,opt,name=issuer_url,json=issuerUrl,proto3" json:"issuer_url,omitempty"`
 	// OIDC Audience。
 	Audience string `protobuf:"bytes,2,opt,name=audience,proto3" json:"audience,omitempty"`
@@ -350,17 +359,219 @@ func (x *Authentication_Registration) GetDefaultPositionCode() string {
 	return ""
 }
 
+// 通用第三方登录 Provider 配置。
+type Authentication_SocialProvider struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// 是否启用。
+	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Client ID / App Key。
+	ClientId string `protobuf:"bytes,2,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	// Client Secret / App Secret。
+	ClientSecret string `protobuf:"bytes,3,opt,name=client_secret,json=clientSecret,proto3" json:"client_secret,omitempty"`
+	// 回调地址。
+	RedirectUri string `protobuf:"bytes,4,opt,name=redirect_uri,json=redirectUri,proto3" json:"redirect_uri,omitempty"`
+	// 授权地址。
+	AuthUrl string `protobuf:"bytes,5,opt,name=auth_url,json=authUrl,proto3" json:"auth_url,omitempty"`
+	// Token 交换地址。
+	TokenUrl string `protobuf:"bytes,6,opt,name=token_url,json=tokenUrl,proto3" json:"token_url,omitempty"`
+	// 用户信息地址。
+	UserApiUrl string `protobuf:"bytes,7,opt,name=user_api_url,json=userApiUrl,proto3" json:"user_api_url,omitempty"`
+	// 默认 scopes。
+	Scopes        []string `protobuf:"bytes,8,rep,name=scopes,proto3" json:"scopes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Authentication_SocialProvider) Reset() {
+	*x = Authentication_SocialProvider{}
+	mi := &file_v1_authn_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Authentication_SocialProvider) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Authentication_SocialProvider) ProtoMessage() {}
+
+func (x *Authentication_SocialProvider) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_authn_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Authentication_SocialProvider.ProtoReflect.Descriptor instead.
+func (*Authentication_SocialProvider) Descriptor() ([]byte, []int) {
+	return file_v1_authn_proto_rawDescGZIP(), []int{0, 4}
+}
+
+func (x *Authentication_SocialProvider) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
+func (x *Authentication_SocialProvider) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *Authentication_SocialProvider) GetClientSecret() string {
+	if x != nil {
+		return x.ClientSecret
+	}
+	return ""
+}
+
+func (x *Authentication_SocialProvider) GetRedirectUri() string {
+	if x != nil {
+		return x.RedirectUri
+	}
+	return ""
+}
+
+func (x *Authentication_SocialProvider) GetAuthUrl() string {
+	if x != nil {
+		return x.AuthUrl
+	}
+	return ""
+}
+
+func (x *Authentication_SocialProvider) GetTokenUrl() string {
+	if x != nil {
+		return x.TokenUrl
+	}
+	return ""
+}
+
+func (x *Authentication_SocialProvider) GetUserApiUrl() string {
+	if x != nil {
+		return x.UserApiUrl
+	}
+	return ""
+}
+
+func (x *Authentication_SocialProvider) GetScopes() []string {
+	if x != nil {
+		return x.Scopes
+	}
+	return nil
+}
+
+// 第三方登录配置。
+type Authentication_SocialAuth struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// GitHub 网页 OAuth。
+	Github *Authentication_SocialProvider `protobuf:"bytes,1,opt,name=github,proto3,oneof" json:"github,omitempty"`
+	// 钉钉网页登录。
+	Dingtalk *Authentication_SocialProvider `protobuf:"bytes,2,opt,name=dingtalk,proto3,oneof" json:"dingtalk,omitempty"`
+	// 微信网页登录。
+	WechatWeb *Authentication_SocialProvider `protobuf:"bytes,3,opt,name=wechat_web,json=wechatWeb,proto3,oneof" json:"wechat_web,omitempty"`
+	// 微信小程序登录。
+	WechatMiniapp *Authentication_SocialProvider `protobuf:"bytes,4,opt,name=wechat_miniapp,json=wechatMiniapp,proto3,oneof" json:"wechat_miniapp,omitempty"`
+	// 支付宝网页登录 / 小程序登录。
+	Alipay *Authentication_SocialProvider `protobuf:"bytes,5,opt,name=alipay,proto3,oneof" json:"alipay,omitempty"`
+	// 抖音开放平台登录。
+	Douyin        *Authentication_SocialProvider `protobuf:"bytes,6,opt,name=douyin,proto3,oneof" json:"douyin,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Authentication_SocialAuth) Reset() {
+	*x = Authentication_SocialAuth{}
+	mi := &file_v1_authn_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Authentication_SocialAuth) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Authentication_SocialAuth) ProtoMessage() {}
+
+func (x *Authentication_SocialAuth) ProtoReflect() protoreflect.Message {
+	mi := &file_v1_authn_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Authentication_SocialAuth.ProtoReflect.Descriptor instead.
+func (*Authentication_SocialAuth) Descriptor() ([]byte, []int) {
+	return file_v1_authn_proto_rawDescGZIP(), []int{0, 5}
+}
+
+func (x *Authentication_SocialAuth) GetGithub() *Authentication_SocialProvider {
+	if x != nil {
+		return x.Github
+	}
+	return nil
+}
+
+func (x *Authentication_SocialAuth) GetDingtalk() *Authentication_SocialProvider {
+	if x != nil {
+		return x.Dingtalk
+	}
+	return nil
+}
+
+func (x *Authentication_SocialAuth) GetWechatWeb() *Authentication_SocialProvider {
+	if x != nil {
+		return x.WechatWeb
+	}
+	return nil
+}
+
+func (x *Authentication_SocialAuth) GetWechatMiniapp() *Authentication_SocialProvider {
+	if x != nil {
+		return x.WechatMiniapp
+	}
+	return nil
+}
+
+func (x *Authentication_SocialAuth) GetAlipay() *Authentication_SocialProvider {
+	if x != nil {
+		return x.Alipay
+	}
+	return nil
+}
+
+func (x *Authentication_SocialAuth) GetDouyin() *Authentication_SocialProvider {
+	if x != nil {
+		return x.Douyin
+	}
+	return nil
+}
+
 var File_v1_authn_proto protoreflect.FileDescriptor
 
 const file_v1_authn_proto_rawDesc = "" +
 	"\n" +
-	"\x0ev1/authn.proto\x12\x04conf\"\x91\x06\n" +
+	"\x0ev1/authn.proto\x12\x04conf\"\xf1\f\n" +
 	"\x0eAuthentication\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12/\n" +
 	"\x03jwt\x18\x02 \x01(\v2\x18.conf.Authentication.JwtH\x00R\x03jwt\x88\x01\x01\x122\n" +
 	"\x04oidc\x18\x03 \x01(\v2\x19.conf.Authentication.OIDCH\x01R\x04oidc\x88\x01\x01\x12K\n" +
 	"\rpreshared_key\x18\x04 \x01(\v2!.conf.Authentication.PresharedKeyH\x02R\fpresharedKey\x88\x01\x01\x12J\n" +
-	"\fregistration\x18\x05 \x01(\v2!.conf.Authentication.RegistrationH\x03R\fregistration\x88\x01\x01\x1a/\n" +
+	"\fregistration\x18\x05 \x01(\v2!.conf.Authentication.RegistrationH\x03R\fregistration\x88\x01\x01\x12E\n" +
+	"\vsocial_auth\x18\x06 \x01(\v2\x1f.conf.Authentication.SocialAuthH\x04R\n" +
+	"socialAuth\x88\x01\x01\x1a/\n" +
 	"\x03Jwt\x12\x16\n" +
 	"\x06method\x18\x01 \x01(\tR\x06method\x12\x10\n" +
 	"\x03key\x18\x02 \x01(\tR\x03key\x1aY\n" +
@@ -377,11 +588,37 @@ const file_v1_authn_proto_rawDesc = "" +
 	"\x13default_tenant_code\x18\x02 \x01(\tR\x11defaultTenantCode\x12*\n" +
 	"\x11default_role_code\x18\x03 \x01(\tR\x0fdefaultRoleCode\x121\n" +
 	"\x15default_org_unit_code\x18\x04 \x01(\tR\x12defaultOrgUnitCode\x122\n" +
-	"\x15default_position_code\x18\x05 \x01(\tR\x13defaultPositionCodeB\x06\n" +
+	"\x15default_position_code\x18\x05 \x01(\tR\x13defaultPositionCode\x1a\x81\x02\n" +
+	"\x0eSocialProvider\x12\x18\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\x12\x1b\n" +
+	"\tclient_id\x18\x02 \x01(\tR\bclientId\x12#\n" +
+	"\rclient_secret\x18\x03 \x01(\tR\fclientSecret\x12!\n" +
+	"\fredirect_uri\x18\x04 \x01(\tR\vredirectUri\x12\x19\n" +
+	"\bauth_url\x18\x05 \x01(\tR\aauthUrl\x12\x1b\n" +
+	"\ttoken_url\x18\x06 \x01(\tR\btokenUrl\x12 \n" +
+	"\fuser_api_url\x18\a \x01(\tR\n" +
+	"userApiUrl\x12\x16\n" +
+	"\x06scopes\x18\b \x03(\tR\x06scopes\x1a\x82\x04\n" +
+	"\n" +
+	"SocialAuth\x12@\n" +
+	"\x06github\x18\x01 \x01(\v2#.conf.Authentication.SocialProviderH\x00R\x06github\x88\x01\x01\x12D\n" +
+	"\bdingtalk\x18\x02 \x01(\v2#.conf.Authentication.SocialProviderH\x01R\bdingtalk\x88\x01\x01\x12G\n" +
+	"\n" +
+	"wechat_web\x18\x03 \x01(\v2#.conf.Authentication.SocialProviderH\x02R\twechatWeb\x88\x01\x01\x12O\n" +
+	"\x0ewechat_miniapp\x18\x04 \x01(\v2#.conf.Authentication.SocialProviderH\x03R\rwechatMiniapp\x88\x01\x01\x12@\n" +
+	"\x06alipay\x18\x05 \x01(\v2#.conf.Authentication.SocialProviderH\x04R\x06alipay\x88\x01\x01\x12@\n" +
+	"\x06douyin\x18\x06 \x01(\v2#.conf.Authentication.SocialProviderH\x05R\x06douyin\x88\x01\x01B\t\n" +
+	"\a_githubB\v\n" +
+	"\t_dingtalkB\r\n" +
+	"\v_wechat_webB\x11\n" +
+	"\x0f_wechat_miniappB\t\n" +
+	"\a_alipayB\t\n" +
+	"\a_douyinB\x06\n" +
 	"\x04_jwtB\a\n" +
 	"\x05_oidcB\x10\n" +
 	"\x0e_preshared_keyB\x0f\n" +
-	"\r_registrationB'Z%github.com/chnxq/xkitpkg/conf/v1;confb\x06proto3"
+	"\r_registrationB\x0e\n" +
+	"\f_social_authB'Z%github.com/chnxq/xkitpkg/conf/v1;confb\x06proto3"
 
 var (
 	file_v1_authn_proto_rawDescOnce sync.Once
@@ -395,24 +632,33 @@ func file_v1_authn_proto_rawDescGZIP() []byte {
 	return file_v1_authn_proto_rawDescData
 }
 
-var file_v1_authn_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_v1_authn_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_v1_authn_proto_goTypes = []any{
-	(*Authentication)(nil),              // 0: conf.Authentication
-	(*Authentication_Jwt)(nil),          // 1: conf.Authentication.Jwt
-	(*Authentication_OIDC)(nil),         // 2: conf.Authentication.OIDC
-	(*Authentication_PresharedKey)(nil), // 3: conf.Authentication.PresharedKey
-	(*Authentication_Registration)(nil), // 4: conf.Authentication.Registration
+	(*Authentication)(nil),                // 0: conf.Authentication
+	(*Authentication_Jwt)(nil),            // 1: conf.Authentication.Jwt
+	(*Authentication_OIDC)(nil),           // 2: conf.Authentication.OIDC
+	(*Authentication_PresharedKey)(nil),   // 3: conf.Authentication.PresharedKey
+	(*Authentication_Registration)(nil),   // 4: conf.Authentication.Registration
+	(*Authentication_SocialProvider)(nil), // 5: conf.Authentication.SocialProvider
+	(*Authentication_SocialAuth)(nil),     // 6: conf.Authentication.SocialAuth
 }
 var file_v1_authn_proto_depIdxs = []int32{
-	1, // 0: conf.Authentication.jwt:type_name -> conf.Authentication.Jwt
-	2, // 1: conf.Authentication.oidc:type_name -> conf.Authentication.OIDC
-	3, // 2: conf.Authentication.preshared_key:type_name -> conf.Authentication.PresharedKey
-	4, // 3: conf.Authentication.registration:type_name -> conf.Authentication.Registration
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	1,  // 0: conf.Authentication.jwt:type_name -> conf.Authentication.Jwt
+	2,  // 1: conf.Authentication.oidc:type_name -> conf.Authentication.OIDC
+	3,  // 2: conf.Authentication.preshared_key:type_name -> conf.Authentication.PresharedKey
+	4,  // 3: conf.Authentication.registration:type_name -> conf.Authentication.Registration
+	6,  // 4: conf.Authentication.social_auth:type_name -> conf.Authentication.SocialAuth
+	5,  // 5: conf.Authentication.SocialAuth.github:type_name -> conf.Authentication.SocialProvider
+	5,  // 6: conf.Authentication.SocialAuth.dingtalk:type_name -> conf.Authentication.SocialProvider
+	5,  // 7: conf.Authentication.SocialAuth.wechat_web:type_name -> conf.Authentication.SocialProvider
+	5,  // 8: conf.Authentication.SocialAuth.wechat_miniapp:type_name -> conf.Authentication.SocialProvider
+	5,  // 9: conf.Authentication.SocialAuth.alipay:type_name -> conf.Authentication.SocialProvider
+	5,  // 10: conf.Authentication.SocialAuth.douyin:type_name -> conf.Authentication.SocialProvider
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_v1_authn_proto_init() }
@@ -421,13 +667,14 @@ func file_v1_authn_proto_init() {
 		return
 	}
 	file_v1_authn_proto_msgTypes[0].OneofWrappers = []any{}
+	file_v1_authn_proto_msgTypes[6].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_v1_authn_proto_rawDesc), len(file_v1_authn_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
