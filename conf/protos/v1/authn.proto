@@ -17,10 +17,10 @@ message Authentication {
 
   // OIDC 认证配置。
   message OIDC {
-    // OIDC Issuer 地址。
+    // OIDC 签发方地址。
     string issuer_url = 1;
 
-    // OIDC Audience。
+    // OIDC 受众标识。
     string audience = 2;
 
     // OIDC 场景下用于校验 JWT 的签名算法。
@@ -80,7 +80,7 @@ message Authentication {
 
   // 第三方登录配置。
   message SocialAuth {
-    // GitHub 网页 OAuth。
+    // GitHub 网页登录。
     optional SocialProvider github = 1;
 
     // 钉钉网页登录。
