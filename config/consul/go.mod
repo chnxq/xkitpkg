@@ -5,19 +5,19 @@ go 1.26.0
 replace github.com/armon/go-metrics => github.com/hashicorp/go-metrics v0.4.1
 
 require (
-	github.com/chnxq/xkitmod/config v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260418035512-1c3a2a7d2edc
-	github.com/chnxq/xkitpkg/config v0.0.0-20260418035512-1c3a2a7d2edc
-	github.com/hashicorp/consul/api v1.34.1
+	github.com/chnxq/xkitmod/config v0.0.0-20260529105211-b1cd4c65f020
+	github.com/chnxq/xkitmod/log v0.0.0-20260529105211-b1cd4c65f020
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260611040354-12618fedb015
+	github.com/chnxq/xkitpkg/config v0.0.0-20260611040354-12618fedb015
+	github.com/hashicorp/consul/api v1.34.3
 )
 
 require (
 	dario.cat/mergo v1.0.2 // indirect
 	github.com/armon/go-metrics v0.5.4 // indirect
-	github.com/chnxq/xkitmod v0.0.0-20260411132219-50da08594d1b // indirect
+	github.com/chnxq/xkitmod v0.0.0-20260529105211-b1cd4c65f020 // indirect
 	github.com/fatih/color v1.19.0 // indirect
-	github.com/fsnotify/fsnotify v1.9.0 // indirect
+	github.com/fsnotify/fsnotify v1.10.1 // indirect
 	github.com/go-viper/mapstructure/v2 v2.5.0 // indirect
 	github.com/google/btree v1.1.3 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
@@ -29,12 +29,12 @@ require (
 	github.com/hashicorp/go-rootcerts v1.0.2 // indirect
 	github.com/hashicorp/golang-lru v1.0.2 // indirect
 	github.com/hashicorp/serf v0.10.2 // indirect
-	github.com/mattn/go-colorable v0.1.14 // indirect
-	github.com/mattn/go-isatty v0.0.21 // indirect
+	github.com/mattn/go-colorable v0.1.15 // indirect
+	github.com/mattn/go-isatty v0.0.22 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/stretchr/testify v1.11.1 // indirect
-	golang.org/x/exp v0.0.0-20260410095643-746e56fc9e2f // indirect
-	golang.org/x/sys v0.43.0 // indirect
+	golang.org/x/exp v0.0.0-20260611194520-c48552f49976 // indirect
+	golang.org/x/sys v0.46.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

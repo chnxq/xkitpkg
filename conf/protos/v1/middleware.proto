@@ -32,6 +32,18 @@ message Middleware {
   // 限流器
   message RateLimiter {
     string name = 1; // 限流器名字，支持：bbr。
+    optional google.protobuf.Duration window = 2; // 统计窗口时长
+    optional int32 bucket = 3; // 窗口桶数量
+    optional int64 cpu_threshold = 4; // CPU 限流阈值，千分比，例如 800 表示 80%
+    optional double cpu_quota = 5; // CPU 配额，无法正确探测时可手工指定
+  }
+
+  // 熔断器
+  message CircuitBreaker {
+    optional google.protobuf.Duration window = 1; // 统计窗口时长
+    optional int64 request = 2; // 进入熔断计算的最小请求数
+    optional int32 bucket = 3; // 窗口桶数量
+    optional double success = 4; // 成功率阈值，0-1 之间
   }
 
   // 性能指标
@@ -45,6 +57,7 @@ message Middleware {
   RateLimiter limiter = 1;
   Metrics metrics = 2;
   Auth auth = 3;
+  CircuitBreaker circuit_breaker = 4;
 
   bool enable_logging = 10; // 日志开关
   bool enable_recovery = 11; // 异常恢复
