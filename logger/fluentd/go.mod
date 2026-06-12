@@ -3,9 +3,9 @@ module github.com/chnxq/xkitpkg/logger/fluentd
 go 1.26.0
 
 require (
-	github.com/chnxq/xkitmod/log v0.0.0-20260411132219-50da08594d1b
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260418035512-1c3a2a7d2edc
-	github.com/chnxq/xkitpkg/logger v0.0.0-20260418035512-1c3a2a7d2edc
+	github.com/chnxq/xkitmod/log v0.0.0-20260529105211-b1cd4c65f020
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260612144631-fc9d007bf51b
+	github.com/chnxq/xkitpkg/logger v0.0.0-20260612144631-fc9d007bf51b
 	github.com/fluent/fluent-logger-golang v1.10.1
 )
 

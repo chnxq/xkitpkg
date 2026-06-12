@@ -5,8 +5,8 @@ go 1.26.0
 require (
 	github.com/chnxq/xkitmod/config v0.0.0-20260529105211-b1cd4c65f020
 	github.com/chnxq/xkitmod/log v0.0.0-20260529105211-b1cd4c65f020
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260611040354-12618fedb015
-	github.com/chnxq/xkitpkg/config v0.0.0-20260611040354-12618fedb015
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260612144631-fc9d007bf51b
+	github.com/chnxq/xkitpkg/config v0.0.0-20260612144631-fc9d007bf51b
 	go.etcd.io/etcd/client/v3 v3.6.12
 	google.golang.org/grpc v1.81.1
 )
