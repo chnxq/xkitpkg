@@ -81,6 +81,15 @@ func NewLoggerProvider(cfg *conf.Logger, appInfo *conf.AppInfo) log.Logger {
 	newlogger := log.With(l, fields...)
 	log.SetLogger(newlogger)
 	log.Infof("Logger %s created successfully", cfg.GetType())
+	if cfg != nil && cfg.GetZap() != nil {
+		log.Debugf(
+			"Logger %s config: otel_export=%t console=%t file_path=%q",
+			cfg.GetType(),
+			cfg.GetZap().GetExportToOtel(),
+			cfg.GetZap().GetLogToConsole(),
+			cfg.GetZap().GetLogFilePath(),
+		)
+	}
 	return newlogger
 }
 
