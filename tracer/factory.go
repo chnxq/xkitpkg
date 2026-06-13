@@ -20,9 +20,6 @@ var (
 
 func init() {
 	// register built-in exporters
-	RegisterExporter(string(Zipkin), func(ctx context.Context, cfg *conf.Tracer) (traceSdk.SpanExporter, error) {
-		return NewZipkinExporter(ctx, cfg.GetEndpoint())
-	})
 	RegisterExporter(string(OtlpHttp), func(ctx context.Context, cfg *conf.Tracer) (traceSdk.SpanExporter, error) {
 		return NewOtlpHttpExporter(ctx, cfg.GetEndpoint(), cfg.GetInsecure())
 	})
@@ -31,11 +28,6 @@ func init() {
 	})
 	RegisterExporter(string(Std), func(ctx context.Context, cfg *conf.Tracer) (traceSdk.SpanExporter, error) {
 		return NewStdoutExporter(ctx)
-	})
-
-	// legacy/unsupported entries can be mapped to explicit errors
-	RegisterExporter(string(Jaeger), func(ctx context.Context, cfg *conf.Tracer) (traceSdk.SpanExporter, error) {
-		return NewJaegerExporter(ctx, cfg.GetEndpoint())
 	})
 }
 
