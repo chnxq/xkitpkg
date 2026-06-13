@@ -1,6 +1,7 @@
 package config
 
 import (
+	"errors"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -22,6 +23,21 @@ var (
 	commonConfig *conf.ServerConfig
 )
 
+var watchedConfigKeys = []string{
+	"server",
+	"client",
+	"data",
+	"trace",
+	"logger",
+	"registry",
+	"config",
+	"oss",
+	"notify",
+	"authn",
+	"authz",
+	"script",
+}
+
 // LoadServerConfig 加载程序引导配置
 func LoadServerConfig(configPath string) error {
 	cfg, err := CheckConfigProvider(configPath)
@@ -39,6 +55,10 @@ func LoadServerConfig(configPath string) error {
 
 	if err = scanConfigs(cfg); err != nil {
 		log.Errorf("Scan config failed: %v\n", err)
+		return err
+	}
+	if err = registerConfigRefreshWatchers(cfg); err != nil {
+		log.Errorf("Register config refresh watchers failed: %v\n", err)
 		return err
 	}
 
@@ -226,11 +246,50 @@ func addConfigLocked(c proto.Message) {
 
 func scanConfigs(cfg config.Config) error {
 	initServerConfig()
+	muBC.Lock()
+	defer muBC.Unlock()
 
+	return scanConfigsLocked(cfg)
+}
+
+func scanConfigsLocked(cfg config.Config) error {
 	for _, c := range configList {
 		if err := cfg.Scan(c); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func registerConfigRefreshWatchers(cfg config.Config) error {
+	for _, key := range watchedConfigKeys {
+		key := key
+		if err := cfg.Watch(key, func(_ string, _ config.Value) {
+			log.Debugf("server config observer triggered: key=%s", key)
+			if err := scanConfigs(cfg); err != nil {
+				log.Errorf("rescan server config failed after %s update: %v", key, err)
+				return
+			}
+			log.Debugf("server config rescanned successfully after update: key=%s", key)
+			applied, err := applyRuntimeConfigChange(key, GetServerConfig())
+			if err != nil {
+				log.Errorf("apply runtime config failed for key=%s: %v", key, err)
+				log.Warnf("config key=%s changed, restart required for full effect", key)
+				return
+			}
+			if applied {
+				log.Infof("config key=%s applied at runtime", key)
+				return
+			}
+			log.Warnf("config key=%s changed, restart required for full effect", key)
+		}); err != nil {
+			if errors.Is(err, config.ErrNotFound) {
+				log.Debugf("server config observer skipped missing key: %s", key)
+				continue
+			}
+			return err
+		}
+		log.Debugf("server config observer registered: key=%s", key)
 	}
 	return nil
 }
