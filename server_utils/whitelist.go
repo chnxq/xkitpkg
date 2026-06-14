@@ -95,6 +95,11 @@ func (w *WhiteList) isWhitelistedLocked(op string) bool {
 		if _, ok := w.items[op]; ok {
 			return true
 		}
+		for k := range w.items {
+			if i := strings.LastIndex(k, "/"); i >= 0 && i+1 < len(k) && k[i+1:] == op {
+				return true
+			}
+		}
 		// fallback to method-only if op contains '/'
 		if i := strings.LastIndex(op, "/"); i >= 0 && i+1 < len(op) {
 			method := op[i+1:]
