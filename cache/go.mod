@@ -3,10 +3,10 @@ module github.com/chnxq/xkitpkg/cache
 go 1.26.0
 
 require (
-	github.com/chnxq/xkitmod/log v0.0.0-20260529105211-b1cd4c65f020
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260608172503-db631b44b2c1
-	github.com/redis/go-redis/extra/redisotel/v9 v9.20.0
-	github.com/redis/go-redis/v9 v9.20.0
+	github.com/chnxq/xkitmod/log v0.0.0-20260613061637-23d531e87870
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260614080916-2469689c9333
+	github.com/redis/go-redis/extra/redisotel/v9 v9.20.1
+	github.com/redis/go-redis/v9 v9.20.1
 )
 
 require (
@@ -14,7 +14,7 @@ require (
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/klauspost/cpuid/v2 v2.3.0 // indirect
-	github.com/redis/go-redis/extra/rediscmd/v9 v9.20.0 // indirect
+	github.com/redis/go-redis/extra/rediscmd/v9 v9.20.1 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/otel v1.44.0 // indirect
 	go.opentelemetry.io/otel/metric v1.44.0 // indirect

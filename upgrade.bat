@@ -8,7 +8,7 @@ cd %DIR%\app
 go get all
 go mod tidy
 
-cd %DIR%\cache\redis
+cd %DIR%\cache
 go get all
 go mod tidy
 

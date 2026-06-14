@@ -2,23 +2,15 @@ module github.com/chnxq/xkitpkg/server_utils
 
 go 1.26.0
 
-replace github.com/chnxq/xkitpkg/app => ../app
-
-replace github.com/chnxq/xkitpkg/conf => ../conf
-
-replace github.com/chnxq/xkitpkg/middleware => ../middleware
-
-replace github.com/chnxq/xkitpkg/transport => ../transport
-
 require (
 	github.com/chnxq/x-utils v0.0.0-20260612100514-4160a415201a
 	github.com/chnxq/xkitmod v0.0.0-20260613061637-23d531e87870
 	github.com/chnxq/xkitmod/algs v0.0.0-20260613061637-23d531e87870
 	github.com/chnxq/xkitmod/log v0.0.0-20260613061637-23d531e87870
-	github.com/chnxq/xkitpkg/app v0.0.0-20260613055836-e8183b9771c8
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260613055836-e8183b9771c8
-	github.com/chnxq/xkitpkg/middleware v0.0.0-20260613055836-e8183b9771c8
-	github.com/chnxq/xkitpkg/transport v0.0.0-20260613055836-e8183b9771c8
+	github.com/chnxq/xkitpkg/app v0.0.0-20260614080916-2469689c9333
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260614080916-2469689c9333
+	github.com/chnxq/xkitpkg/middleware v0.0.0-20260614080916-2469689c9333
+	github.com/chnxq/xkitpkg/transport v0.0.0-20260614080916-2469689c9333
 	github.com/gorilla/handlers v1.5.2
 	google.golang.org/grpc v1.81.1
 )
@@ -32,9 +24,9 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/chnxq/xkitmod/config v0.0.0-20260613061637-23d531e87870 // indirect
 	github.com/chnxq/xkitmod/selector v0.0.0-20260613061637-23d531e87870 // indirect
-	github.com/chnxq/xkitpkg v0.0.0-20260613055836-e8183b9771c8 // indirect
-	github.com/chnxq/xkitpkg/config v0.0.0-20260613055836-e8183b9771c8 // indirect
-	github.com/chnxq/xkitpkg/registry v0.0.0-20260613055836-e8183b9771c8 // indirect
+	github.com/chnxq/xkitpkg v0.0.0-20260614080916-2469689c9333 // indirect
+	github.com/chnxq/xkitpkg/config v0.0.0-20260614080916-2469689c9333 // indirect
+	github.com/chnxq/xkitpkg/registry v0.0.0-20260614080916-2469689c9333 // indirect
 	github.com/felixge/httpsnoop v1.1.0 // indirect
 	github.com/fsnotify/fsnotify v1.10.1 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
