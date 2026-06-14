@@ -7,10 +7,10 @@ require (
 	github.com/chnxq/xkitmod v0.0.0-20260613061637-23d531e87870
 	github.com/chnxq/xkitmod/algs v0.0.0-20260613061637-23d531e87870
 	github.com/chnxq/xkitmod/log v0.0.0-20260613061637-23d531e87870
-	github.com/chnxq/xkitpkg/app v0.0.0-20260614080916-2469689c9333
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260614080916-2469689c9333
-	github.com/chnxq/xkitpkg/middleware v0.0.0-20260614080916-2469689c9333
-	github.com/chnxq/xkitpkg/transport v0.0.0-20260614080916-2469689c9333
+	github.com/chnxq/xkitpkg/app v0.0.0-20260614081852-4e56d1470ffd
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260614081852-4e56d1470ffd
+	github.com/chnxq/xkitpkg/middleware v0.0.0-20260614081852-4e56d1470ffd
+	github.com/chnxq/xkitpkg/transport v0.0.0-20260614081852-4e56d1470ffd
 	github.com/gorilla/handlers v1.5.2
 	google.golang.org/grpc v1.81.1
 )
@@ -24,9 +24,9 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/chnxq/xkitmod/config v0.0.0-20260613061637-23d531e87870 // indirect
 	github.com/chnxq/xkitmod/selector v0.0.0-20260613061637-23d531e87870 // indirect
-	github.com/chnxq/xkitpkg v0.0.0-20260614080916-2469689c9333 // indirect
-	github.com/chnxq/xkitpkg/config v0.0.0-20260614080916-2469689c9333 // indirect
-	github.com/chnxq/xkitpkg/registry v0.0.0-20260614080916-2469689c9333 // indirect
+	github.com/chnxq/xkitpkg v0.0.0-20260614081852-4e56d1470ffd // indirect
+	github.com/chnxq/xkitpkg/config v0.0.0-20260614081852-4e56d1470ffd // indirect
+	github.com/chnxq/xkitpkg/registry v0.0.0-20260614081852-4e56d1470ffd // indirect
 	github.com/felixge/httpsnoop v1.1.0 // indirect
 	github.com/fsnotify/fsnotify v1.10.1 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect

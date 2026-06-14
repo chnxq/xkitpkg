@@ -4,8 +4,8 @@ go 1.26.0
 
 require (
 	github.com/chnxq/xkitmod/log v0.0.0-20260613061637-23d531e87870
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260613055836-e8183b9771c8
-	github.com/chnxq/xkitpkg/logger v0.0.0-20260613055836-e8183b9771c8
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260614081852-4e56d1470ffd
+	github.com/chnxq/xkitpkg/logger v0.0.0-20260614081852-4e56d1470ffd
 	github.com/natefinch/lumberjack v2.0.0+incompatible
 	github.com/rs/zerolog v1.35.1
 )
