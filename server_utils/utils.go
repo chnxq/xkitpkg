@@ -7,7 +7,7 @@ import (
 	conf "github.com/chnxq/xkitpkg/conf/v1"
 )
 
-func loadServerTlsConfig(cfg *conf.TLS) (*tls.Config, error) {
+func LoadServerTLSConfig(cfg *conf.TLS) (*tls.Config, error) {
 	if cfg == nil {
 		return nil, nil
 	}
@@ -38,7 +38,7 @@ func loadServerTlsConfig(cfg *conf.TLS) (*tls.Config, error) {
 	return tlsCfg, err
 }
 
-func loadClientTlsConfig(cfg *conf.TLS) (*tls.Config, error) {
+func LoadClientTLSConfig(cfg *conf.TLS) (*tls.Config, error) {
 	if cfg == nil {
 		return nil, nil
 	}

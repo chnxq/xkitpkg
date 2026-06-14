@@ -1,25 +1,16 @@
 package server_utils
 
 import (
-	"crypto/tls"
 	"net/http/pprof"
 
 	"github.com/gorilla/handlers"
 
-	"github.com/chnxq/xkitmod/algs/ratelimit"
-	"github.com/chnxq/xkitmod/algs/ratelimit/bbr"
-
 	kHttp "github.com/chnxq/xkitpkg/transport/http"
 
 	"github.com/chnxq/xkitpkg/middleware"
-	"github.com/chnxq/xkitpkg/middleware/metadata"
-	midRateLimit "github.com/chnxq/xkitpkg/middleware/ratelimit"
-	"github.com/chnxq/xkitpkg/middleware/recovery"
 	"github.com/chnxq/xkitpkg/middleware/selector"
-	"github.com/chnxq/xkitpkg/middleware/tracing"
 
 	conf "github.com/chnxq/xkitpkg/conf/v1"
-	"github.com/chnxq/xkitpkg/middleware/validate"
 )
 
 // CreateRestServer 创建REST服务端
@@ -57,32 +48,7 @@ func initRestConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kHt
 		)))
 	}
 
-	var ms []middleware.Middleware
-	if cfg.Server.Rest.Middleware != nil {
-		if cfg.Server.Rest.Middleware.GetEnableRecovery() {
-			ms = append(ms, recovery.Recovery())
-		}
-		if cfg.Server.Rest.Middleware.GetEnableTracing() {
-			ms = append(ms, tracing.Server())
-		}
-		if cfg.Server.Rest.Middleware.GetEnableValidate() {
-			ms = append(ms, validate.ProtoValidate())
-		}
-		if cfg.Server.Rest.Middleware.GetEnableCircuitBreaker() {
-			//ms = append(ms, circuitbreaker.NewBreaker()) //Fixme: 待实现 XQ
-		}
-		if cfg.Server.Rest.Middleware.Limiter != nil {
-			var limiter ratelimit.Limiter
-			switch cfg.Server.Rest.Middleware.Limiter.GetName() {
-			case "bbr":
-				limiter = bbr.NewLimiter()
-			}
-			ms = append(ms, midRateLimit.Server(midRateLimit.WithLimiter(limiter)))
-		}
-		if cfg.Server.Rest.Middleware.GetEnableMetadata() {
-			ms = append(ms, metadata.Server())
-		}
-	}
+	ms := CommonServerMiddlewares(nil, cfg.Server.Rest.Middleware)
 	ms = append(ms, mds...)
 
 	options = append(options, kHttp.Middleware(ms...))
@@ -98,13 +64,10 @@ func initRestConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) ([]kHt
 	}
 
 	if cfg.Server.Rest.Tls != nil {
-		var tlsCfg *tls.Config
-		var err error
-
-		if tlsCfg, err = loadServerTlsConfig(cfg.Server.Rest.Tls); err != nil {
+		tlsCfg, err := LoadServerTLSConfig(cfg.Server.Rest.Tls)
+		if err != nil {
 			return nil, err
 		}
-
 		if tlsCfg != nil {
 			options = append(options, kHttp.TLSConfig(tlsCfg))
 		}

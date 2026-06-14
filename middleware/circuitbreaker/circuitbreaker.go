@@ -2,11 +2,13 @@ package circuitbreaker
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/chnxq/xkitmod/algs/circuitbreaker"
 	"github.com/chnxq/xkitmod/algs/circuitbreaker/sre"
 
 	"github.com/chnxq/xkitmod/errors"
+	conf "github.com/chnxq/xkitpkg/conf/v1"
 	"github.com/chnxq/xkitpkg/middleware"
 
 	"github.com/chnxq/xkitpkg/internal/group"
@@ -72,4 +74,80 @@ func Client(opts ...Option) middleware.Middleware {
 			return reply, err
 		}
 	}
+}
+
+func WithSREConfig(cfg *conf.Middleware_CircuitBreaker) Option {
+	return WithCircuitBreaker(func() circuitbreaker.CircuitBreaker {
+		opts := make([]sre.Option, 0, 4)
+		if cfg != nil {
+			if d := cfg.GetWindow(); d != nil {
+				opts = append(opts, sre.WithWindow(d.AsDuration()))
+			}
+			if v := cfg.GetRequest(); v > 0 {
+				opts = append(opts, sre.WithRequest(v))
+			}
+			if v := cfg.GetBucket(); v > 0 {
+				opts = append(opts, sre.WithBucket(int(v)))
+			}
+			if v := cfg.GetSuccess(); v > 0 {
+				opts = append(opts, sre.WithSuccess(v))
+			}
+		}
+		return sre.NewBreaker(opts...)
+	})
+}
+
+func Server(opts ...Option) middleware.Middleware {
+	opt := &options{
+		group: group.NewGroup(func() circuitbreaker.CircuitBreaker {
+			return sre.NewBreaker()
+		}),
+	}
+	for _, o := range opts {
+		o(opt)
+	}
+	return func(handler middleware.Handler) middleware.Handler {
+		return func(ctx context.Context, req any) (any, error) {
+			info, _ := transport.FromServerContext(ctx)
+			key := "server"
+			if info != nil {
+				if op := info.Operation(); op != "" {
+					key = info.Kind().String() + ":" + op
+				} else {
+					key = info.Kind().String()
+				}
+			}
+			breaker := opt.group.Get(key)
+			if err := breaker.Allow(); err != nil {
+				breaker.MarkFailed()
+				return nil, ErrNotAllowed
+			}
+			defer func() {
+				if recovered := recover(); recovered != nil {
+					breaker.MarkFailed()
+					panic(recovered)
+				}
+			}()
+
+			reply, err := handler(ctx, req)
+			if isServerFailure(err) {
+				breaker.MarkFailed()
+			} else {
+				breaker.MarkSuccess()
+			}
+			return reply, err
+		}
+	}
+}
+
+func isServerFailure(err error) bool {
+	if err == nil {
+		return false
+	}
+	if stderrors.Is(err, context.Canceled) || stderrors.Is(err, context.DeadlineExceeded) {
+		return true
+	}
+	return errors.IsInternalServer(err) ||
+		errors.IsServiceUnavailable(err) ||
+		errors.IsGatewayTimeout(err)
 }

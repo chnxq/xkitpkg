@@ -2,26 +2,22 @@ package server_utils
 
 import (
 	"context"
-	"crypto/tls"
 	"strings"
 	"time"
 
 	"google.golang.org/grpc"
 
-	"github.com/chnxq/xkitmod/algs/ratelimit"
-	"github.com/chnxq/xkitmod/algs/ratelimit/bbr"
 	"github.com/chnxq/xkitmod/log"
 	"github.com/chnxq/xkitmod/registry"
 	"github.com/chnxq/xkitpkg/middleware"
 	"github.com/chnxq/xkitpkg/middleware/metadata"
-	midRateLimit "github.com/chnxq/xkitpkg/middleware/ratelimit"
 	"github.com/chnxq/xkitpkg/middleware/recovery"
 	"github.com/chnxq/xkitpkg/middleware/selector"
 	"github.com/chnxq/xkitpkg/middleware/tracing"
+	"github.com/chnxq/xkitpkg/middleware/validate"
 	xkitGrpc "github.com/chnxq/xkitpkg/transport/grpc"
 
 	conf "github.com/chnxq/xkitpkg/conf/v1"
-	"github.com/chnxq/xkitpkg/middleware/validate"
 )
 
 const defaultTimeout = 5 * time.Second
@@ -89,13 +85,10 @@ func initGrpcClientConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) 
 	options = append(options, xkitGrpc.WithMiddleware(ms...))
 
 	if cfg.Client.Grpc.Tls != nil {
-		var tlsCfg *tls.Config
-		var err error
-
-		if tlsCfg, err = loadClientTlsConfig(cfg.Client.Grpc.Tls); err != nil {
+		tlsCfg, err := LoadClientTLSConfig(cfg.Client.Grpc.Tls)
+		if err != nil {
 			return nil, err
 		}
-
 		if tlsCfg != nil {
 			options = append(options, xkitGrpc.WithTLSConfig(tlsCfg))
 		}
@@ -128,43 +121,16 @@ func initGrpcServerConfig(cfg *conf.ServerConfig, mds ...middleware.Middleware) 
 
 	var options []xkitGrpc.ServerOption
 
-	var ms []middleware.Middleware
-	if cfg.Server.Grpc.Middleware != nil {
-		if cfg.Server.Grpc.Middleware.GetEnableRecovery() {
-			ms = append(ms, recovery.Recovery())
-		}
-		if cfg.Server.Grpc.Middleware.GetEnableTracing() {
-			ms = append(ms, tracing.Server())
-		}
-		if cfg.Server.Grpc.Middleware.GetEnableValidate() {
-			ms = append(ms, validate.ProtoValidate())
-		}
-		if cfg.Server.Grpc.Middleware.GetEnableCircuitBreaker() {
-		}
-		if cfg.Server.Grpc.Middleware.Limiter != nil {
-			var limiter ratelimit.Limiter
-			switch cfg.Server.Grpc.Middleware.Limiter.GetName() {
-			case "bbr":
-				limiter = bbr.NewLimiter()
-			}
-			ms = append(ms, midRateLimit.Server(midRateLimit.WithLimiter(limiter)))
-		}
-		if cfg.Server.Grpc.Middleware.GetEnableMetadata() {
-			ms = append(ms, metadata.Server())
-		}
-	}
+	ms := CommonServerMiddlewares(nil, cfg.Server.Grpc.Middleware)
 	ms = append(ms, mds...)
 
 	options = append(options, xkitGrpc.Middleware(ms...))
 
 	if cfg.Server.Grpc.Tls != nil {
-		var tlsCfg *tls.Config
-		var err error
-
-		if tlsCfg, err = loadServerTlsConfig(cfg.Server.Grpc.Tls); err != nil {
+		tlsCfg, err := LoadServerTLSConfig(cfg.Server.Grpc.Tls)
+		if err != nil {
 			return nil, err
 		}
-
 		if tlsCfg != nil {
 			options = append(options, xkitGrpc.TLSConfig(tlsCfg))
 		}

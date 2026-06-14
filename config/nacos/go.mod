@@ -3,10 +3,10 @@ module github.com/chnxq/xkitpkg/config/nacos
 go 1.26.0
 
 require (
-	github.com/chnxq/xkitmod/config v0.0.0-20260529105211-b1cd4c65f020
-	github.com/chnxq/xkitmod/log v0.0.0-20260529105211-b1cd4c65f020
-	github.com/chnxq/xkitpkg/conf v0.0.0-20260612144631-fc9d007bf51b
-	github.com/chnxq/xkitpkg/config v0.0.0-20260612144631-fc9d007bf51b
+	github.com/chnxq/xkitmod/config v0.0.0-20260613061637-23d531e87870
+	github.com/chnxq/xkitmod/log v0.0.0-20260613061637-23d531e87870
+	github.com/chnxq/xkitpkg/conf v0.0.0-20260613055836-e8183b9771c8
+	github.com/chnxq/xkitpkg/config v0.0.0-20260613055836-e8183b9771c8
 	github.com/nacos-group/nacos-sdk-go/v2 v2.3.5
 )
 
@@ -35,7 +35,7 @@ require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/buger/jsonparser v1.2.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/chnxq/xkitmod v0.0.0-20260529105211-b1cd4c65f020 // indirect
+	github.com/chnxq/xkitmod v0.0.0-20260613061637-23d531e87870 // indirect
 	github.com/clbanning/mxj/v2 v2.7.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/deckarep/golang-set v1.8.0 // indirect
